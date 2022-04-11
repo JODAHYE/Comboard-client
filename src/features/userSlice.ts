@@ -17,6 +17,7 @@ export interface UserState {
   postLock?: boolean;
   alertCount: number;
   kakaoAccessToken?: string;
+  loginLoading: boolean;
 }
 const initialState: UserState = {
   objectId: "",
@@ -32,6 +33,7 @@ const initialState: UserState = {
   postLock: undefined,
   alertCount: 0,
   kakaoAccessToken: "",
+  loginLoading: false,
 };
 export const userSlice = createSlice({
   name: "user",
@@ -49,7 +51,6 @@ export const userSlice = createSlice({
           }
         });
     },
-    logout: (state, action: PayloadAction) => {},
   },
   extraReducers: (builder) => {
     builder.addCase(auth.fulfilled, (state, action) => {
@@ -75,9 +76,18 @@ export const userSlice = createSlice({
     builder.addCase(getAlertCount.fulfilled, (state, action) => {
       state.alertCount = action.payload;
     });
-    builder.addCase(kakaoLogin.pending, (state, action) => {});
+    builder.addCase(login.pending, (state, action) => {
+      state.loginLoading = true;
+    });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.loginLoading = false;
+    });
+    builder.addCase(kakaoLogin.pending, (state, action) => {
+      state.loginLoading = true;
+    });
     builder.addCase(kakaoLogin.fulfilled, (state, action) => {
       state.kakaoAccessToken = action.payload.kakaoAccessToken;
+      state.loginLoading = false;
     });
   },
 });

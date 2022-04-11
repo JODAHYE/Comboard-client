@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
@@ -9,6 +9,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { board_init } from "../../features/boardSlice";
 import AlertPopup from "../alert/AlertPopup";
 import { useLocation } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import LoginLoading from "../auth/LoginLoading";
 type StyleType = {
   alert: number;
 };
@@ -18,9 +20,9 @@ const Nav: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { mainMenu, onPopup } = useSelector((state: RootState) => state.menu);
-  const { is_auth, profileImage, alertCount, kakaoAccessToken } = useSelector(
-    (state: RootState) => state.user
-  );
+  const { is_auth, profileImage, alertCount, kakaoAccessToken, loginLoading } =
+    useSelector((state: RootState) => state.user);
+
   useEffect(() => {
     dispatch(auth());
     const code = location.search.substring(6);
@@ -58,7 +60,7 @@ const Nav: React.FC = () => {
           비밀 게시판
         </MenuItem>
       </Menu>
-      {!is_auth && (
+      {!is_auth && !loginLoading && (
         <LoginBtn
           onClick={() => {
             navigate("/login");
@@ -67,8 +69,8 @@ const Nav: React.FC = () => {
           로그인
         </LoginBtn>
       )}
-
-      {is_auth && (
+      {loginLoading && <LoginLoading />}
+      {!loginLoading && is_auth && (
         <MyInfo>
           <Link to="/mypage">
             {profileImage ? (
