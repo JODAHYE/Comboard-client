@@ -23,9 +23,9 @@ const Login: React.FC = () => {
       dispatch(kakaoLogin(code));
     }
     if (code && is_auth) {
-      window.location.href = "https://comboard.netlify.app";
+      window.location.href = process.env.REACT_APP_REDIRECT_URL as string;
     }
-  }, [is_auth]);
+  }, []);
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
