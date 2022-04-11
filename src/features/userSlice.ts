@@ -55,15 +55,16 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(auth.fulfilled, (state, action) => {
       if (!action.payload) return;
+      state.profileImage = action.payload.profileImage;
+      state.is_auth = action.payload.isAuth;
+      state.loginLoading = false;
       state.objectId = action.payload.objectId;
       state.email = action.payload.email;
       state.nickname = action.payload.nickname;
-      state.is_auth = action.payload.isAuth;
       state.like_post = action.payload.like_post;
       state.dislike_post = action.payload.dislike_post;
       state.scrap_post = action.payload.scrap_post;
       state.bookmark = action.payload.bookmark;
-      state.profileImage = action.payload.profileImage;
       state.postLock = action.payload.postLock;
     });
     builder.addCase(logout.fulfilled, (state, action) => {
@@ -79,15 +80,11 @@ export const userSlice = createSlice({
     builder.addCase(login.pending, (state, action) => {
       state.loginLoading = true;
     });
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.loginLoading = false;
-    });
     builder.addCase(kakaoLogin.pending, (state, action) => {
       state.loginLoading = true;
     });
     builder.addCase(kakaoLogin.fulfilled, (state, action) => {
       state.kakaoAccessToken = action.payload.kakaoAccessToken;
-      state.loginLoading = false;
     });
   },
 });
