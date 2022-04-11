@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 type BodyType = {
@@ -14,7 +14,7 @@ export function usePost() {
   const params = useParams();
   const getPostList = async (boardId: string, skip: number, sort: string) => {
     const response = await axios.get(
-      `https://comboard.herokuapp.com/board/${params.id}/list`,
+      `${process.env.REACT_APP_SERVER_URL}/board/${params.id}/list`,
       {
         params: {
           boardId: boardId,
@@ -29,7 +29,7 @@ export function usePost() {
   const createPost = async (body: BodyType) => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     const response = await axios.post(
-      "https://comboard.herokuapp.com/post/create",
+      `${process.env.REACT_APP_SERVER_URL}/post/create`,
       body,
       {
         headers: {
@@ -42,7 +42,7 @@ export function usePost() {
 
   const updatePost = async (body: BodyType) => {
     const response = await axios.patch(
-      "https://comboard.herokuapp.com/post/update",
+      `${process.env.REACT_APP_SERVER_URL}/post/update`,
       body,
       {
         headers: {
@@ -59,7 +59,7 @@ export function usePost() {
 
   const deletePost = async () => {
     const response = await axios.delete(
-      "https://comboard.herokuapp.com/post/delete",
+      `${process.env.REACT_APP_SERVER_URL}/post/delete`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -76,7 +76,7 @@ export function usePost() {
 
   const getPostDetail = async () => {
     const response = await axios.get(
-      `https://comboard.herokuapp.com/post/get`,
+      `${process.env.REACT_APP_SERVER_URL}/post/get`,
       {
         params: {
           postId: params.postId,
@@ -89,7 +89,7 @@ export function usePost() {
 
   const isExistPost = async (postId: string) => {
     const response = await axios.get(
-      `https://comboard.herokuapp.com/post/get`,
+      `${process.env.REACT_APP_SERVER_URL}/post/get`,
       {
         params: {
           postId: postId,
@@ -107,7 +107,7 @@ export function usePost() {
   const clickLike = async (postId: string) => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     await axios.patch(
-      "https://comboard.herokuapp.com/post/like",
+      `${process.env.REACT_APP_SERVER_URL}/post/like`,
       { postId },
       {
         headers: {
@@ -120,7 +120,7 @@ export function usePost() {
   const clickDislike = async (postId: string) => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     await axios.patch(
-      "https://comboard.herokuapp.com/post/dislike",
+      `${process.env.REACT_APP_SERVER_URL}/post/dislike`,
       { postId },
       {
         headers: {
@@ -133,7 +133,7 @@ export function usePost() {
   const clickScrap = async () => {
     await axios
       .patch(
-        "https://comboard.herokuapp.com/user/scrap/add",
+        `${process.env.REACT_APP_SERVER_URL}/user/scrap/add`,
         { postId: params.postId },
         {
           headers: {
@@ -148,7 +148,7 @@ export function usePost() {
 
   const scrapDelete = async () => {
     await axios.patch(
-      "https://comboard.herokuapp.com/user/scrap/delete",
+      `${process.env.REACT_APP_SERVER_URL}/user/scrap/delete`,
       { postId: params.postId },
       {
         headers: {
@@ -160,7 +160,7 @@ export function usePost() {
 
   const getMyPostList = async (skip: number) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/user/post/list",
+      `${process.env.REACT_APP_SERVER_URL}/user/post/list`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -177,7 +177,7 @@ export function usePost() {
   const getMyPostCount = async () => {
     if (!cookies.get("accessToken")) return;
     const response = await axios.get(
-      "https://comboard.herokuapp.com/user/post_count",
+      `${process.env.REACT_APP_SERVER_URL}/user/post_count`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -190,7 +190,7 @@ export function usePost() {
   const deleteMyPost = async (postList: string[]) => {
     for (let i = 0; i < postList.length; i++) {
       const idValue = postList[i].split("-");
-      axios.delete("https://comboard.herokuapp.com/post/delete", {
+      axios.delete(`${process.env.REACT_APP_SERVER_URL}/post/delete`, {
         headers: {
           Authorization: cookies.get("accessToken"),
         },
@@ -203,7 +203,7 @@ export function usePost() {
   };
   const getScrapList = async (skip: number) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/user/scrap/list",
+      `${process.env.REACT_APP_SERVER_URL}/user/scrap/list`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -219,7 +219,7 @@ export function usePost() {
   const clearScrap = async (postList: string[]) => {
     for (let i = 0; i < postList.length; i++) {
       axios.patch(
-        "https://comboard.herokuapp.com/user/scrap/delete",
+        `${process.env.REACT_APP_SERVER_URL}/user/scrap/delete`,
         { postId: postList[i] },
         {
           headers: {
@@ -231,7 +231,7 @@ export function usePost() {
   };
   const getUserPostList = async (userId: string, skip: number) => {
     const response = await axios.get(
-      `https://comboard.herokuapp.com/post/user_list`,
+      `${process.env.REACT_APP_SERVER_URL}/post/user_list`,
       {
         params: {
           userId: userId,

@@ -49,7 +49,7 @@ export const getCurrentBoard = createAsyncThunk(
   "board/getCurrentBoard",
   async (boardId: string, thunkAPI) => {
     const response = await axios.get(
-      `https://comboard.herokuapp.com/board/${boardId}`
+      `${process.env.REACT_APP_SERVER_URL}/board/${boardId}`
     );
     const data = await response.data;
     return data;
@@ -60,7 +60,7 @@ export const getCreateList = createAsyncThunk(
   "board/getCreateList",
   async () => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/user/board/created_list",
+      `${process.env.REACT_APP_SERVER_URL}/user/board/created_list`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),

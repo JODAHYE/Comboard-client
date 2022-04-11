@@ -1,12 +1,10 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { useLocation, useNavigate } from "react-router-dom";
 export function useUser() {
-  const location = useLocation();
   const cookies = new Cookies();
   const updateProfileImg = async (imgUrl: string) => {
     const response = await axios.patch(
-      "https://comboard.herokuapp.com/user/update/image",
+      `${process.env.REACT_APP_SERVER_URL}/user/update/image`,
       { imgUrl },
       {
         headers: {
@@ -18,7 +16,7 @@ export function useUser() {
   };
   const updateNickname = async (nickname: string) => {
     const response = await axios.patch(
-      "https://comboard.herokuapp.com/user/update/nickname",
+      `${process.env.REACT_APP_SERVER_URL}/user/update/nickname`,
       { nickname },
       {
         headers: {
@@ -30,7 +28,7 @@ export function useUser() {
   };
   const updatePostLock = async (value: boolean) => {
     const response = await axios.patch(
-      "https://comboard.herokuapp.com/user/update/post_lock",
+      `${process.env.REACT_APP_SERVER_URL}/user/update/post_lock`,
       { value },
       {
         headers: {
@@ -42,7 +40,7 @@ export function useUser() {
   };
   const getUserDetail = async (userId: string) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/user/detail",
+      `${process.env.REACT_APP_SERVER_URL}/user/detail`,
       {
         params: { userId },
       }

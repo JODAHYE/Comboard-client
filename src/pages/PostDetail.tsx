@@ -56,7 +56,10 @@ const PostDetail: React.FC = () => {
       const body = {
         postId: post._id,
       };
-      axios.patch("https://comboard.herokuapp.com/post/increase/view", body);
+      axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}/post/increase/view`,
+        body
+      );
       cookies.set(post._id, post._id, {
         path: "/",
         maxAge: 60 * 60 * 12,
@@ -201,7 +204,7 @@ const PostDetail: React.FC = () => {
               <Icon src="../../icon/download-outline.svg" onClick={onScrap} />
             </Item>
           )}
-          {buttonLoading && <CircularProgress size={20} />}
+          {buttonLoading && <CircularProgress />}
         </Icons>
         <ListBtn
           onClick={() => {
@@ -282,8 +285,10 @@ const Writer = styled.p`
   cursor: pointer;
   margin-right: 8px;
   display: inline-block;
+  font-family: SpoqaHanSansNeoBold;
   &:hover {
     color: #000;
+    text-decoration: underline;
   }
   @media (min-width: 320px) and (max-width: 480px) {
     width: 90%;
@@ -326,7 +331,6 @@ const Btn = styled.button`
 `;
 const Icons = styled.div`
   margin-top: 30px;
-  width: 30%;
   display: flex;
   gap: 8px;
 `;

@@ -8,6 +8,7 @@ import { useMenu } from "../../hooks/useMenu";
 import { Link, useNavigate } from "react-router-dom";
 import { board_init } from "../../features/boardSlice";
 import AlertPopup from "../alert/AlertPopup";
+import { useLocation } from "react-router-dom";
 type StyleType = {
   alert: number;
 };
@@ -15,13 +16,18 @@ type StyleType = {
 const Nav: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { mainMenu, onPopup } = useSelector((state: RootState) => state.menu);
   const { is_auth, profileImage, alertCount, kakaoAccessToken } = useSelector(
     (state: RootState) => state.user
   );
   useEffect(() => {
     dispatch(auth());
-  }, []);
+    const code = location.search.substring(6);
+    if (code && is_auth) {
+      navigate("/", { replace: true });
+    }
+  }, [is_auth]);
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       const target = e.target as HTMLElement;

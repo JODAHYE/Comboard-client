@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useParams } from "react-router";
 import { CommentType } from "../types/dataType";
 
 interface commentState {
@@ -28,7 +27,7 @@ export const getCommentList = createAsyncThunk(
   "comment/getCommentList",
   async (postId: string) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/comment/list",
+      `${process.env.REACT_APP_SERVER_URL}/comment/list`,
       {
         params: {
           postId,

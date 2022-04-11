@@ -5,7 +5,7 @@ const cookies = new Cookies();
 export function useAlert() {
   const getAlertList = async (skip: number) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/alert/list",
+      `${process.env.REACT_APP_SERVER_URL}/alert/list`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -20,7 +20,7 @@ export function useAlert() {
   };
   const alertRead = async (alertId: string) => {
     await axios.patch(
-      "https://comboard.herokuapp.com/alert/read",
+      `${process.env.REACT_APP_SERVER_URL}/alert/read`,
       { alertId },
       {
         headers: {
@@ -30,7 +30,7 @@ export function useAlert() {
     );
   };
   const alertDelete = async () => {
-    await axios.delete("https://comboard.herokuapp.com/alert/delete", {
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/alert/delete`, {
       headers: {
         Authorization: cookies.get("accessToken"),
       },

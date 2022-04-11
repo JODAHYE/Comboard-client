@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 type BodyType = {
@@ -16,7 +16,7 @@ export function useComment() {
   const params = useParams();
   const commentCreate = async (body: BodyType) => {
     const response = await axios.post(
-      "https://comboard.herokuapp.com/comment/create",
+      `${process.env.REACT_APP_SERVER_URL}/comment/create`,
       body,
       {
         headers: {
@@ -37,7 +37,7 @@ export function useComment() {
 
   const getReplyList = async (parentCommentId: string) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/comment/reply/list",
+      `${process.env.REACT_APP_SERVER_URL}/comment/reply/list`,
       {
         params: {
           parentCommentId: parentCommentId,
@@ -49,7 +49,7 @@ export function useComment() {
   };
   const replyCreate = async (body: BodyType) => {
     const response = await axios.post(
-      "https://comboard.herokuapp.com/comment/reply/create",
+      `${process.env.REACT_APP_SERVER_URL}/comment/reply/create`,
       body,
       {
         headers: {
@@ -71,9 +71,12 @@ export function useComment() {
       subdescription: body.content,
       detailUrl: `/board/${params.id}/${params.postId}`,
     };
-    await axios.post("https://comboard.herokuapp.com/alert/create", alertBody);
     await axios.post(
-      "https://comboard.herokuapp.com/alert/create_reply",
+      `${process.env.REACT_APP_SERVER_URL}/alert/create`,
+      alertBody
+    );
+    await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/alert/create_reply`,
       alertReplyBody
     );
     return response.data;
@@ -81,7 +84,7 @@ export function useComment() {
 
   const commentUpdate = async (commentId: string, content: string) => {
     const response = await axios.patch(
-      "https://comboard.herokuapp.com/comment/update",
+      `${process.env.REACT_APP_SERVER_URL}/comment/update`,
       {
         commentId,
         content,
@@ -97,7 +100,7 @@ export function useComment() {
 
   const commentDelete = async (commentId: string) => {
     const response = await axios.delete(
-      "https://comboard.herokuapp.com/comment/delete",
+      `${process.env.REACT_APP_SERVER_URL}/comment/delete`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -113,7 +116,7 @@ export function useComment() {
 
   const getMyCommentList = async (skip: number) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/user/comment/list",
+      `${process.env.REACT_APP_SERVER_URL}/user/comment/list`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -129,7 +132,7 @@ export function useComment() {
   const getMyCommentCount = async () => {
     if (!cookies.get("accessToken")) return;
     const response = await axios.get(
-      "https://comboard.herokuapp.com/user/comment_count",
+      `${process.env.REACT_APP_SERVER_URL}/user/comment_count`,
       {
         headers: {
           Authorization: cookies.get("accessToken"),
@@ -142,7 +145,7 @@ export function useComment() {
   const deleteMyComment = async (commentList: string[]) => {
     for (let i = 0; i < commentList.length; i++) {
       const idValue = commentList[i].split("-");
-      axios.delete("https://comboard.herokuapp.com/comment/delete", {
+      axios.delete(`${process.env.REACT_APP_SERVER_URL}/comment/delete`, {
         headers: {
           Authorization: cookies.get("accessToken"),
         },
@@ -155,7 +158,6 @@ export function useComment() {
   };
   return {
     commentCreate,
-    // getCommentList,
     getReplyList,
     commentUpdate,
     commentDelete,

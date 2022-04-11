@@ -24,7 +24,7 @@ const PostWriteOption: React.FC<PropsType> = ({
     const loadingNode = document.createTextNode("이미지 첨부중...");
     contentField.current.appendChild(loadingNode);
     const imgUrl = await axios
-      .post("https://comboard.herokuapp.com/upload/image", formData)
+      .post(`${process.env.REACT_APP_SERVER_URL}/upload/image`, formData)
       .then((res) => res.data.img_url);
     console.log(imgUrl);
     const imgTag = document.createElement("img");
@@ -45,7 +45,7 @@ const PostWriteOption: React.FC<PropsType> = ({
     );
     contentField.current.appendChild(loadingNode);
     const videoUrl = await axios
-      .post("https://comboard.herokuapp.com/upload/video", formData)
+      .post(`${process.env.REACT_APP_SERVER_URL}/upload/video`, formData)
       .then((res) => res.data.video_url);
     console.log(videoUrl);
     const embedTag = document.createElement("embed");

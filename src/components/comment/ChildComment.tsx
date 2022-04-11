@@ -166,6 +166,9 @@ const Nickname = styled.span<StyleType>`
   color: ${(props) =>
     props.active ? props.theme.colors.button : props.theme.colors.main};
   cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
   @media (min-width: 320px) and (max-width: 480px) {
     font-weight: 400;
     width: 40%;

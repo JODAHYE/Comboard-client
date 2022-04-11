@@ -19,7 +19,7 @@ type CreateBodyType = {
 export function useBoard() {
   const getBoardList = async (body: GetBodyType) => {
     const response = await axios.get(
-      "https://comboard.herokuapp.com/board/list",
+      `${process.env.REACT_APP_SERVER_URL}/board/list`,
       {
         params: {
           access: body.access,
@@ -34,13 +34,13 @@ export function useBoard() {
   const createBoard = async (body: CreateBodyType) => {
     if (body.bgimg) {
       const upload_response = await axios.post(
-        "https://comboard.herokuapp.com/upload/image",
+        `${process.env.REACT_APP_SERVER_URL}/upload/image`,
         body.formData
       );
       body.bgimg = upload_response.data.img_url;
     }
     const response = await axios.post(
-      "https://comboard.herokuapp.com/board/create",
+      `${process.env.REACT_APP_SERVER_URL}/board/create`,
       body,
       {
         headers: {
@@ -53,13 +53,13 @@ export function useBoard() {
   const updateBoard = async (boardId: string, body: CreateBodyType) => {
     if (body.bgimg) {
       const upload_response = await axios.post(
-        "https://comboard.herokuapp.com/upload/image",
+        `${process.env.REACT_APP_SERVER_URL}/upload/image`,
         body.formData
       );
       body.bgimg = upload_response.data.img_url;
     }
     const response = await axios.post(
-      "https://comboard.herokuapp.com/board/update",
+      `${process.env.REACT_APP_SERVER_URL}/board/update`,
       body,
       {
         headers: {
@@ -74,7 +74,7 @@ export function useBoard() {
   };
 
   const deleteBoard = async (boardId: string) => {
-    await axios.delete("https://comboard.herokuapp.com/board/delete", {
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/board/delete`, {
       headers: {
         Authorization: cookies.get("accessToken"),
       },
@@ -86,7 +86,7 @@ export function useBoard() {
 
   const bookmarkBoard = async (boardId: string) => {
     await axios.patch(
-      "https://comboard.herokuapp.com/user/bookmark/add",
+      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/add`,
       { boardId },
       {
         headers: {
@@ -97,7 +97,7 @@ export function useBoard() {
   };
   const bookmarkBoardDelete = async (boardId: string) => {
     await axios.patch(
-      "https://comboard.herokuapp.com/user/bookmark/delete",
+      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/delete`,
       { boardId },
       {
         headers: {
@@ -108,7 +108,7 @@ export function useBoard() {
   };
   const isExistBoard = async (boardId: string) => {
     const response = await axios.get(
-      `https://comboard.herokuapp.com/board/${boardId}`
+      `${process.env.REACT_APP_SERVER_URL}/board/${boardId}`
     );
     const data = await response.data;
     if (!data.success) {

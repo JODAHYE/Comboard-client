@@ -12,7 +12,6 @@ const Login: React.FC = () => {
   const location = useLocation();
   const { kakaoLoginUrl } = useUser();
   const { onPopup } = useSelector((state: RootState) => state.menu);
-  const { is_auth } = useSelector((state: RootState) => state.user);
   const [info, setInfo] = useState({
     email: "",
     password: "",
@@ -22,9 +21,7 @@ const Login: React.FC = () => {
     if (code) {
       dispatch(kakaoLogin(code));
     }
-    if (code && is_auth) {
-      window.location.href = process.env.REACT_APP_REDIRECT_URL as string;
-    }
+
   }, []);
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
