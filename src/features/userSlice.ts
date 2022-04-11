@@ -76,12 +76,11 @@ export const userSlice = createSlice({
     builder.addCase(getAlertCount.fulfilled, (state, action) => {
       state.alertCount = action.payload;
     });
-    builder.addCase(kakaoLogin.pending, (state, action) => {
-      const navigate = useNavigate();
-      navigate("/", { replace: true });
-    });
+    builder.addCase(kakaoLogin.pending, (state, action) => {});
     builder.addCase(kakaoLogin.fulfilled, (state, action) => {
       state.kakaoAccessToken = action.payload.kakaoAccessToken;
+      const navigate = useNavigate();
+      navigate("/", { replace: true });
     });
   },
 });
