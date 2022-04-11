@@ -27,7 +27,7 @@ const Main = () => {
 
   return (
     <Wrap>
-      {/* {mainMenu === "공개 게시판" && <PublicBoard />} */}
+      {mainMenu === "공개 게시판" && <PublicBoard />}
       {mainMenu === "비밀 게시판" && <PrivateBoard />}
       {is_auth ? (
         <Div>
