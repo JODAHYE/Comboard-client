@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { BoardType } from "../types/dataType";
 const cookies = new Cookies();
@@ -79,8 +78,6 @@ export const userSlice = createSlice({
     builder.addCase(kakaoLogin.pending, (state, action) => {});
     builder.addCase(kakaoLogin.fulfilled, (state, action) => {
       state.kakaoAccessToken = action.payload.kakaoAccessToken;
-      const navigate = useNavigate();
-      navigate("/", { replace: true });
     });
   },
 });

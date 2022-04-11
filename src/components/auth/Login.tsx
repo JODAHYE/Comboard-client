@@ -22,7 +22,7 @@ const Login: React.FC = () => {
   useEffect(() => {
     const code = location.search.substring(6);
     if (is_auth) {
-      navigate("/");
+      navigate("/", { replace: true });
     }
     if (code) {
       dispatch(kakaoLogin(code));
