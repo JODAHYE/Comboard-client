@@ -5,27 +5,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { onPopupClick } from "../../features/menuSlice";
 import { kakaoLogin, login } from "../../features/userSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
   const { kakaoLoginUrl } = useUser();
   const { onPopup } = useSelector((state: RootState) => state.menu);
+  const { is_auth } = useSelector((state: RootState) => state.user);
   const [info, setInfo] = useState({
     email: "",
     password: "",
   });
-  const { is_auth } = useSelector((state: RootState) => state.user);
-
   useEffect(() => {
     const code = location.search.substring(6);
-    if (is_auth) {
-      navigate("/", { replace: true });
-    }
     if (code) {
       dispatch(kakaoLogin(code));
+    }
+    if (code && is_auth) {
+      window.location.href = "https://comboard.netlify.app";
     }
   }, [is_auth]);
   const onChange = useCallback(
