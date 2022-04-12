@@ -52,6 +52,6 @@ const Content = styled.div`
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
     height: auto;
-    padding: 0 2% 40px;
+    padding: 0 2% calc(env(safe-area-inset-bottom) + 2%);
   }
 `;
