@@ -26,14 +26,11 @@ export const commentSlice = createSlice({
 export const getCommentList = createAsyncThunk(
   "comment/getCommentList",
   async (postId: string) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/comment/list`,
-      {
-        params: {
-          postId,
-        },
-      }
-    );
+    const response = await axios.get(`/comment/list`, {
+      params: {
+        postId,
+      },
+    });
     const data = response.data.commentList;
     return data;
   }

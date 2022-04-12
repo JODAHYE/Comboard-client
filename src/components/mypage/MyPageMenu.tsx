@@ -6,30 +6,30 @@ import { mypageClick } from "../../features/menuSlice";
 import { useMenu } from "../../hooks/useMenu";
 type StyleType = {
   active?: boolean;
-  height?: boolean;
+  open?: boolean;
 };
 const MyPageMenu = () => {
   const dispatch = useDispatch();
   const { mypageMenu } = useSelector((state: RootState) => state.menu);
-  const [menuHeight, setMenuHeight] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
       const target = e.target as HTMLParagraphElement;
       dispatch(mypageClick(target.innerHTML));
-      setMenuHeight(false);
+      setMenuOpen(false);
     },
     [dispatch]
   );
-  const openMenu = useCallback(() => {
-    setMenuHeight((prev) => !prev);
+  const onOpenMenu = useCallback(() => {
+    setMenuOpen((prev) => !prev);
   }, []);
   return (
     <Wrap>
-      <Header onClick={openMenu}>
+      <Header onClick={onOpenMenu}>
         <MobileMenuBar src="../../../icon/menu.svg" />
         <Title>마이페이지</Title>
       </Header>
-      <List height={menuHeight}>
+      <List open={menuOpen}>
         <MenuItem active={useMenu(mypageMenu, "정보 수정")} onClick={onClick}>
           정보 수정
         </MenuItem>
@@ -94,7 +94,7 @@ const List = styled.div<StyleType>`
     margin-top: 10px;
     gap: 8px;
     overflow: hidden;
-    height: ${(props) => (props.height ? "140px" : "0px")};
+    height: ${(props) => (props.open ? "140px" : "0px")};
     transition: 0.5s;
   }
 `;

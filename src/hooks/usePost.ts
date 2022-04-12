@@ -13,89 +13,69 @@ type BodyType = {
 export function usePost() {
   const params = useParams();
   const getPostList = async (boardId: string, skip: number, sort: string) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/board/${params.id}/list`,
-      {
-        params: {
-          boardId: boardId,
-          skip: skip,
-          sort,
-        },
-      }
-    );
+    const response = await axios.get(`/board/${params.id}/list`, {
+      params: {
+        boardId: boardId,
+        skip: skip,
+        sort,
+      },
+    });
     return response.data.postList;
   };
 
   const createPost = async (body: BodyType) => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/post/create`,
-      body,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axios.post(`/post/create`, body, {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+    });
     return response.data;
   };
 
   const updatePost = async (body: BodyType) => {
-    const response = await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/post/update`,
-      body,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          postId: params.postId,
-        },
-      }
-    );
+    const response = await axios.patch(`/post/update`, body, {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+      params: {
+        postId: params.postId,
+      },
+    });
     const data = await response.data;
     return data;
   };
 
   const deletePost = async () => {
-    const response = await axios.delete(
-      `${process.env.REACT_APP_SERVER_URL}/post/delete`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          postId: params.postId,
-          boardId: params.id,
-        },
-      }
-    );
+    const response = await axios.delete(`/post/delete`, {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+      params: {
+        postId: params.postId,
+        boardId: params.id,
+      },
+    });
     const data = await response.data;
     return data;
   };
 
   const getPostDetail = async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/post/get`,
-      {
-        params: {
-          postId: params.postId,
-        },
-      }
-    );
+    const response = await axios.get(`/post/get`, {
+      params: {
+        postId: params.postId,
+      },
+    });
     const post = response.data.post;
     return post;
   };
 
   const isExistPost = async (postId: string) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/post/get`,
-      {
-        params: {
-          postId: postId,
-        },
-      }
-    );
+    const response = await axios.get(`/post/get`, {
+      params: {
+        postId: postId,
+      },
+    });
     const data = await response.data;
     if (!data.success) {
       alert("해당 게시글이 존재하지 않습니다.");
@@ -107,7 +87,7 @@ export function usePost() {
   const clickLike = async (postId: string) => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/post/like`,
+      `/post/like`,
       { postId },
       {
         headers: {
@@ -120,7 +100,7 @@ export function usePost() {
   const clickDislike = async (postId: string) => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/post/dislike`,
+      `/post/dislike`,
       { postId },
       {
         headers: {
@@ -133,7 +113,7 @@ export function usePost() {
   const clickScrap = async () => {
     await axios
       .patch(
-        `${process.env.REACT_APP_SERVER_URL}/user/scrap/add`,
+        `/user/scrap/add`,
         { postId: params.postId },
         {
           headers: {
@@ -148,7 +128,7 @@ export function usePost() {
 
   const scrapDelete = async () => {
     await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/user/scrap/delete`,
+      `/user/scrap/delete`,
       { postId: params.postId },
       {
         headers: {
@@ -159,38 +139,32 @@ export function usePost() {
   };
 
   const getMyPostList = async (skip: number) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/post/list`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          skip,
-        },
-      }
-    );
+    const response = await axios.get(`/user/post/list`, {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+      params: {
+        skip,
+      },
+    });
     const data = await response.data.postList;
     return data;
   };
 
   const getMyPostCount = async () => {
     if (!cookies.get("accessToken")) return;
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/post_count`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axios.get(`/user/post_count`, {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+    });
     const data = await response.data.postCount;
     return data;
   };
   const deleteMyPost = async (postList: string[]) => {
     for (let i = 0; i < postList.length; i++) {
       const idValue = postList[i].split("-");
-      axios.delete(`${process.env.REACT_APP_SERVER_URL}/post/delete`, {
+      axios.delete(`/post/delete`, {
         headers: {
           Authorization: cookies.get("accessToken"),
         },
@@ -202,24 +176,21 @@ export function usePost() {
     }
   };
   const getScrapList = async (skip: number) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/scrap/list`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          skip,
-        },
-      }
-    );
+    const response = await axios.get(`/user/scrap/list`, {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+      params: {
+        skip,
+      },
+    });
     const data = await response.data.postList;
     return data;
   };
   const clearScrap = async (postList: string[]) => {
     for (let i = 0; i < postList.length; i++) {
       axios.patch(
-        `${process.env.REACT_APP_SERVER_URL}/user/scrap/delete`,
+        `/user/scrap/delete`,
         { postId: postList[i] },
         {
           headers: {
@@ -230,15 +201,12 @@ export function usePost() {
     }
   };
   const getUserPostList = async (userId: string, skip: number) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/post/user_list`,
-      {
-        params: {
-          userId: userId,
-          skip: skip,
-        },
-      }
-    );
+    const response = await axios.get(`/post/user_list`, {
+      params: {
+        userId: userId,
+        skip: skip,
+      },
+    });
     return response.data;
   };
   return {
