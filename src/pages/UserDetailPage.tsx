@@ -144,6 +144,8 @@ const List = styled.div`
   padding: 20px;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
+    height: auto;
+    padding: 20px 20px 40px;
   }
 `;
 const Control = styled.div`
