@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { board_init } from "../../features/boardSlice";
 import AlertPopup from "../alert/AlertPopup";
 import { useLocation } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
 import LoginLoading from "../auth/LoginLoading";
 type StyleType = {
   alert: number;

@@ -80,6 +80,9 @@ export const userSlice = createSlice({
     builder.addCase(login.pending, (state, action) => {
       state.loginLoading = true;
     });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.loginLoading = false;
+    });
     builder.addCase(kakaoLogin.pending, (state, action) => {
       state.loginLoading = true;
     });
