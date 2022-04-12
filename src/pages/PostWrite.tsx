@@ -54,7 +54,7 @@ const PostWrite: React.FC = () => {
       content: showCode
         ? contentField.current.innerText
         : contentField.current.innerHTML,
-      create_date: parseInt(moment(new Date()).format("YYYYMMDDHHmmss")),
+      create_date: parseInt(moment().format("YYYYMMDDHHmmss")),
       board: currentBoard._id,
     };
     if (!body.title || !body.content)

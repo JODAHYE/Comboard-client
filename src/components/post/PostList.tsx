@@ -94,28 +94,30 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
 
   return (
     <>
-    {loading && <Loading />}
-      <Wrap>
-        {postList &&
-          postList.length > 0 &&
-          postList.map((v, i) => {
-            return <PostListItem key={i} post={v} />;
-          })}
-        <PageNation>
-          <PageNum onClick={onPrev}>
-            <IoIosArrowBack />
-          </PageNum>
-          {pageArr.map((num, i) => (
-            <PageNum key={i} onClick={onCurrentPage}>
-              {num}
+      {loading && <Loading />}
+      {!loading && (
+        <Wrap>
+          {postList &&
+            postList.length > 0 &&
+            postList.map((v, i) => {
+              return <PostListItem key={i} post={v} />;
+            })}
+          <PageNation>
+            <PageNum onClick={onPrev}>
+              <IoIosArrowBack />
             </PageNum>
-          ))}
+            {pageArr.map((num, i) => (
+              <PageNum key={i} onClick={onCurrentPage}>
+                {num}
+              </PageNum>
+            ))}
 
-          <PageNum onClick={onNext}>
-            <IoIosArrowForward />
-          </PageNum>
-        </PageNation>
-      </Wrap>
+            <PageNum onClick={onNext}>
+              <IoIosArrowForward />
+            </PageNum>
+          </PageNation>
+        </Wrap>
+      )}
     </>
   );
 };

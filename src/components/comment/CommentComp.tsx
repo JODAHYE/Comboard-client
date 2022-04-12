@@ -88,7 +88,7 @@ export default CommentComp;
 
 const Wrap = styled.div`
   width: 100%;
-  padding: 10px 0;
+  padding: 20px 0 50px;
   border-top: 2px solid ${(props) => props.theme.colors.shadow};
 `;
 const FlexDiv = styled.div`

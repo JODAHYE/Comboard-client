@@ -140,7 +140,8 @@ const Box = styled.div`
 const Header = styled.div`
   border-bottom: 2px solid ${(props) => props.theme.colors.button};
   padding-bottom: 10px;
-  display: flex;
+  ${(props) => props.theme.displayFlex};
+  justify-content: start;
 `;
 const Title = styled.h3`
   display: inline-block;

@@ -6,6 +6,7 @@ import Popup from "../common/Popup";
 import { useBoard } from "../../hooks/useBoard";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import moment from "moment";
 type sizeType = {
   width?: string;
 };
@@ -62,6 +63,7 @@ const CreateBoard: React.FC = () => {
         secretNumber: info.password,
         bgimg: info.bgimg,
         formData: info.formData,
+        creatDate: parseInt(moment().format("YYYYMMDDHHmmss")),
       };
       setLoading(true);
       createBoard(body).then((res) => {
