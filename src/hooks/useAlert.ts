@@ -4,20 +4,23 @@ const cookies = new Cookies();
 
 export function useAlert() {
   const getAlertList = async (skip: number) => {
-    const response = await axios.get(`/alert/list`, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-      params: {
-        skip: skip,
-      },
-    });
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/alert/list`,
+      {
+        headers: {
+          Authorization: cookies.get("accessToken"),
+        },
+        params: {
+          skip: skip,
+        },
+      }
+    );
     const data = await response.data.list;
     return data;
   };
   const alertRead = async (alertId: string) => {
     await axios.patch(
-      `/alert/read`,
+      `${process.env.REACT_APP_SERVER_URL}/alert/read`,
       { alertId },
       {
         headers: {
@@ -27,7 +30,7 @@ export function useAlert() {
     );
   };
   const alertDelete = async () => {
-    await axios.delete(`/alert/delete`, {
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/alert/delete`, {
       headers: {
         Authorization: cookies.get("accessToken"),
       },

@@ -48,7 +48,9 @@ export const boardSlice = createSlice({
 export const getCurrentBoard = createAsyncThunk(
   "board/getCurrentBoard",
   async (boardId: string, thunkAPI) => {
-    const response = await axios.get(`/board/${boardId}`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/board/${boardId}`
+    );
     const data = await response.data;
     return data;
   }
@@ -57,11 +59,14 @@ export const getCurrentBoard = createAsyncThunk(
 export const getCreateList = createAsyncThunk(
   "board/getCreateList",
   async () => {
-    const response = await axios.get(`/user/board/created_list`, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/user/board/created_list`,
+      {
+        headers: {
+          Authorization: cookies.get("accessToken"),
+        },
+      }
+    );
     const data = response.data;
     return data;
   }

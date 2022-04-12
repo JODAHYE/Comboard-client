@@ -56,7 +56,10 @@ const PostDetail: React.FC = () => {
       const body = {
         postId: post._id,
       };
-      axios.patch(`/post/increase/view`, body);
+      axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}/post/increase/view`,
+        body
+      );
       cookies.set(post._id, post._id, {
         path: "/",
         maxAge: 60 * 60 * 12,

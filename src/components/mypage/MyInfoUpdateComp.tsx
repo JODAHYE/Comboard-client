@@ -36,7 +36,7 @@ const MyInfoUpdateComp = () => {
       formData.append("file", files[0]);
       setLoading(true);
       const url = await axios
-        .post("https://comboard.herokuapp.com/upload/image", formData)
+        .post(`${process.env.REACT_APP_SERVER_URL}/upload/image`, formData)
         .then((res) => res.data.img_url);
       updateProfileImg(url).then(() => {
         dispatch(auth());

@@ -4,7 +4,7 @@ export function useUser() {
   const cookies = new Cookies();
   const updateProfileImg = async (imgUrl: string) => {
     const response = await axios.patch(
-      `/user/update/image`,
+      `${process.env.REACT_APP_SERVER_URL}/user/update/image`,
       { imgUrl },
       {
         headers: {
@@ -16,7 +16,7 @@ export function useUser() {
   };
   const updateNickname = async (nickname: string) => {
     const response = await axios.patch(
-      `/user/update/nickname`,
+      `${process.env.REACT_APP_SERVER_URL}/user/update/nickname`,
       { nickname },
       {
         headers: {
@@ -28,7 +28,7 @@ export function useUser() {
   };
   const updatePostLock = async (value: boolean) => {
     const response = await axios.patch(
-      `/user/update/post_lock`,
+      `${process.env.REACT_APP_SERVER_URL}/user/update/post_lock`,
       { value },
       {
         headers: {
@@ -39,9 +39,12 @@ export function useUser() {
     return response.data.postLock;
   };
   const getUserDetail = async (userId: string) => {
-    const response = await axios.get(`/user/detail`, {
-      params: { userId },
-    });
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/user/detail`,
+      {
+        params: { userId },
+      }
+    );
     const data = await response.data;
     return data;
   };

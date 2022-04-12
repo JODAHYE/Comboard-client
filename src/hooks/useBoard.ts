@@ -18,46 +18,63 @@ type CreateBodyType = {
 
 export function useBoard() {
   const getBoardList = async (body: GetBodyType) => {
-    const response = await axios.get(`/board/list`, {
-      params: {
-        access: body.access,
-        skip: body.skip,
-      },
-    });
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/board/list`,
+      {
+        params: {
+          access: body.access,
+          skip: body.skip,
+        },
+      }
+    );
     const data = response.data.list;
     return data;
   };
 
   const createBoard = async (body: CreateBodyType) => {
     if (body.bgimg) {
-      const upload_response = await axios.post(`/upload/image`, body.formData);
+      const upload_response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/upload/image`,
+        body.formData
+      );
       body.bgimg = upload_response.data.img_url;
     }
-    const response = await axios.post(`/board/create`, body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/board/create`,
+      body,
+      {
+        headers: {
+          Authorization: cookies.get("accessToken"),
+        },
+      }
+    );
     return response.data;
   };
   const updateBoard = async (boardId: string, body: CreateBodyType) => {
     if (body.bgimg) {
-      const upload_response = await axios.post(`/upload/image`, body.formData);
+      const upload_response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/upload/image`,
+        body.formData
+      );
       body.bgimg = upload_response.data.img_url;
     }
-    const response = await axios.post(`/board/update`, body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-      params: {
-        boardId,
-      },
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/board/update`,
+      body,
+      {
+        headers: {
+          Authorization: cookies.get("accessToken"),
+        },
+        params: {
+          boardId,
+        },
+      }
+    );
     return response.data;
   };
 
   const deleteBoard = async (boardId: string) => {
-    await axios.delete(`/board/delete`, {
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/board/delete`, {
       headers: {
         Authorization: cookies.get("accessToken"),
       },
@@ -69,7 +86,7 @@ export function useBoard() {
 
   const bookmarkBoard = async (boardId: string) => {
     await axios.patch(
-      `/user/bookmark/add`,
+      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/add`,
       { boardId },
       {
         headers: {
@@ -80,7 +97,7 @@ export function useBoard() {
   };
   const bookmarkBoardDelete = async (boardId: string) => {
     await axios.patch(
-      `/user/bookmark/delete`,
+      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/delete`,
       { boardId },
       {
         headers: {
@@ -90,7 +107,9 @@ export function useBoard() {
     );
   };
   const isExistBoard = async (boardId: string) => {
-    const response = await axios.get(`/board/${boardId}`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/board/${boardId}`
+    );
     const data = await response.data;
     if (!data.success) {
       alert("해당 게시판이 존재하지 않습니다.");

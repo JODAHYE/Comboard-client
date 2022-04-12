@@ -92,7 +92,10 @@ export const userSlice = createSlice({
 export const login = createAsyncThunk(
   "user/login",
   async (info: object, thunkAPI) => {
-    const response = await axios.post(`/user/login`, info);
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/user/login`,
+      info
+    );
     if (!response.data.success) {
       return alert(response.data.msg);
     }
@@ -107,9 +110,12 @@ export const login = createAsyncThunk(
 export const kakaoLogin = createAsyncThunk(
   "user/kakaoLogin",
   async (code: string, thunkAPI) => {
-    const response = await axios.post(`/user/kakaologin`, {
-      code,
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/user/kakaologin`,
+      {
+        code,
+      }
+    );
     cookies.set("accessToken", response.data.accessToken, {
       path: "/",
       maxAge: 60 * 60 * 2,
@@ -123,7 +129,7 @@ export const kakaoLogin = createAsyncThunk(
 export const logout = createAsyncThunk(
   "user/logout",
   async (kakaoAccessToken: string | undefined) => {
-    axios.get(`/user/logout`, {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user/logout`, {
       headers: {
         Authorization: cookies.get("accessToken"),
       },
@@ -139,32 +145,41 @@ export const logout = createAsyncThunk(
 );
 export const auth = createAsyncThunk("user/auth", async () => {
   if (!cookies.get("accessToken")) return;
-  const response = await axios.get(`/user/auth`, {
-    headers: {
-      Authorization: cookies.get("accessToken"),
-    },
-  });
+  const response = await axios.get(
+    `${process.env.REACT_APP_SERVER_URL}/user/auth`,
+    {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+    }
+  );
   return response.data;
 });
 
 export const getBookmarkList = createAsyncThunk(
   "user/getBookmarkList",
   async () => {
-    const response = await axios.get(`/user/bookmark/list`, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/list`,
+      {
+        headers: {
+          Authorization: cookies.get("accessToken"),
+        },
+      }
+    );
     const data = response.data.bookmarkBoardList;
     return data;
   }
 );
 export const getAlertCount = createAsyncThunk("user/alertCount", async () => {
-  const response = await axios.get(`/alert/count`, {
-    headers: {
-      Authorization: cookies.get("accessToken"),
-    },
-  });
+  const response = await axios.get(
+    `${process.env.REACT_APP_SERVER_URL}/alert/count`,
+    {
+      headers: {
+        Authorization: cookies.get("accessToken"),
+      },
+    }
+  );
   const data = response.data.count;
   return data;
 });
