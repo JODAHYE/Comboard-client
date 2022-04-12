@@ -30,7 +30,7 @@ const MyBoardComp = () => {
         arr.push(createList[i]);
       }
     }
-    if(!createList || createList.length===0){
+    if (!createList || createList.length === 0) {
       setBoardList([]);
     }
   }, [createList, skip]);
@@ -57,10 +57,10 @@ const MyBoardComp = () => {
             />
           ))}
       </List>
-      <div>
+      <Controll>
         <PrevBtn onClick={onPrev} />
         <NextBtn onClick={onNext} />
-      </div>
+      </Controll>
       {onPopup === "update_board" && <MyBoardUpdate />}
     </>
   );
@@ -86,6 +86,9 @@ const List = styled.div`
     flex-direction: column;
     align-items: center;
   }
+`;
+const Controll = styled.div`
+  ${(props) => props.theme.displayFlex};
 `;
 const PrevBtn = styled(GrFormPrevious)`
   cursor: pointer;
