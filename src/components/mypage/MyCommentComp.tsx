@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { useComment } from "../../hooks/useComment";
 import MyCommentListItem from "./MyCommentListItem";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import Loading from "../common/Loading";
 import { PostType } from "../../types/dataType";
 
@@ -15,8 +15,10 @@ type CommentType = {
   create_date: number;
   childComment: string[];
 };
+
 const MyCommentComp = () => {
   const { getMyCommentList, getMyCommentCount, deleteMyComment } = useComment();
+
   const [commentList, setCommentList] = useState<CommentType[]>();
   const [skip, setSkip] = useState(0);
   const [checkList, setCheckList] = useState<string[]>();
@@ -25,6 +27,7 @@ const MyCommentComp = () => {
   const [loading, setLoading] = useState(false);
 
   const limit = 16;
+
   useEffect(() => {
     setLoading(true);
     getMyCommentList(skip).then((res) => {
@@ -37,21 +40,25 @@ const MyCommentComp = () => {
       });
     }
   }, [skip]);
+
   useEffect(() => {
     if (!checkList) setCheckList([]);
   }, [checkList]);
+
   const onPrev = useCallback(() => {
     if (skip === 0) return;
     console.log(skip);
     setSkip((prev) => prev - limit);
     setCurrentPage((prev) => prev - 1);
   }, [skip]);
+
   const onNext = useCallback(() => {
     if (currentPage * limit >= commentCount) return;
     setSkip((prev) => prev + limit);
     setCurrentPage((prev) => prev + 1);
     console.log(skip);
   }, [commentCount, skip, currentPage]);
+
   const onDelete = useCallback(() => {
     if (!checkList || checkList.length === 0) return;
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -68,6 +75,7 @@ const MyCommentComp = () => {
       });
     }
   }, [checkList, deleteMyComment, getMyCommentCount, getMyCommentList, skip]);
+
   return (
     <>
       <Title>
@@ -102,6 +110,7 @@ const MyCommentComp = () => {
 };
 
 export default MyCommentComp;
+
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
@@ -109,6 +118,7 @@ const Title = styled.h1`
     font-size: 16px;
   }
 `;
+
 const List = styled.div`
   width: 60%;
   margin-top: 30px;
@@ -117,6 +127,7 @@ const List = styled.div`
     flex-direction: column;
   }
 `;
+
 const PrevBtn = styled(GrFormPrevious)`
   cursor: pointer;
   font-size: 26px;
@@ -124,6 +135,7 @@ const PrevBtn = styled(GrFormPrevious)`
     font-size: 22px;
   }
 `;
+
 const NextBtn = styled(GrFormNext)`
   cursor: pointer;
   font-size: 26px;
@@ -131,18 +143,17 @@ const NextBtn = styled(GrFormNext)`
     font-size: 22px;
   }
 `;
+
 const Control = styled.div`
   margin: 0 auto;
   ${(props) => props.theme.displayFlex}
 `;
+
 const DeleteBtn = styled.button`
-  outline: none;
-  border: none;
+  color: #fff;
   background: ${(props) => props.theme.colors.button};
   border-radius: 5px;
   padding: 4px;
-  cursor: pointer;
-  color: #fff;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }

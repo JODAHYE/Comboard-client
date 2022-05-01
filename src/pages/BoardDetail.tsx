@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Cookies from "universal-cookie";
+import { BsBookmarkStar, BsBookmarkDashFill } from "react-icons/bs";
 import { RootState } from "../app/store";
 import { getCurrentBoard } from "../features/boardSlice";
 import PostList from "../components/post/PostList";
-import Cookies from "universal-cookie";
-import { BsBookmarkStar, BsBookmarkDashFill } from "react-icons/bs";
 import { useBoard } from "../hooks/useBoard";
 import { auth } from "../features/userSlice";
 import MyInfoComp from "../components/common/MyInfoComp";
@@ -16,27 +16,33 @@ type StyleType = {
 };
 
 const BoardDetail: React.FC = () => {
-  const { bookmarkBoard, bookmarkBoardDelete } = useBoard();
   const cookies = new Cookies();
   const params = useParams();
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const { bookmarkBoard, bookmarkBoardDelete } = useBoard();
+
   const { currentBoard } = useSelector((state: RootState) => state.board);
   const { bookmark } = useSelector((state: RootState) => state.user);
   const [sort, setSort] = useState("create_date");
-  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     if (!params.id) return;
     dispatch(getCurrentBoard(params.id));
   }, []);
+
   const onClick = () => {
     setIsOpen((prev) => !prev);
   };
+
   const onWrite = () => {
     if (!params.id) return;
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     navigate(`/board/${currentBoard._id}/write`);
   };
+
   const onBookmark = () => {
     if (bookmark.includes(currentBoard._id)) {
       bookmarkBoardDelete(currentBoard._id).then(() => {
@@ -50,6 +56,7 @@ const BoardDetail: React.FC = () => {
       });
     }
   };
+
   return (
     <Wrap>
       <Box>
@@ -114,21 +121,23 @@ const BoardDetail: React.FC = () => {
 };
 
 export default BoardDetail;
+
 const Wrap = styled.div`
   width: 100%;
   height: 95vh;
-  padding: 50px 0;
   display: flex;
   justify-content: center;
   gap: 2%;
+  padding: 50px 0;
   @media (min-width: 320px) and (max-width: 480px) {
+    height: 94vh;
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    height: 94vh;
     padding: 10px 0;
   }
 `;
+
 const Box = styled.div`
   width: 60%;
   position: relative;
@@ -137,12 +146,14 @@ const Box = styled.div`
     padding: 30px 0;
   }
 `;
+
 const Header = styled.div`
-  border-bottom: 2px solid ${(props) => props.theme.colors.button};
-  padding-bottom: 10px;
   ${(props) => props.theme.displayFlex};
   justify-content: start;
+  border-bottom: 2px solid ${(props) => props.theme.colors.button};
+  padding-bottom: 10px;
 `;
+
 const Title = styled.h3`
   display: inline-block;
   cursor: pointer;
@@ -160,39 +171,38 @@ const InfoBox = styled.div`
     display: none;
   }
 `;
+
 const Info = styled.p<StyleType>`
-  text-align: center;
   width: ${(props) => props.width && props.width};
+  text-align: center;
 `;
 
 const FlexDiv = styled.div`
   display: flex;
+  gap: 10px;
   position: absolute;
   right: 0;
   top: 0;
   margin: 0;
-  gap: 10px;
 `;
 
 const NewPostBtn = styled.button`
-  background: ${(props) => props.theme.colors.button};
-  outline: none;
-  border: none;
-  padding: 2px;
-  color: #fff;
   width: 100px;
-  font-size: 14px;
-  cursor: pointer;
+  background: ${(props) => props.theme.colors.button};
+  color: #fff;
   border-radius: 2px;
+  padding: 2px;
+  font-size: 14px;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
   @media (min-width: 320px) and (max-width: 480px) {
-    padding: 2px 6px;
     width: auto;
+    padding: 2px 6px;
     font-size: 12px;
   }
 `;
+
 const SortSelect = styled.select`
   border: 1px solid ${(props) => props.theme.colors.shadow};
   outline: none;
@@ -206,19 +216,16 @@ const Option = styled.option``;
 
 const Desc = styled.p`
   display: inline-block;
-  display: block;
   white-space: pre-wrap;
   font-size: 15px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
 `;
+
 const InfoBtn = styled.button`
-  outline: none;
-  border: none;
-  background: #fff;
-  cursor: pointer;
   display: inline-block;
+  background: #fff;
   font-size: 16px;
   &::before {
     content: "|";
@@ -241,10 +248,12 @@ const RemoveBookmarkBtn = styled(BsBookmarkDashFill)`
   cursor: pointer;
   color: ${(props) => props.theme.colors.button};
 `;
+
 const Img = styled.img`
-  display: inline-block;
   max-width: 80%;
+  display: inline-block;
 `;
+
 const InfoWrap = styled.div`
   width: 100%;
   padding: 10px;

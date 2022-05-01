@@ -6,12 +6,14 @@ import Popup from "../common/Popup";
 
 const Signup: React.FC = () => {
   const dispatch = useDispatch();
+
   const [info, setInfo] = useState({
     email: "",
     password: "",
     passwordcheck: "",
     nickname: "",
   });
+
   const onSignup = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -34,6 +36,7 @@ const Signup: React.FC = () => {
     },
     [info, dispatch]
   );
+
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
@@ -44,6 +47,7 @@ const Signup: React.FC = () => {
     },
     [info]
   );
+
   return (
     <Popup>
       <Title>회원가입</Title>
@@ -79,7 +83,9 @@ const Signup: React.FC = () => {
     </Popup>
   );
 };
+
 export default Signup;
+
 const Title = styled.h3`
   font-family: BMHANNAAir;
   font-size: 28px;
@@ -89,6 +95,7 @@ const Title = styled.h3`
     font-size: 18px;
   }
 `;
+
 const Form = styled.form`
   width: 40%;
   height: 70%;
@@ -100,35 +107,37 @@ const Form = styled.form`
     width: 80%;
   }
 `;
+
 const Label = styled.label`
-  font-size: 14px;
   display: block;
+  font-size: 14px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
 `;
+
 const Input = styled.input`
-  outline: none;
   width: 100%;
-  border: 1px solid ${(props) => props.theme.colors.shadow};
-  padding: 6px;
   display: block;
+  border: 1px solid ${(props) => props.theme.colors.shadow};
   border-radius: 6px;
+  padding: 6px;
+  outline: none;
   &:focus {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
 `;
+
 const P = styled.p`
   font-size: 13px;
   color: red;
 `;
+
 const Btn = styled.button`
   background: ${(props) => props.theme.colors.button};
-  border: none;
+  border-radius: 4px;
   padding: 6px;
   color: #fff;
-  cursor: pointer;
-  border-radius: 4px;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }

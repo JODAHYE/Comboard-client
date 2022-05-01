@@ -1,28 +1,33 @@
 import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Signup from "./Signup";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { onPopupClick } from "../../features/menuSlice";
 import { kakaoLogin, login } from "../../features/userSlice";
-import { useLocation } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
+
 const Login: React.FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+
   const { kakaoLoginUrl } = useUser();
+
   const { onPopup } = useSelector((state: RootState) => state.menu);
+
   const [info, setInfo] = useState({
     email: "",
     password: "",
   });
+
   useEffect(() => {
     const code = location.search.substring(6);
     if (code) {
       dispatch(kakaoLogin(code));
     }
-
   }, []);
+
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
@@ -33,6 +38,7 @@ const Login: React.FC = () => {
     },
     [info]
   );
+
   const onLogin = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -43,6 +49,7 @@ const Login: React.FC = () => {
     },
     [info, dispatch]
   );
+
   const onSignup = useCallback(() => {
     dispatch(onPopupClick("signup"));
   }, [dispatch]);
@@ -50,6 +57,7 @@ const Login: React.FC = () => {
   const KaKaoLogin = useCallback(() => {
     window.location.href = kakaoLoginUrl;
   }, []);
+
   return (
     <Wrap>
       <Title>Login</Title>
@@ -83,11 +91,12 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
-  flex-direction: column;
   ${(props) => props.theme.displayFlex}
+  flex-direction: column;
   gap: 10px;
 `;
 
@@ -106,33 +115,34 @@ const Form = styled.form`
     width: 80%;
   }
 `;
+
 const Input = styled.input`
+  width: 100%;
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
-  width: 100%;
+  border-radius: 6px;
   padding: 6px;
   margin-bottom: 10px;
-  border-radius: 6px;
   &:focus {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
 `;
+
 const Btn = styled.button`
-  background: ${(props) => props.theme.colors.button};
-  border: none;
-  padding: 6px;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 4px;
   display: inline;
   position: absolute;
   left: 50%;
   bottom: 0;
+  background: ${(props) => props.theme.colors.button};
+  border-radius: 4px;
+  padding: 6px;
+  color: #fff;
   transform: translateX(-50%);
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
 `;
+
 const SignupBtn = styled.p`
   display: inline;
   position: absolute;
@@ -144,12 +154,13 @@ const SignupBtn = styled.p`
     color: ${(props) => props.theme.colors.button};
   }
 `;
+
 const SocialLoginBox = styled.div`
-  border-top: 1px solid ${(props) => props.theme.colors.shadow};
   width: 90%;
+  position: relative;
+  border-top: 1px solid ${(props) => props.theme.colors.shadow};
   padding: 30px 0;
   margin-top: 30px;
-  position: relative;
   &::before {
     content: "sns 간편 로그인";
     position: absolute;
@@ -160,18 +171,16 @@ const SocialLoginBox = styled.div`
     transform: translate(-50%, -50%);
   }
 `;
+
 const KaKaoLoginButton = styled.button`
-  border: none;
-  outline: none;
-  background: #ffe812;
   width: auto;
-  margin: 0 auto;
-  padding: 10px;
   ${(props) => props.theme.displayFlex};
   gap: 16px;
   justify-content: space-around;
   border-radius: 6px;
-  cursor: pointer;
+  background: #ffe812;
+  margin: 0 auto;
+  padding: 10px;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 8px;
   }

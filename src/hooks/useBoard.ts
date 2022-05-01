@@ -1,6 +1,8 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
+
 type GetBodyType = {
   access: string;
   skip: number;
@@ -50,6 +52,7 @@ export function useBoard() {
     );
     return response.data;
   };
+
   const updateBoard = async (boardId: string, body: CreateBodyType) => {
     if (body.bgimg) {
       const upload_response = await axios.post(
@@ -95,6 +98,7 @@ export function useBoard() {
       }
     );
   };
+
   const bookmarkBoardDelete = async (boardId: string) => {
     await axios.patch(
       `${process.env.REACT_APP_SERVER_URL}/user/bookmark/delete`,
@@ -106,6 +110,7 @@ export function useBoard() {
       }
     );
   };
+
   const isExistBoard = async (boardId: string) => {
     const response = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/board/${boardId}`
@@ -117,6 +122,7 @@ export function useBoard() {
     }
     return true;
   };
+
   return {
     getBoardList,
     createBoard,

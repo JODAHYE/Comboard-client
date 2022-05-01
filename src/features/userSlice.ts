@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { BoardType } from "../types/dataType";
+
 const cookies = new Cookies();
+
 export interface UserState {
   objectId: string;
   email: string;
@@ -19,6 +21,7 @@ export interface UserState {
   kakaoAccessToken?: string;
   loginLoading: boolean;
 }
+
 const initialState: UserState = {
   objectId: "",
   email: "",
@@ -35,6 +38,7 @@ const initialState: UserState = {
   kakaoAccessToken: "",
   loginLoading: false,
 };
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -110,6 +114,7 @@ export const login = createAsyncThunk(
     thunkAPI.dispatch(getAlertCount());
   }
 );
+
 export const kakaoLogin = createAsyncThunk(
   "user/kakaoLogin",
   async (code: string, thunkAPI) => {
@@ -129,6 +134,7 @@ export const kakaoLogin = createAsyncThunk(
     return data;
   }
 );
+
 export const logout = createAsyncThunk(
   "user/logout",
   async (kakaoAccessToken: string | undefined) => {
@@ -146,6 +152,7 @@ export const logout = createAsyncThunk(
     });
   }
 );
+
 export const auth = createAsyncThunk("user/auth", async () => {
   if (!cookies.get("accessToken")) return;
   const response = await axios.get(
@@ -174,6 +181,7 @@ export const getBookmarkList = createAsyncThunk(
     return data;
   }
 );
+
 export const getAlertCount = createAsyncThunk("user/alertCount", async () => {
   const response = await axios.get(
     `${process.env.REACT_APP_SERVER_URL}/alert/count`,
@@ -188,4 +196,5 @@ export const getAlertCount = createAsyncThunk("user/alertCount", async () => {
 });
 
 export const { signup } = userSlice.actions;
+
 export default userSlice.reducer;

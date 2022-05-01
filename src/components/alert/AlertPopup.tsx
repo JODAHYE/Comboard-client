@@ -8,11 +8,15 @@ import AlertItem from "./AlertItem";
 
 const AlertPopup: React.FC = () => {
   const target = useRef<HTMLDivElement>(null);
+
   const { getAlertList, alertDelete } = useAlert();
+
   const [alertList, setAlertList] = useState<AlertType[]>([]);
   const [loading, setLoading] = useState(false);
   const [alertEnd, setAlertEnd] = useState(false);
+
   let skip = 0;
+
   useEffect(() => {
     setLoading(true);
     getAlertList(skip).then((res) => {
@@ -20,6 +24,7 @@ const AlertPopup: React.FC = () => {
       setLoading(false);
     });
   }, []);
+
   useEffect(() => {
     if (!target.current) return;
     const observer = new IntersectionObserver(callback, {
@@ -52,6 +57,7 @@ const AlertPopup: React.FC = () => {
       observer.observe(entry.target);
     }
   };
+
   const onDelete = useCallback(() => {
     if (window.confirm("읽은 알림을 삭제하시겠습니까?")) {
       alertDelete().then(() => {
@@ -62,6 +68,7 @@ const AlertPopup: React.FC = () => {
       });
     }
   }, [getAlertList, alertDelete, skip]);
+
   return (
     <Popup height={"85%"}>
       <Header>
@@ -94,6 +101,7 @@ const Header = styled.div`
   position: relative;
   margin: 20px;
 `;
+
 const Title = styled.h3`
   font-family: BMHANNAAir;
   font-size: 22px;
@@ -102,11 +110,12 @@ const Title = styled.h3`
     font-size: 18px;
   }
 `;
+
 const Icon = styled.img`
-  cursor: pointer;
   position: absolute;
   top: 0px;
   right: 30px;
+  cursor: pointer;
   &:hover {
     ${(props) => props.theme.iconColor}
   }
@@ -123,6 +132,7 @@ const List = styled.div`
   flex-direction: column;
   overflow: auto;
 `;
+
 const Target = styled.div`
   width: 100%;
   height: 300px;

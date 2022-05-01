@@ -1,22 +1,28 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
+import Cookies from "universal-cookie";
+import { CircularProgress } from "@mui/material";
 import { RootState } from "../app/store";
 import CommentComp from "../components/comment/CommentComp";
 import { getCurrentBoard } from "../features/boardSlice";
-import Cookies from "universal-cookie";
 import { usePost } from "../hooks/usePost";
 import { auth } from "../features/userSlice";
 import { PostType } from "../types/dataType";
 import MyInfoComp from "../components/common/MyInfoComp";
 import Loading from "../components/common/Loading";
 import { commentListInit } from "../features/commentSlice";
-import { CircularProgress } from "@mui/material";
-const cookies = new Cookies();
 
 const PostDetail: React.FC = () => {
+  const cookies = new Cookies();
+  const params = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const content = useRef<HTMLParagraphElement>(null);
+
   const {
     getPostDetail,
     clickLike,
@@ -25,18 +31,16 @@ const PostDetail: React.FC = () => {
     clickScrap,
     scrapDelete,
   } = usePost();
-  const [post, setPost] = useState<PostType>();
-  const params = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { currentBoard } = useSelector((state: RootState) => state.board);
-  const [loading, setLoading] = useState(false);
   const { objectId, like_post, dislike_post, scrap_post } = useSelector(
     (state: RootState) => state.user
   );
+
+  const [post, setPost] = useState<PostType>();
+  const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
 
-  const content = useRef<HTMLParagraphElement>(null);
   useEffect(() => {
     dispatch(commentListInit());
     setLoading(true);
@@ -49,6 +53,7 @@ const PostDetail: React.FC = () => {
     if (!params.id) return;
     dispatch(getCurrentBoard(params.id));
   }, []);
+
   useEffect(() => {
     if (!post) return;
     if (!post._id) return;
@@ -68,9 +73,11 @@ const PostDetail: React.FC = () => {
       return;
     }
   }, [post]);
+
   const onClick = () => {
     navigate(`/board/${currentBoard._id}`);
   };
+
   const onLike = async () => {
     if (!post) return;
     if (like_post.includes(post._id)) return alert("이미 추천하셨습니다.");
@@ -131,9 +138,11 @@ const PostDetail: React.FC = () => {
       });
     }
   };
+
   const onUserDetail = () => {
     navigate(`/user/${post?.writer}`);
   };
+
   return (
     <Wrap>
       <Box>
@@ -221,17 +230,19 @@ const PostDetail: React.FC = () => {
 };
 
 export default PostDetail;
+
 const Wrap = styled.div`
   width: 100%;
   height: 95vh;
-  padding: 50px 0;
   display: flex;
   justify-content: center;
   gap: 2%;
+  padding: 50px 0;
   @media (min-width: 320px) and (max-width: 480px) {
     height: 94vh;
   }
 `;
+
 const Box = styled.div`
   width: 60%;
   position: relative;
@@ -239,6 +250,7 @@ const Box = styled.div`
     width: 96%;
   }
 `;
+
 const BoardTitle = styled.h2`
   cursor: pointer;
   color: ${(props) => props.theme.colors.button};
@@ -251,19 +263,20 @@ const BoardTitle = styled.h2`
     font-size: 14px;
   }
 `;
+
 const PostTitle = styled.p`
   padding-top: 20px;
   @media (min-width: 320px) and (max-width: 480px) {
     padding-top: 10px;
   }
 `;
+
 const InfoDiv = styled.div`
-  padding: 20px 0;
   width: 50%;
   display: inline-block;
+  padding: 20px 0;
   font-size: 14px;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
-
   &.right {
     text-align: right;
     @media (min-width: 320px) and (max-width: 480px) {
@@ -276,15 +289,16 @@ const InfoDiv = styled.div`
     padding: 10px 0;
   }
 `;
+
 const Info = styled.p`
-  margin-right: 8px;
   display: inline-block;
+  margin-right: 8px;
 `;
 
 const Writer = styled.p`
+  display: inline-block;
   cursor: pointer;
   margin-right: 8px;
-  display: inline-block;
   font-family: SpoqaHanSansNeoBold;
   &:hover {
     color: #000;
@@ -294,32 +308,28 @@ const Writer = styled.p`
     width: 90%;
   }
 `;
+
 const Content = styled.p`
   line-height: 1.3em;
   padding: 10px 0;
 `;
 
 const ListBtn = styled.button`
+  width: 80px;
   display: block;
   background: ${(props) => props.theme.colors.button};
   margin: 30px 0;
-  outline: none;
-  border: none;
   padding: 2px;
   color: #fff;
-  width: 80px;
   font-size: 14px;
-  cursor: pointer;
   border-radius: 2px;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
 `;
+
 const Btn = styled.button`
-  border: none;
-  outline: none;
   font-size: 14px;
-  cursor: pointer;
   background: #fff;
   margin-left: 10px;
   &:active {
@@ -329,23 +339,26 @@ const Btn = styled.button`
     font-size: 12px;
   }
 `;
+
 const Icons = styled.div`
-  margin-top: 30px;
   display: flex;
   gap: 8px;
+  margin-top: 30px;
 `;
+
 const Item = styled.div`
+  display: flex;
+  flex-direction: column;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   border-radius: 10px;
   padding: 4px;
-  display: flex;
-  flex-direction: column;
 `;
+
 const Icon = styled.img`
-  display: inline-block;
-  padding: 2px;
   width: 28px;
   height: 28px;
+  display: inline-block;
+  padding: 2px;
   ${(props) => props.theme.iconColor};
   cursor: pointer;
 `;

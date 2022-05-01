@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { BoardType } from "../types/dataType";
+
 const cookies = new Cookies();
 
 interface BoardState {
@@ -20,6 +21,7 @@ const initialState: BoardState = {
     postCount: 0,
   },
 };
+
 export const boardSlice = createSlice({
   name: "board",
   initialState,
@@ -45,6 +47,7 @@ export const boardSlice = createSlice({
     });
   },
 });
+
 export const getCurrentBoard = createAsyncThunk(
   "board/getCurrentBoard",
   async (boardId: string, thunkAPI) => {
@@ -71,5 +74,7 @@ export const getCreateList = createAsyncThunk(
     return data;
   }
 );
+
 export const { board_init } = boardSlice.actions;
+
 export default boardSlice.reducer;

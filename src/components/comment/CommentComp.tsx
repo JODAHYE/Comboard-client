@@ -1,36 +1,43 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
+import moment from "moment";
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
-import moment from "moment";
 import CommentItem from "./CommentItem";
 import { CommentType, PostType } from "../../types/dataType";
 import Loading from "../common/Loading";
 import { getCommentList } from "../../features/commentSlice";
-import { useParams } from "react-router-dom";
-const cookies = new Cookies();
 
 type PropTypes = {
   post: PostType;
 };
+
 const CommentComp: React.FC<PropTypes> = ({ post }) => {
-  const { commentCreate } = useComment();
-  const contentField = useRef<HTMLDivElement>(null);
-  const { nickname } = useSelector((state: RootState) => state.user);
-  const [commentsCount, setCommentsCount] = useState(post.comments_count);
-  const [loading, setLoading] = useState(false);
-  const { commentList } = useSelector((state: RootState) => state.comment);
-  const [comments, setComments] = useState<CommentType[]>([]);
+  const cookies = new Cookies();
   const dispatch = useDispatch();
   const params = useParams();
+
+  const { commentCreate } = useComment();
+
+  const contentField = useRef<HTMLDivElement>(null);
+
+  const { nickname } = useSelector((state: RootState) => state.user);
+  const { commentList } = useSelector((state: RootState) => state.comment);
+
+  const [commentsCount, setCommentsCount] = useState(post.comments_count);
+  const [loading, setLoading] = useState(false);
+  const [comments, setComments] = useState<CommentType[]>([]);
+
   useEffect(() => {
     if (!params.postId) return;
     if (commentList.length === 0) {
       dispatch(getCommentList(params.postId));
     }
   }, []);
+
   const onSubmit = () => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     if (!contentField.current || !post._id || !contentField.current.innerHTML)
@@ -91,47 +98,47 @@ const Wrap = styled.div`
   padding: 20px 0 50px;
   border-top: 2px solid ${(props) => props.theme.colors.shadow};
 `;
+
 const FlexDiv = styled.div`
   ${(props) => props.theme.displayFlex};
   justify-content: start;
-  font-size: 14px;
   gap: 10px;
+  font-size: 14px;
   @media (min-width: 320px) and (max-width: 480px) {
     flex-direction: column;
   }
 `;
+
 const Div = styled.div`
   display: flex;
   flex-direction: column;
-
   @media (min-width: 320px) and (max-width: 480px) {
+    width: 98%;
     flex-direction: row;
     justify-content: space-between;
-    width: 98%;
   }
 `;
+
 const TextArea = styled.div`
-  display: inline-block;
   width: 90%;
   height: 150px;
+  display: inline-block;
   outline: none;
   border: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   @media (min-width: 320px) and (max-width: 480px) {
-    flex-direction: column;
     width: 98%;
     height: 80px;
+    flex-direction: column;
   }
 `;
 
 const SubmitBtn = styled.button`
-  padding: 6px;
-  outline: none;
   border: 1px solid ${(props) => props.theme.colors.button};
-  cursor: pointer;
   border-radius: 2px;
   background: #fff;
   color: ${(props) => props.theme.colors.button};
+  padding: 6px;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
     color: #fff;
@@ -141,6 +148,7 @@ const SubmitBtn = styled.button`
     font-size: 12px;
   }
 `;
+
 const P = styled.p`
   margin: 6px 0;
   @media (min-width: 320px) and (max-width: 480px) {
