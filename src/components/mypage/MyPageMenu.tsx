@@ -4,19 +4,14 @@ import styled from "styled-components";
 import { RootState } from "../../app/store";
 import { mypageClick } from "../../features/menuSlice";
 import { useMenu } from "../../hooks/useMenu";
-
 type StyleType = {
   active?: boolean;
   open?: boolean;
 };
-
 const MyPageMenu = () => {
   const dispatch = useDispatch();
-
   const { mypageMenu } = useSelector((state: RootState) => state.menu);
-
   const [menuOpen, setMenuOpen] = useState(false);
-
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
       const target = e.target as HTMLParagraphElement;
@@ -25,11 +20,9 @@ const MyPageMenu = () => {
     },
     [dispatch]
   );
-
   const onOpenMenu = useCallback(() => {
     setMenuOpen((prev) => !prev);
   }, []);
-
   return (
     <Wrap>
       <Header onClick={onOpenMenu}>
@@ -69,13 +62,11 @@ const Wrap = styled.div`
     width: 100%;
   }
 `;
-
 const Header = styled.div`
-  width: 100%;
   ${(props) => props.theme.displayFlex};
+  width: 100%;
   gap: 10px;
 `;
-
 const Title = styled.h1`
   color: ${(props) => props.theme.colors.button};
   font-size: 28px;
@@ -84,7 +75,6 @@ const Title = styled.h1`
     font-size: 18px;
   }
 `;
-
 const MobileMenuBar = styled.img`
   display: none;
   @media (min-width: 320px) and (max-width: 480px) {
@@ -94,11 +84,11 @@ const MobileMenuBar = styled.img`
 
 const List = styled.div<StyleType>`
   width: 100%;
+  margin-top: 100px;
   ${(props) => props.theme.displayFlex};
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-  margin-top: 100px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 16px;
     margin-top: 10px;
@@ -108,7 +98,6 @@ const List = styled.div<StyleType>`
     transition: 0.5s;
   }
 `;
-
 const MenuItem = styled.p<StyleType>`
   font-size: 22px;
   font-family: BMHANNAAir;

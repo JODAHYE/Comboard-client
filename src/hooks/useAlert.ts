@@ -1,6 +1,5 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
-
 const cookies = new Cookies();
 
 export function useAlert() {
@@ -19,7 +18,6 @@ export function useAlert() {
     const data = await response.data.list;
     return data;
   };
-
   const alertRead = async (alertId: string) => {
     await axios.patch(
       `${process.env.REACT_APP_SERVER_URL}/alert/read`,
@@ -31,7 +29,6 @@ export function useAlert() {
       }
     );
   };
-
   const alertDelete = async () => {
     await axios.delete(`${process.env.REACT_APP_SERVER_URL}/alert/delete`, {
       headers: {
@@ -39,7 +36,6 @@ export function useAlert() {
       },
     });
   };
-
   return {
     getAlertList,
     alertRead,

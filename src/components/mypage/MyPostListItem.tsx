@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect } from "react";
 import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
 
@@ -10,12 +10,10 @@ type PropsType = {
   setCheckList: React.Dispatch<React.SetStateAction<string[] | undefined>>;
   checkList?: string[];
 };
-
 type StyleType = {
   width?: string;
   info?: string;
 };
-
 const MyPostListItem: React.FC<PropsType> = ({
   post,
   setCheckList,
@@ -23,11 +21,9 @@ const MyPostListItem: React.FC<PropsType> = ({
 }) => {
   const navigate = useNavigate();
   const { isExistBoard } = useBoard();
-
   useEffect(() => {
     if (!checkList) setCheckList([]);
   }, [checkList]);
-
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
@@ -41,7 +37,6 @@ const MyPostListItem: React.FC<PropsType> = ({
     },
     [checkList, setCheckList]
   );
-
   const onTitleClick = useCallback(() => {
     isExistBoard(post.board).then((res) => {
       if (res) {
@@ -49,7 +44,6 @@ const MyPostListItem: React.FC<PropsType> = ({
       }
     });
   }, [isExistBoard, post, navigate]);
-
   return (
     <PostItem data-post={post._id}>
       <Title onClick={onTitleClick}>
@@ -82,20 +76,18 @@ const MyPostListItem: React.FC<PropsType> = ({
 };
 
 export default MyPostListItem;
-
 const PostItem = styled.div`
   display: flex;
-  align-items: center;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
+  align-items: center;
   @media (min-width: 320px) and (max-width: 480px) {
     flex-wrap: wrap;
     gap: 5px;
   }
 `;
-
 const Content = styled.p<StyleType>`
-  width: ${(props) => props.width && props.width};
   text-align: center;
+  width: ${(props) => props.width && props.width};
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;
     margin-right: 6px;
@@ -105,7 +97,6 @@ const Content = styled.p<StyleType>`
     }
   }
 `;
-
 const Title = styled.div`
   display: flex;
   width: 70%;
@@ -127,7 +118,6 @@ const Title = styled.div`
     width: 100%;
   }
 `;
-
 const Checkbox = styled.input`
   width: 18px;
   height: 18px;

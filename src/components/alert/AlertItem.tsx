@@ -1,8 +1,8 @@
+import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import moment from "moment";
 import { onPopupClick } from "../../features/menuSlice";
 import { getAlertCount } from "../../features/userSlice";
 import { useAlert } from "../../hooks/useAlert";
@@ -15,21 +15,17 @@ type StyleType = {
 };
 
 const AlertItem = ({ alert }: { alert: AlertType }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const { alertRead } = useAlert();
   const { isExistBoard } = useBoard();
   const { isExistPost } = usePost();
-
   const [isRead, setIsRead] = useState<boolean>();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!alert.isRead) return;
     setIsRead(alert.isRead);
     console.log(alert);
   }, [alert]);
-
   const onClick = useCallback(() => {
     alertRead(alert._id).then(() => {
       setIsRead(true);
@@ -47,16 +43,15 @@ const AlertItem = ({ alert }: { alert: AlertType }) => {
         });
       }
     });
+
     dispatch(onPopupClick(""));
   }, [alert, alertRead, dispatch, isExistBoard, isExistPost, navigate]);
-
   const onRead = useCallback(() => {
     alertRead(alert._id).then(() => {
       setIsRead(true);
       dispatch(getAlertCount());
     });
   }, [alert._id, alertRead, dispatch]);
-
   return (
     <Item blur={isRead && true}>
       <ContentDiv onClick={onClick}>
@@ -85,11 +80,10 @@ const AlertItem = ({ alert }: { alert: AlertType }) => {
 };
 
 export default AlertItem;
-
 const Item = styled.div<StyleType>`
-  width: 100%;
-  ${(props) => props.theme.displayFlex};
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
+  ${(props) => props.theme.displayFlex};
+  width: 100%;
   background: ${(props) => props.blur && "rgba(0, 0, 0, 0.05)"};
   &:hover {
     background: rgba(0, 0, 0, 0.05);
@@ -98,14 +92,14 @@ const Item = styled.div<StyleType>`
     flex-direction: column;
   }
 `;
-
 const ContentDiv = styled.div`
   width: 92%;
-  display: flex;
-  flex-direction: column;
   cursor: pointer;
+  padding: 6px;
   line-height: 1.2em;
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
   padding: 10px 0;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
@@ -113,8 +107,8 @@ const ContentDiv = styled.div`
   }
 `;
 const Info = styled.div`
-  width: 100%;
   display: flex;
+  width: 100%;
   justify-content: space-between;
   @media (min-width: 320px) and (max-width: 480px) {
     & > span {
@@ -123,11 +117,15 @@ const Info = styled.div`
   }
 `;
 const IsRead = styled.button`
+  outline: none;
+  border: none;
   background: #fff;
   color: ${(props) => props.theme.colors.button};
   border: 1px solid ${(props) => props.theme.colors.button};
   border-radius: 2px;
   padding: 4px;
+  cursor: pointer;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
     padding: 6px;

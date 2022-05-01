@@ -11,17 +11,13 @@ import CreateBoard from "./CreateBoard";
 
 const PublicBoard: React.FC = () => {
   const { getBoardList } = useBoard();
-
-  const target = useRef<HTMLDivElement>(null);
-
   const { onPopup } = useSelector((state: RootState) => state.menu);
-
   const [boardList, setBoardList] = useState<BoardType[]>([]);
+
   const [loading, setLoading] = useState(false);
   const [boardListEnd, setBoardListEnd] = useState(false);
-
+  const target = useRef<HTMLDivElement>(null);
   let skip = 0;
-
   useEffect(() => {
     setLoading(true);
     getBoardList({ access: "public", skip }).then((res) => {
@@ -60,6 +56,7 @@ const PublicBoard: React.FC = () => {
         }
         setLoading(false);
       });
+
       observer.observe(entry.target);
     }
   };
@@ -83,36 +80,32 @@ const PublicBoard: React.FC = () => {
     </Wrap>
   );
 };
-
 export default PublicBoard;
-
 const Wrap = styled.div`
-  width: 70%;
-  height: 100%;
   position: relative;
   padding: 40px;
+  width: 70%;
+  height: 100%;
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
     padding: 40px 10px;
   }
 `;
-
 const List = styled.div`
-  height: 100%;
-  width: 100%;
   overflow: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  height: 100%;
+  width: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
-    display: none;
+    display: none; /* Chrome, Safari, Opera*/
   }
   @media (min-width: 320px) and (max-width: 480px) {
     margin: 0 auto;
   }
 `;
-
 const Target = styled.div`
   width: 100%;
   height: 300px;

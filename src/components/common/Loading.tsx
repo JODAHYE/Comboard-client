@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Skeleton from "@mui/material/Skeleton";
-
+const Wrap = styled.div`
+  width: 100%;
+  margin-top: 40px;
+`;
 const Loading = () => {
   return (
     <Wrap>
@@ -12,8 +15,3 @@ const Loading = () => {
 };
 
 export default Loading;
-
-const Wrap = styled.div`
-  width: 100%;
-  margin-top: 40px;
-`;

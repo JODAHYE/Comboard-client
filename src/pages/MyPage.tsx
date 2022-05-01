@@ -1,28 +1,24 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../app/store";
 import MyPageMenu from "../components/mypage/MyPageMenu";
 import MyInfoUpdateComp from "../components/mypage/MyInfoUpdateComp";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 import MyPostList from "../components/mypage/MyPostList";
 import MyScrapList from "../components/mypage/MyScrapList";
 import MyCommentComp from "../components/mypage/MyCommentComp";
 import MyBoardComp from "../components/mypage/MyBoardComp";
-
+const cookies = new Cookies();
 const MyPage = () => {
-  const cookies = new Cookies();
-  const navigate = useNavigate();
-
   const { mypageMenu } = useSelector((state: RootState) => state.menu);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (!cookies.get("accessToken")) {
       return navigate("/");
     }
   }, []);
-
   return (
     <Wrap>
       <MyPageMenu />
@@ -38,17 +34,16 @@ const MyPage = () => {
 };
 
 export default MyPage;
-
 const Wrap = styled.div`
-  width: 100%;
-  height: 95vh;
   display: flex;
   position: relative;
+  width: 100%;
+  height: 95vh;
   overflow: auto;
   @media (min-width: 320px) and (max-width: 480px) {
-    height: 94vh;
     flex-direction: column;
     align-items: center;
+    height: 94vh;
   }
 `;
 const Content = styled.div`

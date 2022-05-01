@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { ImSearch } from "react-icons/im";
-
 type PropsType = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   val: string;
 };
-
 const SearchForm: React.FC<PropsType> = ({ onChange, onSubmit, val }) => {
   return (
     <div>
@@ -26,20 +24,18 @@ const SearchForm: React.FC<PropsType> = ({ onChange, onSubmit, val }) => {
 };
 
 export default SearchForm;
-
 const Form = styled.form`
   width: 100%;
   height: 32px;
-  ${(props) => props.theme.displayFlex}
   text-align: center;
+  ${(props) => props.theme.displayFlex}
 `;
-
 const Input = styled.input`
-  width: 50%;
-  height: 100%;
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   padding: 4px;
+  width: 50%;
+  height: 100%;
   &:focus {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
@@ -47,10 +43,10 @@ const Input = styled.input`
     width: 60%;
   }
 `;
-
 const Btn = styled.button`
-  height: 100%;
   border: 1px solid transparent;
+  height: 100%;
+  cursor: pointer;
   font-size: 20px;
   padding: 4px;
   background: ${(props) => props.theme.colors.button};

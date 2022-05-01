@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
-
 const cookies = new Cookies();
-
 type BodyType = {
   title: string;
   writer: string;
@@ -189,7 +187,6 @@ export function usePost() {
     const data = await response.data.postCount;
     return data;
   };
-
   const deleteMyPost = async (postList: string[]) => {
     for (let i = 0; i < postList.length; i++) {
       const idValue = postList[i].split("-");
@@ -204,7 +201,6 @@ export function usePost() {
       });
     }
   };
-
   const getScrapList = async (skip: number) => {
     const response = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/user/scrap/list`,
@@ -220,7 +216,6 @@ export function usePost() {
     const data = await response.data.postList;
     return data;
   };
-
   const clearScrap = async (postList: string[]) => {
     for (let i = 0; i < postList.length; i++) {
       axios.patch(
@@ -234,7 +229,6 @@ export function usePost() {
       );
     }
   };
-
   const getUserPostList = async (userId: string, skip: number) => {
     const response = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/post/user_list`,
@@ -247,7 +241,6 @@ export function usePost() {
     );
     return response.data;
   };
-
   return {
     getPostList,
     createPost,

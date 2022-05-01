@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import PostListItem from "../components/post/PostListItem";
 import { usePost } from "../hooks/usePost";
 import { useUser } from "../hooks/useUser";
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { PostType } from "../types/dataType";
 import Loading from "../components/common/Loading";
 
 const UserDetailPage = () => {
   const params = useParams();
-
   const { getUserDetail } = useUser();
   const { getUserPostList } = usePost();
-
   const [userNickname, setUserNickname] = useState("");
   const [userImg, setUserImg] = useState("");
   const [signupDate, setSignupDate] = useState(0);
@@ -22,9 +20,7 @@ const UserDetailPage = () => {
   const [postList, setPostList] = useState<PostType[]>();
   const [skip, setSkip] = useState(0);
   const [loading, setLoading] = useState(false);
-
   const limit = 10;
-
   useEffect(() => {
     if (!params.userId) return;
     setLoading(true);
@@ -37,7 +33,6 @@ const UserDetailPage = () => {
       setLoading(false);
     });
   }, []);
-
   useEffect(() => {
     if (postLock) return;
     if (!params.userId) return;
@@ -55,11 +50,9 @@ const UserDetailPage = () => {
     if (skip === 0) return;
     setSkip((prev) => prev - limit);
   };
-
   const onNext = () => {
     setSkip((prev) => prev + limit);
   };
-
   return (
     <Wrap>
       <InfoBox>
@@ -101,30 +94,28 @@ const UserDetailPage = () => {
 };
 
 export default UserDetailPage;
-
 const Wrap = styled.div`
   width: 100vw;
-  height: 95vh;
   ${(props) => props.theme.displayFlex};
   gap: 10px;
   justify-content: flex-start;
+  height: 95vh;
   @media (min-width: 320px) and (max-width: 480px) {
-    height: 94vh;
     flex-direction: column;
+    height: 94vh;
   }
 `;
-
 const InfoBox = styled.div`
-  width: 16%;
-  height: 100%;
   ${(props) => props.theme.displayFlex};
   flex-direction: column;
   justify-content: start;
-  gap: 16px;
   padding: 10px;
   /* align-items: flex-start; */
   margin-left: 10px;
+  width: 16%;
+  height: 100%;
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
+  gap: 16px;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
     gap: 6px;
@@ -135,20 +126,18 @@ const InfoBox = styled.div`
 const Name = styled.p``;
 
 const Img = styled.img`
+  display: inline-block;
   width: 90%;
   height: 300px;
-  display: inline-block;
   object-fit: cover;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 70%;
     height: 120px;
   }
 `;
-
 const Date = styled.p`
   font-size: 14px;
 `;
-
 const List = styled.div`
   width: 60%;
   height: 100%;
@@ -159,22 +148,18 @@ const List = styled.div`
     padding: 20px 20px 40px;
   }
 `;
-
 const Control = styled.div`
-  ${(props) => props.theme.displayFlex};
   margin: 0 auto;
+  ${(props) => props.theme.displayFlex}
 `;
-
 const PrevBtn = styled(GrFormPrevious)`
   cursor: pointer;
   font-size: 26px;
 `;
-
 const NextBtn = styled(GrFormNext)`
   cursor: pointer;
   font-size: 26px;
 `;
-
 const Title = styled.h3`
   color: ${(props) => props.theme.colors.button};
   margin-bottom: 20px;

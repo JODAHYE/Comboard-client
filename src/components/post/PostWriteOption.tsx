@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { RefObject } from "react";
 import styled from "styled-components";
-
 type PropsType = {
   contentField: RefObject<HTMLDivElement>;
   showCode: boolean;
@@ -11,7 +10,6 @@ type PropsType = {
 type StyleType = {
   active?: boolean;
 };
-
 const PostWriteOption: React.FC<PropsType> = ({
   contentField,
   showCode,
@@ -71,6 +69,7 @@ const PostWriteOption: React.FC<PropsType> = ({
       a.innerText = url;
       contentField.current.appendChild(a);
     }
+
     if (target.dataset.name === "toCode") {
       console.log("toCode");
       if (!contentField.current.textContent || !contentField.current.innerHTML)
@@ -85,7 +84,6 @@ const PostWriteOption: React.FC<PropsType> = ({
       setShowCode((prev) => !prev);
     }
   };
-
   return (
     <Option>
       <Icon
@@ -94,6 +92,7 @@ const PostWriteOption: React.FC<PropsType> = ({
         onClick={onClick}
         title="링크 추가"
       />
+
       <form>
         <label data-name="addImage" title="이미지 첨부" htmlFor="image">
           <Icon src="../../../icon/image.svg" />
@@ -106,6 +105,7 @@ const PostWriteOption: React.FC<PropsType> = ({
           onChange={onImgChange}
         />
       </form>
+
       <form>
         <label data-name="addImage" title="동영상 첨부" htmlFor="video">
           <Icon src="../../../icon/film.svg" />
@@ -130,13 +130,12 @@ const PostWriteOption: React.FC<PropsType> = ({
 };
 
 export default PostWriteOption;
-
 const Option = styled.div`
   width: 100%;
-  ${(props) => props.theme.displayFlex};
-  gap: 4px;
   border-left: 1px solid ${(props) => props.theme.colors.shadow};
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
+  ${(props) => props.theme.displayFlex}
+  gap: 4px;
   & > form {
     width: 30px;
     height: 30px;
@@ -146,12 +145,11 @@ const Option = styled.div`
 const ImgUpload = styled.input`
   display: none;
 `;
-
 const Icon = styled.img<StyleType>`
   width: 30px;
   height: 30px;
-  display: inline-block;
   object-fit: cover;
+  display: inline-block;
   background: ${(props) =>
     props.active ? props.theme.colors.buttonActive : props.theme.colors.button};
   color: #fff;

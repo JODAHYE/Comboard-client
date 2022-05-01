@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
-
 const cookies = new Cookies();
-
 type BodyType = {
   parentCommentId?: string;
   post: string;
@@ -14,10 +12,8 @@ type BodyType = {
   reply_name?: string;
   reply_comment?: string;
 };
-
 export function useComment() {
   const params = useParams();
-
   const commentCreate = async (body: BodyType) => {
     const response = await axios.post(
       `${process.env.REACT_APP_SERVER_URL}/comment/create`,
@@ -51,7 +47,6 @@ export function useComment() {
     const data = response.data.commentList;
     return data;
   };
-
   const replyCreate = async (body: BodyType) => {
     const response = await axios.post(
       `${process.env.REACT_APP_SERVER_URL}/comment/reply/create`,
@@ -134,7 +129,6 @@ export function useComment() {
     const data = await response.data.list;
     return data;
   };
-
   const getMyCommentCount = async () => {
     if (!cookies.get("accessToken")) return;
     const response = await axios.get(
@@ -148,7 +142,6 @@ export function useComment() {
     const data = await response.data.CommentCount;
     return data;
   };
-
   const deleteMyComment = async (commentList: string[]) => {
     for (let i = 0; i < commentList.length; i++) {
       const idValue = commentList[i].split("-");
@@ -163,7 +156,6 @@ export function useComment() {
       });
     }
   };
-
   return {
     commentCreate,
     getReplyList,

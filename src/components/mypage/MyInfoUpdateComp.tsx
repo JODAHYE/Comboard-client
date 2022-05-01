@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
@@ -13,19 +13,15 @@ type StyledType = {
 };
 
 const MyInfoUpdateComp = () => {
-  const dispatch = useDispatch();
-
   const { updateProfileImg, updateNickname, updatePostLock } = useUser();
-
-  const nicknameField = useRef<HTMLDivElement>(null);
-
   const { nickname, profileImage, postLock } = useSelector(
     (state: RootState) => state.user
   );
-
+  const nicknameField = useRef<HTMLDivElement>(null);
   const [isUpdateClick, setIsUpdateClick] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!nicknameField.current) return;
     nicknameField.current.innerHTML = nickname;
@@ -48,13 +44,11 @@ const MyInfoUpdateComp = () => {
     },
     [dispatch, updateProfileImg]
   );
-
   const onNicknameClick = useCallback(() => {
     if (!nicknameField.current) return;
     setIsUpdateClick(true);
     nicknameField.current.focus();
   }, []);
-
   const onNicknameUpdate = useCallback(() => {
     if (!nicknameField.current) return;
     if (nicknameField.current.innerText.length > 18) {
@@ -63,9 +57,9 @@ const MyInfoUpdateComp = () => {
     updateNickname(nicknameField.current.innerText).then(() => {
       dispatch(auth());
     });
+
     setIsUpdateClick(false);
   }, [dispatch, updateNickname]);
-
   const onPostLock = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const target = e.target as HTMLButtonElement;
@@ -81,7 +75,6 @@ const MyInfoUpdateComp = () => {
     },
     [updatePostLock, dispatch]
   );
-
   return (
     <>
       <Title>정보 수정</Title>
@@ -152,8 +145,8 @@ export default MyInfoUpdateComp;
 
 const List = styled.div`
   width: 60%;
-  display: flex;
   margin-top: 30px;
+  display: flex;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
     flex-direction: column;
@@ -167,12 +160,11 @@ const Title = styled.h1`
     font-size: 16px;
   }
 `;
-
 const InfoDiv = styled.div`
   width: 50%;
+  gap: 6px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
   & > span {
     font-size: 14px;
   }
@@ -182,11 +174,11 @@ const InfoDiv = styled.div`
     align-items: center;
   }
 `;
-
 const Row = styled.div`
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  /* align-items: flex-start; */
   & > p {
     color: ${(props) => props.theme.colors.button};
   }
@@ -196,18 +188,16 @@ const Row = styled.div`
     align-items: center;
   }
 `;
-
 const Img = styled.img`
+  display: inline-block;
   width: 300px;
   height: 300px;
-  display: inline-block;
   object-fit: cover;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 80%;
     height: 160px;
   }
 `;
-
 const Label = styled.label`
   display: inline-block;
   padding: 4px;
@@ -221,28 +211,29 @@ const Label = styled.label`
     margin-bottom: 8px;
   }
 `;
-
 const ImgUpload = styled.input`
   display: none;
 `;
-
 const NicknameField = styled.div<StyledType>`
-  display: inline-block;
   outline: none;
   border: ${(props) =>
     props.isFocus ? `1px solid ${props.theme.colors.fontColor}` : "none"};
   padding: 4px;
+  outline: none;
+  display: inline-block;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 14px;
   }
 `;
-
 const Btn = styled.button<StyledType>`
   display: inline-block;
-  border-radius: 4px;
+  outline: none;
+  border: none;
   padding: 6px;
+  border-radius: 4px;
   background: ${(props) =>
     props.active ? props.theme.colors.button : props.theme.colors.buttonActive};
+  cursor: pointer;
   color: #fff;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};

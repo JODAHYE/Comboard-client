@@ -11,22 +11,17 @@ import Loading from "../common/Loading";
 type PropsType = {
   sort: string;
 };
-
 const PostList: React.FC<PropsType> = ({ sort }) => {
   const { getPostList } = usePost();
-
   const { currentBoard } = useSelector((state: RootState) => state.board);
-
   const [postCount, setPostCount] = useState(0);
   const [postList, setPostList] = useState<PostType[]>();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageArr, setPageArr] = useState<Number[]>([]); //페이지 배열 [6, 7, 8, 9, 10]
-  const [page, setPage] = useState(0); //총 페이지 수  (ex: 100쪽)(끝페이지:?)
-  const [loading, setLoading] = useState(false);
-
   const viewPostCount = 22; //보일 게시글 개수
   const pageCount = 3; //◀ 1 2 3 4 5▶  페이지 번호 개수
-
+  const [page, setPage] = useState(0); //총 페이지 수  (ex: 100쪽)(끝페이지:?)
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (currentBoard._id) {
       setLoading(true);
@@ -90,6 +85,7 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
     const arrEnd = pageArr[pageArr.length - 1] as number;
     if (arrEnd >= page) return;
     const arr = [];
+
     for (let i = arrEnd + 1; i <= page; i++) {
       if (arr.length < pageCount) arr.push(i);
     }
@@ -115,6 +111,7 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
                 {num}
               </PageNum>
             ))}
+
             <PageNum onClick={onNext}>
               <IoIosArrowForward />
             </PageNum>
@@ -126,21 +123,19 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
 };
 
 export default PostList;
-
 const Wrap = styled.div`
   width: 100%;
 `;
-
 const PageNation = styled.div`
   width: 100%;
   margin: 30px 0;
   ${(props) => props.theme.displayFlex}
   @media (min-width: 320px) and (max-width: 480px) {
-    height: auto;
     margin: 10px 0;
+    height: auto;
+    /* border: 1px solid red; */
   }
 `;
-
 const PageNum = styled.p`
   margin: 6px;
   cursor: pointer;

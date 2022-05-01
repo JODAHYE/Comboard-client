@@ -1,16 +1,15 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
 import { mainMenuClick, onPopupClick } from "../../features/menuSlice";
 import { auth, logout } from "../../features/userSlice";
-import { board_init } from "../../features/boardSlice";
 import { useMenu } from "../../hooks/useMenu";
+import { Link, useNavigate } from "react-router-dom";
+import { board_init } from "../../features/boardSlice";
 import AlertPopup from "../alert/AlertPopup";
+import { useLocation } from "react-router-dom";
 import LoginLoading from "../auth/LoginLoading";
-
 type StyleType = {
   alert: number;
 };
@@ -19,7 +18,6 @@ const Nav: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
   const { mainMenu, onPopup } = useSelector((state: RootState) => state.menu);
   const { is_auth, profileImage, alertCount, kakaoAccessToken, loginLoading } =
     useSelector((state: RootState) => state.user);
@@ -34,7 +32,6 @@ const Nav: React.FC = () => {
       navigate("/", { replace: true });
     }
   }, [is_auth]);
-
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       const target = e.target as HTMLElement;
@@ -47,7 +44,6 @@ const Nav: React.FC = () => {
     },
     [dispatch]
   );
-
   return (
     <Wrap>
       <Menu>
@@ -108,14 +104,13 @@ const Nav: React.FC = () => {
     </Wrap>
   );
 };
-
 export default Nav;
 
 const Wrap = styled.div`
   width: 100vw;
   height: 5vh;
-  display: flex;
   background: ${(props) => props.theme.colors.main};
+  display: flex;
   align-items: center;
   box-shadow: 2px 2px 2px 2px ${(props) => props.theme.colors.shadow};
   justify-content: space-between;
@@ -125,7 +120,6 @@ const Wrap = styled.div`
     height: 6vh;
   }
 `;
-
 const Menu = styled.div`
   display: flex;
   gap: 30px;
@@ -145,39 +139,41 @@ const MenuItem = styled(Link)`
   }
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 15px;
+    /* font-family: SpoqaHanSansNeoRegular; */
   }
 `;
-
 const LoginBtn = styled.button`
   display: none;
   @media (min-width: 320px) and (max-width: 480px) {
     display: block;
+    outline: none;
+    border: none;
     font-size: 14px;
     color: #fff;
     padding: 2px;
     border-radius: 4px;
+    cursor: pointer;
     background: ${(props) => props.theme.colors.button};
   }
 `;
-
 const MyInfo = styled.div`
+  cursor: pointer;
   ${(props) => props.theme.displayFlex};
   gap: 10px;
-  cursor: pointer;
 `;
 
 const Alert = styled.div<StyleType>`
   position: relative;
   &:before {
     content: "${(props) => props.alert}";
+    background: red;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 12px;
+    padding: 1px 4px;
     position: absolute;
     top: -8px;
     right: -8px;
-    background: red;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 12px;
-    padding: 1px 4px;
     @media (min-width: 320px) and (max-width: 480px) {
       font-size: 10px;
       padding: 0 2px;
@@ -186,10 +182,10 @@ const Alert = styled.div<StyleType>`
 `;
 
 const Icon = styled.img`
-  width: 26px;
-  height: 26px;
   display: inline-block;
   padding: 2px;
+  width: 26px;
+  height: 26px;
   ${(props) => props.theme.iconColor};
   color: #fff;
   cursor: pointer;
@@ -198,7 +194,6 @@ const Icon = styled.img`
     height: 20px;
   }
 `;
-
 const ProfileImg = styled.img`
   width: 34px;
   height: 34px;

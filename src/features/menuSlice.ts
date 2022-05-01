@@ -32,8 +32,6 @@ export const menuSlice = createSlice({
     },
   },
 });
-
 export const { mainMenuClick, myMenuClick, onPopupClick, mypageClick } =
   menuSlice.actions;
-
 export default menuSlice.reducer;

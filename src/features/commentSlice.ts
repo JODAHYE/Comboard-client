@@ -9,7 +9,6 @@ interface commentState {
 const initialState: commentState = {
   commentList: [],
 };
-
 export const commentSlice = createSlice({
   name: "comment",
   initialState,
@@ -24,7 +23,6 @@ export const commentSlice = createSlice({
     });
   },
 });
-
 export const getCommentList = createAsyncThunk(
   "comment/getCommentList",
   async (postId: string) => {
@@ -42,5 +40,4 @@ export const getCommentList = createAsyncThunk(
 );
 
 export const { commentListInit } = commentSlice.actions;
-
 export default commentSlice.reducer;

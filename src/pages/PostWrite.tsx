@@ -1,30 +1,26 @@
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import moment from "moment";
+import { useEffect, useRef, useState } from "react";
 import { RootState } from "../app/store";
+import { useDispatch, useSelector } from "react-redux";
 import { getCurrentBoard } from "../features/boardSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
 import { usePost } from "../hooks/usePost";
 import PostWriteOption from "../components/post/PostWriteOption";
 import { PostType } from "../types/dataType";
 
 const PostWrite: React.FC = () => {
-  const params = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const contentField = useRef<HTMLDivElement>(null);
-  const [post, setPost] = useState<PostType>();
-
   const { getPostDetail, createPost, updatePost } = usePost();
-
+  const contentField = useRef<HTMLDivElement>(null);
+  const [showCode, setShowCode] = useState(false);
+  const [post, setPost] = useState<PostType>();
+  const params = useParams();
   const { currentBoard } = useSelector((state: RootState) => state.board);
   const { objectId } = useSelector((state: RootState) => state.user);
   const { nickname } = useSelector((state: RootState) => state.user);
-  const [showCode, setShowCode] = useState(false);
   const [postTitle, setPostTitle] = useState("");
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     if (!params.id) return;
     if (!objectId) {
@@ -38,7 +34,6 @@ const PostWrite: React.FC = () => {
       });
     }
   }, []);
-
   useEffect(() => {
     if (!contentField.current) return;
     if (params.postId && post) {
@@ -79,7 +74,6 @@ const PostWrite: React.FC = () => {
       });
     }
   };
-
   return (
     <Wrap>
       <Box>
@@ -122,33 +116,29 @@ const PostWrite: React.FC = () => {
 };
 
 export default PostWrite;
-
 const Wrap = styled.div`
   width: 100%;
   height: 95vh;
+  padding: 10px;
   ${(props) => props.theme.displayFlex}
   flex-direction: column;
-  padding: 10px;
   @media (min-width: 320px) and (max-width: 480px) {
     height: 94vh;
   }
 `;
-
 const Div = styled.div`
-  width: 100%;
   ${(props) => props.theme.displayFlex}
+  width: 100%;
   justify-content: space-between;
   @media (min-width: 320px) and (max-width: 480px) {
     flex-wrap: wrap;
   }
 `;
-
 const Title = styled.h3`
-  display: inline-block;
   color: ${(props) => props.theme.colors.button};
   font-weight: 500;
+  display: inline-block;
 `;
-
 const Box = styled.div`
   width: 60%;
   height: 100%;
@@ -159,7 +149,6 @@ const Box = styled.div`
     justify-content: flex-start;
   }
 `;
-
 const Input = styled.input`
   width: 100%;
   height: 30px;
@@ -187,11 +176,12 @@ const Content = styled.div`
     height: 50%;
   }
 `;
-
 const SubmitBtn = styled.button`
   display: inline-block;
   padding: 6px;
+  outline: none;
   border: 1px solid ${(props) => props.theme.colors.button};
+  cursor: pointer;
   border-radius: 2px;
   background: #fff;
   color: ${(props) => props.theme.colors.button};

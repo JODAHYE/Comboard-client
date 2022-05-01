@@ -10,7 +10,6 @@ const MobileLogin = () => {
 };
 
 export default MobileLogin;
-
 const Wrap = styled.div`
   width: 100vw;
   height: 94vh;
