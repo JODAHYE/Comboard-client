@@ -10,10 +10,13 @@ import { BoardType } from "../../types/dataType";
 type PropsType = {
   board: BoardType;
 };
+
 const MyBoardCard: React.FC<PropsType> = ({ board }) => {
   const { deleteBoard } = useBoard();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const onDelete = useCallback(() => {
     if (window.confirm("게시판을 삭제하시겠습니까?")) {
       deleteBoard(board._id).then((res) => {
@@ -22,13 +25,16 @@ const MyBoardCard: React.FC<PropsType> = ({ board }) => {
       });
     }
   }, [board, deleteBoard, dispatch]);
+
   const onUpdate = useCallback(async () => {
     await dispatch(getCurrentBoard(board._id));
     await dispatch(onPopupClick("update_board"));
   }, [board, dispatch]);
+
   const onClick = useCallback(() => {
     navigate(`/board/${board._id}`);
   }, [navigate, board]);
+
   return (
     <Wrap>
       {board.bgimg ? (
@@ -67,6 +73,7 @@ const MyBoardCard: React.FC<PropsType> = ({ board }) => {
 };
 
 export default MyBoardCard;
+
 const Wrap = styled.div`
   width: 46%;
   height: 160px;
@@ -77,37 +84,41 @@ const Wrap = styled.div`
     height: 120px;
   }
 `;
+
 const Img = styled.img`
-  object-fit: cover;
   width: 20%;
   height: 100%;
+  object-fit: cover;
   display: inline-block;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 40%;
   }
 `;
+
 const Div = styled.div`
-  ${(props) => props.theme.displayFlex};
-  flex-direction: column;
   width: 80%;
   height: 100%;
+  ${(props) => props.theme.displayFlex};
+  flex-direction: column;
   align-items: start;
+  gap: 4px;
   justify-content: start;
   padding: 6px;
-  gap: 4px;
   & > div {
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 60%;
     padding: 3px;
   }
 `;
+
 const Title = styled.p`
-  font-weight: 600;
   width: 87%;
+  font-weight: 600;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -116,6 +127,7 @@ const Title = styled.p`
     width: 70%;
   }
 `;
+
 const Control = styled.div`
   display: flex;
   justify-content: space-between;
@@ -124,11 +136,9 @@ const Control = styled.div`
     width: 30%;
   }
 `;
+
 const Btn = styled.button`
-  border: none;
-  outline: none;
   font-size: 14px;
-  cursor: pointer;
   background: #fff;
   &:active {
     color: ${(props) => props.theme.colors.buttonActive};
@@ -137,6 +147,7 @@ const Btn = styled.button`
     font-size: 12px;
   }
 `;
+
 const Desc = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
@@ -154,27 +165,30 @@ const Desc = styled.p`
     height: 6em;
   }
 `;
+
 const Info = styled.div`
-  display: flex;
   width: 100%;
+  display: flex;
   justify-content: space-between;
 `;
+
 const Date = styled.p`
   font-size: 14px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
 `;
+
 const SecretCode = styled.p`
+  width: 45%;
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 45%;
   text-align: center;
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
     width: 33%;
+    font-size: 12px;
   }
 `;
 

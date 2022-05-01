@@ -9,11 +9,14 @@ type PropsType = {
   board: BoardType;
   width?: string;
 };
+
 type StyledType = {
   width?: string;
 };
+
 const BoardCard: React.FC<PropsType> = ({ board, width }) => {
   const navigate = useNavigate();
+
   const onClick = useCallback(() => {
     if (!board._id) return;
     if (board.secretNumber) {
@@ -24,6 +27,7 @@ const BoardCard: React.FC<PropsType> = ({ board, width }) => {
     }
     navigate(`/board/${board._id}`);
   }, [board, navigate]);
+
   return (
     <Wrap width={width} onClick={onClick}>
       {board.bgimg ? (
@@ -47,14 +51,14 @@ const BoardCard: React.FC<PropsType> = ({ board, width }) => {
 export default BoardCard;
 
 const Wrap = styled.div<StyledType>`
-  overflow: hidden;
-  margin: 10px;
   width: ${(props) => (props.width ? props.width : "48%")};
-  border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.colors.shadow};
   height: 160px;
   display: inline-block;
   position: relative;
+  overflow: hidden;
+  margin: 10px;
+  border: 1px solid ${(props) => props.theme.colors.shadow};
+  border-radius: 10px;
   cursor: pointer;
   &:hover {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
@@ -66,15 +70,16 @@ const Wrap = styled.div<StyledType>`
   }
 `;
 const Div = styled.div`
-  padding: 10px;
-  position: absolute;
   width: 60%;
   height: 100%;
+  position: absolute;
   display: inline-block;
+  padding: 10px;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 4px;
   }
 `;
+
 const Title = styled.p`
   font-family: "Gothic A1", sans-serif;
   font-weight: 400;
@@ -84,6 +89,7 @@ const Title = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+
 const Desc = styled.p`
   font-size: 14px;
   font-family: "Gothic A1", sans-serif;
@@ -104,12 +110,14 @@ const Desc = styled.p`
     display: none;
   }
 `;
+
 const Img = styled.img`
-  object-fit: cover;
   width: 40%;
   height: 100%;
   display: inline-block;
+  object-fit: cover;
 `;
+
 const LockIcon = styled(AiFillLock)`
   position: absolute;
   right: 3px;

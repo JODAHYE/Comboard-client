@@ -13,22 +13,27 @@ type CommentType = {
   create_date: number;
   childComment: string[];
 };
+
 type PropsType = {
   comment: CommentType;
   setCheckList: React.Dispatch<React.SetStateAction<string[] | undefined>>;
   checkList?: string[];
 };
+
 type StyleType = {
   width?: string;
   info?: string;
 };
+
 const MyCommentListItem: React.FC<PropsType> = ({
   comment,
   setCheckList,
   checkList,
 }) => {
-  const { isExistBoard } = useBoard();
   const navigate = useNavigate();
+
+  const { isExistBoard } = useBoard();
+
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
@@ -42,6 +47,7 @@ const MyCommentListItem: React.FC<PropsType> = ({
     },
     [checkList, setCheckList]
   );
+
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       isExistBoard(comment.post.board).then((res) => {
@@ -52,6 +58,7 @@ const MyCommentListItem: React.FC<PropsType> = ({
     },
     [comment, navigate, isExistBoard]
   );
+
   return (
     <Wrap>
       <Title onClick={onClick}>{comment.content}</Title>
@@ -71,22 +78,23 @@ const MyCommentListItem: React.FC<PropsType> = ({
 };
 
 export default MyCommentListItem;
-const Wrap = styled.div`
-  ${(props) => props.theme.displayFlex};
-  width: 100%;
-  margin-bottom: 10px;
-  justify-content: start;
-  border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
-  gap: 4px;
 
+const Wrap = styled.div`
+  width: 100%;
+  ${(props) => props.theme.displayFlex};
+  justify-content: start;
+  gap: 4px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
   @media (min-width: 320px) and (max-width: 480px) {
     flex-wrap: wrap;
     gap: 5px;
   }
 `;
+
 const Title = styled.div`
-  cursor: pointer;
   width: 75%;
+  cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -95,12 +103,13 @@ const Title = styled.div`
     width: 100%;
   }
 `;
+
 const Info = styled.p<StyleType>`
+  width: ${(props) => props.width && props.width};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
-  width: ${(props) => props.width && props.width};
   font-size: 14px;
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;

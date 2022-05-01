@@ -1,8 +1,8 @@
-import moment from "moment";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import moment from "moment";
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
 import { CommentType } from "../../types/dataType";
@@ -12,22 +12,29 @@ type PropTypes = {
   postWriter: string;
   setCommentsCount: React.Dispatch<React.SetStateAction<number>>;
 };
+
 type StyleType = {
   noMatch?: boolean;
   active?: boolean;
 };
+
 const ChildComment: React.FC<PropTypes> = ({
   comment,
   postWriter,
   setCommentsCount,
 }) => {
-  const { commentUpdate, commentDelete } = useComment();
-  const [updateClick, setUpdateClick] = useState(false);
-  const updateField = useRef<HTMLParagraphElement>(null);
-  const { objectId } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
+
+  const updateField = useRef<HTMLParagraphElement>(null);
+
+  const { commentUpdate, commentDelete } = useComment();
+
+  const { objectId } = useSelector((state: RootState) => state.user);
+
+  const [updateClick, setUpdateClick] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [updateDesc, setUpdateDesc] = useState("");
+
   useEffect(() => {
     if (updateClick) {
       if (!updateField.current) return;
@@ -39,6 +46,7 @@ const ChildComment: React.FC<PropTypes> = ({
       updateField.current.focus();
     }
   }, [updateClick]);
+
   const onDelete = useCallback(
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
       if (window.confirm("댓글을 삭제하시겠습니까?")) {
@@ -52,6 +60,7 @@ const ChildComment: React.FC<PropTypes> = ({
     },
     [commentDelete, setCommentsCount]
   );
+
   const onUpdate = useCallback(
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
       const target = e.target as HTMLSpanElement;
@@ -65,9 +74,11 @@ const ChildComment: React.FC<PropTypes> = ({
     },
     [commentUpdate, setCommentsCount]
   );
+
   const onUserDetail = useCallback(() => {
     navigate(`/user/${comment.writer}`);
   }, [comment, navigate]);
+
   return (
     <>
       {!isDelete && (
@@ -145,7 +156,9 @@ const ChildComment: React.FC<PropTypes> = ({
 };
 
 export default ChildComment;
+
 const Item = styled.div`
+  width: 92%;
   display: flex;
   justify-content: start;
   align-items: flex-start;
@@ -153,14 +166,15 @@ const Item = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
   padding: 10px 0;
   position: relative;
-  width: 92%;
   margin: 0 auto;
 `;
+
 const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
+
 const Nickname = styled.span<StyleType>`
   font-weight: 600;
   color: ${(props) =>
@@ -170,40 +184,41 @@ const Nickname = styled.span<StyleType>`
     text-decoration: underline;
   }
   @media (min-width: 320px) and (max-width: 480px) {
-    font-weight: 400;
     width: 40%;
+    font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
   }
 `;
+
 const ControllDiv = styled.div<StyleType>`
   font-size: 14px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
 `;
+
 const ControllBtn = styled.button`
   font-size: 14px;
   margin-right: 2px;
-  border: none;
-  outline: none;
   background: #fff;
-  cursor: pointer;
   padding: 3px;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
     font-size: 12px;
   }
 `;
+
 const UpdateField = styled.p`
+  width: 100%;
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
   outline: none;
   padding: 14px;
   margin: 6px 0;
-  width: 100%;
 `;
+
 const Content = styled.p`
   margin: 6px 0;
 `;

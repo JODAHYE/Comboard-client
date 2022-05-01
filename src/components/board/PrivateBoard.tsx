@@ -12,11 +12,14 @@ import { BoardType } from "../../types/dataType";
 
 const PrivateBoard: React.FC = () => {
   const { getBoardList } = useBoard();
+
   const { onPopup } = useSelector((state: RootState) => state.menu);
+
   const [loading, setLoading] = useState(false);
   const [boardList, setBoardList] = useState<BoardType[]>([]);
   const [searchVal, setSearchVal] = useState("");
   const [filterList, setFilterList] = useState<BoardType[]>([]);
+
   useEffect(() => {
     setLoading(true);
     getBoardList({ access: "private", skip: 0 }).then((res) => {
@@ -24,6 +27,7 @@ const PrivateBoard: React.FC = () => {
       setLoading(false);
     });
   }, []);
+
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -41,12 +45,14 @@ const PrivateBoard: React.FC = () => {
     },
     [searchVal, boardList]
   );
+
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) {
       setFilterList([]);
     }
     setSearchVal(e.target.value);
   }, []);
+
   return (
     <Wrap>
       <NewBtn />
@@ -66,18 +72,19 @@ const PrivateBoard: React.FC = () => {
 };
 
 export default PrivateBoard;
+
 const Wrap = styled.div`
-  position: relative;
-  padding: 40px;
   width: 70%;
   height: 100%;
+  position: relative;
+  padding: 40px;
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
   overflow: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+    display: none;
   }
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
@@ -86,11 +93,11 @@ const Wrap = styled.div`
 `;
 
 const P = styled.p`
+  top: 50%;
+  left: 50%;
   color: ${(props) => props.theme.colors.buttonActive};
   margin: 30px 0;
   position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   @media (min-width: 320px) and (max-width: 480px) {
     margin: 0px;

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import moment from "moment";
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
 import { BsArrowReturnRight } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
-import moment from "moment";
 import ChildComment from "./ChildComment";
 import { CommentType } from "../../types/dataType";
 import Loading from "../common/Loading";
@@ -15,27 +15,34 @@ type PropTypes = {
   postWriter: string;
   setCommentsCount: React.Dispatch<React.SetStateAction<number>>;
 };
+
 type StyleType = {
   noMatch?: boolean;
   active?: boolean;
 };
+
 const CommentItem: React.FC<PropTypes> = ({
   comment,
   postWriter,
   setCommentsCount,
 }) => {
-  const { commentUpdate, commentDelete, replyCreate } = useComment();
-  const [updateClick, setUpdateClick] = useState(false);
-  const [replyClick, setReplyClick] = useState(false);
-  const updateField = useRef<HTMLParagraphElement>(null);
-  const replyField = useRef<HTMLParagraphElement>(null);
-  const { objectId, nickname } = useSelector((state: RootState) => state.user);
   const params = useParams();
   const navigate = useNavigate();
+
+  const updateField = useRef<HTMLParagraphElement>(null);
+  const replyField = useRef<HTMLParagraphElement>(null);
+
+  const { commentUpdate, commentDelete, replyCreate } = useComment();
+
+  const { objectId, nickname } = useSelector((state: RootState) => state.user);
+
+  const [updateClick, setUpdateClick] = useState(false);
+  const [replyClick, setReplyClick] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [replies, setReplies] = useState<CommentType[]>();
   const [updateDesc, setUpdateDesc] = useState("");
+
   useEffect(() => {
     if (comment.childComment) {
       setReplies(comment.childComment);
@@ -75,6 +82,7 @@ const CommentItem: React.FC<PropTypes> = ({
     },
     [commentDelete, setCommentsCount]
   );
+
   const onUpdate = useCallback(
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
       const target = e.target as HTMLSpanElement;
@@ -88,6 +96,7 @@ const CommentItem: React.FC<PropTypes> = ({
     },
     [commentUpdate]
   );
+
   const onReply = useCallback(() => {
     if (!params.postId || !replyField.current) return;
     if (!replyField.current.innerText) return;
@@ -114,6 +123,7 @@ const CommentItem: React.FC<PropTypes> = ({
   const onUserDetail = useCallback(() => {
     navigate(`/user/${comment.writer}`);
   }, [comment, navigate]);
+
   return (
     <>
       {!isDelete && !comment.reply_comment && (
@@ -227,21 +237,24 @@ const CommentItem: React.FC<PropTypes> = ({
 };
 
 export default CommentItem;
+
 const Item = styled.div`
+  width: 100%;
   display: flex;
   justify-content: start;
   align-items: flex-start;
   flex-direction: column;
+  position: relative;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
   padding: 10px 0;
-  position: relative;
-  width: 100%; ;
 `;
+
 const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
+
 const Nickname = styled.span<StyleType>`
   font-weight: 600;
   color: ${(props) =>
@@ -259,32 +272,29 @@ const Nickname = styled.span<StyleType>`
     text-align: left;
   }
 `;
+
 const ControllDiv = styled.div<StyleType>`
   font-size: 14px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
 `;
+
 const ControllBtn = styled.button`
   font-size: 14px;
   margin-right: 2px;
-  border: none;
-  outline: none;
   background: #fff;
-  cursor: pointer;
   padding: 3px;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
     font-size: 12px;
   }
 `;
+
 const ReplyBtn = styled.button`
   font-size: 14px;
-  border: none;
-  outline: none;
-  background: #fff;
-  cursor: pointer;
   color: #7e7e7e;
+  background: #fff;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
     font-size: 12px;
@@ -294,18 +304,20 @@ const ReplyBtn = styled.button`
 const Content = styled.p`
   margin: 6px 0;
 `;
+
 const UpdateField = styled.p`
+  width: 100%;
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
   outline: none;
   padding: 14px;
   margin: 6px 0;
-  width: 100%;
 `;
 
 const ReplyBox = styled.div`
   width: 80%;
   margin-left: 5%;
 `;
+
 const ReplyField = styled.p`
   width: 100%;
   height: 100px;
@@ -313,13 +325,11 @@ const ReplyField = styled.p`
   outline: none;
   padding: 4px;
 `;
+
 const ReplyControllBtn = styled.button`
   font-size: 14px;
   margin-right: 4px;
-  border: none;
-  outline: none;
   background: #fff;
-  cursor: pointer;
   padding: 4px;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;

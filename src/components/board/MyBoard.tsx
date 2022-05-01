@@ -9,16 +9,21 @@ import { useMenu } from "../../hooks/useMenu";
 import { BoardType } from "../../types/dataType";
 import BoardCard from "../common/BoardCard";
 import SearchForm from "../common/SearchForm";
+
 type activeType = {
   active: boolean;
 };
+
 const MyBoard: React.FC = () => {
+  const dispatch = useDispatch();
+
   const { myMenu } = useSelector((state: RootState) => state.menu);
   const { bookmarkBoardList } = useSelector((state: RootState) => state.user);
   const { createList } = useSelector((state: RootState) => state.board);
+
   const [searchVal, setSearchVal] = useState("");
   const [filterList, setFilterList] = useState<BoardType[]>([]);
-  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getCreateList());
     dispatch(getBookmarkList());
@@ -34,6 +39,7 @@ const MyBoard: React.FC = () => {
     },
     [dispatch]
   );
+
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -97,23 +103,25 @@ const MyBoard: React.FC = () => {
           filterList.map((v, i) => {
             return <BoardCard key={i} width={"98%"} board={v} />;
           })}
-        {/* {loading && <Loading />} */}
       </List>
     </Wrap>
   );
 };
 export default MyBoard;
+
 const Wrap = styled.div`
-  flex-direction: column;
   width: 100%;
   height: 100%;
+  flex-direction: column;
 `;
+
 const Menu = styled.div`
   ${(props) => props.theme.displayFlex};
-  padding: 16px;
   justify-content: space-around;
+  padding: 16px;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
 `;
+
 const MenuItem = styled.p<activeType>`
   font-weight: 600;
   font-family: BMHANNAAir;
@@ -123,14 +131,14 @@ const MenuItem = styled.p<activeType>`
   }};
   cursor: pointer;
 `;
+
 const List = styled.div`
+  height: 94%;
   overflow: hidden;
   overflow-y: scroll;
-  height: 94%;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+    display: none;
   }
 `;

@@ -1,19 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { usePost } from "../../hooks/usePost";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+import { usePost } from "../../hooks/usePost";
 import MyPostListItem from "./MyPostListItem";
 import Loading from "../common/Loading";
 import { PostType } from "../../types/dataType";
+
 type StyleType = {
   width: string;
 };
+
 const MyScrapList = () => {
   const { clearScrap, getScrapList } = usePost();
+
   const [skip, setSkip] = useState(0);
   const [postList, setPostList] = useState<PostType[]>();
   const [loading, setLoading] = useState(false);
   const [checkList, setCheckList] = useState<string[]>();
+
   const limit = 18;
 
   useEffect(() => {
@@ -27,13 +31,16 @@ const MyScrapList = () => {
       setLoading(false);
     });
   }, [skip]);
+
   const onPrev = useCallback(() => {
     if (skip === 0) return;
     setSkip((prev) => prev - limit);
   }, [skip]);
+
   const onNext = useCallback(() => {
     setSkip((prev) => prev + limit);
   }, []);
+
   const onDelete = useCallback(() => {
     if (!checkList || checkList.length === 0) return;
     clearScrap(checkList).then(() => {
@@ -49,6 +56,7 @@ const MyScrapList = () => {
       });
     });
   }, [checkList, getScrapList, clearScrap, skip]);
+
   return (
     <>
       <Title>스크랩</Title>
@@ -86,6 +94,7 @@ const MyScrapList = () => {
 };
 
 export default MyScrapList;
+
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
@@ -93,6 +102,7 @@ const Title = styled.h1`
     font-size: 16px;
   }
 `;
+
 const List = styled.div`
   width: 60%;
   margin-top: 30px;
@@ -101,6 +111,7 @@ const List = styled.div`
     flex-direction: column;
   }
 `;
+
 const PrevBtn = styled(GrFormPrevious)`
   cursor: pointer;
   font-size: 26px;
@@ -108,6 +119,7 @@ const PrevBtn = styled(GrFormPrevious)`
     font-size: 22px;
   }
 `;
+
 const NextBtn = styled(GrFormNext)`
   cursor: pointer;
   font-size: 26px;
@@ -115,14 +127,12 @@ const NextBtn = styled(GrFormNext)`
     font-size: 22px;
   }
 `;
+
 const DeleteBtn = styled.button`
-  outline: none;
-  border: none;
   background: ${(props) => props.theme.colors.button};
+  color: #fff;
   border-radius: 5px;
   padding: 4px;
-  cursor: pointer;
-  color: #fff;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
@@ -130,22 +140,26 @@ const DeleteBtn = styled.button`
     font-size: 12px;
   }
 `;
+
 const InfoBox = styled.div`
   display: flex;
   border-bottom: 1px solid ${(props) => props.theme.colors.button};
   padding: 6px 0;
 `;
+
 const Info = styled.p<StyleType>`
-  text-align: center;
   width: ${(props) => props.width};
+  text-align: center;
   @media (min-width: 320px) and (max-width: 480px) {
     display: none;
   }
 `;
+
 const NoPost = styled.p`
   margin-top: 100px;
 `;
+
 const Control = styled.div`
-  margin: 0 auto;
   ${(props) => props.theme.displayFlex}
+  margin: 0 auto;
 `;

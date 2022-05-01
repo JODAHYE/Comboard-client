@@ -8,14 +8,18 @@ import { useComment } from "../../hooks/useComment";
 import { usePost } from "../../hooks/usePost";
 
 const MyInfoComp = () => {
-  const { nickname, is_auth } = useSelector((state: RootState) => state.user);
-  const { getMyPostCount } = usePost();
-  const { getMyCommentCount } = useComment();
-  const [postCount, setPostCount] = useState(0);
-  const [commentCount, setCommentCount] = useState(0);
-  const { profileImage } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { getMyPostCount } = usePost();
+  const { getMyCommentCount } = useComment();
+
+  const { nickname, is_auth } = useSelector((state: RootState) => state.user);
+  const { profileImage } = useSelector((state: RootState) => state.user);
+
+  const [postCount, setPostCount] = useState(0);
+  const [commentCount, setCommentCount] = useState(0);
+
   useEffect(() => {
     getMyPostCount().then((res) => {
       setPostCount(res);
@@ -41,6 +45,7 @@ const MyInfoComp = () => {
     },
     [dispatch, navigate]
   );
+
   return (
     <>
       {is_auth && (
@@ -65,26 +70,30 @@ const MyInfoComp = () => {
 };
 
 export default MyInfoComp;
+
 const Wrap = styled.div`
-  border: 1px solid ${(props) => props.theme.colors.shadow};
   width: 180px;
-  overflow: hidden;
   height: auto;
+  border: 1px solid ${(props) => props.theme.colors.shadow};
+  overflow: hidden;
   @media (min-width: 320px) and (max-width: 480px) {
     display: none;
   }
 `;
+
 const Img = styled.img`
-  display: inline-block;
   width: 100%;
   height: 180px;
+  display: inline-block;
   object-fit: cover;
 `;
+
 const Nickname = styled.p`
   font-size: 14px;
   margin: 8px;
   font-weight: 600;
 `;
+
 const Info = styled.p`
   font-size: 14px;
   margin: 6px;

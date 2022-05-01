@@ -1,18 +1,24 @@
 import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 import styled from "styled-components";
+import moment from "moment";
 import { RootState } from "../../app/store";
 import Popup from "../common/Popup";
 import { useBoard } from "../../hooks/useBoard";
-import { useNavigate } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
-import moment from "moment";
+
 type sizeType = {
   width?: string;
 };
+
 const CreateBoard: React.FC = () => {
+  const navigate = useNavigate();
+
   const { createBoard } = useBoard();
+
   const { objectId } = useSelector((state: RootState) => state.user);
+
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({
     title: "",
@@ -23,7 +29,7 @@ const CreateBoard: React.FC = () => {
     bgimg: "",
     formData: {},
   });
-  const navigate = useNavigate();
+
   const onChange = useCallback(
     (
       e:
@@ -39,6 +45,7 @@ const CreateBoard: React.FC = () => {
     },
     [info]
   );
+
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -77,6 +84,7 @@ const CreateBoard: React.FC = () => {
     },
     [info, navigate, createBoard, objectId]
   );
+
   const onImgChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
@@ -91,6 +99,7 @@ const CreateBoard: React.FC = () => {
     },
     [info]
   );
+
   return (
     <Popup height={"80vh"}>
       <Title>게시판 생성</Title>
@@ -169,6 +178,7 @@ const CreateBoard: React.FC = () => {
 };
 
 export default CreateBoard;
+
 const Title = styled.h3`
   font-family: BMHANNAAir;
   font-size: 28px;
@@ -177,6 +187,7 @@ const Title = styled.h3`
     font-size: 18px;
   }
 `;
+
 const Form = styled.form`
   width: 100%;
   height: 80%;
@@ -187,14 +198,16 @@ const Form = styled.form`
     gap: 6px;
   }
 `;
+
 const Label = styled.label`
   font-size: 14px;
   margin-right: 10px;
 `;
+
 const Input = styled.input<sizeType>`
-  padding: 6px;
   width: ${(props) => (props.width ? props.width : "80%")};
   height: 30px;
+  padding: 6px;
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   margin: 2px;
@@ -211,17 +224,19 @@ const Input = styled.input<sizeType>`
     }
   }
 `;
+
 const Div = styled.div`
+  width: 100%;
   margin: 10px 0;
   text-align: center;
-  width: 100%;
 `;
+
 const Desc = styled.textarea`
+  width: 80%;
+  height: 60%;
   outline: none;
   border: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
-  width: 80%;
-  height: 60%;
   margin: 2px;
   padding: 6px;
   line-height: 1.2em;
@@ -238,10 +253,8 @@ const Desc = styled.textarea`
 
 const Btn = styled.button`
   background: ${(props) => props.theme.colors.button};
-  border: none;
   padding: 6px;
   color: #fff;
-  cursor: pointer;
   border-radius: 4px;
   &:active {
     background: ImgSelector;
@@ -250,6 +263,7 @@ const Btn = styled.button`
     padding: 2px;
   }
 `;
+
 const P = styled.p`
   font-size: 13px;
   color: ${(props) => props.theme.colors.button};
@@ -262,6 +276,7 @@ const P = styled.p`
     white-space: nowrap;
   }
 `;
+
 const ImgSelector = styled.label`
   font-size: 14px;
   cursor: pointer;
@@ -273,10 +288,7 @@ const ImgSelector = styled.label`
     font-size: 12px;
   }
 `;
+
 const ImgUpload = styled.input`
   display: none;
-`;
-const Loading = styled.h3`
-  margin: 20px;
-  color: ${(props) => props.theme.colors.buttonActive};
 `;

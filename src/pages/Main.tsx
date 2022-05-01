@@ -5,22 +5,7 @@ import Login from "../components/auth/Login";
 import MyBoard from "../components/board/MyBoard";
 import PrivateBoard from "../components/board/PrivateBoard";
 import PublicBoard from "../components/board/PublicBoard";
-const Wrap = styled.div`
-  ${(props) => props.theme.displayFlex};
-  height: 95vh;
-  width: 100%;
-  @media (min-width: 320px) and (max-width: 480px) {
-    flex-direction: column;
-    height: 94vh;
-  }
-`;
-const Div = styled.div`
-  width: 30%;
-  height: 95vh;
-  @media (min-width: 320px) and (max-width: 480px) {
-    display: none;
-  }
-`;
+
 const Main = () => {
   const { mainMenu } = useSelector((state: RootState) => state.menu);
   const { is_auth } = useSelector((state: RootState) => state.user);
@@ -43,3 +28,21 @@ const Main = () => {
 };
 
 export default Main;
+
+const Wrap = styled.div`
+  height: 95vh;
+  width: 100%;
+  ${(props) => props.theme.displayFlex};
+  @media (min-width: 320px) and (max-width: 480px) {
+    height: 94vh;
+    flex-direction: column;
+  }
+`;
+
+const Div = styled.div`
+  width: 30%;
+  height: 95vh;
+  @media (min-width: 320px) and (max-width: 480px) {
+    display: none;
+  }
+`;
