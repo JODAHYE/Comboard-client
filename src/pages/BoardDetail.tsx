@@ -26,16 +26,12 @@ const BoardDetail: React.FC = () => {
   const { currentBoard } = useSelector((state: RootState) => state.board);
   const { bookmark } = useSelector((state: RootState) => state.user);
   const [sort, setSort] = useState("create_date");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   useEffect(() => {
     if (!params.id) return;
     dispatch(getCurrentBoard(params.id));
   }, []);
-
-  const onClick = () => {
-    setIsOpen((prev) => !prev);
-  };
 
   const onWrite = () => {
     if (!params.id) return;
@@ -68,14 +64,20 @@ const BoardDetail: React.FC = () => {
           )}
           <Title
             onClick={() => {
-              setIsOpen(false);
+              setIsInfoOpen(false);
             }}
           >
             {currentBoard && currentBoard.title}
           </Title>
-          <InfoBtn onClick={onClick}>정보</InfoBtn>
+          <InfoBtn
+            onClick={() => {
+              setIsInfoOpen((prev) => !prev);
+            }}
+          >
+            정보
+          </InfoBtn>
         </Header>
-        {!isOpen ? (
+        {!isInfoOpen ? (
           <>
             <InfoBox>
               <Info width="70%">제목</Info>
@@ -257,4 +259,6 @@ const Img = styled.img`
 const InfoWrap = styled.div`
   width: 100%;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 `;
