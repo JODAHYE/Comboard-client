@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
 import { BsArrowReturnRight } from "react-icons/bs";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ChildComment from "./ChildComment";
 import { CommentType } from "../../types/dataType";
 import Loading from "../common/Loading";
@@ -26,11 +26,7 @@ const CommentItem: React.FC<PropTypes> = ({
   postWriter,
   setCommentsCount,
 }) => {
-  const params = useParams();
   const navigate = useNavigate();
-
-  const updateField = useRef<HTMLParagraphElement>(null);
-  const replyField = useRef<HTMLParagraphElement>(null);
 
   const { commentUpdate, commentDelete, replyCreate } = useComment();
 
@@ -41,28 +37,16 @@ const CommentItem: React.FC<PropTypes> = ({
   const [loading, setLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [replies, setReplies] = useState<CommentType[]>();
-  const [updateDesc, setUpdateDesc] = useState("");
+  const [updatedCommentValue, setUpdatedCommentValue] = useState(
+    comment.content
+  );
+  const [replyValue, setReplyValue] = useState("");
 
   useEffect(() => {
     if (comment.childComment) {
       setReplies(comment.childComment);
     }
-  }, []);
-
-  useEffect(() => {
-    if (updateClick) {
-      if (!updateField.current) return;
-      if (updateDesc) {
-        updateField.current.innerHTML = updateDesc;
-      } else {
-        updateField.current.innerHTML = comment.content;
-      }
-      updateField.current.focus();
-    }
-    if (replyClick) {
-      replyField.current?.focus();
-    }
-  }, [updateClick, replyClick]);
+  }, [comment.childComment]);
 
   const onDelete = useCallback(
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -80,45 +64,39 @@ const CommentItem: React.FC<PropTypes> = ({
         });
       }
     },
-    [commentDelete, setCommentsCount]
+    [commentDelete, setCommentsCount, replies]
   );
 
   const onUpdate = useCallback(
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
       const target = e.target as HTMLSpanElement;
       if (!target.dataset.comment) return;
-      if (!updateField.current) return;
-      const content = updateField.current.innerText;
-      if (!content) return;
       setUpdateClick(false);
-      setUpdateDesc(content);
-      commentUpdate(target.dataset.comment, content);
+      commentUpdate(target.dataset.comment, updatedCommentValue);
     },
-    [commentUpdate]
+    [commentUpdate, updatedCommentValue]
   );
 
   const onReply = useCallback(() => {
-    if (!params.postId || !replyField.current) return;
-    if (!replyField.current.innerText) return;
     setLoading(true);
     const body = {
       parentCommentId: comment._id,
       post: comment.post,
       writer_name: nickname,
-      content: replyField.current.innerText,
+      content: replyValue,
       createDate: parseInt(moment().format("YYYYMMDDHHmm")),
       reply_user: comment.writer,
       reply_name: comment.writer_name,
       reply_comment: comment._id,
     };
-    replyField.current.innerText = "";
+    setReplyValue("");
     setReplyClick(false);
     replyCreate(body).then((res) => {
       setReplies((prev) => prev?.concat(res.comment));
       setCommentsCount(res.comments_count + 1);
       setLoading(false);
     });
-  }, [comment, nickname, params, replyCreate, setCommentsCount]);
+  }, [comment, nickname, replyCreate, setCommentsCount, replyValue]);
 
   const onUserDetail = useCallback(() => {
     navigate(`/user/${comment.writer}`);
@@ -169,7 +147,12 @@ const CommentItem: React.FC<PropTypes> = ({
           </Header>
           {updateClick && (
             <>
-              <UpdateField contentEditable="true" ref={updateField} />
+              <UpdateField
+                value={updatedCommentValue}
+                onChange={(e) => {
+                  setUpdatedCommentValue(e.target.value);
+                }}
+              />
               <ControllDiv>
                 <ControllBtn data-comment={comment._id} onClick={onUpdate}>
                   완료
@@ -177,6 +160,7 @@ const CommentItem: React.FC<PropTypes> = ({
                 <ControllBtn
                   onClick={() => {
                     setUpdateClick(false);
+                    setUpdatedCommentValue(comment.content);
                   }}
                 >
                   취소
@@ -184,8 +168,7 @@ const CommentItem: React.FC<PropTypes> = ({
               </ControllDiv>
             </>
           )}
-          {!updateClick && !updateDesc && <Content>{comment.content}</Content>}
-          {updateDesc && !updateClick && <Content>{updateDesc}</Content>}
+          {!updateClick && <Content>{updatedCommentValue}</Content>}
           {!updateClick && !replyClick && objectId && (
             <ReplyBtn
               onClick={() => {
@@ -199,8 +182,12 @@ const CommentItem: React.FC<PropTypes> = ({
             <>
               <BsArrowReturnRight />
               <ReplyBox>
-                <ReplyField ref={replyField} contentEditable="true" />
-
+                <ReplyField
+                  value={replyValue}
+                  onChange={(e) => {
+                    setReplyValue(e.target.value);
+                  }}
+                />
                 <ReplyControllBtn data-comment={comment._id} onClick={onReply}>
                   완료
                 </ReplyControllBtn>
@@ -305,12 +292,13 @@ const Content = styled.p`
   margin: 6px 0;
 `;
 
-const UpdateField = styled.p`
+const UpdateField = styled.textarea`
   width: 100%;
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
   outline: none;
   padding: 14px;
   margin: 6px 0;
+  resize: none;
 `;
 
 const ReplyBox = styled.div`
@@ -318,12 +306,13 @@ const ReplyBox = styled.div`
   margin-left: 5%;
 `;
 
-const ReplyField = styled.p`
+const ReplyField = styled.textarea`
   width: 100%;
   height: 100px;
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
   outline: none;
   padding: 4px;
+  resize: none;
 `;
 
 const ReplyControllBtn = styled.button`

@@ -17,18 +17,15 @@ const MyInfoUpdateComp = () => {
 
   const { updateProfileImg, updateNickname, updatePostLock } = useUser();
 
-  const nicknameField = useRef<HTMLDivElement>(null);
-
   const { nickname, profileImage, postLock } = useSelector(
     (state: RootState) => state.user
   );
 
   const [isUpdateClick, setIsUpdateClick] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [updatedNickname, setUpdatedNickname] = useState(nickname);
 
   useEffect(() => {
-    if (!nicknameField.current) return;
-    nicknameField.current.innerHTML = nickname;
     setLoading(false);
   }, [nickname, profileImage]);
 
@@ -46,25 +43,18 @@ const MyInfoUpdateComp = () => {
         dispatch(auth());
       });
     },
-    [dispatch, updateProfileImg]
+    [updateProfileImg]
   );
 
-  const onNicknameClick = useCallback(() => {
-    if (!nicknameField.current) return;
-    setIsUpdateClick(true);
-    nicknameField.current.focus();
-  }, []);
-
   const onNicknameUpdate = useCallback(() => {
-    if (!nicknameField.current) return;
-    if (nicknameField.current.innerText.length > 18) {
+    if (updatedNickname.length > 18) {
       return alert("닉네임은 18글자까지만 가능합니다.");
     }
-    updateNickname(nicknameField.current.innerText).then(() => {
+    updateNickname(updatedNickname).then(() => {
       dispatch(auth());
     });
     setIsUpdateClick(false);
-  }, [dispatch, updateNickname]);
+  }, [updateNickname, updatedNickname]);
 
   const onPostLock = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -79,7 +69,7 @@ const MyInfoUpdateComp = () => {
         });
       }
     },
-    [updatePostLock, dispatch]
+    [updatePostLock]
   );
 
   return (
@@ -110,20 +100,30 @@ const MyInfoUpdateComp = () => {
         <InfoDiv>
           <Row>
             <p>닉네임</p>
-            <NicknameField
-              ref={nicknameField}
-              isFocus={isUpdateClick}
-              contentEditable="true"
-              spellCheck="false"
-            />
             {isUpdateClick ? (
-              <Btn onClick={onNicknameUpdate} active={true}>
-                완료
-              </Btn>
+              <>
+                <NicknameField
+                  value={updatedNickname}
+                  onChange={(e) => {
+                    setUpdatedNickname(e.target.value);
+                  }}
+                />
+                <Btn onClick={onNicknameUpdate} active={true}>
+                  완료
+                </Btn>
+              </>
             ) : (
-              <Btn onClick={onNicknameClick} active={true}>
-                변경
-              </Btn>
+              <>
+                <p>{nickname}</p>
+                <Btn
+                  onClick={() => {
+                    setIsUpdateClick(true);
+                  }}
+                  active={true}
+                >
+                  변경
+                </Btn>
+              </>
             )}
           </Row>
           <Row>
@@ -226,11 +226,14 @@ const ImgUpload = styled.input`
   display: none;
 `;
 
-const NicknameField = styled.div<StyledType>`
+const NicknameField = styled.textarea<StyledType>`
+  width: 50%;
+  height: 26px;
   display: inline-block;
   outline: none;
-  border: ${(props) =>
-    props.isFocus ? `1px solid ${props.theme.colors.fontColor}` : "none"};
+  border: none;
+  border: 1px solid ${(props) => props.theme.colors.buttonActive};
+  resize: none;
   padding: 4px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 14px;

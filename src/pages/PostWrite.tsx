@@ -40,13 +40,11 @@ const PostWrite: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!contentField.current) return;
     if (params.postId && post) {
       if (!objectId || post.writer !== objectId) {
         alert("잘못된 접근입니다.");
         return navigate("/");
       }
-      contentField.current.innerHTML = post.content;
     }
   }, [post]);
 
@@ -62,17 +60,16 @@ const PostWrite: React.FC = () => {
       create_date: parseInt(moment().format("YYYYMMDDHHmmss")),
       board: currentBoard._id,
     };
+    console.log(body);
     if (!body.title || !body.content)
       return alert("제목과 내용을 입력해주세요.");
 
     if (params.postId) {
-      // 게시글 수정
       updatePost(body).then((res) => {
         alert("게시글을 수정하였습니다.");
         navigate(`/board/${params.id}/${res.post._id}`);
       });
     } else {
-      // 글 작성
       createPost(body).then((res) => {
         alert(res.msg);
         navigate(`/board/${params.id}/${res.post._id}`);
@@ -111,11 +108,21 @@ const PostWrite: React.FC = () => {
           showCode={showCode}
           setShowCode={setShowCode}
         />
-        <Content
-          ref={contentField}
-          contentEditable="true"
-          spellCheck="false"
-        ></Content>
+        {!params.postId && (
+          <Content
+            ref={contentField}
+            contentEditable={true}
+            spellCheck={false}
+          ></Content>
+        )}
+        {params.postId && post && (
+          <Content
+            ref={contentField}
+            contentEditable={true}
+            spellCheck={false}
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        )}
       </Box>
     </Wrap>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -25,27 +25,15 @@ const ChildComment: React.FC<PropTypes> = ({
 }) => {
   const navigate = useNavigate();
 
-  const updateField = useRef<HTMLParagraphElement>(null);
-
   const { commentUpdate, commentDelete } = useComment();
 
   const { objectId } = useSelector((state: RootState) => state.user);
 
   const [updateClick, setUpdateClick] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [updateDesc, setUpdateDesc] = useState("");
-
-  useEffect(() => {
-    if (updateClick) {
-      if (!updateField.current) return;
-      if (updateDesc) {
-        updateField.current.innerHTML = updateDesc;
-      } else {
-        updateField.current.innerHTML = comment.content;
-      }
-      updateField.current.focus();
-    }
-  }, [updateClick]);
+  const [updatedCommentValue, setUpdatedCommentValue] = useState(
+    comment.content
+  );
 
   const onDelete = useCallback(
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -65,14 +53,10 @@ const ChildComment: React.FC<PropTypes> = ({
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
       const target = e.target as HTMLSpanElement;
       if (!target.dataset.comment) return;
-      if (!updateField.current) return;
-      const content = updateField.current.innerText;
-      if (!content) return;
       setUpdateClick(false);
-      setUpdateDesc(content);
-      commentUpdate(target.dataset.comment, content);
+      commentUpdate(target.dataset.comment, updatedCommentValue);
     },
-    [commentUpdate, setCommentsCount]
+    [commentUpdate, updatedCommentValue]
   );
 
   const onUserDetail = useCallback(() => {
@@ -128,7 +112,12 @@ const ChildComment: React.FC<PropTypes> = ({
               </Header>
               {updateClick && (
                 <>
-                  <UpdateField contentEditable="true" ref={updateField} />
+                  <UpdateField
+                    value={updatedCommentValue}
+                    onChange={(e) => {
+                      setUpdatedCommentValue(e.target.value);
+                    }}
+                  />
                   <ControllDiv>
                     <ControllBtn data-comment={comment._id} onClick={onUpdate}>
                       완료
@@ -136,6 +125,7 @@ const ChildComment: React.FC<PropTypes> = ({
                     <ControllBtn
                       onClick={() => {
                         setUpdateClick(false);
+                        setUpdatedCommentValue(comment.content);
                       }}
                     >
                       취소
@@ -143,10 +133,7 @@ const ChildComment: React.FC<PropTypes> = ({
                   </ControllDiv>
                 </>
               )}
-              {!updateClick && !updateDesc && (
-                <Content>{comment.content}</Content>
-              )}
-              {updateDesc && !updateClick && <Content>{updateDesc}</Content>}
+              {!updateClick && <Content>{updatedCommentValue}</Content>}
             </>
           )}
         </Item>
@@ -211,12 +198,20 @@ const ControllBtn = styled.button`
   }
 `;
 
-const UpdateField = styled.p`
+// const UpdateField = styled.p`
+//   width: 100%;
+//   border: 1px solid ${(props) => props.theme.colors.buttonActive};
+//   outline: none;
+//   padding: 14px;
+//   margin: 6px 0;
+// `;
+const UpdateField = styled.textarea`
   width: 100%;
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
   outline: none;
   padding: 14px;
   margin: 6px 0;
+  resize: none;
 `;
 
 const Content = styled.p`

@@ -20,9 +20,6 @@ const PostDetail: React.FC = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const content = useRef<HTMLParagraphElement>(null);
-
   const {
     getPostDetail,
     clickLike,
@@ -46,8 +43,6 @@ const PostDetail: React.FC = () => {
     setLoading(true);
     getPostDetail().then((post) => {
       setPost(post);
-      if (!content.current) return;
-      content.current.innerHTML = post.content;
       setLoading(false);
     });
     if (!params.id) return;
@@ -85,8 +80,6 @@ const PostDetail: React.FC = () => {
     clickLike(post._id).then(() => {
       getPostDetail().then((post) => {
         setPost(post);
-        if (!content.current) return;
-        content.current.innerHTML = post.content;
       });
       dispatch(auth());
       setButtonLoading(false);
@@ -100,8 +93,6 @@ const PostDetail: React.FC = () => {
     clickDislike(post._id).then(() => {
       getPostDetail().then((post) => {
         setPost(post);
-        if (!content.current) return;
-        content.current.innerHTML = post.content;
         dispatch(auth());
         setButtonLoading(false);
       });
@@ -177,7 +168,7 @@ const PostDetail: React.FC = () => {
           <Info>추천 {post?.like}</Info>
         </InfoDiv>
         {post?.content ? (
-          <Content ref={content}>{post?.content}</Content>
+          <Content dangerouslySetInnerHTML={{ __html: post.content }}></Content>
         ) : (
           <Loading />
         )}
@@ -309,7 +300,7 @@ const Writer = styled.p`
   }
 `;
 
-const Content = styled.p`
+const Content = styled.div`
   line-height: 1.3em;
   padding: 10px 0;
 `;

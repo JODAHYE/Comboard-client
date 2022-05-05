@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -22,14 +22,13 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
 
   const { commentCreate } = useComment();
 
-  const contentField = useRef<HTMLDivElement>(null);
-
   const { nickname } = useSelector((state: RootState) => state.user);
   const { commentList } = useSelector((state: RootState) => state.comment);
 
   const [commentsCount, setCommentsCount] = useState(post.comments_count);
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState<CommentType[]>([]);
+  const [commentValue, setCommentValue] = useState("");
 
   useEffect(() => {
     if (!params.postId) return;
@@ -40,16 +39,13 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
 
   const onSubmit = () => {
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
-    if (!contentField.current || !post._id || !contentField.current.innerHTML)
-      return;
     setLoading(true);
     const body = {
       post: post._id,
       writer_name: nickname,
-      content: contentField.current.innerText,
+      content: commentValue,
       createDate: parseInt(moment().format("YYYYMMDDHHmm")),
     };
-    contentField.current.innerHTML = "";
     commentCreate(body).then((res) => {
       setComments((prev) => prev?.concat(res.comment));
       setCommentsCount(res.comments_count + 1);
@@ -64,13 +60,18 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
           <P>댓글 {commentsCount}</P>
           <SubmitBtn onClick={onSubmit}>등록</SubmitBtn>
         </Div>
-        <TextArea ref={contentField} contentEditable="true" />
+        <TextArea
+          value={commentValue}
+          onChange={(e) => {
+            setCommentValue(e.target.value);
+          }}
+        />
       </FlexDiv>
       <List>
         {commentList.length > 0 &&
           commentList.map((v, i) => (
             <CommentItem
-              key={v.create_date}
+              key={i}
               comment={v}
               postWriter={post.writer}
               setCommentsCount={setCommentsCount}
@@ -79,7 +80,7 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
         {comments.length > 0 &&
           comments.map((v, i) => (
             <CommentItem
-              key={v.create_date}
+              key={i}
               comment={v}
               postWriter={post.writer}
               setCommentsCount={setCommentsCount}
@@ -119,13 +120,14 @@ const Div = styled.div`
   }
 `;
 
-const TextArea = styled.div`
+const TextArea = styled.textarea`
   width: 90%;
   height: 150px;
   display: inline-block;
   outline: none;
   border: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
+  resize: none;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 98%;
     height: 80px;
@@ -155,6 +157,7 @@ const P = styled.p`
     font-size: 12px;
   }
 `;
+
 const List = styled.div`
   margin: 20px 0;
   border-top: 1px solid ${(props) => props.theme.colors.shadow};
