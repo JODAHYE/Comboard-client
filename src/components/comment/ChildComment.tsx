@@ -198,13 +198,6 @@ const ControllBtn = styled.button`
   }
 `;
 
-// const UpdateField = styled.p`
-//   width: 100%;
-//   border: 1px solid ${(props) => props.theme.colors.buttonActive};
-//   outline: none;
-//   padding: 14px;
-//   margin: 6px 0;
-// `;
 const UpdateField = styled.textarea`
   width: 100%;
   border: 1px solid ${(props) => props.theme.colors.buttonActive};

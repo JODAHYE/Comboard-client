@@ -60,7 +60,6 @@ const PostWrite: React.FC = () => {
       create_date: parseInt(moment().format("YYYYMMDDHHmmss")),
       board: currentBoard._id,
     };
-    console.log(body);
     if (!body.title || !body.content)
       return alert("제목과 내용을 입력해주세요.");
 

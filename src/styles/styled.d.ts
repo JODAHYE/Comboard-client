@@ -25,3 +25,7 @@ declare module "styled-components" {
     };
   }
 }
+
+declare module "dompurify" {
+  export default any;
+}

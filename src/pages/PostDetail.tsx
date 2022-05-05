@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -14,6 +14,7 @@ import { PostType } from "../types/dataType";
 import MyInfoComp from "../components/common/MyInfoComp";
 import Loading from "../components/common/Loading";
 import { commentListInit } from "../features/commentSlice";
+import dompurify from "dompurify";
 
 const PostDetail: React.FC = () => {
   const cookies = new Cookies();
@@ -28,6 +29,8 @@ const PostDetail: React.FC = () => {
     clickScrap,
     scrapDelete,
   } = usePost();
+
+  const sanitizer = dompurify.sanitize;
 
   const { currentBoard } = useSelector((state: RootState) => state.board);
   const { objectId, like_post, dislike_post, scrap_post } = useSelector(
@@ -168,7 +171,9 @@ const PostDetail: React.FC = () => {
           <Info>추천 {post?.like}</Info>
         </InfoDiv>
         {post?.content ? (
-          <Content dangerouslySetInnerHTML={{ __html: post.content }}></Content>
+          <Content
+            dangerouslySetInnerHTML={{ __html: sanitizer(post.content) }}
+          ></Content>
         ) : (
           <Loading />
         )}
