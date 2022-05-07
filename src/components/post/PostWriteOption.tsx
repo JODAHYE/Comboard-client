@@ -45,16 +45,17 @@ const PostWriteOption: React.FC<PropsType> = ({
     const loadingNode = document.createTextNode(
       "동영상 첨부중... 시간이 걸립니다."
     );
+    const textNode = document.createTextNode(".");
     contentField.current.appendChild(loadingNode);
     const videoUrl = await axios
       .post(`${process.env.REACT_APP_SERVER_URL}/upload/video`, formData)
       .then((res) => res.data.video_url);
-    console.log(videoUrl);
-    const embedTag = document.createElement("embed");
-    embedTag.setAttribute("src", videoUrl);
-    embedTag.style.maxWidth = "90%";
-    embedTag.style.height = "300px";
-    contentField.current.appendChild(embedTag);
+    const videoTag = document.createElement("video");
+    videoTag.setAttribute("controls", "true");
+    videoTag.setAttribute("src", videoUrl);
+    videoTag.style.maxWidth = "80%";
+    contentField.current.appendChild(videoTag);
+    contentField.current.appendChild(textNode);
     contentField.current.removeChild(loadingNode);
   };
 
