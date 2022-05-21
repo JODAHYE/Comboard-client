@@ -1,3 +1,6 @@
+# 기본적인 게시판
+https://comboard.netlify.app/
+
 ## 🔧 사용기술
 
 ### front
@@ -11,6 +14,12 @@
 -   MongoDB(mongoose)
 -   jsonwebtoken, bcrypt
 -   cloudinary
+
+### 배포
+client - netlify
+backend - 헤로쿠
+
+
 
 
 ## ✨기능
