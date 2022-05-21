@@ -16,8 +16,8 @@ https://comboard.netlify.app/
 -   cloudinary
 
 ### 배포
-client - netlify
-backend - 헤로쿠
+ - client - netlify
+ - backend - 헤로쿠
 
 
 
