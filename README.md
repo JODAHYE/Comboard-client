@@ -18,11 +18,12 @@
 -   MongoDB(mongoose)
 -   jsonwebtoken, bcrypt
 -   cloudinary
+-   깃허브: https://github.com/JODAHYE/Comboard-server
+
 
 ### 배포
  - client - netlify
  - backend - 헤로쿠
-
 
 
 
