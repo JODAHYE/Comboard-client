@@ -69,3 +69,25 @@ https://comboard.netlify.app/
 ## 폴더구조
 ![image](https://user-images.githubusercontent.com/57217119/169642765-3d14abc4-cdb4-4a6d-bb5e-842bdaa2067e.png)
 
+ - app
+store가 있는 폴더
+
+ - components
+페이지별로 사용되는 컴포넌트 파일들이 들어있는 폴더
+
+ -features
+리덕스 툴킷을 사용한 파일들이 들어있음
+
+ - hooks
+ 여러 컴포넌트에서 공통적으로 사용되는 함수들을 정의한 파일들이 들어있음
+
+ - pages 
+페이지단위로 렌더링되는 파일들을 모아둠
+
+ - styles
+모든 컴포넌트에 공통적으로 적용되는 GlobalStyle 파일과 여러 곳에서 사용되는 style을 정의한 theme 파일, 폰트 파일을 모아둠
+
+ - types
+사용되는 값의 타입들을 정의
+
+
