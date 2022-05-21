@@ -1,5 +1,9 @@
 # 기본적인 게시판
-https://comboard.netlify.app/
+> 기본적인 커뮤니티 게시판입니다.
+> https://comboard.netlify.app/
+
+![image](https://user-images.githubusercontent.com/57217119/169643710-4cf18c74-3c42-4673-98cf-6490b1f08475.png)
+
 
 ## 🔧 사용기술
 
