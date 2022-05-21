@@ -64,3 +64,8 @@ https://comboard.netlify.app/
 -   알림
     
     > 내 게시글에 댓글이 달리거나 내 댓글에 답글이 달리면 상단 알림 아이콘에 숫자가 증가합니다. 클릭하면 내 알림 리스트를 무한스크롤로 불러옵니다.
+
+
+## 폴더구조
+![image](https://user-images.githubusercontent.com/57217119/169642765-3d14abc4-cdb4-4a6d-bb5e-842bdaa2067e.png)
+
