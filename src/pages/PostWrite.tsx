@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
+
 import { RootState } from "../app/store";
 import { getCurrentBoard } from "../features/boardSlice";
 import { usePost } from "../hooks/usePost";
@@ -76,21 +77,26 @@ const PostWrite: React.FC = () => {
     }
   };
 
+  const inputPostTitle = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPostTitle(e.target.value);
+    },
+    []
+  );
+
+  const goPostListPage = useCallback(() => {
+    if (window.confirm("작성을 취소하시겠습니까?")) {
+      navigate(`/board/${params._id}`);
+    }
+  }, [params._id]);
+
   return (
     <Wrap>
       <Box>
         <Div>
           <Title>{currentBoard.title}</Title>
           <div>
-            <SubmitBtn
-              onClick={() => {
-                if (window.confirm("작성을 취소하시겠습니까?")) {
-                  navigate(`/board/${params.id}`);
-                }
-              }}
-            >
-              목록
-            </SubmitBtn>
+            <SubmitBtn onClick={goPostListPage}>목록</SubmitBtn>
             <SubmitBtn onClick={onSubmit}>완료</SubmitBtn>
           </div>
         </Div>
@@ -98,9 +104,7 @@ const PostWrite: React.FC = () => {
           type="text"
           placeholder="제목"
           value={postTitle}
-          onChange={(e) => {
-            setPostTitle(e.target.value);
-          }}
+          onChange={inputPostTitle}
         />
         <PostWriteOption
           contentField={contentField}

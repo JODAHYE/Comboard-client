@@ -48,6 +48,19 @@ const Nav: React.FC = () => {
     [dispatch]
   );
 
+  const openAlertPopup = useCallback(() => {
+    dispatch(onPopupClick("alert"));
+  }, []);
+
+  const onLogout = useCallback(() => {
+    dispatch(onPopupClick(""));
+    dispatch(logout(kakaoAccessToken));
+  }, [kakaoAccessToken]);
+
+  const goToLoginPage = useCallback(() => {
+    navigate("/login");
+  }, []);
+
   return (
     <Wrap>
       <Menu>
@@ -67,13 +80,7 @@ const Nav: React.FC = () => {
         </MenuItem>
       </Menu>
       {!is_auth && !loginLoading && (
-        <LoginBtn
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          로그인
-        </LoginBtn>
+        <LoginBtn onClick={goToLoginPage}>로그인</LoginBtn>
       )}
       {loginLoading && <LoginLoading />}
       {!loginLoading && is_auth && (
@@ -89,18 +96,13 @@ const Nav: React.FC = () => {
             <Icon
               src="../../../icon/notification.svg"
               title="알림"
-              onClick={() => {
-                dispatch(onPopupClick("alert"));
-              }}
+              onClick={openAlertPopup}
             />
           </Alert>
           <Icon
             src="../../../icon/exit.svg"
             title="로그아웃"
-            onClick={() => {
-              dispatch(onPopupClick(""));
-              dispatch(logout(kakaoAccessToken));
-            }}
+            onClick={onLogout}
           />
         </MyInfo>
       )}

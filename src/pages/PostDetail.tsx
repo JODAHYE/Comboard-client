@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { CircularProgress } from "@mui/material";
+import dompurify from "dompurify";
+
 import { RootState } from "../app/store";
 import CommentComp from "../components/comment/CommentComp";
 import { getCurrentBoard } from "../features/boardSlice";
@@ -14,8 +16,6 @@ import { PostType } from "../types/dataType";
 import MyInfoComp from "../components/common/MyInfoComp";
 import Loading from "../components/common/Loading";
 import { commentListInit } from "../features/commentSlice";
-import dompurify from "dompurify";
-import DateInfo from "../components/common/DateInfo";
 
 const PostDetail: React.FC = () => {
   const cookies = new Cookies();
@@ -73,11 +73,7 @@ const PostDetail: React.FC = () => {
     }
   }, [post]);
 
-  const onClick = () => {
-    navigate(`/board/${currentBoard._id}`);
-  };
-
-  const onLike = async () => {
+  const onLike = useCallback(async () => {
     if (!post) return;
     if (like_post.includes(post._id)) return alert("이미 추천하셨습니다.");
     setButtonLoading(true);
@@ -88,9 +84,9 @@ const PostDetail: React.FC = () => {
       dispatch(auth());
       setButtonLoading(false);
     });
-  };
+  }, [clickLike, getPostDetail, like_post, post]);
 
-  const onDisLike = async () => {
+  const onDisLike = useCallback(async () => {
     if (!post) return;
     if (dislike_post.includes(post._id)) return alert("이미 비추하셨습니다.");
     setButtonLoading(true);
@@ -101,23 +97,23 @@ const PostDetail: React.FC = () => {
         setButtonLoading(false);
       });
     });
-  };
+  }, [clickDislike, dislike_post, getPostDetail, post]);
 
-  const onUpdate = () => {
+  const onUpdate = useCallback(() => {
     if (!post) return;
     navigate(`/board/${currentBoard._id}/${post._id}/update`);
-  };
+  }, [currentBoard, post]);
 
-  const onDelete = () => {
+  const onDelete = useCallback(() => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       deletePost().then(() => {
         alert("삭제하였습니다.");
         navigate(`/board/${currentBoard._id}`);
       });
     }
-  };
+  }, [currentBoard, deletePost]);
 
-  const onScrap = () => {
+  const onScrap = useCallback(() => {
     if (!post) return;
     if (scrap_post.includes(post._id)) {
       setButtonLoading(true);
@@ -132,16 +128,20 @@ const PostDetail: React.FC = () => {
         setButtonLoading(false);
       });
     }
-  };
+  }, [deleteScrapPost, post, scrapPost, scrap_post]);
 
-  const onUserDetail = () => {
+  const onUserDetail = useCallback(() => {
     navigate(`/user/${post?.writer}`);
-  };
+  }, [post]);
+
+  const goPostListPage = useCallback(() => {
+    navigate(`/board/${currentBoard._id}`);
+  }, [currentBoard]);
 
   return (
     <Wrap>
       <Box>
-        <BoardTitle onClick={onClick}>{currentBoard.title}</BoardTitle>
+        <BoardTitle onClick={goPostListPage}>{currentBoard.title}</BoardTitle>
         <PostTitle className="title">{post && post.title}</PostTitle>
         <InfoDiv>
           <Writer onClick={onUserDetail}>
@@ -212,13 +212,7 @@ const PostDetail: React.FC = () => {
           )}
           {buttonLoading && <CircularProgress />}
         </Icons>
-        <ListBtn
-          onClick={() => {
-            navigate(`/board/${currentBoard._id}`);
-          }}
-        >
-          목록
-        </ListBtn>
+        <ListBtn onClick={goPostListPage}>목록</ListBtn>
         {post && <CommentComp post={post} />}
       </Box>
       <MyInfoComp />

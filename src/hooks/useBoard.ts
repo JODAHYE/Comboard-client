@@ -33,7 +33,7 @@ export function useBoard() {
 
   const updateBoard = async (boardId: string, body: CreateBodyType) => {
     if (body.bgimg) {
-      body.bgimg = await UploadAPI.imageUpload(body);
+      body.bgimg = await UploadAPI.imageUpload(body.formData as object);
     }
     const data = await BoardAPI.updateBoard(boardId, body);
     return data;

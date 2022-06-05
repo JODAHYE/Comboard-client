@@ -6,7 +6,7 @@ import { mypageClick } from "../../features/menuSlice";
 import { useMenu } from "../../hooks/useMenu";
 
 type StyleType = {
-  active?: boolean;
+  isActive?: boolean;
   open?: boolean;
 };
 
@@ -37,19 +37,22 @@ const MyPageMenu = () => {
         <Title>마이페이지</Title>
       </Header>
       <List open={menuOpen}>
-        <MenuItem active={useMenu(mypageMenu, "정보 수정")} onClick={onClick}>
+        <MenuItem isActive={useMenu(mypageMenu, "정보 수정")} onClick={onClick}>
           정보 수정
         </MenuItem>
-        <MenuItem active={useMenu(mypageMenu, "내 게시글")} onClick={onClick}>
+        <MenuItem isActive={useMenu(mypageMenu, "내 게시글")} onClick={onClick}>
           내 게시글
         </MenuItem>
-        <MenuItem active={useMenu(mypageMenu, "스크랩")} onClick={onClick}>
+        <MenuItem isActive={useMenu(mypageMenu, "스크랩")} onClick={onClick}>
           스크랩
         </MenuItem>
-        <MenuItem active={useMenu(mypageMenu, "내 댓글")} onClick={onClick}>
+        <MenuItem isActive={useMenu(mypageMenu, "내 댓글")} onClick={onClick}>
           내 댓글
         </MenuItem>
-        <MenuItem active={useMenu(mypageMenu, "게시판 관리")} onClick={onClick}>
+        <MenuItem
+          isActive={useMenu(mypageMenu, "게시판 관리")}
+          onClick={onClick}
+        >
           게시판 관리
         </MenuItem>
       </List>
@@ -115,8 +118,8 @@ const MenuItem = styled.p<StyleType>`
   cursor: pointer;
   transition: 0.4s;
   border-bottom: 1px solid transparent;
-  font-weight: ${(props) => (props.active ? "600" : "300")};
-  color: ${(props) => (props.active ? "#000" : props.theme.colors.fontColor)};
+  font-weight: ${(props) => (props.isActive ? "600" : "300")};
+  color: ${(props) => (props.isActive ? "#000" : props.theme.colors.fontColor)};
   &:hover {
     border-bottom: 1px solid ${(props) => props.theme.colors.fontColor};
   }

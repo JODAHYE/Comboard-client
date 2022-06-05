@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Cookies from "universal-cookie";
 import { BsBookmarkStar, BsBookmarkDashFill } from "react-icons/bs";
+
 import { RootState } from "../app/store";
 import { getCurrentBoard } from "../features/boardSlice";
 import PostList from "../components/post/PostList";
@@ -33,13 +34,13 @@ const BoardDetail: React.FC = () => {
     dispatch(getCurrentBoard(params.id));
   }, []);
 
-  const onWrite = () => {
+  const onWrite = useCallback(() => {
     if (!params.id) return;
     if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
     navigate(`/board/${currentBoard._id}/write`);
-  };
+  }, [cookies, currentBoard, params]);
 
-  const onBookmark = () => {
+  const onBookmark = useCallback(() => {
     if (bookmark.includes(currentBoard._id)) {
       deleteBookmarkBoard(currentBoard._id).then(() => {
         dispatch(auth());
@@ -51,7 +52,19 @@ const BoardDetail: React.FC = () => {
         dispatch(auth());
       });
     }
-  };
+  }, [addBookmarkBoard, bookmark, cookies, currentBoard, deleteBookmarkBoard]);
+
+  const onTitleClick = useCallback(() => {
+    setIsInfoOpen(false);
+  }, []);
+
+  const onInfoClick = useCallback(() => {
+    setIsInfoOpen(true);
+  }, []);
+
+  const sortClick = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSort(e.target.value);
+  }, []);
 
   return (
     <Wrap>
@@ -62,20 +75,10 @@ const BoardDetail: React.FC = () => {
           ) : (
             <AddBookmarkBtn onClick={onBookmark} />
           )}
-          <Title
-            onClick={() => {
-              setIsInfoOpen(false);
-            }}
-          >
+          <Title onClick={onTitleClick}>
             {currentBoard && currentBoard.title}
           </Title>
-          <InfoBtn
-            onClick={() => {
-              setIsInfoOpen((prev) => !prev);
-            }}
-          >
-            정보
-          </InfoBtn>
+          <InfoBtn onClick={onInfoClick}>정보</InfoBtn>
         </Header>
         {!isInfoOpen ? (
           <>
@@ -104,11 +107,7 @@ const BoardDetail: React.FC = () => {
           </InfoWrap>
         )}
         <FlexDiv>
-          <SortSelect
-            onChange={(e) => {
-              setSort(e.target.value);
-            }}
-          >
+          <SortSelect onChange={sortClick}>
             <Option value="create_date">최신순</Option>
             <Option value="hits">조회순</Option>
             <Option value="like">추천순</Option>
@@ -175,7 +174,11 @@ const InfoBox = styled.div`
 `;
 
 const Info = styled.p<StyleType>`
-  width: ${(props) => props.width && props.width};
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width};
+    `};
   text-align: center;
 `;
 

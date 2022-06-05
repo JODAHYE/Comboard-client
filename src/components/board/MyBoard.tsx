@@ -126,9 +126,7 @@ const MenuItem = styled.p<activeType>`
   font-weight: 600;
   font-family: BMHANNAAir;
   font-size: 18px;
-  color: ${(props) => {
-    return props.active ? "#000" : props.theme.colors.fontColor;
-  }};
+  color: ${(props) => (props.active ? "#000" : props.theme.colors.fontColor)};
   cursor: pointer;
 `;
 

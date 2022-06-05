@@ -145,7 +145,7 @@ export const UserAPI = {
     const response = await axiosInstance.get("/detail", {
       params: { userId },
     });
-    const data = await response.data.nickname;
+    const data = await response.data;
     return data;
   },
 

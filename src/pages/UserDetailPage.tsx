@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
@@ -51,14 +51,14 @@ const UserDetailPage = () => {
     });
   }, [skip, postLock]);
 
-  const onPrev = () => {
+  const onPrev = useCallback(() => {
     if (skip === 0) return;
     setSkip((prev) => prev - limit);
-  };
+  }, [skip]);
 
-  const onNext = () => {
+  const onNext = useCallback(() => {
     setSkip((prev) => prev + limit);
-  };
+  }, []);
 
   return (
     <Wrap>
@@ -122,7 +122,6 @@ const InfoBox = styled.div`
   justify-content: start;
   gap: 16px;
   padding: 10px;
-  /* align-items: flex-start; */
   margin-left: 10px;
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
   @media (min-width: 320px) and (max-width: 480px) {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import moment from "moment";
 import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
@@ -89,7 +89,11 @@ const Content = styled.p<StyleType>`
     margin-right: 6px;
     font-size: 11px;
     &:before {
-      content: "${(props) => props.info && props.info}";
+      ${(props) =>
+        props.info &&
+        css`
+          content: ${props.info};
+        `};
     }
   }
 `;

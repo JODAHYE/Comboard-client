@@ -72,6 +72,17 @@ const MyInfoUpdateComp = () => {
     [updatePostLock]
   );
 
+  const inputNickname = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setUpdatedNickname(e.target.value);
+    },
+    []
+  );
+
+  const nicknameChangeBtnClick = useCallback(() => {
+    setIsUpdateClick(true);
+  }, []);
+
   return (
     <>
       <Title>정보 수정</Title>
@@ -104,9 +115,7 @@ const MyInfoUpdateComp = () => {
               <>
                 <NicknameField
                   value={updatedNickname}
-                  onChange={(e) => {
-                    setUpdatedNickname(e.target.value);
-                  }}
+                  onChange={inputNickname}
                 />
                 <Btn onClick={onNicknameUpdate} active={true}>
                   완료
@@ -115,12 +124,7 @@ const MyInfoUpdateComp = () => {
             ) : (
               <>
                 <p>{nickname}</p>
-                <Btn
-                  onClick={() => {
-                    setIsUpdateClick(true);
-                  }}
-                  active={true}
-                >
+                <Btn onClick={nicknameChangeBtnClick} active={true}>
                   변경
                 </Btn>
               </>

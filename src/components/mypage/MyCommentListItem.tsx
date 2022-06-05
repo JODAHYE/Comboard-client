@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
 
@@ -105,7 +105,11 @@ const Title = styled.div`
 `;
 
 const Info = styled.p<StyleType>`
-  width: ${(props) => props.width && props.width};
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width};
+    `};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

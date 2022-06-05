@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import moment from "moment";
 
 import { onPopupClick } from "../../features/menuSlice";
@@ -73,7 +73,11 @@ const Item = styled.div<StyleType>`
   width: 100%;
   ${(props) => props.theme.displayFlex};
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
-  background: ${(props) => props.isBlur && "rgba(0, 0, 0, 0.05)"};
+  ${(props) =>
+    props.isBlur &&
+    css`
+      background: rgba(0, 0, 0, 0.05);
+    `};
   &:hover {
     background: rgba(0, 0, 0, 0.05);
   }

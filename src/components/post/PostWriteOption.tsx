@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { RefObject } from "react";
 import styled from "styled-components";
+import UploadAPI from "../../lib/api/UploadAPI";
 
 type PropsType = {
   contentField: RefObject<HTMLDivElement>;
@@ -25,10 +26,7 @@ const PostWriteOption: React.FC<PropsType> = ({
     formData.append("file", files[0]);
     const loadingNode = document.createTextNode("이미지 첨부중...");
     contentField.current.appendChild(loadingNode);
-    const imgUrl = await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/upload/image`, formData)
-      .then((res) => res.data.img_url);
-    console.log(imgUrl);
+    const imgUrl = await UploadAPI.imageUpload(formData);
     const imgTag = document.createElement("img");
     imgTag.setAttribute("src", imgUrl);
     imgTag.style.width = "50%";
@@ -47,9 +45,7 @@ const PostWriteOption: React.FC<PropsType> = ({
     );
     const textNode = document.createTextNode(".");
     contentField.current.appendChild(loadingNode);
-    const videoUrl = await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/upload/video`, formData)
-      .then((res) => res.data.video_url);
+    const videoUrl = await UploadAPI.videoUpload(formData);
     const videoTag = document.createElement("video");
     videoTag.setAttribute("controls", "true");
     videoTag.setAttribute("src", videoUrl);
@@ -62,9 +58,7 @@ const PostWriteOption: React.FC<PropsType> = ({
   const onClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     const target = e.target as HTMLImageElement;
     if (!contentField.current) return;
-    console.log(target.dataset);
     if (target.dataset.name === "addLink") {
-      console.log("link");
       let url = prompt("링크를 추가하세요.", "");
       if (!url) return;
       const a = document.createElement("a");
@@ -73,14 +67,11 @@ const PostWriteOption: React.FC<PropsType> = ({
       contentField.current.appendChild(a);
     }
     if (target.dataset.name === "toCode") {
-      console.log("toCode");
       if (!contentField.current.textContent || !contentField.current.innerHTML)
         return;
       if (!showCode) {
         contentField.current.textContent = contentField.current.innerHTML;
-        //textContent 속성은 노드와 그 자손의 텍스트 콘텐츠를 표현합니다
       } else {
-        //innerHTML 은 요소(element) 내에 포함 된 HTML 또는 XML 마크업을 가져오거나 설정
         contentField.current.innerHTML = contentField.current.textContent;
       }
       setShowCode((prev) => !prev);

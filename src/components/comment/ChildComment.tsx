@@ -64,6 +64,22 @@ const ChildComment: React.FC<PropTypes> = ({
     navigate(`/user/${comment.writer}`);
   }, [comment, navigate]);
 
+  const updateButtonClick = useCallback(() => {
+    setUpdateClick(true);
+  }, []);
+
+  const inputUpdateField = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setUpdatedCommentValue(e.target.value);
+    },
+    []
+  );
+
+  const closeUpdateField = useCallback(() => {
+    setUpdateClick(false);
+    setUpdatedCommentValue(comment.content);
+  }, [comment]);
+
   return (
     <>
       {!isDelete && (
@@ -81,11 +97,7 @@ const ChildComment: React.FC<PropTypes> = ({
                   <DateInfo date={comment.create_date} />
                   {!updateClick && objectId === comment.writer && (
                     <>
-                      <ControllBtn
-                        onClick={() => {
-                          setUpdateClick(true);
-                        }}
-                      >
+                      <ControllBtn onClick={updateButtonClick}>
                         수정
                       </ControllBtn>
                       <ControllBtn
@@ -102,22 +114,13 @@ const ChildComment: React.FC<PropTypes> = ({
                 <>
                   <UpdateField
                     value={updatedCommentValue}
-                    onChange={(e) => {
-                      setUpdatedCommentValue(e.target.value);
-                    }}
+                    onChange={inputUpdateField}
                   />
                   <ControllDiv>
                     <ControllBtn data-comment={comment._id} onClick={onUpdate}>
                       완료
                     </ControllBtn>
-                    <ControllBtn
-                      onClick={() => {
-                        setUpdateClick(false);
-                        setUpdatedCommentValue(comment.content);
-                      }}
-                    >
-                      취소
-                    </ControllBtn>
+                    <ControllBtn onClick={closeUpdateField}>취소</ControllBtn>
                   </ControllDiv>
                 </>
               )}

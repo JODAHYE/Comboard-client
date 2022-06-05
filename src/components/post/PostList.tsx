@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { RootState } from "../../app/store";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+import { RootState } from "../../app/store";
 import { usePost } from "../../hooks/usePost";
 import PostListItem from "./PostListItem";
 import { PostType } from "../../types/dataType";
@@ -71,10 +72,10 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
     e: React.MouseEvent<HTMLParagraphElement, MouseEvent>
   ) => {
     const target = e.target as HTMLParagraphElement;
-    setCurrentPage(parseInt(target.innerHTML));
+    setCurrentPage(parseInt(target.innerText));
   };
 
-  const onPrev = () => {
+  const onPrev = useCallback(() => {
     if (pageArr[0] === 1) return;
     const arr = [];
     const arrEnd = pageArr[pageArr.length - 1] as number;
@@ -84,9 +85,9 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
       i--;
     }
     setPageArr(arr.reverse());
-  };
+  }, [pageArr]);
 
-  const onNext = () => {
+  const onNext = useCallback(() => {
     const arrEnd = pageArr[pageArr.length - 1] as number;
     if (arrEnd >= page) return;
     const arr = [];
@@ -94,7 +95,7 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
       if (arr.length < pageCount) arr.push(i);
     }
     setPageArr(arr);
-  };
+  }, [page, pageArr]);
 
   return (
     <>

@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import moment from "moment";
 import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
+import { useCallback } from "react";
 
 type PropsType = {
   post: PostType;
@@ -18,13 +19,13 @@ const PostListItem: React.FC<PropsType> = ({ post }) => {
 
   const { isExistBoard } = useBoard();
 
-  const onTitleClick = () => {
+  const onTitleClick = useCallback(() => {
     isExistBoard(post.board).then((res) => {
       if (res) {
         navigate(`/board/${post.board}/${post._id}`);
       }
     });
-  };
+  }, [isExistBoard, post]);
 
   return (
     <PostItem data-post={post._id} onClick={onTitleClick}>
@@ -94,7 +95,11 @@ const Title = styled.div`
 `;
 
 const Content = styled.p<StyleType>`
-  width: ${(props) => props.width && props.width};
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width};
+    `};
   display: inline-block;
   text-align: center;
   white-space: nowrap;
@@ -106,7 +111,11 @@ const Content = styled.p<StyleType>`
     margin-right: 6px;
     font-size: 11px;
     &:before {
-      content: "${(props) => props.info && props.info}";
+      ${(props) =>
+        props.info &&
+        css`
+          content: ${props.info};
+        `};
     }
   }
 `;
