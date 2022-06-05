@@ -72,7 +72,7 @@
 
 
 ## 폴더구조
-![image](https://user-images.githubusercontent.com/57217119/169642765-3d14abc4-cdb4-4a6d-bb5e-842bdaa2067e.png)
+![image](https://user-images.githubusercontent.com/57217119/172051849-93e294fa-8f06-46cd-b3e9-b54dc0b5693f.png)
 
 
  - app
@@ -86,6 +86,9 @@
 
  - hooks
  > 여러 컴포넌트에서 공통적으로 사용되는 함수들을 정의한 파일들이 들어있음
+ 
+ - lib > api
+ > 서버 api 요청 로직 분리
 
  - pages 
 > 페이지단위로 렌더링되는 파일들을 모아둠
