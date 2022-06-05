@@ -20,7 +20,7 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const { commentCreate } = useComment();
+  const { createComment } = useComment();
 
   const { nickname } = useSelector((state: RootState) => state.user);
   const { commentList } = useSelector((state: RootState) => state.comment);
@@ -46,7 +46,7 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
       content: commentValue,
       createDate: parseInt(moment().format("YYYYMMDDHHmm")),
     };
-    commentCreate(body).then((res) => {
+    createComment(body).then((res) => {
       setComments((prev) => prev?.concat(res.comment));
       setCommentsCount(res.comments_count + 1);
       setLoading(false);
@@ -69,19 +69,19 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
       </FlexDiv>
       <List>
         {commentList.length > 0 &&
-          commentList.map((v, i) => (
+          commentList.map((comment, i) => (
             <CommentItem
               key={i}
-              comment={v}
+              comment={comment}
               postWriter={post.writer}
               setCommentsCount={setCommentsCount}
             />
           ))}
         {comments.length > 0 &&
-          comments.map((v, i) => (
+          comments.map((comment, i) => (
             <CommentItem
               key={i}
-              comment={v}
+              comment={comment}
               postWriter={post.writer}
               setCommentsCount={setCommentsCount}
             />

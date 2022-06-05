@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { signup } from "../../features/userSlice";
 import Popup from "../common/Popup";
 
-const Signup: React.FC = () => {
+const Signup = () => {
   const dispatch = useDispatch();
 
   const [info, setInfo] = useState({

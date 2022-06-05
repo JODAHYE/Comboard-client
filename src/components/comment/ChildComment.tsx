@@ -6,6 +6,7 @@ import moment from "moment";
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
 import { CommentType } from "../../types/dataType";
+import DateInfo from "../common/DateInfo";
 
 type PropTypes = {
   comment: CommentType;
@@ -25,7 +26,7 @@ const ChildComment: React.FC<PropTypes> = ({
 }) => {
   const navigate = useNavigate();
 
-  const { commentUpdate, commentDelete } = useComment();
+  const { updateComment, deleteComment } = useComment();
 
   const { objectId } = useSelector((state: RootState) => state.user);
 
@@ -41,12 +42,12 @@ const ChildComment: React.FC<PropTypes> = ({
         const target = e.target as HTMLSpanElement;
         if (!target.dataset.comment) return;
         setIsDelete(true);
-        commentDelete(target.dataset.comment).then((res) => {
+        deleteComment(target.dataset.comment).then((res) => {
           setCommentsCount(res.comments_count - 1);
         });
       }
     },
-    [commentDelete, setCommentsCount]
+    [deleteComment, setCommentsCount]
   );
 
   const onUpdate = useCallback(
@@ -54,9 +55,9 @@ const ChildComment: React.FC<PropTypes> = ({
       const target = e.target as HTMLSpanElement;
       if (!target.dataset.comment) return;
       setUpdateClick(false);
-      commentUpdate(target.dataset.comment, updatedCommentValue);
+      updateComment(target.dataset.comment, updatedCommentValue);
     },
-    [commentUpdate, updatedCommentValue]
+    [updateComment, updatedCommentValue]
   );
 
   const onUserDetail = useCallback(() => {
@@ -77,20 +78,7 @@ const ChildComment: React.FC<PropTypes> = ({
                   {comment.writer_name}
                 </Nickname>
                 <ControllDiv noMatch={objectId !== comment.writer && true}>
-                  {moment().format("YYYYMMDD") ===
-                  String(comment.create_date).substring(0, 8) ? (
-                    <span>
-                      {String(comment.create_date).substring(8, 10) +
-                        ":" +
-                        String(comment.create_date).substring(10, 12)}
-                    </span>
-                  ) : (
-                    <span>
-                      {String(comment.create_date).substring(4, 6) +
-                        "/" +
-                        String(comment.create_date).substring(6, 8)}
-                    </span>
-                  )}
+                  <DateInfo date={comment.create_date} />
                   {!updateClick && objectId === comment.writer && (
                     <>
                       <ControllBtn

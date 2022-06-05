@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
+import ALertAPI from "../lib/api/AlertAPI";
+import CommentAPI from "../lib/api/CommentAPI";
+import UserAPI from "../lib/api/UserAPI";
 
 const cookies = new Cookies();
 
@@ -18,16 +21,8 @@ type BodyType = {
 export function useComment() {
   const params = useParams();
 
-  const commentCreate = async (body: BodyType) => {
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/comment/create`,
-      body,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+  const createComment = async (body: BodyType) => {
+    const data = await CommentAPI.createComment(body);
     const alertBody = {
       postId: body.post,
       createDate: body.createDate,
@@ -35,33 +30,17 @@ export function useComment() {
       subdescription: body.content,
       detailUrl: `/board/${params.id}/${params.postId}`,
     };
-    await axios.post("https://comboard.herokuapp.com/alert/create", alertBody);
-    return response.data;
+    await ALertAPI.createAlert(alertBody);
+    return data;
   };
 
   const getReplyList = async (parentCommentId: string) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/comment/reply/list`,
-      {
-        params: {
-          parentCommentId: parentCommentId,
-        },
-      }
-    );
-    const data = response.data.commentList;
+    const data = await CommentAPI.getReplyList(parentCommentId);
     return data;
   };
 
   const replyCreate = async (body: BodyType) => {
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/comment/reply/create`,
-      body,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const data = await CommentAPI.createReply(body);
     const alertBody = {
       postId: body.post,
       createDate: body.createDate,
@@ -70,105 +49,53 @@ export function useComment() {
       detailUrl: `/board/${params.id}/${params.postId}`,
     };
     const alertReplyBody = {
-      replyUser: body.reply_user,
+      replyUser: body.reply_user as string,
       createDate: body.createDate,
       description: "내 댓글에 답글이 달렸습니다.",
       subdescription: body.content,
       detailUrl: `/board/${params.id}/${params.postId}`,
     };
-    await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/alert/create`,
-      alertBody
-    );
-    await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/alert/create_reply`,
-      alertReplyBody
-    );
-    return response.data;
+    await ALertAPI.createAlert(alertBody);
+    await ALertAPI.createReplyAlert(alertReplyBody);
+    return data;
   };
 
-  const commentUpdate = async (commentId: string, content: string) => {
-    const response = await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/comment/update`,
-      {
-        commentId,
-        content,
-      },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    return response.data.comment;
+  const updateComment = async (commentId: string, content: string) => {
+    const data = await CommentAPI.updateComment(commentId, content);
+    return data;
   };
 
-  const commentDelete = async (commentId: string) => {
-    const response = await axios.delete(
-      `${process.env.REACT_APP_SERVER_URL}/comment/delete`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          postId: params.postId,
-          commentId,
-        },
-      }
+  const deleteComment = async (commentId: string) => {
+    const data = await CommentAPI.deleteComment(
+      params.postId as string,
+      commentId
     );
-    return response.data;
+    return data;
   };
 
   const getMyCommentList = async (skip: number) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/comment/list`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          skip,
-        },
-      }
-    );
-    const data = await response.data.list;
+    const data = await UserAPI.getMyCommentList(skip);
     return data;
   };
 
   const getMyCommentCount = async () => {
     if (!cookies.get("accessToken")) return;
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/comment_count`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    const data = await response.data.CommentCount;
+    const data = await UserAPI.getMyCommentCount();
     return data;
   };
 
   const deleteMyComment = async (commentList: string[]) => {
     for (let i = 0; i < commentList.length; i++) {
       const idValue = commentList[i].split("-");
-      axios.delete(`${process.env.REACT_APP_SERVER_URL}/comment/delete`, {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          commentId: idValue[0],
-          postId: idValue[1],
-        },
-      });
+      CommentAPI.deleteComment(idValue[1], idValue[0]);
     }
   };
 
   return {
-    commentCreate,
+    createComment,
     getReplyList,
-    commentUpdate,
-    commentDelete,
+    updateComment,
+    deleteComment,
     replyCreate,
     getMyCommentList,
     getMyCommentCount,

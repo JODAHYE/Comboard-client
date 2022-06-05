@@ -32,6 +32,7 @@ const MyCommentComp = () => {
     setLoading(true);
     getMyCommentList(skip).then((res) => {
       setCommentList(res);
+      console.log(res);
       setLoading(false);
     });
     if (skip === 0) {
@@ -56,7 +57,6 @@ const MyCommentComp = () => {
     if (currentPage * limit >= commentCount) return;
     setSkip((prev) => prev + limit);
     setCurrentPage((prev) => prev + 1);
-    console.log(skip);
   }, [commentCount, skip, currentPage]);
 
   const onDelete = useCallback(() => {
@@ -88,10 +88,10 @@ const MyCommentComp = () => {
       {loading && <Loading />}
       {!loading && commentList && commentList.length > 0 && (
         <List>
-          {commentList.map((v, i) => (
+          {commentList.map((comment, i) => (
             <MyCommentListItem
               key={i}
-              comment={v}
+              comment={comment}
               setCheckList={setCheckList}
               checkList={checkList}
             />

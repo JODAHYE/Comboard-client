@@ -84,24 +84,24 @@ const MyBoard: React.FC = () => {
         <SearchForm onChange={onChange} onSubmit={onSubmit} val={searchVal} />
         {myMenu === "개설한 게시판" &&
           !searchVal &&
-          createList.map((v, i) => {
-            return <BoardCard key={i} board={v} width={"98%"} />;
+          createList.map((item, i) => {
+            return <BoardCard key={i} board={item} width={"98%"} />;
           })}
         {myMenu === "개설한 게시판" &&
           searchVal &&
-          filterList.map((v, i) => {
-            return <BoardCard key={i} width={"98%"} board={v} />;
+          filterList.map((item, i) => {
+            return <BoardCard key={i} width={"98%"} board={item} />;
           })}
 
         {myMenu === "즐겨찾기" &&
           !searchVal &&
-          bookmarkBoardList.map((v, i) => {
-            return <BoardCard key={i} board={v} width={"98%"} />;
+          bookmarkBoardList.map((item, i) => {
+            return <BoardCard key={i} board={item} width={"98%"} />;
           })}
         {myMenu === "즐겨찾기" &&
           searchVal &&
-          filterList.map((v, i) => {
-            return <BoardCard key={i} width={"98%"} board={v} />;
+          filterList.map((item, i) => {
+            return <BoardCard key={i} width={"98%"} board={item} />;
           })}
       </List>
     </Wrap>

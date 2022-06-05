@@ -81,10 +81,10 @@ const MyPostList = () => {
             <Info width="6%">추천</Info>
             <Info width="6%">조회</Info>
           </InfoBox>
-          {postList.map((v, i) => (
+          {postList.map((post, i) => (
             <MyPostListItem
               key={i}
-              post={v}
+              post={post}
               setCheckList={setCheckList}
               checkList={checkList}
             />

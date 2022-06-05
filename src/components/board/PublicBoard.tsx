@@ -70,8 +70,8 @@ const PublicBoard: React.FC = () => {
       <List>
         {boardList &&
           boardList.length > 0 &&
-          boardList.map((v, i) => {
-            return <BoardCard key={i} board={v} />;
+          boardList.map((board, i) => {
+            return <BoardCard key={i} board={board} />;
           })}
         {!boardListEnd && (
           <Target ref={target}>

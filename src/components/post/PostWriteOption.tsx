@@ -9,7 +9,7 @@ type PropsType = {
 };
 
 type StyleType = {
-  active?: boolean;
+  isActive?: boolean;
 };
 
 const PostWriteOption: React.FC<PropsType> = ({
@@ -124,7 +124,7 @@ const PostWriteOption: React.FC<PropsType> = ({
         data-name="toCode"
         onClick={onClick}
         title="html로 작성"
-        active={showCode ? true : undefined}
+        isActive={showCode ? true : false}
       />
     </Option>
   );
@@ -154,7 +154,9 @@ const Icon = styled.img<StyleType>`
   display: inline-block;
   object-fit: cover;
   background: ${(props) =>
-    props.active ? props.theme.colors.buttonActive : props.theme.colors.button};
+    props.isActive
+      ? props.theme.colors.buttonActive
+      : props.theme.colors.button};
   color: #fff;
   padding: 6px;
   z-index: 100;

@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import Cookies from "universal-cookie";
+import BoardAPI from "../lib/api/BoardAPI";
+import UserAPI from "../lib/api/UserAPI";
 import { BoardType } from "../types/dataType";
-
-const cookies = new Cookies();
 
 interface BoardState {
   createList: BoardType[];
@@ -51,10 +49,7 @@ export const boardSlice = createSlice({
 export const getCurrentBoard = createAsyncThunk(
   "board/getCurrentBoard",
   async (boardId: string, thunkAPI) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/board/${boardId}`
-    );
-    const data = await response.data;
+    const data = await BoardAPI.getBoardInfo(boardId);
     return data;
   }
 );
@@ -62,15 +57,7 @@ export const getCurrentBoard = createAsyncThunk(
 export const getCreateList = createAsyncThunk(
   "board/getCreateList",
   async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/board/created_list`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    const data = response.data;
+    const data = await UserAPI.getCreatedBoardList();
     return data;
   }
 );

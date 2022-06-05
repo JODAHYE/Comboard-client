@@ -3,15 +3,17 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
+
 import { onPopupClick } from "../../features/menuSlice";
 import { getAlertCount } from "../../features/userSlice";
 import { useAlert } from "../../hooks/useAlert";
 import { useBoard } from "../../hooks/useBoard";
 import { usePost } from "../../hooks/usePost";
 import { AlertType } from "../../types/dataType";
+import DateInfo from "../common/DateInfo";
 
 type StyleType = {
-  blur?: boolean;
+  isBlur: boolean;
 };
 
 const AlertItem = ({ alert }: { alert: AlertType }) => {
@@ -22,13 +24,7 @@ const AlertItem = ({ alert }: { alert: AlertType }) => {
   const { isExistBoard } = useBoard();
   const { isExistPost } = usePost();
 
-  const [isRead, setIsRead] = useState<boolean>();
-
-  useEffect(() => {
-    if (!alert.isRead) return;
-    setIsRead(alert.isRead);
-    console.log(alert);
-  }, [alert]);
+  const [isRead, setIsRead] = useState(alert.isRead);
 
   const onClick = useCallback(() => {
     alertRead(alert._id).then(() => {
@@ -58,24 +54,11 @@ const AlertItem = ({ alert }: { alert: AlertType }) => {
   }, [alert._id, alertRead, dispatch]);
 
   return (
-    <Item blur={isRead && true}>
+    <Item isBlur={isRead}>
       <ContentDiv onClick={onClick}>
         <Info>
           <p>{alert.description}</p>
-          {moment().format("YYYYMMDD") ===
-          String(alert.createDate).substring(0, 8) ? (
-            <span>
-              {String(alert.createDate).substring(8, 10) +
-                ":" +
-                String(alert.createDate).substring(10, 12)}
-            </span>
-          ) : (
-            <span>
-              {String(alert.createDate).substring(4, 6) +
-                "/" +
-                String(alert.createDate).substring(6, 8)}
-            </span>
-          )}
+          <DateInfo date={alert.createDate} />
         </Info>
         <p>{alert.subdescription}</p>
       </ContentDiv>
@@ -90,7 +73,7 @@ const Item = styled.div<StyleType>`
   width: 100%;
   ${(props) => props.theme.displayFlex};
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
-  background: ${(props) => props.blur && "rgba(0, 0, 0, 0.05)"};
+  background: ${(props) => props.isBlur && "rgba(0, 0, 0, 0.05)"};
   &:hover {
     background: rgba(0, 0, 0, 0.05);
   }

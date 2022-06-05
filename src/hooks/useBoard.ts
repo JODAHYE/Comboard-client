@@ -1,7 +1,6 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
+import BoardAPI from "../lib/api/BoardAPI";
+import UploadAPI from "../lib/api/UploadAPI";
+import UserAPI from "../lib/api/UserAPI";
 
 type GetBodyType = {
   access: string;
@@ -20,102 +19,40 @@ type CreateBodyType = {
 
 export function useBoard() {
   const getBoardList = async (body: GetBodyType) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/board/list`,
-      {
-        params: {
-          access: body.access,
-          skip: body.skip,
-        },
-      }
-    );
-    const data = response.data.list;
-    return data;
+    const data = await BoardAPI.getBoardList(body);
+    return data.list;
   };
 
   const createBoard = async (body: CreateBodyType) => {
     if (body.bgimg) {
-      const upload_response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/upload/image`,
-        body.formData
-      );
-      body.bgimg = upload_response.data.img_url;
+      body.bgimg = await UploadAPI.imageUpload(body);
     }
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/board/create`,
-      body,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    return response.data;
+    const data = await BoardAPI.createBoard(body);
+    return data;
   };
 
   const updateBoard = async (boardId: string, body: CreateBodyType) => {
     if (body.bgimg) {
-      const upload_response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/upload/image`,
-        body.formData
-      );
-      body.bgimg = upload_response.data.img_url;
+      body.bgimg = await UploadAPI.imageUpload(body);
     }
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/board/update`,
-      body,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          boardId,
-        },
-      }
-    );
-    return response.data;
+    const data = await BoardAPI.updateBoard(boardId, body);
+    return data;
   };
 
   const deleteBoard = async (boardId: string) => {
-    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/board/delete`, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-      params: {
-        boardId,
-      },
-    });
+    BoardAPI.deleteBoard(boardId);
   };
 
-  const bookmarkBoard = async (boardId: string) => {
-    await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/add`,
-      { boardId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+  const addBookmarkBoard = async (boardId: string) => {
+    UserAPI.addBookmarkBoard(boardId);
   };
 
-  const bookmarkBoardDelete = async (boardId: string) => {
-    await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/delete`,
-      { boardId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+  const deleteBookmarkBoard = async (boardId: string) => {
+    UserAPI.deleteBookmarkBoard(boardId);
   };
 
   const isExistBoard = async (boardId: string) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/board/${boardId}`
-    );
-    const data = await response.data;
+    const data = await BoardAPI.getBoardInfo(boardId);
     if (!data.success) {
       alert("해당 게시판이 존재하지 않습니다.");
       return false;
@@ -126,8 +63,8 @@ export function useBoard() {
   return {
     getBoardList,
     createBoard,
-    bookmarkBoard,
-    bookmarkBoardDelete,
+    addBookmarkBoard,
+    deleteBookmarkBoard,
     deleteBoard,
     isExistBoard,
     updateBoard,

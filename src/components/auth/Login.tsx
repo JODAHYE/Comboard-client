@@ -2,13 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+
 import Signup from "./Signup";
 import { RootState } from "../../app/store";
 import { onPopupClick } from "../../features/menuSlice";
 import { kakaoLogin, login } from "../../features/userSlice";
 import { useUser } from "../../hooks/useUser";
 
-const Login: React.FC = () => {
+const Login = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 

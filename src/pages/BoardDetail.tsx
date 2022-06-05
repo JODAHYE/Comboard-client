@@ -21,7 +21,7 @@ const BoardDetail: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { bookmarkBoard, bookmarkBoardDelete } = useBoard();
+  const { addBookmarkBoard, deleteBookmarkBoard } = useBoard();
 
   const { currentBoard } = useSelector((state: RootState) => state.board);
   const { bookmark } = useSelector((state: RootState) => state.user);
@@ -41,12 +41,12 @@ const BoardDetail: React.FC = () => {
 
   const onBookmark = () => {
     if (bookmark.includes(currentBoard._id)) {
-      bookmarkBoardDelete(currentBoard._id).then(() => {
+      deleteBookmarkBoard(currentBoard._id).then(() => {
         dispatch(auth());
       });
     } else {
       if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
-      bookmarkBoard(currentBoard._id).then(() => {
+      addBookmarkBoard(currentBoard._id).then(() => {
         alert("게시판 즐겨찾기 \n[pc버전 메인화면에서만 확인 가능합니다.]");
         dispatch(auth());
       });

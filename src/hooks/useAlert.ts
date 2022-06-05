@@ -1,43 +1,19 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
+import ALertAPI from "../lib/api/AlertAPI";
 
 export function useAlert() {
   const getAlertList = async (skip: number) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/alert/list`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-        params: {
-          skip: skip,
-        },
-      }
-    );
-    const data = await response.data.list;
+    const data = await ALertAPI.getAlertList(skip);
     return data;
   };
 
   const alertRead = async (alertId: string) => {
-    await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/alert/read`,
-      { alertId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const data = await ALertAPI.readAlert(alertId);
+    return data;
   };
 
   const alertDelete = async () => {
-    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/alert/delete`, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const data = await ALertAPI.deleteAlert();
+    return data;
   };
 
   return {

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
+import DateInfo from "../common/DateInfo";
 
 type PropsType = {
   post: PostType;
@@ -56,20 +57,7 @@ const MyPostListItem: React.FC<PropsType> = ({
         <p>{post.title}</p>
         <span>{`[${post.comments_count}]`}</span>
       </Title>
-      {moment().format("YYYYMMDD") ===
-      String(post.create_date).substring(0, 8) ? (
-        <Content width="6%">
-          {String(post.create_date).substring(8, 10) +
-            ":" +
-            String(post.create_date).substring(10, 12)}
-        </Content>
-      ) : (
-        <Content width="6%">
-          {String(post.create_date).substring(4, 6) +
-            "/" +
-            String(post.create_date).substring(6, 8)}
-        </Content>
-      )}
+      <DateInfo date={post.create_date} />
       <Content width="6%" info="추천">
         {post.like}
       </Content>

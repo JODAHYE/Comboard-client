@@ -58,7 +58,7 @@ const MyCommentListItem: React.FC<PropsType> = ({
     },
     [comment, navigate, isExistBoard]
   );
-
+  if (!comment.post) return null;
   return (
     <Wrap>
       <Title onClick={onClick}>{comment.content}</Title>

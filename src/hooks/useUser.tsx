@@ -1,56 +1,23 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
+import UserAPI from "../lib/api/UserAPI";
 
 export function useUser() {
   const updateProfileImg = async (imgUrl: string) => {
-    const response = await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/user/update/image`,
-      { imgUrl },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    return response.data.profileImage;
+    const data = await UserAPI.updateProfileImg(imgUrl);
+    return data;
   };
 
   const updateNickname = async (nickname: string) => {
-    const response = await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/user/update/nickname`,
-      { nickname },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    return response.data.nickname;
+    const data = await UserAPI.updateNickname(nickname);
+    return data;
   };
 
   const updatePostLock = async (value: boolean) => {
-    const response = await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/user/update/post_lock`,
-      { value },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    return response.data.postLock;
+    const data = await UserAPI.updatePostLock(value);
+    return data;
   };
 
   const getUserDetail = async (userId: string) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/detail`,
-      {
-        params: { userId },
-      }
-    );
-    const data = await response.data;
+    const data = await UserAPI.getUserDetail(userId);
     return data;
   };
 

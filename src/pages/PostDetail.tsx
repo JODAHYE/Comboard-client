@@ -15,6 +15,7 @@ import MyInfoComp from "../components/common/MyInfoComp";
 import Loading from "../components/common/Loading";
 import { commentListInit } from "../features/commentSlice";
 import dompurify from "dompurify";
+import DateInfo from "../components/common/DateInfo";
 
 const PostDetail: React.FC = () => {
   const cookies = new Cookies();
@@ -26,8 +27,8 @@ const PostDetail: React.FC = () => {
     clickLike,
     clickDislike,
     deletePost,
-    clickScrap,
-    scrapDelete,
+    scrapPost,
+    deleteScrapPost,
   } = usePost();
 
   const sanitizer = dompurify.sanitize;
@@ -120,13 +121,13 @@ const PostDetail: React.FC = () => {
     if (!post) return;
     if (scrap_post.includes(post._id)) {
       setButtonLoading(true);
-      scrapDelete().then(() => {
+      deleteScrapPost().then(() => {
         dispatch(auth());
         setButtonLoading(false);
       });
     } else {
       setButtonLoading(true);
-      clickScrap().then(() => {
+      scrapPost().then(() => {
         dispatch(auth());
         setButtonLoading(false);
       });

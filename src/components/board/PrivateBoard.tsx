@@ -60,8 +60,8 @@ const PrivateBoard: React.FC = () => {
       {loading && <Loading />}
       {!loading &&
         filterList.length > 0 &&
-        filterList.map((v, i) => {
-          return <BoardCard key={i} board={v} />;
+        filterList.map((item, i) => {
+          return <BoardCard key={i} board={item} />;
         })}
       {!loading && filterList.length === 0 && (
         <P>찾을 비밀 게시판 이름을 검색해주세요.</P>

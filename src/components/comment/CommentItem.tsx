@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ChildComment from "./ChildComment";
 import { CommentType } from "../../types/dataType";
 import Loading from "../common/Loading";
+import DateInfo from "../common/DateInfo";
 
 type PropTypes = {
   comment: CommentType;
@@ -28,7 +29,7 @@ const CommentItem: React.FC<PropTypes> = ({
 }) => {
   const navigate = useNavigate();
 
-  const { commentUpdate, commentDelete, replyCreate } = useComment();
+  const { updateComment, deleteComment, replyCreate } = useComment();
 
   const { objectId, nickname } = useSelector((state: RootState) => state.user);
 
@@ -54,7 +55,7 @@ const CommentItem: React.FC<PropTypes> = ({
         const target = e.target as HTMLSpanElement;
         if (!target.dataset.comment) return;
         setIsDelete(true);
-        commentDelete(target.dataset.comment).then((res) => {
+        deleteComment(target.dataset.comment).then((res) => {
           console.log(res);
           if (replies) {
             setCommentsCount(res.comments_count - (1 + replies.length));
@@ -64,7 +65,7 @@ const CommentItem: React.FC<PropTypes> = ({
         });
       }
     },
-    [commentDelete, setCommentsCount, replies]
+    [deleteComment, setCommentsCount, replies]
   );
 
   const onUpdate = useCallback(
@@ -72,9 +73,9 @@ const CommentItem: React.FC<PropTypes> = ({
       const target = e.target as HTMLSpanElement;
       if (!target.dataset.comment) return;
       setUpdateClick(false);
-      commentUpdate(target.dataset.comment, updatedCommentValue);
+      updateComment(target.dataset.comment, updatedCommentValue);
     },
-    [commentUpdate, updatedCommentValue]
+    [updateComment, updatedCommentValue]
   );
 
   const onReply = useCallback(() => {
@@ -114,20 +115,7 @@ const CommentItem: React.FC<PropTypes> = ({
               {comment.writer_name}
             </Nickname>
             <ControllDiv noMatch={objectId !== comment.writer && true}>
-              {moment().format("YYYYMMDD") ===
-              String(comment.create_date).substring(0, 8) ? (
-                <span>
-                  {String(comment.create_date).substring(8, 10) +
-                    ":" +
-                    String(comment.create_date).substring(10, 12)}
-                </span>
-              ) : (
-                <span>
-                  {String(comment.create_date).substring(4, 6) +
-                    "/" +
-                    String(comment.create_date).substring(6, 8)}
-                </span>
-              )}
+              <DateInfo date={comment.create_date} />
 
               {!updateClick && objectId === comment.writer && (
                 <>
@@ -209,14 +197,14 @@ const CommentItem: React.FC<PropTypes> = ({
         !loading &&
         comment.childComment &&
         replies &&
-        replies.map((v, i) => (
+        replies.map((reply, i) => (
           <ChildComment
             key={i}
-            comment={v}
+            comment={reply}
             postWriter={postWriter}
             setCommentsCount={setCommentsCount}
           >
-            {v.content}
+            {reply.content}
           </ChildComment>
         ))}
     </>

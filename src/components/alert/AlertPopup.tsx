@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+
 import { useAlert } from "../../hooks/useAlert";
 import { AlertType } from "../../types/dataType";
 import Loading from "../common/Loading";
@@ -82,8 +83,8 @@ const AlertPopup: React.FC = () => {
       <List>
         {alertList &&
           alertList.length > 0 &&
-          alertList.map((v, i) => {
-            return <AlertItem key={i} alert={v} />;
+          alertList.map((alert, i) => {
+            return <AlertItem key={i} alert={alert} />;
           })}
         {!alertEnd && (
           <Target ref={target}>

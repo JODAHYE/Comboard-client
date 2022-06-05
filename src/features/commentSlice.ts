@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import CommentAPI from "../lib/api/CommentAPI";
 import { CommentType } from "../types/dataType";
 
 interface commentState {
@@ -28,15 +28,7 @@ export const commentSlice = createSlice({
 export const getCommentList = createAsyncThunk(
   "comment/getCommentList",
   async (postId: string) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/comment/list`,
-      {
-        params: {
-          postId,
-        },
-      }
-    );
-    const data = response.data.commentList;
+    const data = await CommentAPI.getCommentList(postId);
     return data;
   }
 );

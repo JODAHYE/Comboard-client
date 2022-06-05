@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import ALertAPI from "../lib/api/AlertAPI";
+import UserAPI from "../lib/api/UserAPI";
 import { BoardType } from "../types/dataType";
 
 const cookies = new Cookies();
@@ -44,16 +46,14 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     signup: (state, action: PayloadAction<object>) => {
-      axios
-        .post("https://comboard.herokuapp.com/user/signup", action.payload)
-        .then((res) => {
-          if (res.data.success) {
-            alert(res.data.msg);
-            return window.location.reload();
-          } else {
-            return alert(res.data.msg);
-          }
-        });
+      UserAPI.signUp(action.payload).then((data) => {
+        if (data.success) {
+          alert(data.msg);
+          return window.location.reload();
+        } else {
+          return alert(data.msg);
+        }
+      });
     },
   },
   extraReducers: (builder) => {
@@ -99,14 +99,11 @@ export const userSlice = createSlice({
 export const login = createAsyncThunk(
   "user/login",
   async (info: object, thunkAPI) => {
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/user/login`,
-      info
-    );
-    if (!response.data.success) {
-      return alert(response.data.msg);
+    const data = await UserAPI.login(info);
+    if (!data.success) {
+      return alert(data.msg);
     }
-    cookies.set("accessToken", response.data.accessToken, {
+    cookies.set("accessToken", data.accessToken, {
       path: "/",
       maxAge: 60 * 60 * 2,
     });
@@ -118,19 +115,13 @@ export const login = createAsyncThunk(
 export const kakaoLogin = createAsyncThunk(
   "user/kakaoLogin",
   async (code: string, thunkAPI) => {
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/user/kakaologin`,
-      {
-        code,
-      }
-    );
-    cookies.set("accessToken", response.data.accessToken, {
+    const data = await UserAPI.kakaoLogin(code);
+    cookies.set("accessToken", data.accessToken, {
       path: "/",
       maxAge: 60 * 60 * 2,
     });
     thunkAPI.dispatch(auth());
     thunkAPI.dispatch(getAlertCount());
-    const data = response.data;
     return data;
   }
 );
@@ -138,60 +129,31 @@ export const kakaoLogin = createAsyncThunk(
 export const logout = createAsyncThunk(
   "user/logout",
   async (kakaoAccessToken: string | undefined) => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/user/logout`, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-      params: {
-        kakaoAccessToken: kakaoAccessToken,
-      },
-    });
+    const data = await UserAPI.logout(kakaoAccessToken);
     cookies.set("accessToken", "", {
       path: "/",
       maxAge: 0,
     });
+    return data;
   }
 );
 
 export const auth = createAsyncThunk("user/auth", async () => {
   if (!cookies.get("accessToken")) return;
-  const response = await axios.get(
-    `${process.env.REACT_APP_SERVER_URL}/user/auth`,
-    {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    }
-  );
-  return response.data;
+  const data = await UserAPI.auth();
+  return data;
 });
 
 export const getBookmarkList = createAsyncThunk(
   "user/getBookmarkList",
   async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/user/bookmark/list`,
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
-    const data = response.data.bookmarkBoardList;
+    const data = await UserAPI.getBookmarkList();
     return data;
   }
 );
 
 export const getAlertCount = createAsyncThunk("user/alertCount", async () => {
-  const response = await axios.get(
-    `${process.env.REACT_APP_SERVER_URL}/alert/count`,
-    {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    }
-  );
-  const data = response.data.count;
+  const data = ALertAPI.getAlertCount();
   return data;
 });
 
