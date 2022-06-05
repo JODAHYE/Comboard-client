@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { RefObject } from "react";
 import styled from "styled-components";
 import UploadAPI from "../../lib/api/UploadAPI";

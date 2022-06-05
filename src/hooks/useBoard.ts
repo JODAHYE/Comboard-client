@@ -24,16 +24,16 @@ export function useBoard() {
   };
 
   const createBoard = async (body: CreateBodyType) => {
-    if (body.bgimg) {
-      body.bgimg = await UploadAPI.imageUpload(body);
+    if (body.formData) {
+      body.bgimg = await UploadAPI.imageUpload(body.formData);
     }
     const data = await BoardAPI.createBoard(body);
     return data;
   };
 
   const updateBoard = async (boardId: string, body: CreateBodyType) => {
-    if (body.bgimg) {
-      body.bgimg = await UploadAPI.imageUpload(body.formData as object);
+    if (body.formData) {
+      body.bgimg = await UploadAPI.imageUpload(body.formData);
     }
     const data = await BoardAPI.updateBoard(boardId, body);
     return data;
