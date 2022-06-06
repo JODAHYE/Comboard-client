@@ -24,6 +24,12 @@ export function useBoard() {
     return data.list;
   };
 
+  const searchBoard = async (body: { access: string; title: string }) => {
+    const data = await BoardAPI.searchBoard(body);
+    if (!data) return alert("찾으시는 게시판이 없습니다.");
+    return data;
+  };
+
   const createBoard = async (body: CreateBodyType) => {
     if (body.bgimg) {
       body.bgimg = await UploadAPI.imageUpload(body.formData as object);
@@ -102,5 +108,6 @@ export function useBoard() {
     isExistBoard,
     updateBoard,
     scrollRendering,
+    searchBoard,
   };
 }

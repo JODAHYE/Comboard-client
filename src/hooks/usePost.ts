@@ -117,7 +117,6 @@ export function usePost() {
     cookies.set(postId, postId, {
       path: "/",
       maxAge: 60 * 60 * 12,
-      httpOnly: true,
     });
     return data;
   };

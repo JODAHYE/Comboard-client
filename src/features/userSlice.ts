@@ -106,7 +106,6 @@ export const login = createAsyncThunk(
     cookies.set("accessToken", data.accessToken, {
       path: "/",
       maxAge: 60 * 60 * 2,
-      httpOnly: true,
     });
     thunkAPI.dispatch(auth());
     thunkAPI.dispatch(getAlertCount());
@@ -120,7 +119,6 @@ export const kakaoLogin = createAsyncThunk(
     cookies.set("accessToken", data.accessToken, {
       path: "/",
       maxAge: 60 * 60 * 2,
-      httpOnly: true,
     });
     thunkAPI.dispatch(auth());
     thunkAPI.dispatch(getAlertCount());
@@ -135,7 +133,6 @@ export const logout = createAsyncThunk(
     cookies.set("accessToken", "", {
       path: "/",
       maxAge: 0,
-      httpOnly: true,
     });
     return data;
   }

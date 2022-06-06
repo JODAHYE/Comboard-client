@@ -255,7 +255,7 @@ const RemoveBookmarkBtn = styled(BsBookmarkDashFill)`
 `;
 
 const Img = styled.img`
-  max-width: 80%;
+  max-width: 40%;
   display: inline-block;
 `;
 

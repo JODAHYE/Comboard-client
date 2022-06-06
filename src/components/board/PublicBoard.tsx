@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
@@ -7,10 +7,11 @@ import { BoardType } from "../../types/dataType";
 import BoardCard from "../common/BoardCard";
 import Loading from "../common/Loading";
 import NewBtn from "../common/NewBtn";
+import SearchForm from "../common/SearchForm";
 import CreateBoard from "./CreateBoard";
 
 const PublicBoard: React.FC = () => {
-  const { getBoardList, scrollRendering } = useBoard();
+  const { getBoardList, scrollRendering, searchBoard } = useBoard();
 
   const target = useRef<HTMLDivElement>(null);
 
@@ -19,6 +20,8 @@ const PublicBoard: React.FC = () => {
   const [boardList, setBoardList] = useState<BoardType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isBoardListEnd, setIsBoardListEnd] = useState(false);
+  const [searchVal, setSearchVal] = useState("");
+  const [searchBoardData, setSearchBoardData] = useState<BoardType | null>();
 
   let skip = 0;
 
@@ -52,16 +55,49 @@ const PublicBoard: React.FC = () => {
     };
   }, [target]);
 
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!searchVal) return;
+      if (searchVal.length < 2) {
+        return alert("두 글자 이상 입력하세요");
+      }
+      searchBoard({ access: "public", title: searchVal }).then((res) => {
+        setSearchBoardData(res);
+      });
+    },
+    [searchVal, boardList, searchBoard]
+  );
+
+  const onChangeSearchInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchVal(e.target.value);
+      if (!e.target.value) {
+        return setSearchBoardData(null);
+      }
+    },
+    []
+  );
+
   return (
     <Wrap>
-      <NewBtn />
+      <Header>
+        <SearchForm
+          onSubmit={onSubmit}
+          onChangeSearchInput={onChangeSearchInput}
+          val={searchVal}
+        />
+        <NewBtn />
+      </Header>
       <List>
-        {boardList &&
+        {searchBoardData && <BoardCard board={searchBoardData} />}
+        {!searchBoardData &&
+          boardList &&
           boardList.length > 0 &&
           boardList.map((board, i) => {
             return <BoardCard key={i} board={board} />;
           })}
-        {!isBoardListEnd && (
+        {!searchBoardData && !isBoardListEnd && (
           <Target ref={target}>
             <Loading />
           </Target>
@@ -77,8 +113,6 @@ export default PublicBoard;
 const Wrap = styled.div`
   width: 70%;
   height: 100%;
-  position: relative;
-  padding: 40px;
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
@@ -86,8 +120,18 @@ const Wrap = styled.div`
   }
 `;
 
+const Header = styled.div`
+  ${(props) => props.theme.displayFlex};
+  width: 100%;
+  margin: 6px;
+`;
+
 const List = styled.div`
-  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  height: 94%;
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;

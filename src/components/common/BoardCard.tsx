@@ -51,10 +51,11 @@ const BoardCard: React.FC<PropsType> = ({ board, width }) => {
 export default BoardCard;
 
 const Wrap = styled.div<StyledType>`
-  width: ${(props) => (props.width ? props.width : "48%")};
-  height: 160px;
-  display: inline-block;
-  position: relative;
+  width: 24%;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+
   overflow: hidden;
   margin: 10px;
   border: 1px solid ${(props) => props.theme.colors.shadow};
@@ -69,11 +70,16 @@ const Wrap = styled.div<StyledType>`
     margin: 4px 0;
   }
 `;
+
+const Img = styled.img`
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+`;
+
 const Div = styled.div`
-  width: 60%;
-  height: 100%;
-  position: absolute;
-  display: inline-block;
+  width: 100%;
+  height: 50%;
   padding: 10px;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 4px;
@@ -81,8 +87,6 @@ const Div = styled.div`
 `;
 
 const Title = styled.p`
-  font-family: "Gothic A1", sans-serif;
-  font-weight: 400;
   margin-bottom: 5px;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
   overflow: hidden;
@@ -92,15 +96,14 @@ const Title = styled.p`
 
 const Desc = styled.p`
   font-size: 14px;
-  font-family: "Gothic A1", sans-serif;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   word-wrap: break-word;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   line-height: 1.2em;
-  height: 7.2em;
+  height: 6em;
   white-space: pre-wrap;
   &.info {
     font-size: 12px;
@@ -109,13 +112,6 @@ const Desc = styled.p`
   @media (min-width: 320px) and (max-width: 480px) {
     display: none;
   }
-`;
-
-const Img = styled.img`
-  width: 40%;
-  height: 100%;
-  display: inline-block;
-  object-fit: cover;
 `;
 
 const LockIcon = styled(AiFillLock)`

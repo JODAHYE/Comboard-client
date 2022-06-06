@@ -14,23 +14,31 @@ const NewBtn = () => {
     dispatch(onPopupClick("create_board"));
   }, [dispatch, is_auth]);
 
-  return <Btn onClick={onCreate} />;
+  return (
+    <NewButton onClick={onCreate}>
+      <Icon />
+    </NewButton>
+  );
 };
 
 export default NewBtn;
 
-const Btn = styled(BsPlusLg)`
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 24px;
+const NewButton = styled.button`
+  width: 24px;
+  height: 24px;
   color: #fff;
   background: ${(props) => props.theme.colors.button};
+
   border: none;
-  border-radius: 6px;
-  padding: 4px;
+  outline: none;
   cursor: pointer;
+
+  border-radius: 6px;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
+`;
+
+const Icon = styled(BsPlusLg)`
+  font-size: 14px;
 `;

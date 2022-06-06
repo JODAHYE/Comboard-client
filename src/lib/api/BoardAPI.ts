@@ -29,6 +29,17 @@ const BoardAPI = {
     return data;
   },
 
+  searchBoard: async (body: { access: string; title: string }) => {
+    const response = await axiosInstance.get("/search", {
+      params: {
+        access: body.access,
+        title: body.title,
+      },
+    });
+    const data = await response.data.board;
+    return data;
+  },
+
   getBoardInfo: async (boardId: string) => {
     const response = await axiosInstance.get(`/${boardId}`);
     const data = await response.data;

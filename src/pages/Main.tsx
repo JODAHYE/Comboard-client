@@ -33,6 +33,7 @@ export default Main;
 const Wrap = styled.div`
   height: 95vh;
   width: 100%;
+  overflow: hidden;
   ${(props) => props.theme.displayFlex};
   @media (min-width: 320px) and (max-width: 480px) {
     height: 94vh;
