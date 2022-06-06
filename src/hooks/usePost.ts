@@ -112,6 +112,16 @@ export function usePost() {
     return data;
   };
 
+  const increasePostView = async (postId: string) => {
+    const data = await PostAPI.increasePostView(postId);
+    cookies.set(postId, postId, {
+      path: "/",
+      maxAge: 60 * 60 * 12,
+      httpOnly: true,
+    });
+    return data;
+  };
+
   return {
     getPostList,
     createPost,
@@ -129,5 +139,6 @@ export function usePost() {
     clearScrap,
     getUserPostList,
     isExistPost,
+    increasePostView,
   };
 }

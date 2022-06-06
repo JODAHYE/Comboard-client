@@ -29,6 +29,7 @@ const PostDetail: React.FC = () => {
     deletePost,
     scrapPost,
     deleteScrapPost,
+    increasePostView,
   } = usePost();
 
   const sanitizer = dompurify.sanitize;
@@ -57,17 +58,7 @@ const PostDetail: React.FC = () => {
     if (!post) return;
     if (!post._id) return;
     if (!cookies.get(post._id)) {
-      const body = {
-        postId: post._id,
-      };
-      axios.patch(
-        `${process.env.REACT_APP_SERVER_URL}/post/increase/view`,
-        body
-      );
-      cookies.set(post._id, post._id, {
-        path: "/",
-        maxAge: 60 * 60 * 12,
-      });
+      increasePostView(post._id);
     } else {
       return;
     }

@@ -113,5 +113,19 @@ const PostAPI = {
     const data = await response.data;
     return data;
   },
+
+  increasePostView: async (postId: string) => {
+    const response = await axiosInstance.patch(
+      "/increase/view",
+      { postId },
+      {
+        headers: {
+          Authorization: cookies.get("accessToken"),
+        },
+      }
+    );
+    const data = await response.data;
+    return data;
+  },
 };
 export default PostAPI;
