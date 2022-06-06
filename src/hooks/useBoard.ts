@@ -1,6 +1,7 @@
 import BoardAPI from "../lib/api/BoardAPI";
 import UploadAPI from "../lib/api/UploadAPI";
 import UserAPI from "../lib/api/UserAPI";
+import { BoardType } from "../types/dataType";
 
 type GetBodyType = {
   access: string;
@@ -24,16 +25,16 @@ export function useBoard() {
   };
 
   const createBoard = async (body: CreateBodyType) => {
-    if (body.formData) {
-      body.bgimg = await UploadAPI.imageUpload(body.formData);
+    if (body.bgimg) {
+      body.bgimg = await UploadAPI.imageUpload(body.formData as object);
     }
     const data = await BoardAPI.createBoard(body);
     return data;
   };
 
   const updateBoard = async (boardId: string, body: CreateBodyType) => {
-    if (body.formData) {
-      body.bgimg = await UploadAPI.imageUpload(body.formData);
+    if (body.bgimg) {
+      body.bgimg = await UploadAPI.imageUpload(body.formData as object);
     }
     const data = await BoardAPI.updateBoard(boardId, body);
     return data;
@@ -60,6 +61,38 @@ export function useBoard() {
     return true;
   };
 
+  const scrollRendering = (
+    isLoading: boolean,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    isBoardListEnd: boolean,
+    setIsBoardListEnd: React.Dispatch<React.SetStateAction<boolean>>,
+    skip: number,
+    setBoardList: React.Dispatch<React.SetStateAction<BoardType[]>>
+  ) => {
+    const callback = async (
+      [entry]: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ) => {
+      if (entry.isIntersecting && !isLoading && !isBoardListEnd) {
+        observer.unobserve(entry.target);
+        setIsLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 400));
+        skip += 8;
+        getBoardList({ access: "public", skip }).then((res) => {
+          if (res && res.length < 8) {
+            setIsBoardListEnd(true);
+          }
+          if (res && res.length > 0) {
+            setBoardList((prev) => [...prev, ...res]);
+          }
+          setIsLoading(false);
+        });
+        observer.observe(entry.target);
+      }
+    };
+    return callback;
+  };
+
   return {
     getBoardList,
     createBoard,
@@ -68,5 +101,6 @@ export function useBoard() {
     deleteBoard,
     isExistBoard,
     updateBoard,
+    scrollRendering,
   };
 }

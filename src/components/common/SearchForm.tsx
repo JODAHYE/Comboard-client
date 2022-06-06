@@ -2,12 +2,16 @@ import styled from "styled-components";
 import { ImSearch } from "react-icons/im";
 
 type PropsType = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSearchInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   val: string;
 };
 
-const SearchForm: React.FC<PropsType> = ({ onChange, onSubmit, val }) => {
+const SearchForm: React.FC<PropsType> = ({
+  onChangeSearchInput,
+  onSubmit,
+  val,
+}) => {
   return (
     <div>
       <Form onSubmit={onSubmit}>
@@ -15,7 +19,7 @@ const SearchForm: React.FC<PropsType> = ({ onChange, onSubmit, val }) => {
           type="text"
           placeholder="게시판 제목"
           value={val}
-          onChange={onChange}
+          onChange={onChangeSearchInput}
         />
         <Btn>
           <ImSearch />

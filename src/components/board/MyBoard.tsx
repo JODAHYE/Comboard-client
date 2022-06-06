@@ -63,12 +63,15 @@ const MyBoard: React.FC = () => {
     [bookmarkBoardList, myMenu, searchVal, createList]
   );
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value) {
-      setFilterList([]);
-    }
-    setSearchVal(e.target.value);
-  }, []);
+  const onChangeSearchInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.value) {
+        setFilterList([]);
+      }
+      setSearchVal(e.target.value);
+    },
+    []
+  );
 
   return (
     <Wrap>
@@ -81,7 +84,11 @@ const MyBoard: React.FC = () => {
         </MenuItem>
       </Menu>
       <List>
-        <SearchForm onChange={onChange} onSubmit={onSubmit} val={searchVal} />
+        <SearchForm
+          onChangeSearchInput={onChangeSearchInput}
+          onSubmit={onSubmit}
+          val={searchVal}
+        />
         {myMenu === "개설한 게시판" &&
           !searchVal &&
           createList.map((item, i) => {

@@ -46,17 +46,24 @@ const PrivateBoard: React.FC = () => {
     [searchVal, boardList]
   );
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value) {
-      setFilterList([]);
-    }
-    setSearchVal(e.target.value);
-  }, []);
+  const onChangeSearchInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.value) {
+        setFilterList([]);
+      }
+      setSearchVal(e.target.value);
+    },
+    []
+  );
 
   return (
     <Wrap>
       <NewBtn />
-      <SearchForm onSubmit={onSubmit} onChange={onChange} val={searchVal} />
+      <SearchForm
+        onSubmit={onSubmit}
+        onChangeSearchInput={onChangeSearchInput}
+        val={searchVal}
+      />
       {loading && <Loading />}
       {!loading &&
         filterList.length > 0 &&

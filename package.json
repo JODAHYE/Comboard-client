@@ -4,8 +4,6 @@
   "private": true,
   "proxy": "https://comboard.herokuapp.com",
   "dependencies": {
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.0",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.2",
@@ -24,7 +22,6 @@
     "cloudinary": "^1.28.1",
     "dompurify": "^2.3.6",
     "moment": "^2.29.1",
-    "qs": "^6.10.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",

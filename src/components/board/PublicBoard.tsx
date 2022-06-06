@@ -10,59 +10,47 @@ import NewBtn from "../common/NewBtn";
 import CreateBoard from "./CreateBoard";
 
 const PublicBoard: React.FC = () => {
-  const { getBoardList } = useBoard();
+  const { getBoardList, scrollRendering } = useBoard();
 
   const target = useRef<HTMLDivElement>(null);
 
   const { onPopup } = useSelector((state: RootState) => state.menu);
 
   const [boardList, setBoardList] = useState<BoardType[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [boardListEnd, setBoardListEnd] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isBoardListEnd, setIsBoardListEnd] = useState(false);
 
   let skip = 0;
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     getBoardList({ access: "public", skip }).then((res) => {
       setBoardList(res);
-      setLoading(false);
+      setIsLoading(false);
     });
   }, []);
 
   useEffect(() => {
     if (!target.current) return;
-    const observer = new IntersectionObserver(callback, {
-      threshold: 0.6,
-    });
+    const observer = new IntersectionObserver(
+      scrollRendering(
+        isLoading,
+        setIsLoading,
+        isBoardListEnd,
+        setIsBoardListEnd,
+        skip,
+        setBoardList
+      ),
+      {
+        threshold: 0.6,
+      }
+    );
     observer.observe(target.current);
     return () => {
       observer && observer.disconnect();
-      setLoading(false);
+      setIsLoading(false);
     };
   }, [target]);
-
-  const callback = async (
-    [entry]: IntersectionObserverEntry[],
-    observer: IntersectionObserver
-  ) => {
-    if (entry.isIntersecting && !loading && !boardListEnd) {
-      observer.unobserve(entry.target);
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 400));
-      skip += 8;
-      getBoardList({ access: "public", skip }).then((res) => {
-        if (res && res.length < 8) {
-          setBoardListEnd(true);
-        }
-        if (res && res.length > 0) {
-          setBoardList((prev) => prev.concat(res));
-        }
-        setLoading(false);
-      });
-      observer.observe(entry.target);
-    }
-  };
 
   return (
     <Wrap>
@@ -73,7 +61,7 @@ const PublicBoard: React.FC = () => {
           boardList.map((board, i) => {
             return <BoardCard key={i} board={board} />;
           })}
-        {!boardListEnd && (
+        {!isBoardListEnd && (
           <Target ref={target}>
             <Loading />
           </Target>

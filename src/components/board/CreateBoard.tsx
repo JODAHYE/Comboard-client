@@ -30,7 +30,7 @@ const CreateBoard: React.FC = () => {
     formData: {},
   });
 
-  const onChange = useCallback(
+  const onChangeInfo = useCallback(
     (
       e:
         | React.MouseEvent<HTMLInputElement, MouseEvent>
@@ -109,12 +109,12 @@ const CreateBoard: React.FC = () => {
           placeholder="제목"
           name="title"
           value={info.title}
-          onChange={onChange}
+          onChange={onChangeInfo}
         />
         <Div>
           <Label>
             <input
-              onChange={onChange}
+              onChange={onChangeInfo}
               type="radio"
               name="access"
               value="public"
@@ -123,7 +123,7 @@ const CreateBoard: React.FC = () => {
           </Label>
           <Label>
             <input
-              onChange={onChange}
+              onChange={onChangeInfo}
               type="radio"
               name="access"
               value="private"
@@ -149,14 +149,14 @@ const CreateBoard: React.FC = () => {
               name="password"
               placeholder="암호 입력"
               width={"30%"}
-              onChange={onChange}
+              onChange={onChangeInfo}
             />
             <Input
               type="password"
               name="passwordcheck"
               placeholder="암호 확인"
               width={"30%"}
-              onChange={onChange}
+              onChange={onChangeInfo}
             />
             {info.password !== info.passwordcheck && (
               <P>암호와 암호 확인이 일치하지 않습니다.</P>
@@ -168,7 +168,7 @@ const CreateBoard: React.FC = () => {
           placeholder="게시판을 소개해주세요."
           name="description"
           value={info.description}
-          onChange={onChange}
+          onChange={onChangeInfo}
         />
         <Btn>생성</Btn>
         {loading && <CircularProgress size={28} />}
