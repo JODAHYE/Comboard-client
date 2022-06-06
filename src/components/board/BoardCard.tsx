@@ -37,11 +37,13 @@ const BoardCard = ({ board }: { board: BoardType }) => {
         )}
 
         <Desc>{board.description}</Desc>
-        <Desc className="info">게시글 {board.postCount}</Desc>
-        {board.lastPostDate &&
-          parseInt(moment().format("YYYYMMDD")) - board.lastPostDate < 3 && (
-            <Icon src="../../../icon/active.svg" />
-          )}
+        <Row>
+          <Desc className="info">게시글 {board.postCount}</Desc>
+          {board.lastPostDate &&
+            parseInt(moment().format("YYYYMMDD")) - board.lastPostDate < 3 && (
+              <Icon src="../../../icon/active.svg" />
+            )}
+        </Row>
       </Div>
     </Wrap>
   );
@@ -120,11 +122,14 @@ const LockIcon = styled(AiFillLock)`
   font-size: 20px;
 `;
 
+const Row = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
 const Icon = styled.img`
   width: 20px;
   height: 20px;
   display: inline-block;
-  position: absolute;
-  right: 0;
   ${(props) => props.theme.iconColor}
 `;

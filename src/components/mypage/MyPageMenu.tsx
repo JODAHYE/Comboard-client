@@ -113,8 +113,8 @@ const List = styled.div<StyleType>`
 `;
 
 const MenuItem = styled.p<StyleType>`
-  font-size: 22px;
-  font-family: BMHANNAAir;
+  font-size: 20px;
+  font-family: SpoqaHanSansNeoBold;
   cursor: pointer;
   transition: 0.4s;
   border-bottom: 1px solid transparent;

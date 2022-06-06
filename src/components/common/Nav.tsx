@@ -117,7 +117,8 @@ const Wrap = styled.div`
   width: 100vw;
   height: 5vh;
   display: flex;
-  background: ${(props) => props.theme.colors.main};
+  background: #fff;
+  border-bottom: 2px solid ${(props) => props.theme.colors.main};
   align-items: center;
   box-shadow: 2px 2px 2px 2px ${(props) => props.theme.colors.shadow};
   justify-content: space-between;
@@ -137,13 +138,13 @@ const Menu = styled.div`
 `;
 
 const MenuItem = styled(Link)`
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
   text-decoration: none;
-  font-family: BMHANNAAir;
+  font-family: SpoqaHanSansNeoBold;
   color: ${(props) => props.theme.colors.fontColor};
   &.active {
-    color: #fff;
+    color: #000;
   }
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 15px;

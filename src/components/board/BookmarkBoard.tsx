@@ -37,8 +37,7 @@ const Wrap = styled.div`
 
 const Menu = styled.div`
   ${(props) => props.theme.displayFlex};
-  font-family: BMHANNAAir;
-  font-weight: 600;
+  font-family: SpoqaHanSansNeoBold;
   justify-content: space-around;
   padding: 16px;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};

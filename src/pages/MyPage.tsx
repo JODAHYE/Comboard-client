@@ -53,7 +53,6 @@ const Wrap = styled.div`
   }
 `;
 const Content = styled.div`
-  /* border: 1px solid red; */
   width: 70%;
   padding: 2%;
   @media (min-width: 320px) and (max-width: 480px) {

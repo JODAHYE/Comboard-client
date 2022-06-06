@@ -2,7 +2,7 @@ import { DefaultTheme } from "styled-components";
 
 const theme: DefaultTheme = {
   colors: {
-    main: "#6AB350",
+    main: "#86EBAD",
     button: "#74D378",
     buttonActive: "#86EBAD",
     fontColor: "rgb(104, 103, 103)",
@@ -22,7 +22,7 @@ const theme: DefaultTheme = {
   },
   iconColor: {
     filter:
-      "invert(91%) sepia(50%) saturate(403%) hue-rotate(10deg) brightness(100%) contrast(94%);",
+      "invert(60%) sepia(100%) saturate(300%) brightness(80%) contrast(500%);",
   },
 };
 export { theme };
