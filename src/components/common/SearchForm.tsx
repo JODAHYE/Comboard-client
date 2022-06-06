@@ -32,11 +32,14 @@ const SearchForm: React.FC<PropsType> = ({
 export default SearchForm;
 
 const Form = styled.form`
-  width: 600px;
+  width: 50vw;
   max-width: 100%;
   height: 32px;
   ${(props) => props.theme.displayFlex}
   text-align: center;
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 80vw;
+  }
 `;
 
 const Input = styled.input`
@@ -47,9 +50,6 @@ const Input = styled.input`
   padding: 4px;
   &:focus {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    width: 60%;
   }
 `;
 

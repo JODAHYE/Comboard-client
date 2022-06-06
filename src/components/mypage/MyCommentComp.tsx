@@ -5,6 +5,7 @@ import { useComment } from "../../hooks/useComment";
 import MyCommentListItem from "./MyCommentListItem";
 import Loading from "../common/Loading";
 import { PostType } from "../../types/dataType";
+import ContentWrap from "./ContentWrap";
 
 type CommentType = {
   _id: string;
@@ -87,7 +88,7 @@ const MyCommentComp = () => {
       )}
       {loading && <Loading />}
       {!loading && commentList && commentList.length > 0 && (
-        <List>
+        <ContentWrap>
           {commentList.map((comment, i) => (
             <MyCommentListItem
               key={i}
@@ -103,7 +104,7 @@ const MyCommentComp = () => {
             </div>
             <DeleteBtn onClick={onDelete}>선택 삭제</DeleteBtn>
           </Control>
-        </List>
+        </ContentWrap>
       )}
     </>
   );
@@ -116,15 +117,6 @@ const Title = styled.h1`
   font-size: 20px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 16px;
-  }
-`;
-
-const List = styled.div`
-  width: 60%;
-  margin-top: 30px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    width: 100%;
-    flex-direction: column;
   }
 `;
 

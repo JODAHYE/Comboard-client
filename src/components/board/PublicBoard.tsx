@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { RootState } from "../../app/store";
 import { useBoard } from "../../hooks/useBoard";
 import { BoardType } from "../../types/dataType";
-import BoardCard from "../common/BoardCard";
+import BoardCard from "./BoardCard";
 import Loading from "../common/Loading";
-import NewBtn from "../common/NewBtn";
+import NewBtn from "./NewBtn";
 import SearchForm from "../common/SearchForm";
-import CreateBoard from "./CreateBoard";
+import CreateBoard from "./CreateBoardPopup";
 
 const PublicBoard: React.FC = () => {
   const { getBoardList, scrollRendering, searchBoard } = useBoard();
@@ -113,10 +113,8 @@ export default PublicBoard;
 const Wrap = styled.div`
   width: 70%;
   height: 100%;
-  border-right: 1px solid ${(props) => props.theme.colors.shadow};
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
-    padding: 40px 10px;
   }
 `;
 
@@ -139,9 +137,6 @@ const List = styled.div`
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    margin: 0 auto;
   }
 `;
 

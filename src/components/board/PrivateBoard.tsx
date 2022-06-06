@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
-import BoardCard from "../common/BoardCard";
-import NewBtn from "../common/NewBtn";
-import CreateBoard from "../board/CreateBoard";
+import BoardCard from "./BoardCard";
+import NewBtn from "./NewBtn";
+import CreateBoard from "./CreateBoardPopup";
 import Loading from "../common/Loading";
 import SearchForm from "../common/SearchForm";
 import { useBoard } from "../../hooks/useBoard";
@@ -58,12 +58,14 @@ const PrivateBoard: React.FC = () => {
 
   return (
     <Wrap>
-      <NewBtn />
-      <SearchForm
-        onSubmit={onSubmit}
-        onChangeSearchInput={onChangeSearchInput}
-        val={searchVal}
-      />
+      <Header>
+        <SearchForm
+          onSubmit={onSubmit}
+          onChangeSearchInput={onChangeSearchInput}
+          val={searchVal}
+        />
+        <NewBtn />
+      </Header>
       {loading && <Loading />}
       {!loading &&
         filterList.length > 0 &&
@@ -83,9 +85,7 @@ export default PrivateBoard;
 const Wrap = styled.div`
   width: 70%;
   height: 100%;
-  position: relative;
-  padding: 40px;
-  border-right: 1px solid ${(props) => props.theme.colors.shadow};
+
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -95,17 +95,19 @@ const Wrap = styled.div`
   }
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
-    padding: 40px 10px;
   }
 `;
 
+const Header = styled.div`
+  ${(props) => props.theme.displayFlex};
+  width: 100%;
+  margin: 6px;
+`;
+
 const P = styled.p`
-  top: 50%;
-  left: 50%;
+  text-align: center;
   color: ${(props) => props.theme.colors.buttonActive};
   margin: 30px 0;
-  position: absolute;
-  transform: translate(-50%, -50%);
   @media (min-width: 320px) and (max-width: 480px) {
     margin: 0px;
   }

@@ -4,9 +4,10 @@ import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
 import { getCreateList } from "../../features/boardSlice";
-import MyBoardCard from "./MyBoardCard";
 import MyBoardUpdate from "./MyBoardUpdate";
 import { BoardType } from "../../types/dataType";
+import BookmarkBoardCard from "../board/BookmarkBoardCard";
+import MyBoardCard from "./MyBoardCard";
 
 const MyBoardComp = () => {
   const dispatch = useDispatch();
@@ -79,13 +80,15 @@ const Title = styled.h1`
 `;
 
 const List = styled.div`
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
   ${(props) => props.theme.displayFlex};
   justify-content: start;
   align-items: start;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   margin-top: 30px;
+  margin-bottom: 30px;
   @media (min-width: 320px) and (max-width: 480px) {
     flex-direction: column;
     align-items: center;

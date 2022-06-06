@@ -3,9 +3,13 @@ import styled from "styled-components";
 
 import { RootState } from "../app/store";
 import Login from "../components/auth/Login";
-import MyBoard from "../components/board/MyBoard";
+import MyBoard from "../components/board/BookmarkBoard";
 import PrivateBoard from "../components/board/PrivateBoard";
 import PublicBoard from "../components/board/PublicBoard";
+
+type StyledType = {
+  isLogedin?: boolean;
+};
 
 const Main = () => {
   const { mainMenu } = useSelector((state: RootState) => state.menu);
@@ -16,11 +20,11 @@ const Main = () => {
       {mainMenu === "공개 게시판" && <PublicBoard />}
       {mainMenu === "비밀 게시판" && <PrivateBoard />}
       {is_auth ? (
-        <Div>
+        <Div isLogedin={is_auth}>
           <MyBoard />
         </Div>
       ) : (
-        <Div>
+        <Div isLogedin={is_auth}>
           <Login />
         </Div>
       )}
@@ -41,9 +45,12 @@ const Wrap = styled.div`
   }
 `;
 
-const Div = styled.div`
-  width: 30%;
+const Div = styled.div<StyledType>`
+  width: ${(props) => (props.isLogedin ? "200px" : "30%")};
   height: 95vh;
+  border-left: 1px solid ${(props) => props.theme.colors.shadow};
+  border-right: 1px solid ${(props) => props.theme.colors.shadow};
+  transition: 0.3s;
   @media (min-width: 320px) and (max-width: 480px) {
     display: none;
   }

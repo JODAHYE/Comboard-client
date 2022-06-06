@@ -6,6 +6,7 @@ import { RootState } from "../../app/store";
 import { auth } from "../../features/userSlice";
 import { useUser } from "../../hooks/useUser";
 import Loading from "../common/Loading";
+import ContentWrap from "./ContentWrap";
 
 type StyledType = {
   isFocus?: boolean;
@@ -86,7 +87,7 @@ const MyInfoUpdateComp = () => {
   return (
     <>
       <Title>정보 수정</Title>
-      <List>
+      <ContentWrap>
         <InfoDiv>
           {loading && <Loading />}
           {!loading && profileImage && (
@@ -97,7 +98,7 @@ const MyInfoUpdateComp = () => {
           )}
           <form>
             <Label data-name="addImage" title="동영상 첨부" htmlFor="image">
-              프로필 이미지 변경
+              이미지 변경
             </Label>
             <ImgUpload
               type="file"
@@ -147,22 +148,12 @@ const MyInfoUpdateComp = () => {
               : "-타인에게 내 게시글 리스트를 공개중입니다."}
           </span>
         </InfoDiv>
-      </List>
+      </ContentWrap>
     </>
   );
 };
 
 export default MyInfoUpdateComp;
-
-const List = styled.div`
-  width: 60%;
-  display: flex;
-  margin-top: 30px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    width: 100%;
-    flex-direction: column;
-  }
-`;
 
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
@@ -176,14 +167,13 @@ const InfoDiv = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 20px;
   & > span {
     font-size: 14px;
   }
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
-    justify-content: center;
-    align-items: center;
   }
 `;
 
@@ -202,13 +192,13 @@ const Row = styled.div`
 `;
 
 const Img = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   display: inline-block;
   object-fit: cover;
   @media (min-width: 320px) and (max-width: 480px) {
-    width: 80%;
-    height: 160px;
+    width: 50%;
+    max-height: 160px;
   }
 `;
 

@@ -11,6 +11,7 @@ import PostList from "../components/post/PostList";
 import { useBoard } from "../hooks/useBoard";
 import { auth } from "../features/userSlice";
 import MyInfoComp from "../components/common/MyInfoComp";
+import BoardInfoComp from "../components/board/BoardInfoComp";
 
 type StyleType = {
   width?: string;
@@ -92,19 +93,7 @@ const BoardDetail: React.FC = () => {
             <PostList sort={sort} />
           </>
         ) : (
-          <InfoWrap>
-            {currentBoard.bgimg && (
-              <Img src={currentBoard.bgimg} alt="게시판 사진" />
-            )}
-            <Desc>{currentBoard.description}</Desc>
-            <Desc>게시글 수: {currentBoard.postCount}</Desc>
-            {currentBoard.secretNumber && (
-              <Desc>암호: {currentBoard.secretNumber}</Desc>
-            )}
-            <Desc>
-              개설일: {String(currentBoard.create_date).substring(0, 8)}
-            </Desc>
-          </InfoWrap>
+          <BoardInfoComp board={currentBoard} />
         )}
         <FlexDiv>
           <SortSelect onChange={sortClick}>
@@ -219,15 +208,6 @@ const SortSelect = styled.select`
 
 const Option = styled.option``;
 
-const Desc = styled.p`
-  display: inline-block;
-  white-space: pre-wrap;
-  font-size: 15px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
-  }
-`;
-
 const InfoBtn = styled.button`
   display: inline-block;
   background: #fff;
@@ -252,16 +232,4 @@ const RemoveBookmarkBtn = styled(BsBookmarkDashFill)`
   font-size: 24px;
   cursor: pointer;
   color: ${(props) => props.theme.colors.button};
-`;
-
-const Img = styled.img`
-  max-width: 40%;
-  display: inline-block;
-`;
-
-const InfoWrap = styled.div`
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
 `;

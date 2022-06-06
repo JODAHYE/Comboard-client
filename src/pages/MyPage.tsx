@@ -43,6 +43,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 95vh;
   display: flex;
+  justify-content: center;
   position: relative;
   overflow: auto;
   @media (min-width: 320px) and (max-width: 480px) {
@@ -52,7 +53,8 @@ const Wrap = styled.div`
   }
 `;
 const Content = styled.div`
-  width: 80%;
+  /* border: 1px solid red; */
+  width: 70%;
   padding: 2%;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;

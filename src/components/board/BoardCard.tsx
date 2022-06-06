@@ -1,20 +1,11 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import styled from "styled-components";
 import { AiFillLock } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { BoardType } from "../../types/dataType";
 
-type PropsType = {
-  board: BoardType;
-  width?: string;
-};
-
-type StyledType = {
-  width?: string;
-};
-
-const BoardCard: React.FC<PropsType> = ({ board, width }) => {
+const BoardCard = ({ board }: { board: BoardType }) => {
   const navigate = useNavigate();
 
   const onClick = useCallback(() => {
@@ -29,15 +20,22 @@ const BoardCard: React.FC<PropsType> = ({ board, width }) => {
   }, [board, navigate]);
 
   return (
-    <Wrap width={width} onClick={onClick}>
+    <Wrap onClick={onClick}>
       {board.bgimg ? (
         <Img src={board.bgimg} />
       ) : (
         <Img src="image/default-img.jpg" />
       )}
       <Div>
-        {board.access === "private" && <LockIcon />}
-        <Title>{board.title}</Title>
+        {board.access === "private" ? (
+          <Title>
+            <LockIcon />
+            {board.title}
+          </Title>
+        ) : (
+          <Title>{board.title}</Title>
+        )}
+
         <Desc>{board.description}</Desc>
         <Desc className="info">게시글 {board.postCount}</Desc>
         {board.lastPostDate &&
@@ -50,12 +48,13 @@ const BoardCard: React.FC<PropsType> = ({ board, width }) => {
 };
 export default BoardCard;
 
-const Wrap = styled.div<StyledType>`
+const Wrap = styled.div`
   width: 24%;
   height: 280px;
   display: flex;
   flex-direction: column;
 
+  background: #fff;
   overflow: hidden;
   margin: 10px;
   border: 1px solid ${(props) => props.theme.colors.shadow};
@@ -65,9 +64,8 @@ const Wrap = styled.div<StyledType>`
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
   @media (min-width: 320px) and (max-width: 480px) {
-    width: 100%;
-    height: 100px;
-    margin: 4px 0;
+    width: 40%;
+    height: 160px;
   }
 `;
 
@@ -75,6 +73,10 @@ const Img = styled.img`
   width: 100%;
   height: 50%;
   object-fit: cover;
+  @media (min-width: 320px) and (max-width: 480px) {
+    min-height: 70%;
+    max-height: 70%;
+  }
 `;
 
 const Div = styled.div`
@@ -115,9 +117,6 @@ const Desc = styled.p`
 `;
 
 const LockIcon = styled(AiFillLock)`
-  position: absolute;
-  right: 3px;
-  top: 3px;
   font-size: 20px;
 `;
 

@@ -5,6 +5,7 @@ import { usePost } from "../../hooks/usePost";
 import MyPostListItem from "./MyPostListItem";
 import Loading from "../common/Loading";
 import { PostType } from "../../types/dataType";
+import ContentWrap from "./ContentWrap";
 
 type StyleType = {
   width: string;
@@ -65,7 +66,7 @@ const MyScrapList = () => {
       )}
       {loading && <Loading />}
       {!loading && postList && postList.length > 0 && (
-        <List>
+        <ContentWrap>
           <InfoBox>
             <Info width="70%">제목</Info>
             <Info width="6%">작성일</Info>
@@ -87,7 +88,7 @@ const MyScrapList = () => {
             </div>
             <DeleteBtn onClick={onDelete}>스크랩 해제</DeleteBtn>
           </Control>
-        </List>
+        </ContentWrap>
       )}
     </>
   );
@@ -100,15 +101,6 @@ const Title = styled.h1`
   font-size: 20px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 16px;
-  }
-`;
-
-const List = styled.div`
-  width: 60%;
-  margin-top: 30px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    width: 100%;
-    flex-direction: column;
   }
 `;
 
@@ -156,6 +148,7 @@ const Info = styled.p<StyleType>`
 `;
 
 const NoPost = styled.p`
+  text-align: center;
   margin-top: 100px;
 `;
 
