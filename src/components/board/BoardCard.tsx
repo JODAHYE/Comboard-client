@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import styled from "styled-components";
-import { AiFillLock } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
@@ -30,7 +29,7 @@ const BoardCard = ({ board }: { board: BoardType }) => {
       <Div>
         {board.access === "private" ? (
           <Title>
-            <LockIcon />
+            <LockIcon src="icon/lock.svg" />
             {board.title}
           </Title>
         ) : (
@@ -119,8 +118,8 @@ const Desc = styled.p`
   }
 `;
 
-const LockIcon = styled(AiFillLock)`
-  font-size: 20px;
+const LockIcon = styled.img`
+  width: 16px;
 `;
 
 const Row = styled.div`

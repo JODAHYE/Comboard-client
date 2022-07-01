@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 import { usePost } from "../../hooks/usePost";
 import MyPostListItem from "./MyPostListItem";
 import Loading from "../common/Loading";
 import { PostType } from "../../types/dataType";
 import ContentWrap from "./ContentWrap";
+import ControlButtons from "./ControlButtons";
 
 type StyleType = {
   width: string;
@@ -91,13 +91,12 @@ const MyPostList = () => {
               checkList={checkList}
             />
           ))}
-          <Control>
-            <div>
-              <PrevBtn onClick={onPrev} />
-              <NextBtn onClick={onNext} />
-            </div>
-            <DeleteBtn onClick={onDelete}>선택 삭제</DeleteBtn>
-          </Control>
+          <ControlButtons
+            onPrev={onPrev}
+            onNext={onNext}
+            onDelete={onDelete}
+            text={"선택삭제"}
+          />
         </ContentWrap>
       )}
       {loading && <Loading />}
@@ -112,35 +111,6 @@ const Title = styled.h1`
   font-size: 20px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 16px;
-  }
-`;
-
-const PrevBtn = styled(GrFormPrevious)`
-  cursor: pointer;
-  font-size: 26px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 22px;
-  }
-`;
-
-const NextBtn = styled(GrFormNext)`
-  cursor: pointer;
-  font-size: 26px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 22px;
-  }
-`;
-
-const DeleteBtn = styled.button`
-  color: #fff;
-  background: ${(props) => props.theme.colors.button};
-  border-radius: 5px;
-  padding: 4px;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
   }
 `;
 
@@ -160,9 +130,4 @@ const Info = styled.p<StyleType>`
 
 const NoPost = styled.p`
   margin-top: 100px;
-`;
-
-const Control = styled.div`
-  ${(props) => props.theme.displayFlex}
-  margin: 0 auto;
 `;

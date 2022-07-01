@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
-import { BsArrowReturnRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import { RootState } from "../../app/store";
@@ -99,7 +98,6 @@ const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
   const onUserDetail = useCallback(() => {
     navigate(`/user/${comment.writer}`);
   }, [comment, navigate]);
-
   return (
     <>
       {!isDelete && !comment.reply_comment && (
@@ -165,7 +163,7 @@ const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
           )}
           {replyClick && (
             <>
-              <BsArrowReturnRight />
+              <ReplyIcon src="../../../icon/reply.svg" alt="답글" />
               <ReplyBox>
                 <ReplyField
                   value={replyValue}
@@ -307,4 +305,9 @@ const ReplyControllBtn = styled.button`
     padding: 2px;
     font-size: 12px;
   }
+`;
+
+const ReplyIcon = styled.img`
+  width: 30px;
+  transform: rotate(180deg);
 `;

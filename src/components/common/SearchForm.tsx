@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ImSearch } from "react-icons/im";
 
 type PropsType = {
   onChangeSearchInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -18,7 +17,7 @@ const SearchForm = ({ onChangeSearchInput, onSubmit, val }: PropsType) => {
           onChange={onChangeSearchInput}
         />
         <Btn>
-          <ImSearch />
+          <Icon src="icon/search.svg" alt="검색" />
         </Btn>
       </Form>
     </div>
@@ -52,10 +51,12 @@ const Input = styled.input`
 const Btn = styled.button`
   height: 100%;
   border: 1px solid transparent;
-  font-size: 20px;
+  width: 32px;
   padding: 4px;
   background: ${(props) => props.theme.colors.button};
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
 `;
+
+const Icon = styled.img``;

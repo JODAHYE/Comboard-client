@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 import PostListItem from "../components/post/PostListItem";
 import { usePost } from "../hooks/usePost";
@@ -92,8 +91,12 @@ const UserDetailPage = () => {
         )}
         {!loading && !postLock && (
           <Control>
-            <PrevBtn onClick={onPrev} />
-            <NextBtn onClick={onNext} />
+            <Button onClick={onPrev}>
+              <Icon src="../icon/arrow-left.svg" alt="이전" />
+            </Button>
+            <Button onClick={onNext}>
+              <Icon src="../icon/arrow-right.svg" alt="다음" />
+            </Button>
           </Control>
         )}
       </List>
@@ -163,17 +166,16 @@ const List = styled.div`
 const Control = styled.div`
   ${(props) => props.theme.displayFlex};
   margin: 0 auto;
+  margin-top: 30px;
 `;
 
-const PrevBtn = styled(GrFormPrevious)`
+const Button = styled.button`
+  all: unset;
   cursor: pointer;
-  font-size: 26px;
+  width: 30px;
 `;
 
-const NextBtn = styled(GrFormNext)`
-  cursor: pointer;
-  font-size: 26px;
-`;
+const Icon = styled.img``;
 
 const Title = styled.h3`
   color: ${(props) => props.theme.colors.button};

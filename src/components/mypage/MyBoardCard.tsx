@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { AiFillLock } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
@@ -36,7 +35,7 @@ const MyBoardCard = ({ board }: { board: BoardType }) => {
       )}
       {board.access === "private" ? (
         <Title>
-          <LockIcon />
+          <LockIcon src="icon/lock.svg" />
           {board.title}
         </Title>
       ) : (
@@ -81,8 +80,8 @@ const Title = styled.p`
   white-space: nowrap;
 `;
 
-const LockIcon = styled(AiFillLock)`
-  font-size: 20px;
+const LockIcon = styled.img`
+  width: 16px;
 `;
 
 const Control = styled.div`

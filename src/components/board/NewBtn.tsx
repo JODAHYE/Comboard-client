@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import styled from "styled-components";
-import { BsPlusLg } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../app/store";
@@ -17,7 +16,7 @@ const NewBtn = () => {
 
   return (
     <NewButton onClick={onCreate}>
-      <Icon />
+      <Icon src="icon/add-plus.svg" />
     </NewButton>
   );
 };
@@ -27,6 +26,7 @@ export default NewBtn;
 const NewButton = styled.button`
   width: 24px;
   height: 24px;
+  padding: 4px;
   color: #fff;
   background: ${(props) => props.theme.colors.button};
 
@@ -40,6 +40,6 @@ const NewButton = styled.button`
   }
 `;
 
-const Icon = styled(BsPlusLg)`
+const Icon = styled.img`
   font-size: 14px;
 `;

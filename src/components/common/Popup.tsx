@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { MdOutlineClose } from "react-icons/md";
 
 import { onPopupClick } from "../../features/menuSlice";
 
@@ -20,7 +19,9 @@ const Popup = ({ children, height }: PropsType) => {
   return (
     <Wrap>
       <Box height={height}>
-        <CloseBtn onClick={onClose} />
+        <CloseBtn onClick={onClose}>
+          <img src="icon/close.svg" alt="닫기" />
+        </CloseBtn>
         <Content>{children}</Content>
       </Box>
     </Wrap>
@@ -59,11 +60,13 @@ const Box = styled.div<PropsType>`
   }
 `;
 
-const CloseBtn = styled(MdOutlineClose)`
+const CloseBtn = styled.button`
+  all: unset;
   position: absolute;
   right: 5px;
   cursor: pointer;
-  font-size: 28px;
+  width: 24px;
+  padding: 6px;
 `;
 
 const Content = styled.div`

@@ -130,7 +130,7 @@ const List = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
-  height: 94%;
+  max-height: 94%;
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;

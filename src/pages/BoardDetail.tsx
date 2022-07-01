@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { BsBookmarkStar, BsBookmarkDashFill } from "react-icons/bs";
 
 import { RootState } from "../app/store";
 import { getCurrentBoard } from "../features/boardSlice";
@@ -43,6 +42,7 @@ const BoardDetail = () => {
   const onBookmark = useCallback(() => {
     if (bookmark.includes(currentBoard._id)) {
       deleteBookmarkBoard(currentBoard._id).then(() => {
+        alert("게시판 즐겨찾기 해제");
         dispatch(auth());
       });
     } else {
@@ -71,9 +71,13 @@ const BoardDetail = () => {
       <Box>
         <Header>
           {bookmark.includes(currentBoard._id) ? (
-            <RemoveBookmarkBtn onClick={onBookmark} />
+            <Button onClick={onBookmark}>
+              <Icon src="../../icon/bookmark-active.svg" alt="북마크" />
+            </Button>
           ) : (
-            <AddBookmarkBtn onClick={onBookmark} />
+            <Button onClick={onBookmark}>
+              <Icon src="../../icon/bookmarkicon-nonactive.svg" alt="북마크" />
+            </Button>
           )}
           <Title onClick={onTitleClick}>
             {currentBoard && currentBoard.title}
@@ -221,14 +225,11 @@ const InfoBtn = styled.button`
   }
 `;
 
-const AddBookmarkBtn = styled(BsBookmarkStar)`
-  font-size: 24px;
+const Button = styled.button`
+  all: unset;
   cursor: pointer;
-  color: ${(props) => props.theme.colors.button};
+  width: 20px;
+  margin: 0 14px 0 0;
 `;
 
-const RemoveBookmarkBtn = styled(BsBookmarkDashFill)`
-  font-size: 24px;
-  cursor: pointer;
-  color: ${(props) => props.theme.colors.button};
-`;
+const Icon = styled.img``;

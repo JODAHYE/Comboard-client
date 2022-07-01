@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import styled from "styled-components";
 
 import { RootState } from "../../app/store";
@@ -62,10 +61,14 @@ const MyBoardComp = () => {
             <MyBoardCard key={board._id} board={board} />
           ))}
       </List>
-      <Controll>
-        <PrevBtn onClick={onPrev} />
-        <NextBtn onClick={onNext} />
-      </Controll>
+      <Control>
+        <Button onClick={onPrev}>
+          <Icon src="icon/arrow-left.svg" alt="이전" />
+        </Button>
+        <Button onClick={onNext}>
+          <Icon src="icon/arrow-right.svg" alt="다음" />
+        </Button>
+      </Control>
       {onPopup === "update_board" && <MyBoardUpdate />}
     </>
   );
@@ -96,16 +99,14 @@ const List = styled.div`
     align-items: center;
   }
 `;
-const Controll = styled.div`
+const Control = styled.div`
   ${(props) => props.theme.displayFlex};
 `;
 
-const PrevBtn = styled(GrFormPrevious)`
+const Button = styled.button`
+  all: unset;
   cursor: pointer;
-  font-size: 26px;
+  width: 30px;
 `;
 
-const NextBtn = styled(GrFormNext)`
-  cursor: pointer;
-  font-size: 26px;
-`;
+const Icon = styled.img``;

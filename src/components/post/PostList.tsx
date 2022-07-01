@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { RootState } from "../../app/store";
 import { usePost } from "../../hooks/usePost";
@@ -104,17 +103,17 @@ const PostList = ({ sort }: { sort: string }) => {
               return <PostListItem key={post._id} post={post} />;
             })}
           <PageNation>
-            <PageNum onClick={onPrev}>
-              <IoIosArrowBack />
-            </PageNum>
+            <Button onClick={onPrev}>
+              <Icon src="../../../icon/arrow-left.svg" alt="이전" />
+            </Button>
             {pageArr.map((num, i) => (
               <PageNum key={i} onClick={onCurrentPage}>
                 {num}
               </PageNum>
             ))}
-            <PageNum onClick={onNext}>
-              <IoIosArrowForward />
-            </PageNum>
+            <Button onClick={onNext}>
+              <Icon src="../../../icon/arrow-right.svg" alt="다음" />
+            </Button>
           </PageNation>
         </Wrap>
       )}
@@ -139,6 +138,15 @@ const PageNation = styled.div`
 `;
 
 const PageNum = styled.p`
-  margin: 6px;
+  margin: 0 6px;
   cursor: pointer;
 `;
+
+const Button = styled.button`
+  all: unset;
+  cursor: pointer;
+  width: 20px;
+  padding: 4px;
+`;
+
+const Icon = styled.img``;

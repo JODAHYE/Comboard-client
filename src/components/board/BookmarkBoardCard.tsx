@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { AiFillLock } from "react-icons/ai";
+
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 
@@ -28,7 +28,7 @@ const BookmarkBoardCard = ({ board }: { board: BoardType }) => {
       )}
       {board.access === "private" ? (
         <Title>
-          <LockIcon />
+          <LockIcon src="icon/lock.svg" />
           {board.title}
         </Title>
       ) : (
@@ -73,6 +73,6 @@ const Title = styled.p`
   white-space: nowrap;
 `;
 
-const LockIcon = styled(AiFillLock)`
-  font-size: 20px;
+const LockIcon = styled.img`
+  width: 16px;
 `;
