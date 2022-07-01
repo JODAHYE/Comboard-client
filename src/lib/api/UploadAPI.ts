@@ -2,6 +2,7 @@ import Axios from "axios";
 
 const axiosInstance = Axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}/upload`,
+  withCredentials: true,
 });
 
 const UploadAPI = {

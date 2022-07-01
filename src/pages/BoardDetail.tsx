@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import Cookies from "universal-cookie";
 import { BsBookmarkStar, BsBookmarkDashFill } from "react-icons/bs";
 
 import { RootState } from "../app/store";
@@ -12,19 +11,19 @@ import { useBoard } from "../hooks/useBoard";
 import { auth } from "../features/userSlice";
 import MyInfoComp from "../components/common/MyInfoComp";
 import BoardInfoComp from "../components/board/BoardInfoComp";
+import { useCheck } from "../lib/useCheck";
 
 type StyleType = {
   width?: string;
 };
 
-const BoardDetail: React.FC = () => {
-  const cookies = new Cookies();
+const BoardDetail = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { addBookmarkBoard, deleteBookmarkBoard } = useBoard();
-
+  const { checkIsLoginAlert } = useCheck();
   const { currentBoard } = useSelector((state: RootState) => state.board);
   const { bookmark } = useSelector((state: RootState) => state.user);
   const [sort, setSort] = useState("create_date");
@@ -37,9 +36,9 @@ const BoardDetail: React.FC = () => {
 
   const onWrite = useCallback(() => {
     if (!params.id) return;
-    if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
+    checkIsLoginAlert();
     navigate(`/board/${currentBoard._id}/write`);
-  }, [cookies, currentBoard, params]);
+  }, [currentBoard, params]);
 
   const onBookmark = useCallback(() => {
     if (bookmark.includes(currentBoard._id)) {
@@ -47,13 +46,13 @@ const BoardDetail: React.FC = () => {
         dispatch(auth());
       });
     } else {
-      if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
+      checkIsLoginAlert();
       addBookmarkBoard(currentBoard._id).then(() => {
         alert("게시판 즐겨찾기 \n[pc버전 메인화면에서만 확인 가능합니다.]");
         dispatch(auth());
       });
     }
-  }, [addBookmarkBoard, bookmark, cookies, currentBoard, deleteBookmarkBoard]);
+  }, [addBookmarkBoard, bookmark, currentBoard, deleteBookmarkBoard]);
 
   const onTitleClick = useCallback(() => {
     setIsInfoOpen(false);

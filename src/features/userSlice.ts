@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
 import Cookies from "universal-cookie";
 import ALertAPI from "../lib/api/AlertAPI";
 import UserAPI from "../lib/api/UserAPI";
@@ -20,7 +19,6 @@ export interface UserState {
   bookmarkBoardList: BoardType[];
   postLock?: boolean;
   alertCount: number;
-  kakaoAccessToken?: string;
   loginLoading: boolean;
 }
 
@@ -28,7 +26,7 @@ const initialState: UserState = {
   objectId: "",
   email: "",
   nickname: "",
-  is_auth: cookies.get("accessToken") ? true : false,
+  is_auth: cookies.get("user") ? true : false,
   like_post: [],
   dislike_post: [],
   scrap_post: [],
@@ -37,7 +35,6 @@ const initialState: UserState = {
   bookmarkBoardList: [],
   postLock: undefined,
   alertCount: 0,
-  kakaoAccessToken: "",
   loginLoading: false,
 };
 
@@ -72,7 +69,6 @@ export const userSlice = createSlice({
       state.postLock = action.payload.postLock;
     });
     builder.addCase(logout.fulfilled, (state, action) => {
-      state.kakaoAccessToken = "";
       window.location.reload();
     });
     builder.addCase(getBookmarkList.fulfilled, (state, action) => {
@@ -90,9 +86,6 @@ export const userSlice = createSlice({
     builder.addCase(kakaoLogin.pending, (state, action) => {
       state.loginLoading = true;
     });
-    builder.addCase(kakaoLogin.fulfilled, (state, action) => {
-      state.kakaoAccessToken = action.payload.kakaoAccessToken;
-    });
   },
 });
 
@@ -103,7 +96,7 @@ export const login = createAsyncThunk(
     if (!data.success) {
       return alert(data.msg);
     }
-    cookies.set("accessToken", data.accessToken, {
+    cookies.set("user", data.user, {
       path: "/",
       maxAge: 60 * 60 * 2,
     });
@@ -116,7 +109,7 @@ export const kakaoLogin = createAsyncThunk(
   "user/kakaoLogin",
   async (code: string, thunkAPI) => {
     const data = await UserAPI.kakaoLogin(code);
-    cookies.set("accessToken", data.accessToken, {
+    cookies.set("user", data.user, {
       path: "/",
       maxAge: 60 * 60 * 2,
     });
@@ -126,20 +119,17 @@ export const kakaoLogin = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk(
-  "user/logout",
-  async (kakaoAccessToken: string | undefined) => {
-    const data = await UserAPI.logout(kakaoAccessToken);
-    cookies.set("accessToken", "", {
-      path: "/",
-      maxAge: 0,
-    });
-    return data;
-  }
-);
+export const logout = createAsyncThunk("user/logout", async () => {
+  const data = await UserAPI.logout();
+  cookies.set("user", "", {
+    path: "/",
+    maxAge: 0,
+  });
+  return data;
+});
 
 export const auth = createAsyncThunk("user/auth", async () => {
-  if (!cookies.get("accessToken")) return;
+  if (!cookies.get("user")) return;
   const data = await UserAPI.auth();
   return data;
 });

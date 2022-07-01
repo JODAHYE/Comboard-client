@@ -1,7 +1,4 @@
 import Axios from "axios";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
 
 type BodyType = {
   parentCommentId?: string;
@@ -15,6 +12,7 @@ type BodyType = {
 };
 const axiosInstance = Axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}/comment`,
+  withCredentials: true,
 });
 
 const CommentAPI = {
@@ -29,37 +27,22 @@ const CommentAPI = {
   },
 
   createComment: async (body: BodyType) => {
-    const response = await axiosInstance.post("/create", body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.post("/create", body);
     const data = await response.data;
     return data;
   },
 
   updateComment: async (commentId: string, content: string) => {
-    const response = await axiosInstance.patch(
-      "/update",
-      {
-        commentId,
-        content,
-      },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/update", {
+      commentId,
+      content,
+    });
     const data = await response.data.comment;
     return data;
   },
 
   deleteComment: async (postId: string, commentId: string) => {
     const response = await axiosInstance.delete("/delete", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         postId,
         commentId,
@@ -70,11 +53,7 @@ const CommentAPI = {
   },
 
   createReply: async (body: BodyType) => {
-    const response = await axiosInstance.post("/reply/create", body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.post("/reply/create", body);
     const data = await response.data;
     return data;
   },

@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import Cookies from "universal-cookie";
 import { CircularProgress } from "@mui/material";
 import dompurify from "dompurify";

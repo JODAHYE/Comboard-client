@@ -1,5 +1,4 @@
 import Axios from "axios";
-import Cookies from "universal-cookie";
 
 type CreateBodyType = {
   master: string;
@@ -11,10 +10,9 @@ type CreateBodyType = {
   bgimg?: string;
 };
 
-const cookies = new Cookies();
-
 const axiosInstance = Axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}/board`,
+  withCredentials: true,
 });
 
 const BoardAPI = {
@@ -47,20 +45,13 @@ const BoardAPI = {
   },
 
   createBoard: async (body: CreateBodyType) => {
-    const response = await axiosInstance.post("/create", body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.post("/create", body);
     const data = await response.data;
     return data;
   },
 
   updateBoard: async (boardId: string, body: CreateBodyType) => {
     const response = await axiosInstance.post("/update", body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         boardId,
       },
@@ -71,9 +62,6 @@ const BoardAPI = {
 
   deleteBoard: async (boardId: string) => {
     const response = await axiosInstance.delete("/delete", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         boardId,
       },

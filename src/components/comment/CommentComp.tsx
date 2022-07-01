@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import Cookies from "universal-cookie";
 import moment from "moment";
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
@@ -16,13 +15,12 @@ type PropTypes = {
 };
 
 const CommentComp: React.FC<PropTypes> = ({ post }) => {
-  const cookies = new Cookies();
   const dispatch = useDispatch();
   const params = useParams();
 
   const { createComment } = useComment();
 
-  const { nickname } = useSelector((state: RootState) => state.user);
+  const { nickname, is_auth } = useSelector((state: RootState) => state.user);
   const { commentList } = useSelector((state: RootState) => state.comment);
 
   const [commentsCount, setCommentsCount] = useState(post.comments_count);
@@ -38,7 +36,7 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
   }, []);
 
   const onSubmit = () => {
-    if (!cookies.get("accessToken")) return alert("로그인이 필요합니다.");
+    if (!is_auth) return alert("로그인이 필요합니다.");
     setLoading(true);
     const body = {
       post: post._id,

@@ -1,11 +1,8 @@
-import axios from "axios";
 import { useParams } from "react-router-dom";
-import Cookies from "universal-cookie";
 import ALertAPI from "../lib/api/AlertAPI";
 import CommentAPI from "../lib/api/CommentAPI";
 import UserAPI from "../lib/api/UserAPI";
-
-const cookies = new Cookies();
+import { useCheck } from "../lib/useCheck";
 
 type BodyType = {
   parentCommentId?: string;
@@ -20,6 +17,7 @@ type BodyType = {
 
 export function useComment() {
   const params = useParams();
+  const { checkIsLoginReturn } = useCheck();
 
   const createComment = async (body: BodyType) => {
     const data = await CommentAPI.createComment(body);
@@ -79,7 +77,7 @@ export function useComment() {
   };
 
   const getMyCommentCount = async () => {
-    if (!cookies.get("accessToken")) return;
+    checkIsLoginReturn();
     const data = await UserAPI.getMyCommentCount();
     return data;
   };

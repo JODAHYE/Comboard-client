@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../app/store";
@@ -12,13 +11,12 @@ import MyCommentComp from "../components/mypage/MyCommentComp";
 import MyBoardComp from "../components/mypage/MyBoardComp";
 
 const MyPage = () => {
-  const cookies = new Cookies();
   const navigate = useNavigate();
-
+  const { is_auth } = useSelector((state: RootState) => state.user);
   const { mypageMenu } = useSelector((state: RootState) => state.menu);
 
   useEffect(() => {
-    if (!cookies.get("accessToken")) {
+    if (!is_auth) {
       return navigate("/");
     }
   }, []);

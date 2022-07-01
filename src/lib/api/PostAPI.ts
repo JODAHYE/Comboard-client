@@ -1,7 +1,4 @@
 import Axios from "axios";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
 
 type BodyType = {
   title: string;
@@ -13,6 +10,7 @@ type BodyType = {
 
 const axiosInstance = Axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}/post`,
+  withCredentials: true,
 });
 
 const PostAPI = {
@@ -50,20 +48,13 @@ const PostAPI = {
   },
 
   createPost: async (body: BodyType) => {
-    const response = await axiosInstance.post("/create", body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.post("/create", body);
     const data = await response.data;
     return data;
   },
 
   updatePost: async (body: BodyType, postId: string) => {
     const response = await axiosInstance.patch("/update", body, {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         postId: postId,
       },
@@ -74,9 +65,6 @@ const PostAPI = {
 
   deletePost: async (postId: string, boardId: string) => {
     const response = await axiosInstance.delete("/delete", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         postId,
         boardId,
@@ -87,43 +75,19 @@ const PostAPI = {
   },
 
   likePost: async (postId: string) => {
-    const response = await axiosInstance.patch(
-      "/like",
-      { postId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/like", { postId });
     const data = await response.data;
     return data;
   },
 
   dislikePost: async (postId: string) => {
-    const response = await axiosInstance.patch(
-      "/dislike",
-      { postId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/dislike", { postId });
     const data = await response.data;
     return data;
   },
 
   increasePostView: async (postId: string) => {
-    const response = await axiosInstance.patch(
-      "/increase/view",
-      { postId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/increase/view", { postId });
     const data = await response.data;
     return data;
   },

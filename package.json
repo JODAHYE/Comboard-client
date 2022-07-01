@@ -2,7 +2,6 @@
   "name": "board",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://comboard.herokuapp.com",
   "dependencies": {
     "@mui/material": "^5.5.0",
     "@reduxjs/toolkit": "^1.8.0",

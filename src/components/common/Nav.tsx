@@ -21,8 +21,9 @@ const Nav: React.FC = () => {
   const location = useLocation();
 
   const { mainMenu, onPopup } = useSelector((state: RootState) => state.menu);
-  const { is_auth, profileImage, alertCount, kakaoAccessToken, loginLoading } =
-    useSelector((state: RootState) => state.user);
+  const { is_auth, profileImage, alertCount, loginLoading } = useSelector(
+    (state: RootState) => state.user
+  );
 
   useEffect(() => {
     dispatch(auth());
@@ -54,8 +55,8 @@ const Nav: React.FC = () => {
 
   const onLogout = useCallback(() => {
     dispatch(onPopupClick(""));
-    dispatch(logout(kakaoAccessToken));
-  }, [kakaoAccessToken]);
+    dispatch(logout());
+  }, []);
 
   const goToLoginPage = useCallback(() => {
     navigate("/login");

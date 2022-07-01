@@ -1,10 +1,8 @@
 import Axios from "axios";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
 
 const axiosInstance = Axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}/user`,
+  withCredentials: true,
 });
 
 export const UserAPI = {
@@ -15,11 +13,7 @@ export const UserAPI = {
   },
 
   auth: async () => {
-    const response = await axiosInstance.get("/auth", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.get("/auth");
     const data = await response.data;
     return data;
   },
@@ -38,105 +32,52 @@ export const UserAPI = {
     return data;
   },
 
-  logout: async (kakaoAccessToken: string | undefined) => {
-    const response = await axiosInstance.get("/logout", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-      params: {
-        kakaoAccessToken: kakaoAccessToken,
-      },
-    });
+  logout: async () => {
+    const response = await axiosInstance.get("/logout");
     const data = await response.data;
     return data;
   },
 
   addBookmarkBoard: async (boardId: string) => {
-    const response = await axiosInstance.patch(
-      "/bookmark/add",
-      { boardId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/bookmark/add", { boardId });
     const data = await response.data;
     return data;
   },
 
   deleteBookmarkBoard: async (boardId: string) => {
-    const response = await axiosInstance.patch(
-      "/bookmark/delete",
-      { boardId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/bookmark/delete", { boardId });
     const data = await response.data;
     return data;
   },
 
   getCreatedBoardList: async () => {
-    const response = await axiosInstance.get("/board/created_list", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.get("/board/created_list");
     const data = await response.data;
     return data;
   },
 
   getBookmarkList: async () => {
-    const response = await axiosInstance.get("/bookmark/list", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.get("/bookmark/list");
     const data = await response.data.bookmarkBoardList;
     return data;
   },
 
   updateProfileImg: async (imgUrl: string) => {
-    const response = await axiosInstance.patch(
-      "/update/image",
-      { imgUrl },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/update/image", { imgUrl });
     const data = await response.data.profileImage;
     return data;
   },
 
   updateNickname: async (nickname: string) => {
-    const response = await axiosInstance.patch(
-      "/update/nickname",
-      { nickname },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/update/nickname", {
+      nickname,
+    });
     const data = await response.data.nickname;
     return data;
   },
 
   updatePostLock: async (value: boolean) => {
-    const response = await axiosInstance.patch(
-      "/update/post_lock",
-      { value },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/update/post_lock", { value });
     const data = await response.data.postLock;
     return data;
   },
@@ -150,38 +91,19 @@ export const UserAPI = {
   },
 
   scrapPost: async (postId: string) => {
-    const response = await axiosInstance.patch(
-      "/scrap/add",
-      { postId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/scrap/add", { postId });
     const data = await response.data;
     return data;
   },
 
   deleteScrapPost: async (postId: string) => {
-    const response = await axiosInstance.patch(
-      "/scrap/delete",
-      { postId },
-      {
-        headers: {
-          Authorization: cookies.get("accessToken"),
-        },
-      }
-    );
+    const response = await axiosInstance.patch("/scrap/delete", { postId });
     const data = await response.data;
     return data;
   },
 
   getScrapPostList: async (skip: number) => {
     const response = await axiosInstance.get("/scrap/list", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         skip,
       },
@@ -192,9 +114,6 @@ export const UserAPI = {
 
   getMyPostList: async (skip: number) => {
     const response = await axiosInstance.get("/post/list", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         skip,
       },
@@ -204,20 +123,13 @@ export const UserAPI = {
   },
 
   getMyPostCount: async () => {
-    const response = await axiosInstance.get("/post_count", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.get("/post_count");
     const data = await response.data.postCount;
     return data;
   },
 
   getMyCommentList: async (skip: number) => {
     const response = await axiosInstance.get("/comment/list", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
       params: {
         skip,
       },
@@ -227,11 +139,7 @@ export const UserAPI = {
   },
 
   getMyCommentCount: async () => {
-    const response = await axiosInstance.get("/comment_count", {
-      headers: {
-        Authorization: cookies.get("accessToken"),
-      },
-    });
+    const response = await axiosInstance.get("/comment_count");
     const data = await response.data.CommentCount;
     return data;
   },
