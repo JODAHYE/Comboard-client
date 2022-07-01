@@ -1,0 +1,323 @@
+[33mcommit 78ef0d8e8f3b4c4fc08c91c472c53d29a1f0a290[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri Jul 1 15:28:08 2022 +0900
+
+    chore : 모바일 css 마이페이지 메뉴 고저
+
+[33mcommit e864cdf8b084f59fe54b6305fab6f2650245144f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri Jul 1 15:19:40 2022 +0900
+
+    chore : 사용하지않는 import 제거
+
+[33mcommit 2be12c0a1c23d5e1167b29a9755a53ea83ed98bb[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri Jul 1 15:11:38 2022 +0900
+
+    refactor : React.FC 제거
+
+[33mcommit 838bc069a16930d782f213778b98f2c70438782a[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri Jul 1 14:55:18 2022 +0900
+
+    refactor : key props가 index인 것 수정
+
+[33mcommit 12db74bd545ec992341079c4de410e11d852f644[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri Jul 1 14:47:52 2022 +0900
+
+    refactor : httponly 쿠키로 수정
+
+[33mcommit f3bc4b62228016c4a4a116a01550493c8c7d25ab[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Jun 7 00:09:15 2022 +0900
+
+    chore : package.json 수정
+
+[33mcommit 9ddb49d96980b8be5ca4d172ad4070d3a1ec1e67[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Jun 7 00:06:19 2022 +0900
+
+    chore : 아이콘 색상 변경
+
+[33mcommit c8f52326bbe95ca026efdbcb5778bab54a6f856a[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Jun 6 23:37:48 2022 +0900
+
+    chore : pagckage.json 수정
+
+[33mcommit ac1da975e306dab2451683b65e4acbad34934b5e[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Jun 6 21:33:07 2022 +0900
+
+    chore : 스타일 수정
+
+[33mcommit c3162d58db9fbf7fa28cbbdb39e5cdafd9ca59f4[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Jun 6 18:02:26 2022 +0900
+
+    feat : 메인 화면 검색 기능 구현
+
+[33mcommit a71e9c102e54e7fbbef3de0ec3fa234cd060ab60[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Jun 6 15:20:13 2022 +0900
+
+    refactor : 조회수 http요청 api 분리
+
+[33mcommit 616472f963b11925b4293c04b77b6ae96ab27b08[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Jun 6 14:31:00 2022 +0900
+
+    refactor : observer callback 함수 hook으로 분리
+
+[33mcommit bd83dc0fda0791be3668d19b6eae08cd15f60cef[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sun Jun 5 22:56:55 2022 +0900
+
+    fix : 게시판 이미지 저장 수정
+
+[33mcommit 7ab25020440947cb1c5910f786638cfbd37eca15[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sun Jun 5 22:07:51 2022 +0900
+
+    Update README.md
+
+[33mcommit e4869d33c8ffbae8f61c168697e28a535034ecf8[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sun Jun 5 21:19:38 2022 +0900
+
+    refactor: 인라인 함수 분리
+
+[33mcommit 3239ff3198c6a3bda0977ad4f6fc4c93b1f5d808[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sun Jun 5 19:32:27 2022 +0900
+
+    refactor : api 로직 분리
+
+[33mcommit 8697d9696504987f28c4491640e4f774074eff50[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:50:47 2022 +0900
+
+    Update README.md
+
+[33mcommit 7e7f437abf7dd0d3518e43f0036d9e784110febb[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:47:11 2022 +0900
+
+    Update README.md
+
+[33mcommit d5e2bf950ce1f0811147e3a7b5302fdd610d41a2[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:46:42 2022 +0900
+
+    Update README.md
+
+[33mcommit ba909fe3151e943bad58c027a16d1da29be5acba[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:35:47 2022 +0900
+
+    Update README.md
+
+[33mcommit b8f38781c8375e1991bcfe25600849055993cd0d[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:34:48 2022 +0900
+
+    Create README.md
+
+[33mcommit 55cb9a16cf7e7c8fc0e4f259c4b41bb0d2073caa[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:33:44 2022 +0900
+
+    Update README.md
+
+[33mcommit 5200f91a1c3094e0fb5d43223171200aae0dad94[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:19:10 2022 +0900
+
+    Update README.md
+
+[33mcommit 48a192783a37f6460282fdd25eb2e70c4943d1c1[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:12:50 2022 +0900
+
+    Update README.md
+
+[33mcommit d9fdab9b7d2b8eeef7b3905d9dbf42bb054935e0[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:12:22 2022 +0900
+
+    Update README.md
+
+[33mcommit e78137150eb473109c511c5395562a5a4d88c45b[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 21 17:09:44 2022 +0900
+
+    Update README.md
+
+[33mcommit 55f3b1c044d7225f2300be80f3cf6542028dd32f[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Wed May 18 00:36:14 2022 +0900
+
+    chore : dependabot alerts  업데이트
+
+[33mcommit 2add358441b2652bf8330801099a1cb2fe72c115[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Wed May 18 00:28:30 2022 +0900
+
+    chore: dependabot alerts 업데이트
+
+[33mcommit 169225e7df8e070dceb1da1abc6ff215eff37216[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Wed May 18 00:16:53 2022 +0900
+
+    chore : dependabot alerts  업데이트
+
+[33mcommit f86c18705b59898688d8c34eb5f33f8ed1825242[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Wed May 18 00:12:43 2022 +0900
+
+    chore : dependabot alerts  업데이트
+
+[33mcommit 59b463c2c51513c5470345a15817938ad2d1e442[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sat May 7 10:52:21 2022 +0900
+
+    fix : embed 태그를 video태그로 변경
+
+[33mcommit 3493202082cb06b634c795c675e466795380235c[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri May 6 01:56:28 2022 +0900
+
+    chore : 게시판 정보 css 수정
+
+[33mcommit 024fa12671a025f23d39637ea56384eeb4d7b94e[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri May 6 01:50:12 2022 +0900
+
+    chore : dompurify 적용
+
+[33mcommit 42958af9620278c10b48bcd6c10e929e2a6b7970[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Fri May 6 00:22:51 2022 +0900
+
+    chore : 댓글 입력 element를  textarea로 수정, dangerouslySetInnerHTML 적용
+
+[33mcommit a55cf3a60466b8d9d4110ef0c5c8b7d140eab7ec[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sun May 1 20:08:53 2022 +0900
+
+    chore: 함수, 변수 등 구분, 간격 띄움
+
+[33mcommit a3c040003438a3c727a1313ff1ea7fda40067a95[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sun May 1 20:04:31 2022 +0900
+
+    chore: 함수, 변수 등 구분, 간격 띄움
+
+[33mcommit 2d9956e612c00a6de7515a9e53ce1aac53cd1998[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Sun May 1 19:39:08 2022 +0900
+
+    style: 함수, 변수 등 구분, 간격 띄움
+
+[33mcommit 771de5cd071a3e65a6752172e5e293c5e55ac1ed[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 22:17:43 2022 +0900
+
+    userSlice state modified
+
+[33mcommit 0198a8adfc7d52caf75191a54511639943965a21[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 12:56:06 2022 +0900
+
+    mypage padding
+
+[33mcommit b2217451735c3fa7630db94b55f51d77e503f58d[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 12:43:44 2022 +0900
+
+    아이폰 안전영역 -css 수정
+
+[33mcommit 24abc7b4743cbf560a92e453d0734668f53f88b1[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 12:32:35 2022 +0900
+
+    모바일 화면 높이 조정
+
+[33mcommit 707e797f8b4ea5d7948e6605610bd1d87cf36583[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 12:17:06 2022 +0900
+
+    에러 수정
+
+[33mcommit a3b2fdf7a52833635e8ae0609bdfc9bb592da1e4[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 12:05:28 2022 +0900
+
+    package.json proxy setting
+
+[33mcommit 8dbe81433c0ea602279e4746f9497da3d9b84370[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 11:19:35 2022 +0900
+
+    something  modified
+
+[33mcommit bc6063e385254ec74333f9a138b17c05c584139c[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 01:50:00 2022 +0900
+
+    feat : loading ui add
+
+[33mcommit c14acaa06b1f8a43c79b934dda8987e252930259[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 01:41:44 2022 +0900
+
+    feat : loading ui add
+
+[33mcommit 884794b55fed97f2428bfe1b4c6cb2c1f3984ff9[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 01:12:25 2022 +0900
+
+    feat : redirect after kakaologin
+
+[33mcommit deff30bf9f5ad5ba517b9e7d526e291ad75fdc0a[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 00:28:04 2022 +0900
+
+    feat : redirect after kakaologin
+
+[33mcommit 11a432c47d04003c7c2007af31c862c2eba91111[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Tue Apr 12 00:23:40 2022 +0900
+
+    feat : redirect after kakaologin
+
+[33mcommit df495156cb380d9ae9c001e770eb60264d90ddab[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Apr 11 23:50:41 2022 +0900
+
+    feat : kakao auth redirect
+
+[33mcommit 980d0e909bca9bf44d96be892b50d24bb52a0b7c[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Apr 11 20:59:33 2022 +0900
+
+    feat : kakao auth redirect
+
+[33mcommit b1a8863191580f4a54f74e666ec0b3ce06e71d00[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Apr 11 20:56:05 2022 +0900
+
+    feat : kakao auth redirect
+
+[33mcommit 01fa55606563905922f91f8ec64755c8265291ad[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Apr 11 20:18:46 2022 +0900
+
+    feat : Kakao Login
+
+[33mcommit e596201e8b4390df22061894854cd18ec4da69cc[m
+Author: JODAHYE <57217119+JODAHYE@users.noreply.github.com>
+Date:   Mon Apr 11 20:17:24 2022 +0900
+
+    Initial commit

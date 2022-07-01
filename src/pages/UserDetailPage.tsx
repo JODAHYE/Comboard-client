@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+
 import PostListItem from "../components/post/PostListItem";
 import { usePost } from "../hooks/usePost";
 import { useUser } from "../hooks/useUser";

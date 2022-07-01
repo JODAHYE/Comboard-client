@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+
 import { RootState } from "../app/store";
 import MyPageMenu from "../components/mypage/MyPageMenu";
 import MyInfoUpdateComp from "../components/mypage/MyInfoUpdateComp";
@@ -47,6 +48,7 @@ const Wrap = styled.div`
   @media (min-width: 320px) and (max-width: 480px) {
     height: 94vh;
     flex-direction: column;
+    justify-content: start;
     align-items: center;
   }
 `;
