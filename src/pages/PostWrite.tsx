@@ -10,7 +10,7 @@ import { usePost } from "../hooks/usePost";
 import PostWriteOption from "../components/post/PostWriteOption";
 import { PostType } from "../types/dataType";
 
-const PostWrite: React.FC = () => {
+const PostWrite = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();

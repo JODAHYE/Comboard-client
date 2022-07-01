@@ -12,7 +12,7 @@ type sizeType = {
   width?: string;
 };
 
-const CreateBoard: React.FC = () => {
+const CreateBoard = () => {
   const navigate = useNavigate();
 
   const { createBoard } = useBoard();

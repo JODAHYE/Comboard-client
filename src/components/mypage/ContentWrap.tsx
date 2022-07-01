@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ContentWrap: React.FC = ({ children }) => {
+const ContentWrap = ({ children }: { children: React.ReactNode }) => {
   return <Wrap>{children}</Wrap>;
 };
 

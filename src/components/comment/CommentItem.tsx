@@ -22,11 +22,7 @@ type StyleType = {
   active?: boolean;
 };
 
-const CommentItem: React.FC<PropTypes> = ({
-  comment,
-  postWriter,
-  setCommentsCount,
-}) => {
+const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
   const navigate = useNavigate();
 
   const { updateComment, deleteComment, replyCreate } = useComment();
@@ -203,9 +199,7 @@ const CommentItem: React.FC<PropTypes> = ({
             comment={reply}
             postWriter={postWriter}
             setCommentsCount={setCommentsCount}
-          >
-            {reply.content}
-          </ChildComment>
+          />
         ))}
     </>
   );

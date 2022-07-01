@@ -5,10 +5,11 @@ import { MdOutlineClose } from "react-icons/md";
 import { onPopupClick } from "../../features/menuSlice";
 
 type PropsType = {
+  children: React.ReactNode;
   height?: string;
 };
 
-const Popup: React.FC<PropsType> = ({ children, height }) => {
+const Popup = ({ children, height }: PropsType) => {
   const dispatch = useDispatch();
 
   const onClose = useCallback(() => {

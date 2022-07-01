@@ -19,7 +19,7 @@ const Wrap = styled.div`
   }
 `;
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Wrap>
       <BrowserRouter>

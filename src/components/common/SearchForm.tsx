@@ -7,11 +7,7 @@ type PropsType = {
   val: string;
 };
 
-const SearchForm: React.FC<PropsType> = ({
-  onChangeSearchInput,
-  onSubmit,
-  val,
-}) => {
+const SearchForm = ({ onChangeSearchInput, onSubmit, val }: PropsType) => {
   return (
     <div>
       <Form onSubmit={onSubmit}>

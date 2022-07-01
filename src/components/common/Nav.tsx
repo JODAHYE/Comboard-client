@@ -15,7 +15,7 @@ type StyleType = {
   alert: number;
 };
 
-const Nav: React.FC = () => {
+const Nav = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

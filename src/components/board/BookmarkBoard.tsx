@@ -5,7 +5,7 @@ import { RootState } from "../../app/store";
 import { getAlertCount, getBookmarkList } from "../../features/userSlice";
 import BookmarkBoardCard from "./BookmarkBoardCard";
 
-const BookmarkBoard: React.FC = () => {
+const BookmarkBoard = () => {
   const dispatch = useDispatch();
 
   const { bookmarkBoardList } = useSelector((state: RootState) => state.user);

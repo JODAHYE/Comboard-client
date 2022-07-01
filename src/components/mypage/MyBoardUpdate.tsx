@@ -11,7 +11,7 @@ type sizeType = {
   width?: string;
 };
 
-const MyBoardUpdate: React.FC = () => {
+const MyBoardUpdate = () => {
   const dispatch = useDispatch();
 
   const { updateBoard } = useBoard();

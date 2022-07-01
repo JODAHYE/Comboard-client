@@ -17,11 +17,7 @@ type StyleType = {
   info?: string;
 };
 
-const MyPostListItem: React.FC<PropsType> = ({
-  post,
-  setCheckList,
-  checkList,
-}) => {
+const MyPostListItem = ({ post, setCheckList, checkList }: PropsType) => {
   const navigate = useNavigate();
   const { isExistBoard } = useBoard();
 

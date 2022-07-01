@@ -7,7 +7,7 @@ import Loading from "../common/Loading";
 import Popup from "../common/Popup";
 import AlertItem from "./AlertItem";
 
-const AlertPopup: React.FC = () => {
+const AlertPopup = () => {
   const target = useRef<HTMLDivElement>(null);
 
   const { getAlertList, alertDelete } = useAlert();

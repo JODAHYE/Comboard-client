@@ -25,11 +25,7 @@ type StyleType = {
   info?: string;
 };
 
-const MyCommentListItem: React.FC<PropsType> = ({
-  comment,
-  setCheckList,
-  checkList,
-}) => {
+const MyCommentListItem = ({ comment, setCheckList, checkList }: PropsType) => {
   const navigate = useNavigate();
 
   const { isExistBoard } = useBoard();

@@ -12,11 +12,11 @@ type StyleType = {
   isActive?: boolean;
 };
 
-const PostWriteOption: React.FC<PropsType> = ({
+const PostWriteOption = ({
   contentField,
   showCode,
   setShowCode,
-}) => {
+}: PropsType) => {
   const onImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!contentField.current) return;
     const target = e.target as HTMLInputElement;

@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import moment from "moment";
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
 import { CommentType } from "../../types/dataType";
@@ -19,11 +18,7 @@ type StyleType = {
   active?: boolean;
 };
 
-const ChildComment: React.FC<PropTypes> = ({
-  comment,
-  postWriter,
-  setCommentsCount,
-}) => {
+const ChildComment = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
   const navigate = useNavigate();
 
   const { updateComment, deleteComment } = useComment();

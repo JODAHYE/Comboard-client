@@ -5,16 +5,12 @@ import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
 import { useCallback } from "react";
 
-type PropsType = {
-  post: PostType;
-};
-
 type StyleType = {
   width?: string;
   info?: string;
 };
 
-const PostListItem: React.FC<PropsType> = ({ post }) => {
+const PostListItem = ({ post }: { post: PostType }) => {
   const navigate = useNavigate();
 
   const { isExistBoard } = useBoard();

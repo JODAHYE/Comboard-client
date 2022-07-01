@@ -10,11 +10,7 @@ import { CommentType, PostType } from "../../types/dataType";
 import Loading from "../common/Loading";
 import { getCommentList } from "../../features/commentSlice";
 
-type PropTypes = {
-  post: PostType;
-};
-
-const CommentComp: React.FC<PropTypes> = ({ post }) => {
+const CommentComp = ({ post }: { post: PostType }) => {
   const dispatch = useDispatch();
   const params = useParams();
 

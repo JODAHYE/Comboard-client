@@ -9,11 +9,7 @@ import PostListItem from "./PostListItem";
 import { PostType } from "../../types/dataType";
 import Loading from "../common/Loading";
 
-type PropsType = {
-  sort: string;
-};
-
-const PostList: React.FC<PropsType> = ({ sort }) => {
+const PostList = ({ sort }: { sort: string }) => {
   const { getPostList } = usePost();
 
   const { currentBoard } = useSelector((state: RootState) => state.board);

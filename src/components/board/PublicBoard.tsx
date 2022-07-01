@@ -10,7 +10,7 @@ import NewBtn from "./NewBtn";
 import SearchForm from "../common/SearchForm";
 import CreateBoard from "./CreateBoardPopup";
 
-const PublicBoard: React.FC = () => {
+const PublicBoard = () => {
   const { getBoardList, scrollRendering, searchBoard } = useBoard();
 
   const target = useRef<HTMLDivElement>(null);

@@ -16,7 +16,7 @@ import MyInfoComp from "../components/common/MyInfoComp";
 import Loading from "../components/common/Loading";
 import { commentListInit } from "../features/commentSlice";
 
-const PostDetail: React.FC = () => {
+const PostDetail = () => {
   const cookies = new Cookies();
   const params = useParams();
   const dispatch = useDispatch();

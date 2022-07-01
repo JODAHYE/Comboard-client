@@ -10,7 +10,7 @@ import SearchForm from "../common/SearchForm";
 import { useBoard } from "../../hooks/useBoard";
 import { BoardType } from "../../types/dataType";
 
-const PrivateBoard: React.FC = () => {
+const PrivateBoard = () => {
   const { getBoardList } = useBoard();
 
   const { onPopup } = useSelector((state: RootState) => state.menu);
