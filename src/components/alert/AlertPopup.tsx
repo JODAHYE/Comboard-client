@@ -84,7 +84,7 @@ const AlertPopup: React.FC = () => {
         {alertList &&
           alertList.length > 0 &&
           alertList.map((alert, i) => {
-            return <AlertItem key={i} alert={alert} />;
+            return <AlertItem key={alert._id} alert={alert} />;
           })}
         {!alertEnd && (
           <Target ref={target}>

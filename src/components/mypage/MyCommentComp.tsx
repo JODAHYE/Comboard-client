@@ -91,7 +91,7 @@ const MyCommentComp = () => {
         <ContentWrap>
           {commentList.map((comment, i) => (
             <MyCommentListItem
-              key={i}
+              key={comment._id}
               comment={comment}
               setCheckList={setCheckList}
               checkList={checkList}

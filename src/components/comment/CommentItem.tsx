@@ -199,7 +199,7 @@ const CommentItem: React.FC<PropTypes> = ({
         replies &&
         replies.map((reply, i) => (
           <ChildComment
-            key={i}
+            key={reply._id}
             comment={reply}
             postWriter={postWriter}
             setCommentsCount={setCommentsCount}

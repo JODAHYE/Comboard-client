@@ -20,7 +20,7 @@ const BookmarkBoard: React.FC = () => {
       <Menu>즐겨찾기</Menu>
       <List>
         {bookmarkBoardList.map((item, i) => {
-          return <BookmarkBoardCard key={i} board={item} />;
+          return <BookmarkBoardCard key={item._id} board={item} />;
         })}
       </List>
     </Wrap>

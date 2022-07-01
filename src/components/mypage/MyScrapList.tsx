@@ -75,7 +75,7 @@ const MyScrapList = () => {
           </InfoBox>
           {postList.map((post, i) => (
             <MyPostListItem
-              key={i}
+              key={post._id}
               post={post}
               setCheckList={setCheckList}
               checkList={checkList}

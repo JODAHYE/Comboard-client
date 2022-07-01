@@ -85,7 +85,7 @@ const UserDetailPage = () => {
           <>
             <Title>{userNickname}님의 게시글</Title>
             {postList.map((post, i) => (
-              <PostListItem key={i} post={post} />
+              <PostListItem key={post._id} post={post} />
             ))}
           </>
         )}

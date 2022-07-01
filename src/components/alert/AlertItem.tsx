@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import moment from "moment";
 
 import { onPopupClick } from "../../features/menuSlice";
 import { getAlertCount } from "../../features/userSlice";

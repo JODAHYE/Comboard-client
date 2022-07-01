@@ -95,7 +95,7 @@ const PublicBoard: React.FC = () => {
           boardList &&
           boardList.length > 0 &&
           boardList.map((board, i) => {
-            return <BoardCard key={i} board={board} />;
+            return <BoardCard key={board._id} board={board} />;
           })}
         {!searchBoardData && !isBoardListEnd && (
           <Target ref={target}>

@@ -69,7 +69,7 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
         {commentList.length > 0 &&
           commentList.map((comment, i) => (
             <CommentItem
-              key={i}
+              key={comment._id}
               comment={comment}
               postWriter={post.writer}
               setCommentsCount={setCommentsCount}
@@ -78,7 +78,7 @@ const CommentComp: React.FC<PropTypes> = ({ post }) => {
         {comments.length > 0 &&
           comments.map((comment, i) => (
             <CommentItem
-              key={i}
+              key={comment._id}
               comment={comment}
               postWriter={post.writer}
               setCommentsCount={setCommentsCount}

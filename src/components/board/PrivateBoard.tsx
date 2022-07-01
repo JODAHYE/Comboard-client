@@ -70,7 +70,7 @@ const PrivateBoard: React.FC = () => {
       {!loading &&
         filterList.length > 0 &&
         filterList.map((item, i) => {
-          return <BoardCard key={i} board={item} />;
+          return <BoardCard key={item._id} board={item} />;
         })}
       {!loading && filterList.length === 0 && (
         <P>찾을 비밀 게시판 이름을 검색해주세요.</P>

@@ -58,7 +58,9 @@ const MyBoardComp = () => {
       <List>
         {boardList &&
           boardList.length > 0 &&
-          boardList.map((board, i) => <MyBoardCard key={i} board={board} />)}
+          boardList.map((board, i) => (
+            <MyBoardCard key={board._id} board={board} />
+          ))}
       </List>
       <Controll>
         <PrevBtn onClick={onPrev} />

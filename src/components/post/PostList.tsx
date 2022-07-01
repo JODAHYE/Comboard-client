@@ -105,7 +105,7 @@ const PostList: React.FC<PropsType> = ({ sort }) => {
           {postList &&
             postList.length > 0 &&
             postList.map((post, i) => {
-              return <PostListItem key={i} post={post} />;
+              return <PostListItem key={post._id} post={post} />;
             })}
           <PageNation>
             <PageNum onClick={onPrev}>
