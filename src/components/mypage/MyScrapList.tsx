@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+
 import { usePost } from "../../hooks/usePost";
 import MyPostListItem from "./MyPostListItem";
 import Loading from "../common/Loading";

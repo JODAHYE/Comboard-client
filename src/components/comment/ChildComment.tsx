@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import { RootState } from "../../app/store";
 import { useComment } from "../../hooks/useComment";
 import { CommentType } from "../../types/dataType";

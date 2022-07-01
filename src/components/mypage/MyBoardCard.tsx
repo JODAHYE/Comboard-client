@@ -1,15 +1,14 @@
 import { useCallback } from "react";
 import { AiFillLock } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 import styled from "styled-components";
+
 import { getCreateList, getCurrentBoard } from "../../features/boardSlice";
 import { onPopupClick } from "../../features/menuSlice";
 import { useBoard } from "../../hooks/useBoard";
 import { BoardType } from "../../types/dataType";
 
 const MyBoardCard = ({ board }: { board: BoardType }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { deleteBoard } = useBoard();

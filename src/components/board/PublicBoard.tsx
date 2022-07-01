@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+
 import { RootState } from "../../app/store";
 import { useBoard } from "../../hooks/useBoard";
 import { BoardType } from "../../types/dataType";

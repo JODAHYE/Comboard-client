@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+
 import { RootState } from "../../app/store";
 import BoardCard from "./BoardCard";
 import NewBtn from "./NewBtn";

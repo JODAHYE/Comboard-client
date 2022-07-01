@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AiFillLock } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+
 import { BoardType } from "../../types/dataType";
 
 const BoardCard = ({ board }: { board: BoardType }) => {

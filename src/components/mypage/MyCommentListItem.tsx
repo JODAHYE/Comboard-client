@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
+
 import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
 

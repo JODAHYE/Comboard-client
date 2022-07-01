@@ -2,10 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
-import { RootState } from "../../app/store";
-import { useComment } from "../../hooks/useComment";
 import { BsArrowReturnRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+
+import { RootState } from "../../app/store";
+import { useComment } from "../../hooks/useComment";
 import ChildComment from "./ChildComment";
 import { CommentType } from "../../types/dataType";
 import Loading from "../common/Loading";

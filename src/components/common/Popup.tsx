@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { MdOutlineClose } from "react-icons/md";
+
 import { onPopupClick } from "../../features/menuSlice";
 
 type PropsType = {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { BoardType } from "../../types/dataType";
 
 const BoardInfoComp = ({ board }: { board: BoardType }) => {

@@ -2,11 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import styled from "styled-components";
+
 import { RootState } from "../../app/store";
 import { getCreateList } from "../../features/boardSlice";
 import MyBoardUpdate from "./MyBoardUpdate";
 import { BoardType } from "../../types/dataType";
-import BookmarkBoardCard from "../board/BookmarkBoardCard";
 import MyBoardCard from "./MyBoardCard";
 
 const MyBoardComp = () => {

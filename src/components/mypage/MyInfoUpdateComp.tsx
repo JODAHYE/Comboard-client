@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
 import { RootState } from "../../app/store";
 import { auth } from "../../features/userSlice";
 import { useUser } from "../../hooks/useUser";

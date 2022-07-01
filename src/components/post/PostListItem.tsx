@@ -1,9 +1,10 @@
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import moment from "moment";
+
 import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
-import { useCallback } from "react";
 
 type StyleType = {
   width?: string;

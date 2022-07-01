@@ -2,10 +2,12 @@ import { useCallback } from "react";
 import { AiFillLock } from "react-icons/ai";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+
 import { BoardType } from "../../types/dataType";
 
 const BookmarkBoardCard = ({ board }: { board: BoardType }) => {
   const navigate = useNavigate();
+
   const onClick = useCallback(() => {
     if (!board._id) return;
     if (board.secretNumber) {
