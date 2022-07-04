@@ -4,11 +4,6 @@ import { AxiosError } from "axios";
 export const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}`,
   withCredentials: true,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Cache: "no-cache",
-  },
 });
 
 axiosInstance.interceptors.response.use(
