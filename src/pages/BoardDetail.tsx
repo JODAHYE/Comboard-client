@@ -10,7 +10,7 @@ import { useBoard } from "../hooks/useBoard";
 import { auth } from "../features/userSlice";
 import MyInfoComp from "../components/common/MyInfoComp";
 import BoardInfoComp from "../components/board/BoardInfoComp";
-import { useCheck } from "../lib/useCheck";
+import { useCheck } from "../hooks/useCheck";
 
 type StyleType = {
   width?: string;

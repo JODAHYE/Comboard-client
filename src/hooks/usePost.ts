@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import PostAPI from "../lib/api/PostAPI";
 import UserAPI from "../lib/api/UserAPI";
-import { useCheck } from "../lib/useCheck";
+import { useCheck } from "./useCheck";
 
 const cookies = new Cookies();
 

@@ -121,10 +121,7 @@ export const kakaoLogin = createAsyncThunk(
 
 export const logout = createAsyncThunk("user/logout", async () => {
   const data = await UserAPI.logout();
-  cookies.set("user", "", {
-    path: "/",
-    maxAge: 0,
-  });
+  cookies.remove("user");
   return data;
 });
 

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import ALertAPI from "../lib/api/AlertAPI";
 import CommentAPI from "../lib/api/CommentAPI";
 import UserAPI from "../lib/api/UserAPI";
-import { useCheck } from "../lib/useCheck";
+import { useCheck } from "./useCheck";
 
 type BodyType = {
   parentCommentId?: string;

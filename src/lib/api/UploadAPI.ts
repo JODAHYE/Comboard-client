@@ -1,18 +1,13 @@
-import Axios from "axios";
-
-const axiosInstance = Axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}/upload`,
-  withCredentials: true,
-});
+import { axiosInstance } from ".";
 
 const UploadAPI = {
   imageUpload: async (formData: object) => {
-    const response = await axiosInstance.post("/image", formData);
+    const response = await axiosInstance.post("/upload/image", formData);
     const imgUrl = await response.data.img_url;
     return imgUrl;
   },
   videoUpload: async (formData: object) => {
-    const response = await axiosInstance.post("/video", formData);
+    const response = await axiosInstance.post("/upload/video", formData);
     const videoUrl = await response.data.video_url;
     return videoUrl;
   },

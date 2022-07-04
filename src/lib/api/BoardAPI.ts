@@ -1,4 +1,4 @@
-import Axios from "axios";
+import { axiosInstance } from ".";
 
 type CreateBodyType = {
   master: string;
@@ -10,14 +10,9 @@ type CreateBodyType = {
   bgimg?: string;
 };
 
-const axiosInstance = Axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}/board`,
-  withCredentials: true,
-});
-
 const BoardAPI = {
   getBoardList: async (body: { access: string; skip: number }) => {
-    const response = await axiosInstance.get("/list", {
+    const response = await axiosInstance.get("/board/list", {
       params: {
         access: body.access,
         skip: body.skip,
@@ -28,7 +23,7 @@ const BoardAPI = {
   },
 
   searchBoard: async (body: { access: string; title: string }) => {
-    const response = await axiosInstance.get("/search", {
+    const response = await axiosInstance.get("/board/search", {
       params: {
         access: body.access,
         title: body.title,
@@ -39,19 +34,19 @@ const BoardAPI = {
   },
 
   getBoardInfo: async (boardId: string) => {
-    const response = await axiosInstance.get(`/${boardId}`);
+    const response = await axiosInstance.get(`/board/${boardId}`);
     const data = await response.data;
     return data;
   },
 
   createBoard: async (body: CreateBodyType) => {
-    const response = await axiosInstance.post("/create", body);
+    const response = await axiosInstance.post("/board/create", body);
     const data = await response.data;
     return data;
   },
 
   updateBoard: async (boardId: string, body: CreateBodyType) => {
-    const response = await axiosInstance.post("/update", body, {
+    const response = await axiosInstance.post("/board/update", body, {
       params: {
         boardId,
       },
@@ -61,7 +56,7 @@ const BoardAPI = {
   },
 
   deleteBoard: async (boardId: string) => {
-    const response = await axiosInstance.delete("/delete", {
+    const response = await axiosInstance.delete("/board/delete", {
       params: {
         boardId,
       },

@@ -1,4 +1,4 @@
-import Axios from "axios";
+import { axiosInstance } from ".";
 
 type AlertBody = {
   postId: string;
@@ -16,14 +16,9 @@ type ReplyAlertBody = {
   detailUrl: string;
 };
 
-const axiosInstance = Axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}/alert`,
-  withCredentials: true,
-});
-
 const ALertAPI = {
   getAlertList: async (skip: number) => {
-    const response = await axiosInstance.get("/list", {
+    const response = await axiosInstance.get("/alert/list", {
       params: {
         skip: skip,
       },
@@ -33,31 +28,31 @@ const ALertAPI = {
   },
 
   createAlert: async (alertBody: AlertBody) => {
-    const response = await axiosInstance.post("/create", alertBody);
+    const response = await axiosInstance.post("/alert/create", alertBody);
     const data = await response.data;
     return data;
   },
 
   createReplyAlert: async (alertBody: ReplyAlertBody) => {
-    const response = await axiosInstance.post("/create_reply", alertBody);
+    const response = await axiosInstance.post("/alert/create_reply", alertBody);
     const data = await response.data;
     return data;
   },
 
   readAlert: async (alertId: string) => {
-    const response = await axiosInstance.patch("/read", { alertId });
+    const response = await axiosInstance.patch("/alert/read", { alertId });
     const data = await response.data;
     return data;
   },
 
   deleteAlert: async () => {
-    const response = await axiosInstance.delete("delete");
+    const response = await axiosInstance.delete("/alert/delete");
     const data = await response.data;
     return data;
   },
 
   getAlertCount: async () => {
-    const response = await axiosInstance.get("/count");
+    const response = await axiosInstance.get("/alert/count");
     const data = await response.data.count;
     return data;
   },

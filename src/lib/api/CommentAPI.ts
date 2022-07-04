@@ -1,4 +1,4 @@
-import Axios from "axios";
+import { axiosInstance } from ".";
 
 type BodyType = {
   parentCommentId?: string;
@@ -10,14 +10,10 @@ type BodyType = {
   reply_name?: string;
   reply_comment?: string;
 };
-const axiosInstance = Axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}/comment`,
-  withCredentials: true,
-});
 
 const CommentAPI = {
   getCommentList: async (postId: string) => {
-    const response = await axiosInstance.get("/list", {
+    const response = await axiosInstance.get("/comment/list", {
       params: {
         postId,
       },
@@ -27,13 +23,13 @@ const CommentAPI = {
   },
 
   createComment: async (body: BodyType) => {
-    const response = await axiosInstance.post("/create", body);
+    const response = await axiosInstance.post("/comment/create", body);
     const data = await response.data;
     return data;
   },
 
   updateComment: async (commentId: string, content: string) => {
-    const response = await axiosInstance.patch("/update", {
+    const response = await axiosInstance.patch("/comment/update", {
       commentId,
       content,
     });
@@ -42,7 +38,7 @@ const CommentAPI = {
   },
 
   deleteComment: async (postId: string, commentId: string) => {
-    const response = await axiosInstance.delete("/delete", {
+    const response = await axiosInstance.delete("/comment/delete", {
       params: {
         postId,
         commentId,
@@ -53,13 +49,13 @@ const CommentAPI = {
   },
 
   createReply: async (body: BodyType) => {
-    const response = await axiosInstance.post("/reply/create", body);
+    const response = await axiosInstance.post("/comment/reply/create", body);
     const data = await response.data;
     return data;
   },
 
   getReplyList: async (parentCommentId: string) => {
-    const response = await axiosInstance.get("/reply/list", {
+    const response = await axiosInstance.get("/comment/reply/list", {
       params: {
         parentCommentId: parentCommentId,
       },

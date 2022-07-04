@@ -1,4 +1,4 @@
-import Axios from "axios";
+import { axiosInstance } from ".";
 
 type BodyType = {
   title: string;
@@ -8,14 +8,9 @@ type BodyType = {
   board: string;
 };
 
-const axiosInstance = Axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}/post`,
-  withCredentials: true,
-});
-
 const PostAPI = {
   getPostList: async (boardId: string, skip: number, sort: string) => {
-    const response = await axiosInstance.get("/list", {
+    const response = await axiosInstance.get("/post/list", {
       params: {
         boardId: boardId,
         skip: skip,
@@ -27,7 +22,7 @@ const PostAPI = {
   },
 
   getUserPostList: async (userId: string, skip: number) => {
-    const response = await axiosInstance.get("/user_list", {
+    const response = await axiosInstance.get("/post/user_list", {
       params: {
         userId,
         skip,
@@ -38,7 +33,7 @@ const PostAPI = {
   },
 
   getPostDetail: async (postId: string) => {
-    const response = await axiosInstance.get("/get", {
+    const response = await axiosInstance.get("/post/get", {
       params: {
         postId: postId,
       },
@@ -48,13 +43,13 @@ const PostAPI = {
   },
 
   createPost: async (body: BodyType) => {
-    const response = await axiosInstance.post("/create", body);
+    const response = await axiosInstance.post("/post/create", body);
     const data = await response.data;
     return data;
   },
 
   updatePost: async (body: BodyType, postId: string) => {
-    const response = await axiosInstance.patch("/update", body, {
+    const response = await axiosInstance.patch("/post/update", body, {
       params: {
         postId: postId,
       },
@@ -64,7 +59,7 @@ const PostAPI = {
   },
 
   deletePost: async (postId: string, boardId: string) => {
-    const response = await axiosInstance.delete("/delete", {
+    const response = await axiosInstance.delete("/post/delete", {
       params: {
         postId,
         boardId,
@@ -75,19 +70,21 @@ const PostAPI = {
   },
 
   likePost: async (postId: string) => {
-    const response = await axiosInstance.patch("/like", { postId });
+    const response = await axiosInstance.patch("/post/like", { postId });
     const data = await response.data;
     return data;
   },
 
   dislikePost: async (postId: string) => {
-    const response = await axiosInstance.patch("/dislike", { postId });
+    const response = await axiosInstance.patch("/post/dislike", { postId });
     const data = await response.data;
     return data;
   },
 
   increasePostView: async (postId: string) => {
-    const response = await axiosInstance.patch("/increase/view", { postId });
+    const response = await axiosInstance.patch("/post/increase/view", {
+      postId,
+    });
     const data = await response.data;
     return data;
   },

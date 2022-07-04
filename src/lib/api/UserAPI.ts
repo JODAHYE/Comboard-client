@@ -1,31 +1,26 @@
-import Axios from "axios";
-
-const axiosInstance = Axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}/user`,
-  withCredentials: true,
-});
+import { axiosInstance } from ".";
 
 export const UserAPI = {
   signUp: async (info: any) => {
-    const response = await axiosInstance.post("/signup", info);
+    const response = await axiosInstance.post("/user/signup", info);
     const data = await response.data;
     return data;
   },
 
   auth: async () => {
-    const response = await axiosInstance.get("/auth");
+    const response = await axiosInstance.get("/user/auth");
     const data = await response.data;
     return data;
   },
 
   login: async (info: object) => {
-    const response = await axiosInstance.post("/login", info);
+    const response = await axiosInstance.post("/user/login", info);
     const data = await response.data;
     return data;
   },
 
   kakaoLogin: async (code: string) => {
-    const response = await axiosInstance.post("/kakaologin", {
+    const response = await axiosInstance.post("/user/kakaologin", {
       code,
     });
     const data = await response.data;
@@ -33,43 +28,49 @@ export const UserAPI = {
   },
 
   logout: async () => {
-    const response = await axiosInstance.get("/logout");
+    const response = await axiosInstance.get("/user/logout");
     const data = await response.data;
     return data;
   },
 
   addBookmarkBoard: async (boardId: string) => {
-    const response = await axiosInstance.patch("/bookmark/add", { boardId });
+    const response = await axiosInstance.patch("/user/bookmark/add", {
+      boardId,
+    });
     const data = await response.data;
     return data;
   },
 
   deleteBookmarkBoard: async (boardId: string) => {
-    const response = await axiosInstance.patch("/bookmark/delete", { boardId });
+    const response = await axiosInstance.patch("/user/bookmark/delete", {
+      boardId,
+    });
     const data = await response.data;
     return data;
   },
 
   getCreatedBoardList: async () => {
-    const response = await axiosInstance.get("/board/created_list");
+    const response = await axiosInstance.get("/user/board/created_list");
     const data = await response.data;
     return data;
   },
 
   getBookmarkList: async () => {
-    const response = await axiosInstance.get("/bookmark/list");
+    const response = await axiosInstance.get("/user/bookmark/list");
     const data = await response.data.bookmarkBoardList;
     return data;
   },
 
   updateProfileImg: async (imgUrl: string) => {
-    const response = await axiosInstance.patch("/update/image", { imgUrl });
+    const response = await axiosInstance.patch("/user/update/image", {
+      imgUrl,
+    });
     const data = await response.data.profileImage;
     return data;
   },
 
   updateNickname: async (nickname: string) => {
-    const response = await axiosInstance.patch("/update/nickname", {
+    const response = await axiosInstance.patch("/user/update/nickname", {
       nickname,
     });
     const data = await response.data.nickname;
@@ -77,13 +78,15 @@ export const UserAPI = {
   },
 
   updatePostLock: async (value: boolean) => {
-    const response = await axiosInstance.patch("/update/post_lock", { value });
+    const response = await axiosInstance.patch("/user/update/post_lock", {
+      value,
+    });
     const data = await response.data.postLock;
     return data;
   },
 
   getUserDetail: async (userId: string) => {
-    const response = await axiosInstance.get("/detail", {
+    const response = await axiosInstance.get("/user/detail", {
       params: { userId },
     });
     const data = await response.data;
@@ -91,19 +94,21 @@ export const UserAPI = {
   },
 
   scrapPost: async (postId: string) => {
-    const response = await axiosInstance.patch("/scrap/add", { postId });
+    const response = await axiosInstance.patch("/user/scrap/add", { postId });
     const data = await response.data;
     return data;
   },
 
   deleteScrapPost: async (postId: string) => {
-    const response = await axiosInstance.patch("/scrap/delete", { postId });
+    const response = await axiosInstance.patch("/user/scrap/delete", {
+      postId,
+    });
     const data = await response.data;
     return data;
   },
 
   getScrapPostList: async (skip: number) => {
-    const response = await axiosInstance.get("/scrap/list", {
+    const response = await axiosInstance.get("/user/scrap/list", {
       params: {
         skip,
       },
@@ -113,7 +118,7 @@ export const UserAPI = {
   },
 
   getMyPostList: async (skip: number) => {
-    const response = await axiosInstance.get("/post/list", {
+    const response = await axiosInstance.get("/user/post/list", {
       params: {
         skip,
       },
@@ -123,13 +128,13 @@ export const UserAPI = {
   },
 
   getMyPostCount: async () => {
-    const response = await axiosInstance.get("/post_count");
+    const response = await axiosInstance.get("/user/post_count");
     const data = await response.data.postCount;
     return data;
   },
 
   getMyCommentList: async (skip: number) => {
-    const response = await axiosInstance.get("/comment/list", {
+    const response = await axiosInstance.get("/user/comment/list", {
       params: {
         skip,
       },
@@ -139,7 +144,7 @@ export const UserAPI = {
   },
 
   getMyCommentCount: async () => {
-    const response = await axiosInstance.get("/comment_count");
+    const response = await axiosInstance.get("/user/comment_count");
     const data = await response.data.CommentCount;
     return data;
   },
