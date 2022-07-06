@@ -51,7 +51,7 @@ const BoardCard = ({ board }: { board: BoardType }) => {
 export default BoardCard;
 
 const Wrap = styled.div`
-  width: 24%;
+  width: 30%;
   height: 280px;
   display: flex;
   flex-direction: column;

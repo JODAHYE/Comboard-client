@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 
@@ -21,11 +20,6 @@ const BookmarkBoardCard = ({ board }: { board: BoardType }) => {
 
   return (
     <Wrap onClick={onClick}>
-      {board.bgimg ? (
-        <Img src={board.bgimg} />
-      ) : (
-        <Img src="image/default-img.jpg" />
-      )}
       {board.access === "private" ? (
         <Title>
           <LockIcon src="icon/lock.svg" />
@@ -38,11 +32,9 @@ const BookmarkBoardCard = ({ board }: { board: BoardType }) => {
   );
 };
 
-export default BookmarkBoardCard;
-
 const Wrap = styled.div`
-  width: 80%;
-  height: 160px;
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -54,17 +46,6 @@ const Wrap = styled.div`
   &:hover {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
-  @media (min-width: 320px) and (max-width: 480px) {
-    width: 100%;
-    height: 100px;
-    margin: 4px 0;
-  }
-`;
-
-const Img = styled.img`
-  width: 100%;
-  height: 80%;
-  object-fit: cover;
 `;
 
 const Title = styled.p`
@@ -76,3 +57,5 @@ const Title = styled.p`
 const LockIcon = styled.img`
   width: 16px;
 `;
+
+export default BookmarkBoardCard;

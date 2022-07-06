@@ -65,75 +65,92 @@ const Nav = () => {
 
   return (
     <Wrap>
-      <Menu>
-        <MenuItem
-          to="/"
-          onClick={onClick}
-          className={useMenu(mainMenu, "공개 게시판") ? "active" : undefined}
-        >
-          공개 게시판
-        </MenuItem>
-        <MenuItem
-          to="/"
-          onClick={onClick}
-          className={useMenu(mainMenu, "비밀 게시판") ? "active" : undefined}
-        >
-          비밀 게시판
-        </MenuItem>
-      </Menu>
-      {!is_auth && !loginLoading && (
-        <LoginBtn onClick={goToLoginPage}>로그인</LoginBtn>
-      )}
-      {loginLoading && <LoginLoading />}
-      {!loginLoading && is_auth && (
-        <MyInfo>
-          <Link to="/mypage">
-            {profileImage ? (
-              <ProfileImg src={profileImage} title="마이페이지" />
-            ) : (
-              <Icon src="../../../icon/user.svg" title="마이페이지" />
-            )}
-          </Link>
-          <Alert alert={alertCount}>
+      <Container>
+        <Menu>
+          <MenuItem
+            to="/"
+            onClick={onClick}
+            className={useMenu(mainMenu, "공개 게시판") ? "active" : undefined}
+          >
+            공개 게시판
+          </MenuItem>
+          <MenuItem
+            to="/"
+            onClick={onClick}
+            className={useMenu(mainMenu, "비밀 게시판") ? "active" : undefined}
+          >
+            비밀 게시판
+          </MenuItem>
+        </Menu>
+
+        {!is_auth && !loginLoading && (
+          <LoginBtn onClick={goToLoginPage}>로그인</LoginBtn>
+        )}
+
+        {loginLoading && <LoginLoading />}
+
+        {!loginLoading && is_auth && (
+          <MyInfo>
+            <Link to="/mypage">
+              {profileImage ? (
+                <ProfileImg src={profileImage} title="마이페이지" />
+              ) : (
+                <Icon src="../../../icon/user.svg" title="마이페이지" />
+              )}
+            </Link>
+            <Alert alert={alertCount}>
+              <Icon
+                src="../../../icon/notification.svg"
+                title="알림"
+                onClick={openAlertPopup}
+              />
+            </Alert>
             <Icon
-              src="../../../icon/notification.svg"
-              title="알림"
-              onClick={openAlertPopup}
+              src="../../../icon/exit.svg"
+              title="로그아웃"
+              onClick={onLogout}
             />
-          </Alert>
-          <Icon
-            src="../../../icon/exit.svg"
-            title="로그아웃"
-            onClick={onLogout}
-          />
-        </MyInfo>
-      )}
-      {onPopup === "alert" && <AlertPopup />}
+          </MyInfo>
+        )}
+        {onPopup === "alert" && <AlertPopup />}
+      </Container>
     </Wrap>
   );
 };
 
-export default Nav;
-
 const Wrap = styled.div`
   width: 100vw;
   height: 5vh;
-  display: flex;
+
+  ${(props) => props.theme.displayFlex}
+  justify-content: center;
+
   background: #fff;
-  border-bottom: 2px solid ${(props) => props.theme.colors.main};
-  align-items: center;
   box-shadow: 2px 2px 2px 2px ${(props) => props.theme.colors.shadow};
-  justify-content: space-between;
   padding: 0 50px;
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 0 10px;
     height: 6vh;
   }
 `;
 
+const Container = styled.div`
+  width: 80%;
+  height: 100%;
+
+  ${(props) => props.theme.displayFlex}
+  justify-content: space-between;
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 100%;
+  }
+`;
+
 const Menu = styled.div`
   display: flex;
   gap: 30px;
+
   @media (min-width: 320px) and (max-width: 480px) {
     gap: 6px;
   }
@@ -148,6 +165,7 @@ const MenuItem = styled(Link)`
   &.active {
     color: #000;
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 15px;
   }
@@ -155,6 +173,7 @@ const MenuItem = styled(Link)`
 
 const LoginBtn = styled.button`
   display: none;
+
   @media (min-width: 320px) and (max-width: 480px) {
     display: block;
     font-size: 14px;
@@ -173,6 +192,7 @@ const MyInfo = styled.div`
 
 const Alert = styled.div<StyleType>`
   position: relative;
+
   &:before {
     content: "${(props) => props.alert}";
     position: absolute;
@@ -183,6 +203,7 @@ const Alert = styled.div<StyleType>`
     border-radius: 50%;
     font-size: 12px;
     padding: 1px 4px;
+
     @media (min-width: 320px) and (max-width: 480px) {
       font-size: 10px;
       padding: 0 2px;
@@ -194,10 +215,12 @@ const Icon = styled.img`
   width: 26px;
   height: 26px;
   display: inline-block;
+
   padding: 2px;
   ${(props) => props.theme.iconColor};
   color: #fff;
   cursor: pointer;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 20px;
     height: 20px;
@@ -209,8 +232,11 @@ const ProfileImg = styled.img`
   height: 34px;
   border-radius: 50%;
   object-fit: cover;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 24px;
     height: 24px;
   }
 `;
+
+export default Nav;

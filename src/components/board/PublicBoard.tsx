@@ -112,7 +112,7 @@ const PublicBoard = () => {
 export default PublicBoard;
 
 const Wrap = styled.div`
-  width: 70%;
+  width: 60%;
   height: 100%;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { signup } from "../../features/userSlice";
 import Popup from "../common/Popup";
 
-const Signup = () => {
+const SignupPopup = () => {
   const dispatch = useDispatch();
 
   const [info, setInfo] = useState({
@@ -85,7 +85,7 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupPopup;
 
 const Title = styled.h3`
   font-family: BMHANNAAir;
@@ -98,7 +98,7 @@ const Title = styled.h3`
 `;
 
 const Form = styled.form`
-  width: 40%;
+  width: 60%;
   height: 70%;
   display: flex;
   flex-direction: column;

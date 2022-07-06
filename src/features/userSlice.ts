@@ -86,6 +86,9 @@ export const userSlice = createSlice({
     builder.addCase(kakaoLogin.pending, (state, action) => {
       state.loginLoading = true;
     });
+    builder.addCase(kakaoLogin.fulfilled, (state, action) => {
+      state.loginLoading = false;
+    });
   },
 });
 

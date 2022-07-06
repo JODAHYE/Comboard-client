@@ -7,7 +7,7 @@ import PostWrite from "./pages/PostWrite";
 import PostDetail from "./pages/PostDetail";
 import MyPage from "./pages/MyPage";
 import UserDetailPage from "./pages/UserDetailPage";
-import MobileLogin from "./pages/MobileLogin";
+import Login from "./pages/Login";
 const Wrap = styled.div`
   width: 100vw;
   min-height: 100vh;
@@ -26,12 +26,12 @@ const App = () => {
         <Nav />
         <Routes>
           <Route path="/" element={<Main />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/board/:id" element={<BoardDetail />} />
           <Route path="/board/:id/write" element={<PostWrite />} />
           <Route path="/board/:id/:postId" element={<PostDetail />} />
           <Route path="/board/:id/:postId/update" element={<PostWrite />} />
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/login" element={<MobileLogin />} />
           <Route path="/user/:userId" element={<UserDetailPage />} />
         </Routes>
       </BrowserRouter>

@@ -84,7 +84,7 @@ const PrivateBoard = () => {
 export default PrivateBoard;
 
 const Wrap = styled.div`
-  width: 70%;
+  width: 60%;
   height: 100%;
 
   overflow: hidden;

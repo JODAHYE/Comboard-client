@@ -1,33 +1,32 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 
 import { RootState } from "../app/store";
-import Login from "../components/auth/Login";
-import MyBoard from "../components/board/BookmarkBoard";
+// import Login from "./Login";
+import BookmarkBoard from "../components/board/BookmarkBoard";
 import PrivateBoard from "../components/board/PrivateBoard";
 import PublicBoard from "../components/board/PublicBoard";
 
-type StyledType = {
-  isLogedin?: boolean;
-};
-
 const Main = () => {
   const { mainMenu } = useSelector((state: RootState) => state.menu);
-  const { is_auth } = useSelector((state: RootState) => state.user);
+  const location = useLocation();
+
+  useEffect(() => {
+    const code = location.search.substring(6);
+    if (code) {
+      window.location.replace("/");
+    }
+  }, []);
 
   return (
     <Wrap>
-      {mainMenu === "공개 게시판" && <PublicBoard />}
-      {mainMenu === "비밀 게시판" && <PrivateBoard />}
-      {is_auth ? (
-        <Div isLogedin={is_auth}>
-          <MyBoard />
-        </Div>
-      ) : (
-        <Div isLogedin={is_auth}>
-          <Login />
-        </Div>
-      )}
+      <Container>
+        {mainMenu === "공개 게시판" && <PublicBoard />}
+        {mainMenu === "비밀 게시판" && <PrivateBoard />}
+        <BookmarkBoard />
+      </Container>
     </Wrap>
   );
 };
@@ -35,23 +34,17 @@ const Main = () => {
 export default Main;
 
 const Wrap = styled.div`
-  height: 95vh;
   width: 100%;
+  height: 95vh;
   overflow: hidden;
-  ${(props) => props.theme.displayFlex};
   @media (min-width: 320px) and (max-width: 480px) {
     height: 94vh;
     flex-direction: column;
   }
 `;
 
-const Div = styled.div<StyledType>`
-  width: ${(props) => (props.isLogedin ? "200px" : "30%")};
-  height: 95vh;
-  border-left: 1px solid ${(props) => props.theme.colors.shadow};
-  border-right: 1px solid ${(props) => props.theme.colors.shadow};
-  transition: 0.3s;
-  @media (min-width: 320px) and (max-width: 480px) {
-    display: none;
-  }
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  ${(props) => props.theme.displayFlex};
 `;
