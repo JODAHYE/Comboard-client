@@ -247,13 +247,9 @@ const Button = styled.button<StyledType>`
   display: inline-block;
 
   border-radius: 4px;
-  padding: 6px;
   background: ${(props) =>
     props.active ? props.theme.colors.button : props.theme.colors.buttonActive};
   color: #fff;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
 
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 4px;

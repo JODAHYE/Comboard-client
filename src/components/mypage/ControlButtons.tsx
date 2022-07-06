@@ -29,21 +29,18 @@ const Control = styled.div`
 `;
 
 const Button = styled.button`
-  all: unset;
-  cursor: pointer;
   width: 30px;
+  background: #fff;
+  &:active {
+    background: #fff;
+  }
 `;
 
 const Icon = styled.img``;
 
 const DeleteBtn = styled.button`
   color: #fff;
-  background: ${(props) => props.theme.colors.button};
   border-radius: 5px;
-  padding: 4px;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
 `;
 
 export default ControlButtons;

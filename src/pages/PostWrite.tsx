@@ -204,7 +204,6 @@ const SubmitBtn = styled.button`
   background: #fff;
   color: ${(props) => props.theme.colors.button};
   &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
     color: #fff;
   }
   @media (min-width: 320px) and (max-width: 480px) {

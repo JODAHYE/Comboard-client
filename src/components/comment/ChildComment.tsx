@@ -89,22 +89,17 @@ const ChildComment = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
                 >
                   {comment.writer_name}
                 </Nickname>
-                <ControllDiv noMatch={objectId !== comment.writer && true}>
+                <ControlDiv noMatch={objectId !== comment.writer && true}>
                   <DateInfo date={comment.create_date} />
                   {!updateClick && objectId === comment.writer && (
                     <>
-                      <ControllBtn onClick={updateButtonClick}>
-                        수정
-                      </ControllBtn>
-                      <ControllBtn
-                        data-comment={comment._id}
-                        onClick={onDelete}
-                      >
+                      <ControlBtn onClick={updateButtonClick}>수정</ControlBtn>
+                      <ControlBtn data-comment={comment._id} onClick={onDelete}>
                         삭제
-                      </ControllBtn>
+                      </ControlBtn>
                     </>
                   )}
-                </ControllDiv>
+                </ControlDiv>
               </Header>
               {updateClick && (
                 <>
@@ -112,12 +107,12 @@ const ChildComment = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
                     value={updatedCommentValue}
                     onChange={inputUpdateField}
                   />
-                  <ControllDiv>
-                    <ControllBtn data-comment={comment._id} onClick={onUpdate}>
+                  <ControlDiv>
+                    <ControlBtn data-comment={comment._id} onClick={onUpdate}>
                       완료
-                    </ControllBtn>
-                    <ControllBtn onClick={closeUpdateField}>취소</ControllBtn>
-                  </ControllDiv>
+                    </ControlBtn>
+                    <ControlBtn onClick={closeUpdateField}>취소</ControlBtn>
+                  </ControlDiv>
                 </>
               )}
               {!updateClick && <Content>{updatedCommentValue}</Content>}
@@ -165,15 +160,15 @@ const Nickname = styled.span<StyleType>`
   }
 `;
 
-const ControllDiv = styled.div<StyleType>`
+const ControlDiv = styled.div<StyleType>`
   font-size: 14px;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
 `;
 
-const ControllBtn = styled.button`
-  font-size: 14px;
+const ControlBtn = styled.button`
+  font-size: 0.875rem;
   margin-right: 2px;
   background: #fff;
 

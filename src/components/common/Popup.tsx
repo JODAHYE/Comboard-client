@@ -59,12 +59,13 @@ const Box = styled.div<PropsType>`
 `;
 
 const CloseBtn = styled.button`
-  all: unset;
   position: absolute;
   right: 5px;
-  cursor: pointer;
-  width: 24px;
-  padding: 6px;
+  width: 26px;
+  background: #fff;
+  &:active {
+    background: #fff;
+  }
 `;
 
 const Content = styled.div`

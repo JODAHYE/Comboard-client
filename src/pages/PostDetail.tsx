@@ -151,8 +151,8 @@ const PostDetail = () => {
           )}
           {post?.writer === objectId && (
             <>
-              <Btn onClick={onUpdate}>수정</Btn>
-              <Btn onClick={onDelete}>삭제</Btn>
+              <Button onClick={onUpdate}>수정</Button>
+              <Button onClick={onDelete}>삭제</Button>
             </>
           )}
         </InfoDiv>
@@ -201,7 +201,7 @@ const PostDetail = () => {
           )}
           {buttonLoading && <CircularProgress />}
         </Icons>
-        <ListBtn onClick={goPostListPage}>목록</ListBtn>
+        <ListButton onClick={goPostListPage}>목록</ListButton>
         {post && <CommentComp post={post} />}
       </Box>
       {is_auth && <MyInfoComp />}
@@ -292,29 +292,25 @@ const Content = styled.div`
   padding: 10px 0;
 `;
 
-const ListBtn = styled.button`
+const ListButton = styled.button`
   width: 80px;
-  display: block;
-  background: ${(props) => props.theme.colors.button};
+  text-align: center;
   margin: 30px 0;
   padding: 2px;
   color: #fff;
-  font-size: 14px;
+  font-size: 0.875rem;
   border-radius: 2px;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
 `;
 
-const Btn = styled.button`
-  font-size: 14px;
+const Button = styled.button`
+  font-size: 0.875rem;
   background: #fff;
   margin-left: 10px;
   &:active {
     color: ${(props) => props.theme.colors.buttonActive};
   }
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 

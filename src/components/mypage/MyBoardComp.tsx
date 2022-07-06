@@ -61,14 +61,14 @@ const MyBoardComp = () => {
             <MyBoardCard key={board._id} board={board} />
           ))}
       </List>
-      <Control>
+      <ControlButtons>
         <Button onClick={onPrev}>
           <Icon src="icon/arrow-left.svg" alt="이전" />
         </Button>
         <Button onClick={onNext}>
           <Icon src="icon/arrow-right.svg" alt="다음" />
         </Button>
-      </Control>
+      </ControlButtons>
       {onPopup === "update_board" && <MyBoardUpdate />}
     </>
   );
@@ -100,14 +100,16 @@ const List = styled.div`
     align-items: center;
   }
 `;
-const Control = styled.div`
+const ControlButtons = styled.div`
   ${(props) => props.theme.displayFlex};
 `;
 
 const Button = styled.button`
-  all: unset;
-  cursor: pointer;
   width: 30px;
+  background: #fff;
+  &:active {
+    background: #fff;
+  }
 `;
 
 const Icon = styled.img``;

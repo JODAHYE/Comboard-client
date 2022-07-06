@@ -146,9 +146,12 @@ const PageNum = styled.p`
 
 const Button = styled.button`
   width: 20px;
-  all: unset;
-  cursor: pointer;
-  padding: 4px;
+  ${(props) => props.theme.displayFlex}
+
+  background: #fff;
+  &:active {
+    background: #fff;
+  }
 `;
 
 const Icon = styled.img``;

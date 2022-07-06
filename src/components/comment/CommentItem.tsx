@@ -241,7 +241,6 @@ const Nickname = styled.span<StyleType>`
 
 const ControlDiv = styled.div<StyleType>`
   font-size: 0.875rem;
-  border: 1px solid red;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
@@ -265,6 +264,10 @@ const ReplyBtn = styled.button`
   font-size: 0.875rem;
   color: #7e7e7e;
   background: #fff;
+  &:active {
+    background: #fff;
+  }
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
     font-size: 0.75rem;
@@ -299,13 +302,15 @@ const ReplyField = styled.textarea`
 `;
 
 const ReplyControllBtn = styled.button`
-  font-size: 14px;
+  font-size: 0.875rem;
   margin-right: 4px;
   background: #fff;
-  padding: 4px;
+  &:active {
+    background: #fff;
+  }
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 

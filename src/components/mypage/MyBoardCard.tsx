@@ -42,8 +42,8 @@ const MyBoardCard = ({ board }: { board: BoardType }) => {
         <Title>{board.title}</Title>
       )}
       <Control>
-        <Btn onClick={onUpdate}>수정</Btn>
-        <Btn onClick={onDelete}>삭제</Btn>
+        <Button onClick={onUpdate}>수정</Button>
+        <Button onClick={onDelete}>삭제</Button>
       </Control>
     </Wrap>
   );
@@ -89,13 +89,12 @@ const Control = styled.div`
   gap: 10px;
 `;
 
-const Btn = styled.button`
+const Button = styled.button`
   font-size: 0.875rem;
   background: #fff;
   &:active {
-    color: ${(props) => props.theme.colors.buttonActive};
+    background: #fff;
   }
-
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 0.75rem;
   }

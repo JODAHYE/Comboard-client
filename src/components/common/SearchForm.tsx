@@ -51,12 +51,7 @@ const Input = styled.input`
 const Button = styled.button`
   height: 100%;
   width: 32px;
-  padding: 4px;
-  background: ${(props) => props.theme.colors.button};
   border-radius: 0 10px 10px 0;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
 `;
 
 const Icon = styled.img`

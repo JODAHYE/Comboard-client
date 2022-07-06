@@ -77,8 +77,12 @@ const Login = () => {
           name="password"
           onChange={onChange}
         />
-        <Btn>로그인</Btn>
-        <SignupBtn onClick={onSignup}>회원가입</SignupBtn>
+        <Buttons>
+          <Button>로그인</Button>
+          <SignupButton type="button" onClick={onSignup}>
+            회원가입
+          </SignupButton>
+        </Buttons>
       </Form>
       {onPopup === "signup" && <SignupPopup />}
       <SocialLoginBox>
@@ -127,28 +131,19 @@ const Input = styled.input`
   }
 `;
 
-const Btn = styled.button`
-  display: inline;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  background: ${(props) => props.theme.colors.button};
-  border-radius: 4px;
-  padding: 6px;
-  color: #fff;
-  transform: translateX(-50%);
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
-const SignupBtn = styled.p`
-  display: inline;
-  position: absolute;
-  right: 0;
-  bottom: 10px;
-  font-size: 14px;
-  cursor: pointer;
+const Button = styled.button`
+  border-radius: 4px;
+  color: #fff;
+`;
+
+const SignupButton = styled.button`
+  font-size: 0.875rem;
+  background: #fff;
   &:hover {
     color: ${(props) => props.theme.colors.button};
   }
@@ -176,6 +171,7 @@ const KaKaoLoginButton = styled.button`
   ${(props) => props.theme.displayFlex};
   gap: 16px;
   justify-content: space-around;
+
   border-radius: 6px;
   background: #ffe812;
   margin: 0 auto;

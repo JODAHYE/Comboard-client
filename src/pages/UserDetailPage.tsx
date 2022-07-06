@@ -168,8 +168,6 @@ const Control = styled.div`
 `;
 
 const Button = styled.button`
-  all: unset;
-  cursor: pointer;
   width: 30px;
 `;
 

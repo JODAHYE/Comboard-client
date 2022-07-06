@@ -171,7 +171,7 @@ const MyBoardUpdate = () => {
           value={info.description}
           onChange={onChange}
         />
-        <Btn>수정</Btn>
+        <Button>수정</Button>
         {loading && <Loading>수정중...</Loading>}
       </Form>
     </Popup>
@@ -253,14 +253,9 @@ const Desc = styled.textarea`
   }
 `;
 
-const Btn = styled.button`
+const Button = styled.button`
   color: #fff;
-  background: ${(props) => props.theme.colors.button};
   border-radius: 4px;
-  padding: 6px;
-  &:active {
-    background: ImgSelector;
-  }
 
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
@@ -285,7 +280,7 @@ const ImgSelector = styled.label`
   font-size: 0.875rem;
   cursor: pointer;
   padding: 4px;
-  background: ${(props) => props.theme.colors.buttonActive};
+  background: ${(props) => props.theme.colors.button};
   color: #fff;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;

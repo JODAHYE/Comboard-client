@@ -183,18 +183,16 @@ const FlexDiv = styled.div`
 
 const NewPostBtn = styled.button`
   width: 100px;
-  background: ${(props) => props.theme.colors.button};
   color: #fff;
   border-radius: 2px;
   padding: 2px;
-  font-size: 14px;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
+  font-size: 0.875rem;
+  text-align: center;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;
     padding: 2px 6px;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 
@@ -212,22 +210,24 @@ const Option = styled.option``;
 const InfoBtn = styled.button`
   display: inline-block;
   background: #fff;
-  font-size: 16px;
+  font-size: 1rem;
   &::before {
     content: "|";
     margin-right: 4px;
     color: ${(props) => props.theme.colors.shadow};
   }
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 
 const Button = styled.button`
-  all: unset;
-  cursor: pointer;
-  width: 20px;
+  width: 24px;
   margin: 0 14px 0 0;
+  background: #fff;
+  &:active {
+    background: #fff;
+  }
 `;
 
 const Icon = styled.img``;
