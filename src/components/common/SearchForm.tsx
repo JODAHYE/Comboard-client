@@ -57,6 +57,8 @@ const Btn = styled.button`
   }
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img`
+  ${(props) => props.theme.iconColorWhite}
+`;
 
 export default SearchForm;

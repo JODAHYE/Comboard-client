@@ -23,6 +23,9 @@ declare module "styled-components" {
     iconColor: {
       filter: string;
     };
+    iconColorWhite: {
+      filter: string;
+    };
   }
 }
 

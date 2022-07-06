@@ -141,15 +141,17 @@ const Icon = styled.img<StyleType>`
   width: 30px;
   height: 30px;
   display: inline-block;
+
   object-fit: cover;
   background: ${(props) =>
     props.isActive
       ? props.theme.colors.buttonActive
       : props.theme.colors.button};
-  color: #fff;
+
   padding: 6px;
   z-index: 100;
   cursor: pointer;
+
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }

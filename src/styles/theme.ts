@@ -2,10 +2,10 @@ import { DefaultTheme } from "styled-components";
 
 const theme: DefaultTheme = {
   colors: {
-    main: "#86EBAD",
-    button: "#74D378",
-    buttonActive: "#86EBAD",
-    fontColor: "rgb(104, 103, 103)",
+    main: "#B6A7FD",
+    button: "#7964E1",
+    buttonActive: "#B6A7FD",
+    fontColor: "#5E5E5E",
     shadow: "#E7E7E7",
   },
   displayFlex: {
@@ -22,7 +22,10 @@ const theme: DefaultTheme = {
   },
   iconColor: {
     filter:
-      "invert(60%) sepia(100%) saturate(300%) brightness(80%) contrast(500%);",
+      "invert(64%) sepia(55%) saturate(2269%) hue-rotate(2deg) brightness(109%) contrast(104%)",
+  },
+  iconColorWhite: {
+    filter: "brightness(0) invert(1)",
   },
 };
 export { theme };

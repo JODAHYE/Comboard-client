@@ -40,6 +40,7 @@ const NewButton = styled.button`
 
 const Icon = styled.img`
   font-size: 14px;
+  ${(props) => props.theme.iconColorWhite}
 `;
 
 export default NewBtn;
