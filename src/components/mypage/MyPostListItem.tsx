@@ -69,6 +69,7 @@ const PostItem = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
+
   @media (min-width: 320px) and (max-width: 480px) {
     flex-wrap: wrap;
     gap: 5px;
@@ -78,10 +79,11 @@ const PostItem = styled.div`
 const Content = styled.p<StyleType>`
   width: ${(props) => props.width && props.width};
   text-align: center;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;
     margin-right: 6px;
-    font-size: 11px;
+    font-size: 0.6875rem;
     &:before {
       ${(props) =>
         props.info &&
@@ -95,6 +97,7 @@ const Content = styled.p<StyleType>`
 const Title = styled.div`
   display: flex;
   width: 70%;
+
   cursor: pointer;
   padding: 6px 0;
   & > p {
@@ -105,10 +108,11 @@ const Title = styled.div`
     text-align: left;
   }
   & > span {
-    font-size: 12px;
+    font-size: 0.75rem;
     display: inline-block;
     max-width: 9%;
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
   }
@@ -118,6 +122,7 @@ const Checkbox = styled.input`
   width: 18px;
   height: 18px;
   cursor: pointer;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 16px;
     height: 16px;

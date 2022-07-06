@@ -66,6 +66,7 @@ const Wrap = styled.div`
   text-align: center;
   padding: 100px 0;
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 10px 0;
     width: 100%;
@@ -80,10 +81,11 @@ const Header = styled.div`
 
 const Title = styled.h1`
   color: ${(props) => props.theme.colors.button};
-  font-size: 28px;
+  font-size: 1.75rem;
   font-family: SpoqaHanSansNeoBold;
+
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 `;
 
@@ -100,9 +102,11 @@ const List = styled.div<StyleType>`
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
+
   margin-top: 100px;
+
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 16px;
+    font-size: 1rem;
     margin-top: 10px;
     gap: 8px;
     overflow: hidden;
@@ -112,7 +116,7 @@ const List = styled.div<StyleType>`
 `;
 
 const MenuItem = styled.p<StyleType>`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: SpoqaHanSansNeoBold;
   cursor: pointer;
   transition: 0.4s;
@@ -122,8 +126,9 @@ const MenuItem = styled.p<StyleType>`
   &:hover {
     border-bottom: 1px solid ${(props) => props.theme.colors.fontColor};
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 16px;
+    font-size: 1rem;
   }
 `;
 

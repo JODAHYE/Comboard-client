@@ -96,9 +96,9 @@ const MyScrapList = () => {
 
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
-  font-size: 20px;
+  font-size: 1.25rem;
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 16px;
+    font-size: 1rem;
   }
 `;
 

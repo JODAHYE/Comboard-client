@@ -54,12 +54,14 @@ const Wrap = styled.div`
   height: 200px;
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
   margin: 0 auto;
   margin-bottom: 10px;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   border-radius: 10px;
   cursor: pointer;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 70%;
     margin-bottom: 0px;
@@ -88,13 +90,14 @@ const Control = styled.div`
 `;
 
 const Btn = styled.button`
-  font-size: 14px;
+  font-size: 0.875rem;
   background: #fff;
   &:active {
     color: ${(props) => props.theme.colors.buttonActive};
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 

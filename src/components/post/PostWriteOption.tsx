@@ -123,8 +123,10 @@ const PostWriteOption = ({
 
 const Option = styled.div`
   width: 100%;
+
   ${(props) => props.theme.displayFlex};
   gap: 4px;
+
   border-left: 1px solid ${(props) => props.theme.colors.shadow};
   border-right: 1px solid ${(props) => props.theme.colors.shadow};
   & > form {

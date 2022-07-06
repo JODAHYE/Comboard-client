@@ -76,22 +76,25 @@ const MyBoardComp = () => {
 
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
-  font-size: 20px;
+  font-size: 1.25rem;
+
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 16px;
+    font-size: 1rem;
   }
 `;
 
 const List = styled.div`
   width: 50%;
-  margin: 0 auto;
   ${(props) => props.theme.displayFlex};
   justify-content: start;
   align-items: start;
   flex-wrap: wrap;
   gap: 20px;
+
+  margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 30px;
+
   @media (min-width: 320px) and (max-width: 480px) {
     flex-direction: column;
     align-items: center;

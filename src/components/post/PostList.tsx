@@ -129,8 +129,10 @@ const Wrap = styled.div`
 
 const PageNation = styled.div`
   width: 100%;
-  margin: 30px 0;
   ${(props) => props.theme.displayFlex}
+
+  margin: 30px 0;
+
   @media (min-width: 320px) and (max-width: 480px) {
     height: auto;
     margin: 10px 0;
@@ -143,9 +145,9 @@ const PageNum = styled.p`
 `;
 
 const Button = styled.button`
+  width: 20px;
   all: unset;
   cursor: pointer;
-  width: 20px;
   padding: 4px;
 `;
 

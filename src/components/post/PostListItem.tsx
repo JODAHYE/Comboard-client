@@ -58,8 +58,10 @@ const PostListItem = ({ post }: { post: PostType }) => {
 const PostItem = styled.div`
   display: flex;
   align-items: center;
+
   cursor: pointer;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
+
   @media (min-width: 320px) and (max-width: 480px) {
     flex-wrap: wrap;
     gap: 5px;
@@ -78,11 +80,12 @@ const Title = styled.div`
     text-align: left;
   }
   & > span {
-    font-size: 12px;
+    font-size: 0.75rem;
     @media (min-width: 320px) and (max-width: 480px) {
       max-width: 9%;
     }
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     flex-wrap: wrap;
     width: 100%;
@@ -96,6 +99,7 @@ const Content = styled.p<StyleType>`
       width: ${props.width};
     `};
   display: inline-block;
+
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -104,7 +108,7 @@ const Content = styled.p<StyleType>`
     width: auto;
     max-width: 50%;
     margin-right: 6px;
-    font-size: 11px;
+    font-size: 0.6875rem;
     &:before {
       ${(props) =>
         props.info &&

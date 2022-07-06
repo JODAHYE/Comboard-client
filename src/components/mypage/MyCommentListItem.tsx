@@ -79,8 +79,10 @@ const Wrap = styled.div`
   ${(props) => props.theme.displayFlex};
   justify-content: start;
   gap: 4px;
+
   margin-bottom: 10px;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
+
   @media (min-width: 320px) and (max-width: 480px) {
     flex-wrap: wrap;
     gap: 5px;
@@ -89,11 +91,13 @@ const Wrap = styled.div`
 
 const Title = styled.div`
   width: 75%;
+
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 6px 0;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
   }
@@ -109,12 +113,13 @@ const Info = styled.p<StyleType>`
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;
     max-width: 70%;
     margin-right: 6px;
-    font-size: 11px;
+    font-size: 0.6875rem;
   }
 `;
 
@@ -123,6 +128,7 @@ const Checkbox = styled.input`
   height: 18px;
   cursor: pointer;
   margin-left: 10px;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 16px;
     height: 16px;

@@ -155,21 +155,21 @@ const MyInfoUpdateComp = () => {
 
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
-  font-size: 20px;
+  font-size: 1.25rem;
 
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 16px;
+    font-size: 1rem;
   }
 `;
 
 const InfoDiv = styled.div`
   width: 70%;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
+
   & > span {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
@@ -191,8 +191,8 @@ const Row = styled.div`
 const Img = styled.img`
   width: 200px;
   height: 200px;
-
   display: inline-block;
+
   object-fit: cover;
 
   @media (min-width: 320px) and (max-width: 480px) {
@@ -211,11 +211,12 @@ const Nickname = styled.p`
 
 const Label = styled.label`
   display: inline-block;
-  padding: 4px;
+
   cursor: pointer;
   background: ${(props) => props.theme.colors.button};
   color: #fff;
   margin-bottom: 30px;
+  padding: 4px;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
@@ -229,6 +230,7 @@ const NicknameField = styled.textarea<StyledType>`
   width: 50%;
   height: 26px;
   display: inline-block;
+
   outline: none;
   border: none;
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
@@ -236,13 +238,13 @@ const NicknameField = styled.textarea<StyledType>`
   padding: 4px;
 
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 `;
 
 const Button = styled.button<StyledType>`
-  display: inline-block;
   width: 80px;
+  display: inline-block;
 
   border-radius: 4px;
   padding: 6px;
@@ -255,7 +257,7 @@ const Button = styled.button<StyledType>`
 
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 4px;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 

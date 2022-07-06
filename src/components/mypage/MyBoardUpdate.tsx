@@ -180,11 +180,12 @@ const MyBoardUpdate = () => {
 
 const Title = styled.h3`
   font-family: BMHANNAAir;
-  font-size: 28px;
+  font-size: 1.75rem;
   color: #000;
   margin-bottom: 30px;
+
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 `;
 const Form = styled.form`
@@ -192,19 +193,21 @@ const Form = styled.form`
   height: 80%;
   ${(props) => props.theme.displayFlex};
   flex-direction: column;
+
   @media (min-width: 320px) and (max-width: 480px) {
     gap: 6px;
   }
 `;
 
 const Label = styled.label`
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 12px;
 `;
 
 const Input = styled.input<sizeType>`
   width: ${(props) => (props.width ? props.width : "80%")};
   height: 30px;
+
   padding: 6px;
   margin: 2px;
   outline: none;
@@ -213,12 +216,13 @@ const Input = styled.input<sizeType>`
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
   &::placeholder {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
     &::placeholder {
-      font-size: 12px;
+      font-size: 0.75rem;
     }
   }
 `;
@@ -232,6 +236,7 @@ const Div = styled.div`
 const Desc = styled.textarea`
   width: 80%;
   height: 300px;
+
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   margin: 2px;
@@ -243,7 +248,7 @@ const Desc = styled.textarea`
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
     &::placeholder {
-      font-size: 12px;
+      font-size: 0.75rem;
     }
   }
 `;
@@ -256,18 +261,20 @@ const Btn = styled.button`
   &:active {
     background: ImgSelector;
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
   }
 `;
 
 const P = styled.p`
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: ${(props) => props.theme.colors.button};
   margin: 10px;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
-    font-size: 12px;
+    font-size: 0.75rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -275,14 +282,14 @@ const P = styled.p`
 `;
 
 const ImgSelector = styled.label`
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
   padding: 4px;
   background: ${(props) => props.theme.colors.buttonActive};
   color: #fff;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 
