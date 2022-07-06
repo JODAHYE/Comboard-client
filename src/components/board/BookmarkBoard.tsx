@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { RootState } from "../../app/store";
 import { getAlertCount, getBookmarkList } from "../../features/userSlice";
-import BookmarkBoardCard from "./BookmarkBoardCard";
+import BookmarkBoardItem from "./BookmarkBoardItem";
 
 const BookmarkBoard = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const BookmarkBoard = () => {
           </Header>
           <List>
             {bookmarkBoardList.map((item, i) => {
-              return <BookmarkBoardCard key={item._id} board={item} />;
+              return <BookmarkBoardItem key={item._id} board={item} />;
             })}
           </List>
         </>

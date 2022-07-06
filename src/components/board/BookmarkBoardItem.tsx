@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { BoardType } from "../../types/dataType";
 
-const BookmarkBoardCard = ({ board }: { board: BoardType }) => {
+const BookmarkBoardItem = ({ board }: { board: BoardType }) => {
   const navigate = useNavigate();
 
   const onClick = useCallback(() => {
@@ -58,4 +58,4 @@ const LockIcon = styled.img`
   width: 16px;
 `;
 
-export default BookmarkBoardCard;
+export default BookmarkBoardItem;

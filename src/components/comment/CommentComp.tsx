@@ -44,6 +44,7 @@ const CommentComp = ({ post }: { post: PostType }) => {
     createComment(body).then((res) => {
       setComments((prev) => prev?.concat(res.comment));
       setCommentsCount(res.comments_count + 1);
+      setCommentValue("");
       setLoading(false);
     });
   };
