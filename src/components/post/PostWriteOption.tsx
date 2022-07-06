@@ -29,7 +29,7 @@ const PostWriteOption = ({
     const imgUrl = await UploadAPI.imageUpload(formData);
     const imgTag = document.createElement("img");
     imgTag.setAttribute("src", imgUrl);
-    imgTag.style.width = "50%";
+    imgTag.style.maxWidth = "80%";
     contentField.current.appendChild(imgTag);
     contentField.current.removeChild(loadingNode);
   };
