@@ -176,7 +176,11 @@ const ControllBtn = styled.button`
   font-size: 14px;
   margin-right: 2px;
   background: #fff;
-  padding: 3px;
+
+  &:active {
+    background: #fff;
+  }
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
     font-size: 12px;

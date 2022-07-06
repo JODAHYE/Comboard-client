@@ -109,24 +109,24 @@ const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
             >
               {comment.writer_name}
             </Nickname>
-            <ControllDiv noMatch={objectId !== comment.writer && true}>
+            <ControlDiv noMatch={objectId !== comment.writer && true}>
               <DateInfo date={comment.create_date} />
 
               {!updateClick && objectId === comment.writer && (
                 <>
-                  <ControllBtn
+                  <ControlBtn
                     onClick={() => {
                       setUpdateClick(true);
                     }}
                   >
                     수정
-                  </ControllBtn>
-                  <ControllBtn data-comment={comment._id} onClick={onDelete}>
+                  </ControlBtn>
+                  <ControlBtn data-comment={comment._id} onClick={onDelete}>
                     삭제
-                  </ControllBtn>
+                  </ControlBtn>
                 </>
               )}
-            </ControllDiv>
+            </ControlDiv>
           </Header>
           {updateClick && (
             <>
@@ -136,19 +136,19 @@ const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
                   setUpdatedCommentValue(e.target.value);
                 }}
               />
-              <ControllDiv>
-                <ControllBtn data-comment={comment._id} onClick={onUpdate}>
+              <ControlDiv>
+                <ControlBtn data-comment={comment._id} onClick={onUpdate}>
                   완료
-                </ControllBtn>
-                <ControllBtn
+                </ControlBtn>
+                <ControlBtn
                   onClick={() => {
                     setUpdateClick(false);
                     setUpdatedCommentValue(comment.content);
                   }}
                 >
                   취소
-                </ControllBtn>
-              </ControllDiv>
+                </ControlBtn>
+              </ControlDiv>
             </>
           )}
           {!updateClick && <Content>{updatedCommentValue}</Content>}
@@ -239,31 +239,35 @@ const Nickname = styled.span<StyleType>`
   }
 `;
 
-const ControllDiv = styled.div<StyleType>`
-  font-size: 14px;
+const ControlDiv = styled.div<StyleType>`
+  font-size: 0.875rem;
+  border: 1px solid red;
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 12px;
   }
 `;
 
-const ControllBtn = styled.button`
-  font-size: 14px;
+const ControlBtn = styled.button`
+  font-size: 0.875rem;
   margin-right: 2px;
   background: #fff;
-  padding: 3px;
+  &:active {
+    background: #fff;
+  }
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 
 const ReplyBtn = styled.button`
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #7e7e7e;
   background: #fff;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 `;
 

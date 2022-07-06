@@ -42,6 +42,7 @@ const Wrap = styled.div`
   margin-bottom: 10px;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   border-radius: 10px;
+  padding: 4px;
   cursor: pointer;
   &:hover {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};

@@ -105,6 +105,7 @@ export const login = createAsyncThunk(
     });
     thunkAPI.dispatch(auth());
     thunkAPI.dispatch(getAlertCount());
+    window.location.replace("/");
   }
 );
 

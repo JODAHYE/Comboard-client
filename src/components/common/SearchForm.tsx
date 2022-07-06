@@ -16,9 +16,9 @@ const SearchForm = ({ onChangeSearchInput, onSubmit, val }: PropsType) => {
           value={val}
           onChange={onChangeSearchInput}
         />
-        <Btn>
+        <Button>
           <Icon src="icon/search.svg" alt="검색" />
-        </Btn>
+        </Button>
       </Form>
     </div>
   );
@@ -28,6 +28,7 @@ const Form = styled.form`
   width: 50vw;
   max-width: 100%;
   height: 32px;
+
   ${(props) => props.theme.displayFlex}
   text-align: center;
   @media (min-width: 320px) and (max-width: 480px) {
@@ -41,17 +42,18 @@ const Input = styled.input`
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   padding: 4px;
+  border-radius: 10px 0 0 10px;
   &:focus {
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
 `;
 
-const Btn = styled.button`
+const Button = styled.button`
   height: 100%;
-  border: 1px solid transparent;
   width: 32px;
   padding: 4px;
   background: ${(props) => props.theme.colors.button};
+  border-radius: 0 10px 10px 0;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }

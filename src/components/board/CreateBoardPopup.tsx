@@ -171,7 +171,7 @@ const CreateBoard = () => {
           value={info.description}
           onChange={onChangeInfo}
         />
-        <Btn>생성</Btn>
+        <Button>생성</Button>
         {loading && <CircularProgress size={28} />}
       </Form>
     </Popup>
@@ -250,14 +250,9 @@ const Desc = styled.textarea`
   }
 `;
 
-const Btn = styled.button`
-  background: ${(props) => props.theme.colors.button};
-  padding: 6px;
+const Button = styled.button`
   color: #fff;
   border-radius: 4px;
-  &:active {
-    background: ImgSelector;
-  }
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
   }
@@ -280,7 +275,7 @@ const ImgSelector = styled.label`
   font-size: 14px;
   cursor: pointer;
   padding: 4px;
-  background: ${(props) => props.theme.colors.buttonActive};
+  background: ${(props) => props.theme.colors.button};
   color: #fff;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;

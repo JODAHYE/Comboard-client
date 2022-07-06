@@ -32,9 +32,14 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     button{
-        outline: none;
-        border: none;
+        all: unset;
         cursor: pointer;
+        box-sizing: border-box;
+        padding: 4px;
+        background: ${(props) => props.theme.colors.button};
+        &:active {
+            background: ${(props) => props.theme.colors.buttonActive};
+        }
     }
 `;
 export default GlobalStyle;

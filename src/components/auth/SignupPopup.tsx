@@ -79,7 +79,7 @@ const SignupPopup = () => {
           id="nickname"
           onChange={onChange}
         />
-        <Btn>회원가입</Btn>
+        <Button>회원가입</Button>
       </Form>
     </Popup>
   );
@@ -132,14 +132,11 @@ const P = styled.p`
   color: red;
 `;
 
-const Btn = styled.button`
-  background: ${(props) => props.theme.colors.button};
+const Button = styled.button`
   border-radius: 4px;
   padding: 6px;
   color: #fff;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 4px;
   }

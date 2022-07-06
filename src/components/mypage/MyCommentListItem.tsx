@@ -59,7 +59,7 @@ const MyCommentListItem = ({ comment, setCheckList, checkList }: PropsType) => {
   return (
     <Wrap>
       <Title onClick={onClick}>{comment.content}</Title>
-      <Info width="7%">
+      <Info width="10%">
         {String(comment.create_date).substring(4, 6) +
           "/" +
           String(comment.create_date).substring(6, 8)}

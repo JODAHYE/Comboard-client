@@ -111,7 +111,6 @@ const IsRead = styled.button`
   color: ${(props) => props.theme.colors.button};
   border: 1px solid ${(props) => props.theme.colors.button};
   border-radius: 2px;
-  padding: 4px;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
     padding: 6px;

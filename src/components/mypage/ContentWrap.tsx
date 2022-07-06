@@ -6,7 +6,7 @@ const ContentWrap = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Wrap = styled.div`
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
   margin-top: 30px;
 

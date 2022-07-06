@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-const ControlButtons = ({ onPrev, onNext, onDelete, text }: any) => {
+type PropsType = {
+  onPrev: () => void;
+  onNext: () => void;
+  onDelete: () => void;
+  text?: string;
+};
+
+const ControlButtons = ({ onPrev, onNext, onDelete, text }: PropsType) => {
   return (
     <Control>
       <div>
@@ -11,7 +18,7 @@ const ControlButtons = ({ onPrev, onNext, onDelete, text }: any) => {
           <Icon src="icon/arrow-right.svg" alt="다음" />
         </Button>
       </div>
-      <DeleteBtn onClick={onDelete}>선택 삭제</DeleteBtn>
+      <DeleteBtn onClick={onDelete}>{text}</DeleteBtn>
     </Control>
   );
 };

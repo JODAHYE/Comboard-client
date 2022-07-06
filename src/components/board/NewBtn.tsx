@@ -24,18 +24,8 @@ const NewBtn = () => {
 const NewButton = styled.button`
   width: 24px;
   height: 24px;
-  padding: 4px;
   color: #fff;
-  background: ${(props) => props.theme.colors.button};
-
-  border: none;
-  outline: none;
-  cursor: pointer;
-
   border-radius: 6px;
-  &:active {
-    background: ${(props) => props.theme.colors.buttonActive};
-  }
 `;
 
 const Icon = styled.img`

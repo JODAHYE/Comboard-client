@@ -54,12 +54,12 @@ const MyPostListItem = ({ post, setCheckList, checkList }: PropsType) => {
         <span>{`[${post.comments_count}]`}</span>
       </Title>
       <DateInfo date={post.create_date} />
-      <Content width="6%" info="추천">
+      <Info width="6%" info="추천">
         {post.like}
-      </Content>
-      <Content width="6%" info="조회">
+      </Info>
+      <Info width="6%" info="조회">
         {post.hits}
-      </Content>
+      </Info>
       <Checkbox type="checkbox" onChange={onChange} value={post._id} />
     </PostItem>
   );
@@ -76,7 +76,7 @@ const PostItem = styled.div`
   }
 `;
 
-const Content = styled.p<StyleType>`
+const Info = styled.p<StyleType>`
   width: ${(props) => props.width && props.width};
   text-align: center;
 
@@ -102,6 +102,7 @@ const Title = styled.div`
   padding: 6px 0;
   & > p {
     width: 91%;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -36,9 +36,10 @@ const BookmarkBoard = () => {
             <p>즐겨찾기</p>
           </Header>
           <List>
-            {bookmarkBoardList.map((item, i) => {
-              return <BookmarkBoardItem key={item._id} board={item} />;
-            })}
+            {bookmarkBoardList &&
+              bookmarkBoardList.map((item, i) => {
+                return <BookmarkBoardItem key={item._id} board={item} />;
+              })}
           </List>
         </>
       )}
@@ -79,9 +80,6 @@ const List = styled.div`
 `;
 
 const LoginButton = styled.button`
-  all: unset;
-  cursor: pointer;
-
   width: 100%;
   padding: 6px;
 
