@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import SignupPopup from "../components/auth/SignupPopup";
@@ -12,11 +12,9 @@ import { useUser } from "../hooks/useUser";
 const Login = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const { kakaoLoginUrl } = useUser();
 
-  const { is_auth } = useSelector((state: RootState) => state.user);
   const { onPopup } = useSelector((state: RootState) => state.menu);
 
   const [info, setInfo] = useState({
@@ -25,7 +23,6 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (is_auth) return navigate("/");
     const code = location.search.substring(6);
     if (code) {
       dispatch(kakaoLogin(code));

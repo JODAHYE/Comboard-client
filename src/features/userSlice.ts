@@ -137,12 +137,14 @@ export const auth = createAsyncThunk("user/auth", async () => {
 export const getBookmarkList = createAsyncThunk(
   "user/getBookmarkList",
   async () => {
+    if (!cookies.get("user")) return;
     const data = await UserAPI.getBookmarkList();
     return data;
   }
 );
 
 export const getAlertCount = createAsyncThunk("user/alertCount", async () => {
+  if (!cookies.get("user")) return;
   const data = ALertAPI.getAlertCount();
   return data;
 });
