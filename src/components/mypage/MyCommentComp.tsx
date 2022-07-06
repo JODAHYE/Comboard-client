@@ -42,7 +42,7 @@ const MyCommentComp = () => {
         setCommentCount(res);
       });
     }
-  }, [skip, getMyCommentCount, getMyCommentList]);
+  }, [skip]);
 
   useEffect(() => {
     if (!checkList) setCheckList([]);
