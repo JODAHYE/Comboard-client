@@ -42,7 +42,7 @@ const MyCommentComp = () => {
         setCommentCount(res);
       });
     }
-  }, [skip]);
+  }, [skip, getMyCommentCount, getMyCommentList]);
 
   useEffect(() => {
     if (!checkList) setCheckList([]);
@@ -50,7 +50,6 @@ const MyCommentComp = () => {
 
   const onPrev = useCallback(() => {
     if (skip === 0) return;
-    console.log(skip);
     setSkip((prev) => prev - limit);
     setCurrentPage((prev) => prev - 1);
   }, [skip]);
@@ -59,7 +58,7 @@ const MyCommentComp = () => {
     if (currentPage * limit >= commentCount) return;
     setSkip((prev) => prev + limit);
     setCurrentPage((prev) => prev + 1);
-  }, [commentCount, skip, currentPage]);
+  }, [commentCount, currentPage]);
 
   const onDelete = useCallback(() => {
     if (!checkList || checkList.length === 0) return;

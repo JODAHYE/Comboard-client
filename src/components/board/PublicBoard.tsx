@@ -67,7 +67,7 @@ const PublicBoard = () => {
         setSearchBoardData(res);
       });
     },
-    [searchVal, boardList, searchBoard]
+    [searchVal, searchBoard]
   );
 
   const onChangeSearchInput = useCallback(

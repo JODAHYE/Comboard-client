@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { RootState } from "../../app/store";
 
 import { useAlert } from "../../hooks/useAlert";
 import { AlertType } from "../../types/dataType";

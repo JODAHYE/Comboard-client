@@ -47,7 +47,7 @@ const MyPostList = () => {
     if (currentPage * limit >= postCount) return;
     setSkip((prev) => prev + limit);
     setCurrentPage((prev) => prev + 1);
-  }, [skip, postCount, currentPage]);
+  }, [postCount, currentPage]);
 
   const onDelete = useCallback(() => {
     if (!checkList || checkList.length === 0) return;
