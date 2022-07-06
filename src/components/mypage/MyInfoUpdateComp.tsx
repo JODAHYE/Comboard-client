@@ -112,35 +112,34 @@ const MyInfoUpdateComp = () => {
         </InfoDiv>
         <InfoDiv>
           <Row>
-            <p>닉네임</p>
             {isUpdateClick ? (
               <>
                 <NicknameField
                   value={updatedNickname}
                   onChange={inputNickname}
                 />
-                <Btn onClick={onNicknameUpdate} active={true}>
+                <Button onClick={onNicknameUpdate} active={true}>
                   완료
-                </Btn>
+                </Button>
               </>
             ) : (
               <>
-                <p>{nickname}</p>
-                <Btn onClick={nicknameChangeBtnClick} active={true}>
+                <Nickname>{nickname}</Nickname>
+                <Button onClick={nicknameChangeBtnClick} active={true}>
                   변경
-                </Btn>
+                </Button>
               </>
             )}
           </Row>
           <Row>
-            <p>게시글 리스트 공개</p>
+            <p>내 게시글 공개</p>
             <div>
-              <Btn active={!postLock && true} onClick={onPostLock}>
+              <Button active={!postLock && true} onClick={onPostLock}>
                 On
-              </Btn>
-              <Btn active={postLock && true} onClick={onPostLock}>
+              </Button>
+              <Button active={postLock && true} onClick={onPostLock}>
                 Off
-              </Btn>
+              </Button>
             </div>
           </Row>
           <span>
@@ -157,20 +156,22 @@ const MyInfoUpdateComp = () => {
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
+
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 16px;
   }
 `;
 
 const InfoDiv = styled.div`
-  width: 50%;
+  width: 70%;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
   & > span {
     font-size: 14px;
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
   }
@@ -180,24 +181,31 @@ const Row = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  & > p {
-    color: ${(props) => props.theme.colors.button};
-  }
+
   @media (min-width: 320px) and (max-width: 480px) {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 6px;
   }
 `;
 
 const Img = styled.img`
   width: 200px;
   height: 200px;
+
   display: inline-block;
   object-fit: cover;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: 50%;
     max-height: 160px;
+  }
+`;
+
+const Nickname = styled.p`
+  font-size: 1.25rem;
+  &::after {
+    content: "님";
+    font-size: 1rem;
   }
 `;
 
@@ -207,11 +215,9 @@ const Label = styled.label`
   cursor: pointer;
   background: ${(props) => props.theme.colors.button};
   color: #fff;
+  margin-bottom: 30px;
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    margin-bottom: 8px;
   }
 `;
 
@@ -228,13 +234,16 @@ const NicknameField = styled.textarea<StyledType>`
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
   resize: none;
   padding: 4px;
+
   @media (min-width: 320px) and (max-width: 480px) {
     font-size: 14px;
   }
 `;
 
-const Btn = styled.button<StyledType>`
+const Button = styled.button<StyledType>`
   display: inline-block;
+  width: 80px;
+
   border-radius: 4px;
   padding: 6px;
   background: ${(props) =>
@@ -243,6 +252,7 @@ const Btn = styled.button<StyledType>`
   &:active {
     background: ${(props) => props.theme.colors.buttonActive};
   }
+
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 4px;
     font-size: 12px;
