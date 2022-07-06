@@ -21,8 +21,6 @@ const NewBtn = () => {
   );
 };
 
-export default NewBtn;
-
 const NewButton = styled.button`
   width: 24px;
   height: 24px;
@@ -43,3 +41,5 @@ const NewButton = styled.button`
 const Icon = styled.img`
   font-size: 14px;
 `;
+
+export default NewBtn;

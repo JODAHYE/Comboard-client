@@ -28,8 +28,6 @@ const Popup = ({ children, height }: PropsType) => {
   );
 };
 
-export default Popup;
-
 const Wrap = styled.div`
   position: fixed;
   top: 5vh;
@@ -75,3 +73,5 @@ const Content = styled.div`
   ${(props) => props.theme.displayFlex}
   flex-direction: column;
 `;
+
+export default Popup;

@@ -49,8 +49,6 @@ const MyBoardCard = ({ board }: { board: BoardType }) => {
   );
 };
 
-export default MyBoardCard;
-
 const Wrap = styled.div`
   width: 30%;
   height: 200px;
@@ -99,3 +97,5 @@ const Btn = styled.button`
     font-size: 12px;
   }
 `;
+
+export default MyBoardCard;

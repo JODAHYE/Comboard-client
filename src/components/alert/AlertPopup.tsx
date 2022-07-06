@@ -95,7 +95,6 @@ const AlertPopup = () => {
     </Popup>
   );
 };
-export default AlertPopup;
 
 const Header = styled.div`
   width: 90%;
@@ -138,3 +137,5 @@ const Target = styled.div`
   width: 100%;
   height: 300px;
 `;
+
+export default AlertPopup;

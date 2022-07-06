@@ -11,9 +11,9 @@ const Loading = () => {
   );
 };
 
-export default Loading;
-
 const Wrap = styled.div`
   width: 100%;
   margin-top: 40px;
 `;
+
+export default Loading;

@@ -23,6 +23,8 @@ const BoardDetail = () => {
 
   const { addBookmarkBoard, deleteBookmarkBoard } = useBoard();
   const { checkIsLoginAlert } = useCheck();
+
+  const { is_auth } = useSelector((state: RootState) => state.user);
   const { currentBoard } = useSelector((state: RootState) => state.board);
   const { bookmark } = useSelector((state: RootState) => state.user);
   const [sort, setSort] = useState("create_date");
@@ -108,12 +110,10 @@ const BoardDetail = () => {
           <NewPostBtn onClick={onWrite}>글작성</NewPostBtn>
         </FlexDiv>
       </Box>
-      <MyInfoComp />
+      {is_auth && <MyInfoComp />}
     </Wrap>
   );
 };
-
-export default BoardDetail;
 
 const Wrap = styled.div`
   width: 100%;
@@ -233,3 +233,5 @@ const Button = styled.button`
 `;
 
 const Icon = styled.img``;
+
+export default BoardDetail;

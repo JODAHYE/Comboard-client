@@ -48,7 +48,6 @@ const BoardCard = ({ board }: { board: BoardType }) => {
     </Wrap>
   );
 };
-export default BoardCard;
 
 const Wrap = styled.div`
   width: 30%;
@@ -133,3 +132,5 @@ const Icon = styled.img`
   display: inline-block;
   ${(props) => props.theme.iconColor}
 `;
+
+export default BoardCard;

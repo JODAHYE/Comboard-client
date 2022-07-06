@@ -36,8 +36,6 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
-
 const Wrap = styled.div`
   width: 100%;
   height: 95vh;
@@ -60,3 +58,5 @@ const Content = styled.div`
     padding: 2% 2% 40px;
   }
 `;
+
+export default MyPage;

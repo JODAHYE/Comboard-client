@@ -74,8 +74,6 @@ const MyBoardComp = () => {
   );
 };
 
-export default MyBoardComp;
-
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
@@ -110,3 +108,5 @@ const Button = styled.button`
 `;
 
 const Icon = styled.img``;
+
+export default MyBoardComp;

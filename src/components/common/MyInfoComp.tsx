@@ -15,7 +15,7 @@ const MyInfoComp = () => {
   const { getMyPostCount } = usePost();
   const { getMyCommentCount } = useComment();
 
-  const { nickname, is_auth } = useSelector((state: RootState) => state.user);
+  const { nickname } = useSelector((state: RootState) => state.user);
   const { profileImage } = useSelector((state: RootState) => state.user);
 
   const [postCount, setPostCount] = useState(0);
@@ -48,29 +48,23 @@ const MyInfoComp = () => {
   );
 
   return (
-    <>
-      {is_auth && (
-        <Wrap>
-          {profileImage ? (
-            <Img src={profileImage} />
-          ) : (
-            <Img src="../../../image/default-img.jpg" />
-          )}
-          <Nickname>{nickname}님</Nickname>
-          <Info onClick={onClick} data-name="postCount">
-            게시글 수 {postCount}
-          </Info>
-          <Info onClick={onClick} data-name="commentCount">
-            댓글 수 {commentCount}
-          </Info>
-          <Info onClick={onClick}>정보 수정</Info>
-        </Wrap>
+    <Wrap>
+      {profileImage ? (
+        <Img src={profileImage} />
+      ) : (
+        <Img src="../../../image/default-img.jpg" />
       )}
-    </>
+      <Nickname>{nickname}님</Nickname>
+      <Info onClick={onClick} data-name="postCount">
+        게시글 수 {postCount}
+      </Info>
+      <Info onClick={onClick} data-name="commentCount">
+        댓글 수 {commentCount}
+      </Info>
+      <Info onClick={onClick}>정보 수정</Info>
+    </Wrap>
   );
 };
-
-export default MyInfoComp;
 
 const Wrap = styled.div`
   width: 180px;
@@ -103,3 +97,5 @@ const Info = styled.p`
     color: #000;
   }
 `;
+
+export default MyInfoComp;

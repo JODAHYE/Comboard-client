@@ -104,8 +104,6 @@ const UserDetailPage = () => {
   );
 };
 
-export default UserDetailPage;
-
 const Wrap = styled.div`
   width: 100vw;
   height: 95vh;
@@ -181,3 +179,5 @@ const Title = styled.h3`
   color: ${(props) => props.theme.colors.button};
   margin-bottom: 20px;
 `;
+
+export default UserDetailPage;

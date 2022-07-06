@@ -55,8 +55,6 @@ const PostListItem = ({ post }: { post: PostType }) => {
   );
 };
 
-export default PostListItem;
-
 const PostItem = styled.div`
   display: flex;
   align-items: center;
@@ -116,3 +114,5 @@ const Content = styled.p<StyleType>`
     }
   }
 `;
+
+export default PostListItem;

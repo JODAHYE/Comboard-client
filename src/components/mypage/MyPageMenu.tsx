@@ -61,8 +61,6 @@ const MyPageMenu = () => {
   );
 };
 
-export default MyPageMenu;
-
 const Wrap = styled.div`
   width: 16%;
   text-align: center;
@@ -128,3 +126,5 @@ const MenuItem = styled.p<StyleType>`
     font-size: 16px;
   }
 `;
+
+export default MyPageMenu;

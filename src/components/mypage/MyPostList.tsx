@@ -104,8 +104,6 @@ const MyPostList = () => {
   );
 };
 
-export default MyPostList;
-
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
@@ -131,3 +129,5 @@ const Info = styled.p<StyleType>`
 const NoPost = styled.p`
   margin-top: 100px;
 `;
+
+export default MyPostList;

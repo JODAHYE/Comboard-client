@@ -204,8 +204,6 @@ const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
   );
 };
 
-export default CommentItem;
-
 const Item = styled.div`
   width: 100%;
   display: flex;
@@ -311,3 +309,5 @@ const ReplyIcon = styled.img`
   width: 30px;
   transform: rotate(180deg);
 `;
+
+export default CommentItem;

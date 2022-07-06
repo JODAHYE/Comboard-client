@@ -178,8 +178,6 @@ const CreateBoard = () => {
   );
 };
 
-export default CreateBoard;
-
 const Title = styled.h3`
   font-family: BMHANNAAir;
   font-size: 28px;
@@ -293,3 +291,5 @@ const ImgSelector = styled.label`
 const ImgUpload = styled.input`
   display: none;
 `;
+
+export default CreateBoard;

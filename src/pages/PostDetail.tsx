@@ -34,9 +34,8 @@ const PostDetail = () => {
   const sanitizer = dompurify.sanitize;
 
   const { currentBoard } = useSelector((state: RootState) => state.board);
-  const { objectId, like_post, dislike_post, scrap_post } = useSelector(
-    (state: RootState) => state.user
-  );
+  const { is_auth, objectId, like_post, dislike_post, scrap_post } =
+    useSelector((state: RootState) => state.user);
 
   const [post, setPost] = useState<PostType>();
   const [loading, setLoading] = useState(false);
@@ -205,12 +204,10 @@ const PostDetail = () => {
         <ListBtn onClick={goPostListPage}>목록</ListBtn>
         {post && <CommentComp post={post} />}
       </Box>
-      <MyInfoComp />
+      {is_auth && <MyInfoComp />}
     </Wrap>
   );
 };
-
-export default PostDetail;
 
 const Wrap = styled.div`
   width: 100%;
@@ -343,3 +340,5 @@ const Icon = styled.img`
   ${(props) => props.theme.iconColor};
   cursor: pointer;
 `;
+
+export default PostDetail;

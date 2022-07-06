@@ -81,8 +81,6 @@ const PrivateBoard = () => {
   );
 };
 
-export default PrivateBoard;
-
 const Wrap = styled.div`
   width: 60%;
   height: 100%;
@@ -113,3 +111,5 @@ const P = styled.p`
     margin: 0px;
   }
 `;
+
+export default PrivateBoard;

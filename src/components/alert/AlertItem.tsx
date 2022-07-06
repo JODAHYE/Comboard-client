@@ -66,8 +66,6 @@ const AlertItem = ({ alert }: { alert: AlertType }) => {
   );
 };
 
-export default AlertItem;
-
 const Item = styled.div<StyleType>`
   width: 100%;
   ${(props) => props.theme.displayFlex};
@@ -120,3 +118,5 @@ const IsRead = styled.button`
     font-size: 10px;
   }
 `;
+
+export default AlertItem;

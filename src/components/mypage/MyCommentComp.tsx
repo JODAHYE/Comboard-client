@@ -110,8 +110,6 @@ const MyCommentComp = () => {
   );
 };
 
-export default MyCommentComp;
-
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
@@ -123,3 +121,5 @@ const Title = styled.h1`
 const NoPost = styled.p`
   margin-top: 100px;
 `;
+
+export default MyCommentComp;

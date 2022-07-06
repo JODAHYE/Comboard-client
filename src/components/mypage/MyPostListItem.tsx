@@ -65,8 +65,6 @@ const MyPostListItem = ({ post, setCheckList, checkList }: PropsType) => {
   );
 };
 
-export default MyPostListItem;
-
 const PostItem = styled.div`
   display: flex;
   align-items: center;
@@ -125,3 +123,5 @@ const Checkbox = styled.input`
     height: 16px;
   }
 `;
+
+export default MyPostListItem;

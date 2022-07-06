@@ -94,8 +94,6 @@ const MyScrapList = () => {
   );
 };
 
-export default MyScrapList;
-
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
@@ -122,3 +120,5 @@ const NoPost = styled.p`
   text-align: center;
   margin-top: 100px;
 `;
+
+export default MyScrapList;

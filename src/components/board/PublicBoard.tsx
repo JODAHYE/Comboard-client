@@ -109,8 +109,6 @@ const PublicBoard = () => {
   );
 };
 
-export default PublicBoard;
-
 const Wrap = styled.div`
   width: 60%;
   height: 100%;
@@ -148,3 +146,5 @@ const Target = styled.div`
     height: 150px;
   }
 `;
+
+export default PublicBoard;

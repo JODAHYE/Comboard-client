@@ -121,8 +121,6 @@ const PostWriteOption = ({
   );
 };
 
-export default PostWriteOption;
-
 const Option = styled.div`
   width: 100%;
   ${(props) => props.theme.displayFlex};
@@ -156,3 +154,5 @@ const Icon = styled.img<StyleType>`
     background: ${(props) => props.theme.colors.buttonActive};
   }
 `;
+
+export default PostWriteOption;

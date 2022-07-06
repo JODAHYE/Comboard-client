@@ -14,8 +14,6 @@ const BoardInfoComp = ({ board }: { board: BoardType }) => {
   );
 };
 
-export default BoardInfoComp;
-
 const Wrap = styled.div`
   width: 100%;
   padding: 20px 10px;
@@ -38,3 +36,5 @@ const Info = styled.p`
     font-size: 12px;
   }
 `;
+
+export default BoardInfoComp;

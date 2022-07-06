@@ -9,8 +9,6 @@ const LoginLoading = () => {
   );
 };
 
-export default LoginLoading;
-
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
@@ -24,3 +22,5 @@ const Wrap = styled.div`
     top: 6vh;
   }
 `;
+
+export default LoginLoading;

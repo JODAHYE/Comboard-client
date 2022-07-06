@@ -178,8 +178,6 @@ const MyBoardUpdate = () => {
   );
 };
 
-export default MyBoardUpdate;
-
 const Title = styled.h3`
   font-family: BMHANNAAir;
   font-size: 28px;
@@ -296,3 +294,5 @@ const Loading = styled.h3`
   margin: 20px;
   color: ${(props) => props.theme.colors.buttonActive};
 `;
+
+export default MyBoardUpdate;

@@ -24,8 +24,6 @@ const SearchForm = ({ onChangeSearchInput, onSubmit, val }: PropsType) => {
   );
 };
 
-export default SearchForm;
-
 const Form = styled.form`
   width: 50vw;
   max-width: 100%;
@@ -60,3 +58,5 @@ const Btn = styled.button`
 `;
 
 const Icon = styled.img``;
+
+export default SearchForm;

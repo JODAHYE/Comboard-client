@@ -94,8 +94,6 @@ const Login = () => {
   );
 };
 
-export default Login;
-
 const Wrap = styled.div`
   width: 100%;
   ${(props) => props.theme.displayFlex}
@@ -193,3 +191,5 @@ const KaKaoLoginButton = styled.button`
 const KaKaoLogo = styled.img`
   width: 24px;
 `;
+
+export default Login;

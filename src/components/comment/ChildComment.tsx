@@ -129,8 +129,6 @@ const ChildComment = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
   );
 };
 
-export default ChildComment;
-
 const Item = styled.div`
   width: 92%;
   display: flex;
@@ -197,3 +195,5 @@ const UpdateField = styled.textarea`
 const Content = styled.p`
   margin: 6px 0;
 `;
+
+export default ChildComment;

@@ -154,8 +154,6 @@ const MyInfoUpdateComp = () => {
   );
 };
 
-export default MyInfoUpdateComp;
-
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 20px;
@@ -250,3 +248,5 @@ const Btn = styled.button<StyledType>`
     font-size: 12px;
   }
 `;
+
+export default MyInfoUpdateComp;

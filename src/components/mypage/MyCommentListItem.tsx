@@ -74,8 +74,6 @@ const MyCommentListItem = ({ comment, setCheckList, checkList }: PropsType) => {
   );
 };
 
-export default MyCommentListItem;
-
 const Wrap = styled.div`
   width: 100%;
   ${(props) => props.theme.displayFlex};
@@ -130,3 +128,5 @@ const Checkbox = styled.input`
     height: 16px;
   }
 `;
+
+export default MyCommentListItem;

@@ -5,8 +5,6 @@ const ContentWrap = ({ children }: { children: React.ReactNode }) => {
   return <Wrap>{children}</Wrap>;
 };
 
-export default ContentWrap;
-
 const Wrap = styled.div`
   width: 60%;
   margin: 0 auto;
@@ -16,3 +14,4 @@ const Wrap = styled.div`
     flex-direction: column;
   }
 `;
+export default ContentWrap;

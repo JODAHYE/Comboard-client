@@ -85,8 +85,6 @@ const SignupPopup = () => {
   );
 };
 
-export default SignupPopup;
-
 const Title = styled.h3`
   font-family: BMHANNAAir;
   font-size: 28px;
@@ -146,3 +144,5 @@ const Btn = styled.button`
     padding: 4px;
   }
 `;
+
+export default SignupPopup;

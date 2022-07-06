@@ -131,8 +131,6 @@ const PostWrite = () => {
   );
 };
 
-export default PostWrite;
-
 const Wrap = styled.div`
   width: 100%;
   height: 95vh;
@@ -214,3 +212,5 @@ const SubmitBtn = styled.button`
     font-size: 12px;
   }
 `;
+
+export default PostWrite;
