@@ -147,7 +147,7 @@ const Img = styled.img`
 `;
 
 const Date = styled.p`
-  font-size: 14px;
+  font-size: 0.875rem;
 `;
 
 const List = styled.div`
@@ -169,6 +169,10 @@ const Control = styled.div`
 
 const Button = styled.button`
   width: 30px;
+  background: #fff;
+  &:active {
+    background: #fff;
+  }
 `;
 
 const Icon = styled.img``;

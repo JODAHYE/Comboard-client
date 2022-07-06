@@ -84,13 +84,13 @@ const Img = styled.img`
 `;
 
 const Nickname = styled.p`
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 8px;
   font-weight: 600;
 `;
 
 const Info = styled.p`
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 6px;
   cursor: pointer;
   &:hover {

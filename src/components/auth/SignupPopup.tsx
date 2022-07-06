@@ -70,7 +70,7 @@ const SignupPopup = () => {
           onChange={onChange}
         />
         {info.password !== info.passwordcheck && (
-          <P>비밀번호와 비밀번호 확인이 일치하지 않습니다.</P>
+          <Alert>비밀번호와 비밀번호 확인이 일치하지 않습니다.</Alert>
         )}
         <Label htmlFor="nickname">닉네임</Label>
         <Input
@@ -87,12 +87,9 @@ const SignupPopup = () => {
 
 const Title = styled.h3`
   font-family: BMHANNAAir;
-  font-size: 28px;
+  font-size: 1.75rem;
   color: #000;
   margin-bottom: 20px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 18px;
-  }
 `;
 
 const Form = styled.form`
@@ -109,10 +106,7 @@ const Form = styled.form`
 
 const Label = styled.label`
   display: block;
-  font-size: 14px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
-  }
+  font-size: 0.875rem;
 `;
 
 const Input = styled.input`
@@ -127,8 +121,8 @@ const Input = styled.input`
   }
 `;
 
-const P = styled.p`
-  font-size: 13px;
+const Alert = styled.p`
+  font-size: 0.8125rem;
   color: red;
 `;
 

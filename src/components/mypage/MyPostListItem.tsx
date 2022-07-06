@@ -83,7 +83,7 @@ const Info = styled.p<StyleType>`
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;
     margin-right: 6px;
-    font-size: 0.6875rem;
+    font-size: 0.9375rem;
     &:before {
       ${(props) =>
         props.info &&

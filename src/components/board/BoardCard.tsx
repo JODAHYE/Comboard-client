@@ -98,7 +98,7 @@ const Title = styled.p`
 `;
 
 const Desc = styled.p`
-  font-size: 14px;
+  font-size: 0.875rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -109,7 +109,7 @@ const Desc = styled.p`
   height: 6em;
   white-space: pre-wrap;
   &.info {
-    font-size: 12px;
+    font-size: 0.75rem;
     display: inline-block;
   }
   @media (min-width: 320px) and (max-width: 480px) {

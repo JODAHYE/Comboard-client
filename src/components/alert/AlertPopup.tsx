@@ -106,11 +106,8 @@ const Header = styled.div`
 
 const Title = styled.h3`
   font-family: BMHANNAAir;
-  font-size: 22px;
+  font-size: 1.375rem;
   color: #000;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 18px;
-  }
 `;
 
 const Icon = styled.img`
@@ -130,6 +127,7 @@ const Icon = styled.img`
 const List = styled.div`
   width: 90%;
   height: 90%;
+
   display: flex;
   flex-direction: column;
   overflow: auto;

@@ -154,17 +154,13 @@ const Menu = styled.div`
 `;
 
 const MenuItem = styled(Link)`
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
   text-decoration: none;
   font-family: SpoqaHanSansNeoBold;
   color: ${(props) => props.theme.colors.fontColor};
   &.active {
     color: #000;
-  }
-
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 15px;
   }
 `;
 
@@ -173,7 +169,7 @@ const LoginBtn = styled.button`
 
   @media (min-width: 320px) and (max-width: 480px) {
     display: block;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #fff;
     padding: 2px;
     border-radius: 4px;
@@ -198,11 +194,10 @@ const Alert = styled.div<StyleType>`
     background: red;
     color: #fff;
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 0.75rem;
     padding: 1px 4px;
 
     @media (min-width: 320px) and (max-width: 480px) {
-      font-size: 10px;
       padding: 0 2px;
     }
   }

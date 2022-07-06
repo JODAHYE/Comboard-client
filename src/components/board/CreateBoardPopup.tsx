@@ -132,7 +132,7 @@ const CreateBoard = () => {
             비밀
           </Label>
           <ImgSelector htmlFor="image">이미지 선택</ImgSelector>
-          {info.bgimg && <P>{info.bgimg}</P>}
+          {info.bgimg && <Alert>{info.bgimg}</Alert>}
           <ImgUpload
             type="file"
             id="image"
@@ -160,7 +160,7 @@ const CreateBoard = () => {
               onChange={onChangeInfo}
             />
             {info.password !== info.passwordcheck && (
-              <P>암호와 암호 확인이 일치하지 않습니다.</P>
+              <Alert>암호와 암호 확인이 일치하지 않습니다.</Alert>
             )}
           </Div>
         )}
@@ -180,11 +180,8 @@ const CreateBoard = () => {
 
 const Title = styled.h3`
   font-family: BMHANNAAir;
-  font-size: 28px;
+  font-size: 1.75rem;
   color: #000;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 18px;
-  }
 `;
 
 const Form = styled.form`
@@ -199,7 +196,7 @@ const Form = styled.form`
 `;
 
 const Label = styled.label`
-  font-size: 14px;
+  font-size: 0.875rem;
   margin-right: 10px;
 `;
 
@@ -214,13 +211,10 @@ const Input = styled.input<sizeType>`
     border: 1px solid ${(props) => props.theme.colors.buttonActive};
   }
   &::placeholder {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
-    &::placeholder {
-      font-size: 12px;
-    }
   }
 `;
 
@@ -245,7 +239,7 @@ const Desc = styled.textarea`
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
     &::placeholder {
-      font-size: 12px;
+      font-size: 0.875rem;
     }
   }
 `;
@@ -258,13 +252,12 @@ const Button = styled.button`
   }
 `;
 
-const P = styled.p`
-  font-size: 13px;
+const Alert = styled.p`
+  font-size: 0.8125rem;
   color: ${(props) => props.theme.colors.button};
   margin: 10px;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
-    font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -272,14 +265,13 @@ const P = styled.p`
 `;
 
 const ImgSelector = styled.label`
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
   padding: 4px;
   background: ${(props) => props.theme.colors.button};
   color: #fff;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
   }
 `;
 

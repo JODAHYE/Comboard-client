@@ -119,7 +119,6 @@ const Info = styled.p<StyleType>`
     width: auto;
     max-width: 70%;
     margin-right: 6px;
-    font-size: 0.6875rem;
   }
 `;
 

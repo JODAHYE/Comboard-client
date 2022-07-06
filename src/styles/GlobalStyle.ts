@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
         color: #626262;
         line-height: 1.2em;
         @media (min-width: 320px) and (max-width: 480px) {
-            font-size: 12px;
+            font-size: 14px;
         } 
     }
     *{        

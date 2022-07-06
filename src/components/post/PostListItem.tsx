@@ -104,11 +104,12 @@ const Content = styled.p<StyleType>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;
     max-width: 50%;
     margin-right: 6px;
-    font-size: 0.6875rem;
+    font-size: 0.9375rem;
     &:before {
       ${(props) =>
         props.info &&

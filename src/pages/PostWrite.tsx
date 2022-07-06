@@ -173,12 +173,9 @@ const Input = styled.input`
   height: 30px;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   outline: none;
-  font-size: 16px;
+  font-size: 1rem;
   &:focus {
     ${(props) => props.theme.displayFlex}
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 14px;
   }
 `;
 
@@ -190,7 +187,6 @@ const Content = styled.div`
   overflow-y: auto;
   line-height: 1.3em;
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 14px;
     line-height: 1.2em;
     height: 50%;
   }
@@ -208,7 +204,7 @@ const SubmitBtn = styled.button`
   }
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
+    font-size: 0.9375rem;
   }
 `;
 

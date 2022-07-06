@@ -89,11 +89,10 @@ const ContentDiv = styled.div`
   flex-direction: column;
   cursor: pointer;
   line-height: 1.2em;
-  font-size: 14px;
+  font-size: 0.875rem;
   padding: 10px 0;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
-    font-size: 12px;
   }
 `;
 const Info = styled.div`
@@ -102,19 +101,19 @@ const Info = styled.div`
   justify-content: space-between;
   @media (min-width: 320px) and (max-width: 480px) {
     & > span {
-      font-size: 11px;
+      font-size: 0.8125rem;
     }
   }
 `;
 const IsRead = styled.button`
+  width: 40px;
   background: #fff;
   color: ${(props) => props.theme.colors.button};
   border: 1px solid ${(props) => props.theme.colors.button};
   border-radius: 2px;
+  font-size: 0.8125rem;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
-    padding: 6px;
-    font-size: 10px;
   }
 `;
 

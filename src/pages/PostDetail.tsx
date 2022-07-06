@@ -232,14 +232,11 @@ const Box = styled.div`
 const BoardTitle = styled.h2`
   cursor: pointer;
   color: ${(props) => props.theme.colors.button};
-  font-size: 18px;
+  font-size: 1.125rem;
   padding-bottom: 10px;
   font-weight: 500;
   line-height: 1.2em;
   border-bottom: 2px solid ${(props) => props.theme.colors.buttonActive};
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 14px;
-  }
 `;
 
 const PostTitle = styled.p`
@@ -253,7 +250,7 @@ const InfoDiv = styled.div`
   width: 50%;
   display: inline-block;
   padding: 20px 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   border-bottom: 1px solid ${(props) => props.theme.colors.shadow};
   &.right {
     text-align: right;
@@ -263,7 +260,6 @@ const InfoDiv = styled.div`
   }
   @media (min-width: 320px) and (max-width: 480px) {
     width: 90%;
-    font-size: 12px;
     padding: 10px 0;
   }
 `;
@@ -308,9 +304,6 @@ const Button = styled.button`
   margin-left: 10px;
   &:active {
     color: ${(props) => props.theme.colors.buttonActive};
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 0.75rem;
   }
 `;
 

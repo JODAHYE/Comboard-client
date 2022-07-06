@@ -107,10 +107,6 @@ const MyPostList = () => {
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 1.25rem;
-
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 1rem;
-  }
 `;
 
 const InfoBox = styled.div`

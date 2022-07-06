@@ -99,6 +99,7 @@ const Wrap = styled.div`
 
 const Header = styled.div`
   ${(props) => props.theme.displayFlex};
+  gap: 4px;
   width: 100%;
   margin: 6px;
 `;

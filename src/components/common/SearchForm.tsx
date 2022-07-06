@@ -39,6 +39,7 @@ const Form = styled.form`
 const Input = styled.input`
   width: 90%;
   height: 100%;
+
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.shadow};
   padding: 4px;

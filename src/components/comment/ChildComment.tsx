@@ -89,7 +89,7 @@ const ChildComment = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
                 >
                   {comment.writer_name}
                 </Nickname>
-                <ControlDiv noMatch={objectId !== comment.writer && true}>
+                <ControlDiv>
                   <DateInfo date={comment.create_date} />
                   {!updateClick && objectId === comment.writer && (
                     <>
@@ -145,7 +145,7 @@ const Header = styled.div`
 const Nickname = styled.span<StyleType>`
   font-weight: 600;
   color: ${(props) =>
-    props.active ? props.theme.colors.button : props.theme.colors.main};
+    props.active ? props.theme.colors.button : props.theme.colors.fontColor};
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -160,11 +160,8 @@ const Nickname = styled.span<StyleType>`
   }
 `;
 
-const ControlDiv = styled.div<StyleType>`
-  font-size: 14px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
-  }
+const ControlDiv = styled.div`
+  font-size: 0.875rem;
 `;
 
 const ControlBtn = styled.button`
@@ -178,7 +175,6 @@ const ControlBtn = styled.button`
 
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
   }
 `;
 

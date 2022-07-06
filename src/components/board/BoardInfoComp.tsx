@@ -31,10 +31,7 @@ const Img = styled.img`
 const Info = styled.p`
   display: inline-block;
   white-space: pre-wrap;
-  font-size: 15px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
-  }
+  font-size: 0.9375rem;
 `;
 
 export default BoardInfoComp;

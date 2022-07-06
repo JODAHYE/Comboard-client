@@ -54,7 +54,7 @@ const CommentComp = ({ post }: { post: PostType }) => {
     <Wrap>
       <FlexDiv>
         <Div>
-          <P>댓글 {commentsCount}</P>
+          <Count>댓글 {commentsCount}</Count>
           <SubmitBtn onClick={onSubmit}>등록</SubmitBtn>
         </Div>
         <TextArea
@@ -99,7 +99,7 @@ const FlexDiv = styled.div`
   ${(props) => props.theme.displayFlex};
   justify-content: start;
   gap: 10px;
-  font-size: 14px;
+  font-size: 0.875rem;
   @media (min-width: 320px) and (max-width: 480px) {
     flex-direction: column;
   }
@@ -141,15 +141,11 @@ const SubmitBtn = styled.button`
   }
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 12px;
   }
 `;
 
-const P = styled.p`
+const Count = styled.p`
   margin: 6px 0;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
-  }
 `;
 
 const List = styled.div`

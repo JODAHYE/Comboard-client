@@ -192,7 +192,6 @@ const NewPostBtn = styled.button`
   @media (min-width: 320px) and (max-width: 480px) {
     width: auto;
     padding: 2px 6px;
-    font-size: 0.75rem;
   }
 `;
 
@@ -200,9 +199,7 @@ const SortSelect = styled.select`
   border: 1px solid ${(props) => props.theme.colors.shadow};
   outline: none;
   padding: 2px;
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 12px;
-  }
+  font-size: 0.9375rem;
 `;
 
 const Option = styled.option``;
@@ -210,14 +207,11 @@ const Option = styled.option``;
 const InfoBtn = styled.button`
   display: inline-block;
   background: #fff;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   &::before {
     content: "|";
     margin-right: 4px;
     color: ${(props) => props.theme.colors.shadow};
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 0.75rem;
   }
 `;
 

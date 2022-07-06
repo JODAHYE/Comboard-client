@@ -105,7 +105,7 @@ const Wrap = styled.div`
 
 const Title = styled.h3`
   font-family: SpoqaHanSansNeoBold;
-  font-size: 32px;
+  font-size: 2rem;
   margin-bottom: 50px;
   color: ${(props) => props.theme.colors.main};
 `;
@@ -137,6 +137,7 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
+  font-size: 0.875rem;
   border-radius: 4px;
   color: #fff;
 `;
@@ -176,6 +177,10 @@ const KaKaoLoginButton = styled.button`
   background: #ffe812;
   margin: 0 auto;
   padding: 10px;
+
+  &:active {
+    background: #ffe812;
+  }
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 8px;
   }

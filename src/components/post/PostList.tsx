@@ -71,7 +71,7 @@ const PostList = ({ sort }: { sort: string }) => {
   };
 
   const onPrev = useCallback(() => {
-    if (pageArr[0] === 1) return;
+    if (pageArr.length <= 0 || pageArr[0] === 1) return;
     const arr = [];
     const arrEnd = pageArr[pageArr.length - 1] as number;
     let i = arrEnd - pageArr.length;

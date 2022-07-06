@@ -132,7 +132,7 @@ const MyBoardUpdate = () => {
             비밀
           </Label>
           <ImgSelector htmlFor="image">이미지 선택</ImgSelector>
-          {info.bgimg && <P>{info.bgimg}</P>}
+          {info.bgimg && <Alert>{info.bgimg}</Alert>}
           <ImgUpload
             type="file"
             id="image"
@@ -160,7 +160,7 @@ const MyBoardUpdate = () => {
               onChange={onChange}
             />
             {info.password !== info.passwordcheck && (
-              <P>암호와 암호 확인이 일치하지 않습니다.</P>
+              <Alert>암호와 암호 확인이 일치하지 않습니다.</Alert>
             )}
           </Div>
         )}
@@ -183,11 +183,8 @@ const Title = styled.h3`
   font-size: 1.75rem;
   color: #000;
   margin-bottom: 30px;
-
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 1.125rem;
-  }
 `;
+
 const Form = styled.form`
   width: 100%;
   height: 80%;
@@ -247,9 +244,6 @@ const Desc = styled.textarea`
   }
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
-    &::placeholder {
-      font-size: 0.75rem;
-    }
   }
 `;
 
@@ -262,14 +256,13 @@ const Button = styled.button`
   }
 `;
 
-const P = styled.p`
-  font-size: 0.8125rem;
+const Alert = styled.p`
+  font-size: 0.875rem;
   color: ${(props) => props.theme.colors.button};
   margin: 10px;
 
   @media (min-width: 320px) and (max-width: 480px) {
     width: 92%;
-    font-size: 0.75rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -284,7 +277,6 @@ const ImgSelector = styled.label`
   color: #fff;
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 2px;
-    font-size: 0.75rem;
   }
 `;
 

@@ -75,6 +75,7 @@ const Img = styled.img`
 `;
 
 const Title = styled.p`
+  font-size: 0.9375rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -92,11 +93,9 @@ const Control = styled.div`
 const Button = styled.button`
   font-size: 0.875rem;
   background: #fff;
+  padding: 0;
   &:active {
     background: #fff;
-  }
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 0.75rem;
   }
 `;
 

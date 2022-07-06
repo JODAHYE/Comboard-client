@@ -85,7 +85,7 @@ const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
 
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 `;
 
@@ -106,7 +106,6 @@ const List = styled.div<StyleType>`
   margin-top: 100px;
 
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 1rem;
     margin-top: 10px;
     gap: 8px;
     overflow: hidden;
@@ -125,10 +124,6 @@ const MenuItem = styled.p<StyleType>`
   color: ${(props) => (props.isActive ? "#000" : props.theme.colors.fontColor)};
   &:hover {
     border-bottom: 1px solid ${(props) => props.theme.colors.fontColor};
-  }
-
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 1rem;
   }
 `;
 

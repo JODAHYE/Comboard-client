@@ -156,10 +156,6 @@ const MyInfoUpdateComp = () => {
 const Title = styled.h1`
   font-family: SpoqaHanSansNeoBold;
   font-size: 1.25rem;
-
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 1rem;
-  }
 `;
 
 const InfoDiv = styled.div`
@@ -236,16 +232,12 @@ const NicknameField = styled.textarea<StyledType>`
   border: 1px solid ${(props) => props.theme.colors.buttonActive};
   resize: none;
   padding: 4px;
-
-  @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 0.875rem;
-  }
 `;
 
 const Button = styled.button<StyledType>`
   width: 80px;
   display: inline-block;
-
+  font-size: 0.875rem;
   border-radius: 4px;
   background: ${(props) =>
     props.active ? props.theme.colors.button : props.theme.colors.buttonActive};
@@ -253,7 +245,6 @@ const Button = styled.button<StyledType>`
 
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 4px;
-    font-size: 0.75rem;
   }
 `;
 
