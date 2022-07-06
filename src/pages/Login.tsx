@@ -84,12 +84,12 @@ const Login = () => {
         <SignupBtn onClick={onSignup}>회원가입</SignupBtn>
       </Form>
       {onPopup === "signup" && <SignupPopup />}
-      {/* <SocialLoginBox>
+      <SocialLoginBox>
         <KaKaoLoginButton onClick={KaKaoLogin}>
           <KaKaoLogo src="../../../icon/kakaologo.svg" />
           카카오로 로그인
         </KaKaoLoginButton>
-      </SocialLoginBox> */}
+      </SocialLoginBox>
     </Wrap>
   );
 };

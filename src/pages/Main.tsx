@@ -13,12 +13,12 @@ const Main = () => {
   const { mainMenu } = useSelector((state: RootState) => state.menu);
   const location = useLocation();
 
-  useEffect(() => {
-    const code = location.search.substring(6);
-    if (code) {
-      window.location.replace("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const code = location.search.substring(6);
+  //   if (code) {
+  //     window.location.replace("/");
+  //   }
+  // }, []);
 
   return (
     <Wrap>
