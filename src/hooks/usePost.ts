@@ -1,8 +1,9 @@
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { RootState } from "../app/store";
 import PostAPI from "../lib/api/PostAPI";
 import UserAPI from "../lib/api/UserAPI";
-import { useCheck } from "./useCheck";
 
 const cookies = new Cookies();
 
@@ -16,7 +17,7 @@ type BodyType = {
 
 export function usePost() {
   const params = useParams();
-  const { checkIsLoginAlert, checkIsLoginReturn } = useCheck();
+  const { is_auth } = useSelector((state: RootState) => state.user);
 
   const getPostList = async (boardId: string, skip: number, sort: string) => {
     const data = await PostAPI.getPostList(boardId, skip, sort);
@@ -24,7 +25,7 @@ export function usePost() {
   };
 
   const createPost = async (body: BodyType) => {
-    checkIsLoginAlert();
+    if (!is_auth) return alert("로그인이 필요합니다.");
     const data = await PostAPI.createPost(body);
     return data;
   };
@@ -57,25 +58,25 @@ export function usePost() {
   };
 
   const clickLike = async (postId: string) => {
-    checkIsLoginAlert();
+    if (!is_auth) return alert("로그인이 필요합니다.");
     const data = await PostAPI.likePost(postId);
     return data;
   };
 
   const clickDislike = async (postId: string) => {
-    checkIsLoginAlert();
+    if (!is_auth) return alert("로그인이 필요합니다.");
     const data = await PostAPI.dislikePost(postId);
     return data;
   };
 
   const scrapPost = async () => {
-    checkIsLoginAlert();
+    if (!is_auth) return alert("로그인이 필요합니다.");
     const data = await UserAPI.scrapPost(params.postId as string);
     return data;
   };
 
   const deleteScrapPost = async () => {
-    checkIsLoginAlert();
+    if (!is_auth) return alert("로그인이 필요합니다.");
     const data = await UserAPI.deleteScrapPost(params.postId as string);
     return data;
   };
@@ -86,7 +87,7 @@ export function usePost() {
   };
 
   const getMyPostCount = async () => {
-    checkIsLoginReturn();
+    if (!is_auth) return;
     const data = await UserAPI.getMyPostCount();
     return data;
   };

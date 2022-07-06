@@ -1,8 +1,9 @@
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { RootState } from "../app/store";
 import ALertAPI from "../lib/api/AlertAPI";
 import CommentAPI from "../lib/api/CommentAPI";
 import UserAPI from "../lib/api/UserAPI";
-import { useCheck } from "./useCheck";
 
 type BodyType = {
   parentCommentId?: string;
@@ -17,7 +18,8 @@ type BodyType = {
 
 export function useComment() {
   const params = useParams();
-  const { checkIsLoginReturn } = useCheck();
+
+  const { is_auth } = useSelector((state: RootState) => state.user);
 
   const createComment = async (body: BodyType) => {
     const data = await CommentAPI.createComment(body);
@@ -77,7 +79,7 @@ export function useComment() {
   };
 
   const getMyCommentCount = async () => {
-    checkIsLoginReturn();
+    if (!is_auth) return;
     const data = await UserAPI.getMyCommentCount();
     return data;
   };

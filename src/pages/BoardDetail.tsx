@@ -10,7 +10,6 @@ import { useBoard } from "../hooks/useBoard";
 import { auth } from "../features/userSlice";
 import MyInfoComp from "../components/common/MyInfoComp";
 import BoardInfoComp from "../components/board/BoardInfoComp";
-import { useCheck } from "../hooks/useCheck";
 
 type StyleType = {
   width?: string;
@@ -22,7 +21,6 @@ const BoardDetail = () => {
   const navigate = useNavigate();
 
   const { addBookmarkBoard, deleteBookmarkBoard } = useBoard();
-  const { checkIsLoginAlert } = useCheck();
 
   const { is_auth } = useSelector((state: RootState) => state.user);
   const { currentBoard } = useSelector((state: RootState) => state.board);
@@ -37,9 +35,9 @@ const BoardDetail = () => {
 
   const onWrite = useCallback(() => {
     if (!params.id) return;
-    checkIsLoginAlert();
+    if (!is_auth) return alert("로그인이 필요합니다.");
     navigate(`/board/${currentBoard._id}/write`);
-  }, [currentBoard, params]);
+  }, [currentBoard, params, is_auth]);
 
   const onBookmark = useCallback(() => {
     if (bookmark.includes(currentBoard._id)) {
@@ -48,13 +46,13 @@ const BoardDetail = () => {
         dispatch(auth());
       });
     } else {
-      checkIsLoginAlert();
+      if (!is_auth) return alert("로그인이 필요합니다.");
       addBookmarkBoard(currentBoard._id).then(() => {
         alert("게시판 즐겨찾기 \n[pc버전 메인화면에서만 확인 가능합니다.]");
         dispatch(auth());
       });
     }
-  }, [addBookmarkBoard, bookmark, currentBoard, deleteBookmarkBoard]);
+  }, [addBookmarkBoard, bookmark, currentBoard, deleteBookmarkBoard, is_auth]);
 
   const onTitleClick = useCallback(() => {
     setIsInfoOpen(false);

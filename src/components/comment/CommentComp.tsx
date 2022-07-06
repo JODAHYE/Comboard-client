@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -32,7 +32,7 @@ const CommentComp = ({ post }: { post: PostType }) => {
     }
   }, []);
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     if (!is_auth) return alert("로그인이 필요합니다.");
     setLoading(true);
     const body = {
@@ -47,7 +47,7 @@ const CommentComp = ({ post }: { post: PostType }) => {
       setCommentValue("");
       setLoading(false);
     });
-  };
+  }, [commentValue, createComment, is_auth, nickname, post._id]);
 
   return (
     <Wrap>
