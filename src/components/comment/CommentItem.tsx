@@ -75,6 +75,7 @@ const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
   );
 
   const onReply = useCallback(() => {
+    if (!replyValue) return;
     setLoading(true);
     const body = {
       parentCommentId: comment._id,

@@ -34,6 +34,7 @@ const CommentComp = ({ post }: { post: PostType }) => {
 
   const onSubmit = useCallback(() => {
     if (!is_auth) return alert("로그인이 필요합니다.");
+    if (!commentValue) return;
     setLoading(true);
     const body = {
       post: post._id,
