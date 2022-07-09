@@ -6,10 +6,18 @@ import { useBoard } from "../../hooks/useBoard";
 import { PostType } from "../../types/dataType";
 import DateInfo from "../common/DateInfo";
 
+type CheckItemType = {
+  postId: string;
+  boardId: string;
+};
+
 type PropsType = {
   post: PostType;
-  setCheckList: React.Dispatch<React.SetStateAction<string[] | undefined>>;
-  checkList?: string[];
+  setCheckList: React.Dispatch<
+    React.SetStateAction<CheckItemType[] | undefined>
+  >;
+
+  checkList?: CheckItemType[];
 };
 
 type StyleType = {
@@ -28,11 +36,14 @@ const MyPostListItem = ({ post, setCheckList, checkList }: PropsType) => {
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
+      console.log(target);
       if (target.checked) {
-        setCheckList((prev) => prev?.concat([target.value]));
+        setCheckList((prev) =>
+          prev?.concat({ postId: target.value, boardId: post.board })
+        );
       } else {
         if (!checkList) return;
-        const arr = checkList.filter((v, i) => v !== target.value);
+        const arr = checkList.filter((v, i) => v.postId !== target.value);
         setCheckList(arr);
       }
     },

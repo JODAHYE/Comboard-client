@@ -12,6 +12,11 @@ type StyleType = {
   width: string;
 };
 
+type CheckItemType = {
+  postId: string;
+  boardId: string;
+};
+
 const MyPostList = () => {
   const { getMyPostList, getMyPostCount, deleteMyPost } = usePost();
 
@@ -20,7 +25,7 @@ const MyPostList = () => {
   const [postCount, setPostCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [checkList, setCheckList] = useState<string[]>();
+  const [checkList, setCheckList] = useState<CheckItemType[]>();
 
   const limit = 18;
 

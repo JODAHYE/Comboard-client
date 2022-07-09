@@ -12,13 +12,18 @@ type StyleType = {
   width: string;
 };
 
+type CheckItemType = {
+  postId: string;
+  boardId: string;
+};
+
 const MyScrapList = () => {
   const { clearScrap, getScrapList } = usePost();
 
   const [skip, setSkip] = useState(0);
   const [postList, setPostList] = useState<PostType[]>();
   const [loading, setLoading] = useState(false);
-  const [checkList, setCheckList] = useState<string[]>();
+  const [checkList, setCheckList] = useState<CheckItemType[]>();
 
   const limit = 18;
 

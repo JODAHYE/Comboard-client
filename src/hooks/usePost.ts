@@ -15,6 +15,11 @@ type BodyType = {
   board: string;
 };
 
+type CheckItemType = {
+  postId: string;
+  boardId: string;
+};
+
 export function usePost() {
   const params = useParams();
   const { is_auth } = useSelector((state: RootState) => state.user);
@@ -92,10 +97,9 @@ export function usePost() {
     return data;
   };
 
-  const deleteMyPost = async (postList: string[]) => {
+  const deleteMyPost = async (postList: CheckItemType[]) => {
     for (let i = 0; i < postList.length; i++) {
-      const idValue = postList[i].split("-");
-      await PostAPI.deletePost(idValue[0], idValue[1]);
+      await PostAPI.deletePost(postList[i].postId, postList[i].boardId);
     }
   };
 
@@ -104,9 +108,9 @@ export function usePost() {
     return data;
   };
 
-  const clearScrap = async (postList: string[]) => {
+  const clearScrap = async (postList: CheckItemType[]) => {
     for (let i = 0; i < postList.length; i++) {
-      UserAPI.deleteScrapPost(postList[i]);
+      UserAPI.deleteScrapPost(postList[i].postId);
     }
   };
 
