@@ -36,7 +36,6 @@ const MyPostListItem = ({ post, setCheckList, checkList }: PropsType) => {
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
-      console.log(target);
       if (target.checked) {
         setCheckList((prev) =>
           prev?.concat({ postId: target.value, boardId: post.board })

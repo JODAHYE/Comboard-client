@@ -52,7 +52,6 @@ const CommentItem = ({ comment, postWriter, setCommentsCount }: PropTypes) => {
         if (!target.dataset.comment) return;
         setIsDelete(true);
         deleteComment(target.dataset.comment).then((res) => {
-          console.log(res);
           if (replies) {
             setCommentsCount(res.comments_count - (1 + replies.length));
           } else {

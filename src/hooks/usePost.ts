@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -11,7 +12,7 @@ type BodyType = {
   title: string;
   writer: string;
   content: string;
-  create_date: number;
+  create_date?: number;
   board: string;
 };
 
@@ -31,6 +32,7 @@ export function usePost() {
 
   const createPost = async (body: BodyType) => {
     if (!is_auth) return alert("로그인이 필요합니다.");
+    body.create_date = parseInt(moment().format("YYYYMMDDHHmmss"));
     const data = await PostAPI.createPost(body);
     return data;
   };

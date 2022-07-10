@@ -4,7 +4,7 @@ type BodyType = {
   title: string;
   writer: string;
   content: string;
-  create_date: number;
+  create_date?: number;
   board: string;
 };
 

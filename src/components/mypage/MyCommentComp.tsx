@@ -34,7 +34,6 @@ const MyCommentComp = () => {
     setLoading(true);
     getMyCommentList(skip).then((res) => {
       setCommentList(res);
-      console.log(res);
       setLoading(false);
     });
     if (skip === 0) {
