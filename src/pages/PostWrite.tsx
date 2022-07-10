@@ -85,9 +85,9 @@ const PostWrite = () => {
 
   const goPostListPage = useCallback(() => {
     if (window.confirm("작성을 취소하시겠습니까?")) {
-      navigate(`/board/${params._id}`);
+      navigate(`/board/${params.id}`);
     }
-  }, [params._id]);
+  }, [params.id]);
 
   return (
     <Wrap>
