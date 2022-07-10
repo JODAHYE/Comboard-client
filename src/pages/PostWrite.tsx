@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import dompurify from "dompurify";
 
 import { RootState } from "../app/store";
 import { getCurrentBoard } from "../features/boardSlice";
@@ -14,6 +15,8 @@ const PostWrite = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const sanitizer = dompurify.sanitize;
+
   const contentField = useRef<HTMLDivElement>(null);
   const [post, setPost] = useState<PostType>();
 
@@ -25,6 +28,21 @@ const PostWrite = () => {
   const [showCode, setShowCode] = useState(false);
   const [postTitle, setPostTitle] = useState("");
   const [uploadLoading, setUploadLoading] = useState(false);
+
+  useEffect(() => {
+    if (!contentField.current) return;
+    const pastAlert = (e: ClipboardEvent) => {
+      const clipboardData = e.clipboardData as DataTransfer;
+      if (clipboardData.types.includes("Files")) {
+        alert("이미지같은 요소는 붙여넣을 수 없습니다.");
+        e.preventDefault();
+      }
+    };
+    contentField.current?.addEventListener("paste", pastAlert);
+    return () => {
+      contentField.current?.removeEventListener("paste", pastAlert);
+    };
+  }, []);
 
   useEffect(() => {
     if (!params.id) return;
@@ -124,7 +142,7 @@ const PostWrite = () => {
             ref={contentField}
             contentEditable={true}
             spellCheck={false}
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizer(post.content) }}
           />
         )}
       </Box>
