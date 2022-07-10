@@ -26,6 +26,12 @@ axiosInstance.interceptors.response.use(
       cookies.remove("user");
       alert("다시 로그인해주세요");
       window.location.replace("/");
+    } else if (
+      error.response &&
+      error.response.status &&
+      [500].includes(error.response.status)
+    ) {
+      alert("잘못된 요청입니다.");
     }
 
     return Promise.reject(error);

@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import moment from "moment";
 
 import { RootState } from "../app/store";
 import { getCurrentBoard } from "../features/boardSlice";
@@ -25,6 +24,7 @@ const PostWrite = () => {
   const { nickname } = useSelector((state: RootState) => state.user);
   const [showCode, setShowCode] = useState(false);
   const [postTitle, setPostTitle] = useState("");
+  const [uploadLoading, setUploadLoading] = useState(false);
 
   useEffect(() => {
     if (!params.id) return;
@@ -58,7 +58,6 @@ const PostWrite = () => {
       content: showCode
         ? contentField.current.innerText
         : contentField.current.innerHTML,
-      // create_date: parseInt(moment().format("YYYYMMDDHHmmss")),
       board: currentBoard._id,
     };
     if (!body.title || !body.content)
@@ -110,6 +109,8 @@ const PostWrite = () => {
           contentField={contentField}
           showCode={showCode}
           setShowCode={setShowCode}
+          setUploadLoading={setUploadLoading}
+          uploadLoading={uploadLoading}
         />
         {!params.postId && (
           <Content
