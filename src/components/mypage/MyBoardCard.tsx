@@ -63,7 +63,8 @@ const Wrap = styled.div`
   cursor: pointer;
 
   @media (min-width: 320px) and (max-width: 480px) {
-    width: 70%;
+    width: 44%;
+    height: 164px;
     margin-bottom: 0px;
   }
 `;

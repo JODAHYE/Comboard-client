@@ -92,12 +92,15 @@ const List = styled.div`
   margin-bottom: 30px;
 
   @media (min-width: 320px) and (max-width: 480px) {
-    flex-direction: column;
-    align-items: center;
+    width: 94%;
+    gap: 4px;
   }
 `;
 const ControlButtons = styled.div`
   ${(props) => props.theme.displayFlex};
+  @media (min-width: 320px) and (max-width: 480px) {
+    margin-bottom: 40px;
+  }
 `;
 
 const Button = styled.button`
