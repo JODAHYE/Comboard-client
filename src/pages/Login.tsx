@@ -61,7 +61,7 @@ const Login = () => {
 
   return (
     <Wrap>
-      <Title>Login</Title>
+      <Logo src="../../../icon/mainlogo.png" alt="로고" />
       <Form onSubmit={onLogin}>
         <Input
           type="email"
@@ -100,14 +100,11 @@ const Wrap = styled.div`
   ${(props) => props.theme.displayFlex}
   flex-direction: column;
   gap: 10px;
-  padding: 100px 0;
+  padding: 50px 0;
 `;
-
-const Title = styled.h3`
-  font-family: SpoqaHanSansNeoBold;
-  font-size: 2rem;
-  margin-bottom: 50px;
-  color: ${(props) => props.theme.colors.main};
+const Logo = styled.img`
+  width: 150px;
+  object-fit: contain;
 `;
 
 const Form = styled.form`

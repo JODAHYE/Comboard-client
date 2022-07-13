@@ -62,6 +62,7 @@ const Nav = () => {
 
   return (
     <Wrap>
+      <Logo src="../../../icon/mainlogo.png" alt="로고" />
       <Container>
         <Menu>
           <MenuItem
@@ -125,11 +126,15 @@ const Wrap = styled.div`
   background: #fff;
   box-shadow: 2px 2px 2px 2px ${(props) => props.theme.colors.shadow};
   padding: 0 50px;
-
   @media (min-width: 320px) and (max-width: 480px) {
     padding: 0 10px;
     height: 6vh;
   }
+`;
+
+const Logo = styled.img`
+  height: 100%;
+  object-fit: contain;
 `;
 
 const Container = styled.div`

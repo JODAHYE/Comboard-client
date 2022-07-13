@@ -2,9 +2,9 @@ import { DefaultTheme } from "styled-components";
 
 const theme: DefaultTheme = {
   colors: {
-    main: "#B6A7FD",
-    button: "#7964E1",
-    buttonActive: "#B6A7FD",
+    main: "#A8BBF4",
+    button: "#5F81E4",
+    buttonActive: "#A8BBF4",
     fontColor: "#5E5E5E",
     shadow: "#E7E7E7",
   },
