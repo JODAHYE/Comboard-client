@@ -57,30 +57,25 @@ https://comboard.netlify.app
 # 서비스 화면
 
 ### 메인
-![image](https://user-images.githubusercontent.com/57217119/178132853-ef48f374-3a43-4982-a321-2f9d9b3614bf.png)
+![image](https://user-images.githubusercontent.com/57217119/178649199-b5a557bc-949d-4a59-be8b-59fa408e74f3.png)
 
 ### 게시글 리스트
-![image](https://user-images.githubusercontent.com/57217119/178132875-d1b1f729-dbc6-42f7-8726-17801ac8bca7.png)
+![image](https://user-images.githubusercontent.com/57217119/178649222-91336f76-b4bd-49a0-906e-219c13027e3b.png)
 
 ### 게시글 디테일
-![image](https://user-images.githubusercontent.com/57217119/178132884-1a380d74-6898-4fd3-985b-785af9b5a266.png)
-
+![image](https://user-images.githubusercontent.com/57217119/178649327-d67239e8-8cfb-4660-81e0-dfc18007791b.png)
 
 ### 특정 사용자 게시글 리스트
-![image](https://user-images.githubusercontent.com/57217119/178132895-1a07fbc4-8f74-4c51-a9e2-1c553db0fc8f.png)
-
+![image](https://user-images.githubusercontent.com/57217119/178649371-e40a4ef5-2307-4e6f-92e6-692c7b810ee3.png)
 
 ### 게시글 작성
-![image](https://user-images.githubusercontent.com/57217119/178132903-46958ef9-bd98-455b-b094-05445022f8c8.png)
-
+![image](https://user-images.githubusercontent.com/57217119/178649515-e1d7d2bc-e6ca-409d-9e7e-f97cd80b70c1.png)
 
 ### 알림
-![image](https://user-images.githubusercontent.com/57217119/178132915-58b0fe55-1bbd-4d0d-b0b0-5fba1ba29169.png)
-
+![image](https://user-images.githubusercontent.com/57217119/178649567-11750a97-51ee-4e6e-96b8-a57e24515f65.png)
 
 ### 마이페이지
-![image](https://user-images.githubusercontent.com/57217119/178132930-4c1a1c00-be55-4a44-b656-fae68c55b1b4.png)
-
+![image](https://user-images.githubusercontent.com/57217119/178649599-43bc4c1e-c73c-46b7-acaf-d02e82167d97.png)
 ---
 
 
