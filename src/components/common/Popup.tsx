@@ -60,11 +60,13 @@ const Box = styled.div<PropsType>`
 
 const CloseBtn = styled.button`
   position: absolute;
-  right: 5px;
-  width: 26px;
+  right: 0;
   background: #fff;
   &:active {
     background: #fff;
+  }
+  & > img {
+    width: 30px;
   }
 `;
 
